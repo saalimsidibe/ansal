@@ -15,6 +15,7 @@ Route::get('/multi-step-form', [MultiStepFormController::class, 'index'])->name(
 Route::post('/multi-step-form/store', [MultiStepFormController::class, 'store'])->name('multi-step-form.store');
 Route::post('/multi-step-form/next', [MultiStepFormController::class, 'next'])->name('multi-step-form.next');
 Route::post('/multi-step-form/previous', [MultiStepFormController::class, 'previous'])->name('multi-step-form.previous');
+Route::view('/admin', 'admin');
 
 Route::view('/chercheur', 'chercheur')->name('chercheur');
 
@@ -27,9 +28,9 @@ Route::view('/etape6autre', 'autrevues.etape6autre');
 
 //Route::get('/multi-step-form', LivewireChercheurEtape::class)->name('multi-step-form');
 Route::view('/etape1chercheur', 'chercheurvues.etape1chercheur');
-Route::view('/etape2chercheur', 'chercheurvues.etape2chercheur');
-Route::view('/etape3chercheur', 'chercheurvues.etape3chercheur');
-Route::view('/etape4chercheur', 'chercheurvues.etape4chercheur');
-Route::view('/etape5chercheur', 'chercheurvues.etape5chercheur');
-Route::view('/etape6chercheur', 'chercheurvues.etape6chercheur');
-Route::view('/etapefinalechercheur', 'chercheurvues.etapefinalechercheur');
+Route::view('/etape2chercheur', 'chercheurvues.etape2chercheur')->name('etape2chercheur');
+Route::view('/etape3chercheur', 'chercheurvues.etape3chercheur')->name('etape3chercheur');
+Route::view('/etape4chercheur', 'chercheurvues.etape4chercheur')->name('etape4chercheur');
+Route::view('/etape5chercheur', 'chercheurvues.etape5chercheur')->name('etape5chercheur');
+Route::view('/etape6chercheur', 'chercheurvues.etape6chercheur')->name('etape6chercheur');
+Route::view('/etapefinalechercheur', 'chercheurvues.etapefinalechercheur')->name('etapefinalechercheur');

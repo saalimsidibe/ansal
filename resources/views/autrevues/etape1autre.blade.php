@@ -28,12 +28,12 @@
 </div>
 <div class="form-group">
     <label for="titreAutre" class="form-label">Titre</label>
-    <input type="text" name="titreAutre" id="titreAutre">
+    <input type="text" name="titreAutre" id="titreAutre" class="form-control">
 </div>
 
 <div class="form-group">
     <label for="numerotelAutre" class="form-label">Numero de telephone</label>
-    <input type="text" class="form_control" id="numerotelAutre" name="numerotelAutre">
+    <input type="text" class="form_control" id="numerotelAutre" name="numerotelAutre"  class="form-control">
 </div>
 <div class="form-group">
     <label for="emailAutre">email</label>

@@ -30,7 +30,7 @@
 </div>
 <div class="form-group">
     <label for="titre" class="form-label">Titre</label>
-    <select name="titre" id="titre">
+    <select name="titre" id="titre" class="form-control">
         <option value="1">Maître de Recherche</option>
         <option value="2">Directeur de Recherche</option>
         <option value="3">Maître de conférence</option>
@@ -43,14 +43,14 @@
 </div>
 <div class="form-group">
     <label for="numerotel" class="form-label">Numero de telephone</label>
-    <input type="text" class="form_control" id="numerotel" name="numerotel">
+    <input type="text" class="form-control" id="numerotel" name="numerotel">
 </div>
 <div class="form-group">
     <label for="email">email</label>
     <input type="email" class="form-control" id="email">
 </div>
 
-
+ <button onclick="window.location.href='{{ route('etape2chercheur') }}'">Suivant</button>
 
 
 

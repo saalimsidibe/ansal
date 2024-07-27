@@ -38,7 +38,8 @@
         </div>
 
         <!-- Bouton de soumission du formulaire -->
-        <button type="submit" class="btn btn-primary">Suivant</button>
+        <button onclick="window.location.href='{{ route('etape4chercheur') }}'">Suivant</button>
+
     </form>
 </div> 
 

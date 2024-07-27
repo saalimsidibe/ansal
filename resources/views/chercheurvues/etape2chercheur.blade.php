@@ -42,6 +42,8 @@
         <label for="specialite">Precisez votre spécialité dans le collège postulé</label>
         <input type="text" name="specialite" id="specialite" class="form-control">
     </div>
+    <button onclick="window.location.href='{{ route('etape3chercheur') }}'">Suivant</button>
+
 </form>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
