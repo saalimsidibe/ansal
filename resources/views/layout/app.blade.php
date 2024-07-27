@@ -180,6 +180,8 @@
   <!-- Main JS File -->
   <script src="{{url('active/assets/js/main.js')}}"></script>
 
+  @yield('scripts')
+
 </body>
 
 </html>
