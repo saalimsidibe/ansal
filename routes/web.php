@@ -8,6 +8,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/apropos', function () {
+    return view('apropos');
+});
+Route::get('/formulaires', function () {
+    return view('formulaires');
+});
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+
 
 
 Route::get('/multi-step-form', [MultiStepFormController::class, 'index'])->name('multi-step-form');
