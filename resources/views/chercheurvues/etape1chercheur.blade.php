@@ -13,6 +13,7 @@
                         <li>Etape3</li>
                         <li>Etape4</li>
                         <li>Etape5</li>
+                        <li>Etape6</li>
                     </ol>
                 </nav>
             </div>
@@ -41,8 +42,15 @@
                                                 required>
                                         </div>
                                         <div class="form-group">
+                                            <label for="sexe" class="form-label">Sexe</label>
+                                            <select name="sexe" id="" class="form-control">
+                                                <option value="masculin">Masculin</option>
+                                                <option value="feminin">Feminin</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="datenaissance" class="form-label">Date de Naissance</label>
-                                            <input type="text" class="form-control" id="datenaissance" name="datenaiss"
+                                            <input type="date" class="form-control" id="datenaissance" name="datenaiss"
                                                 required>
                                         </div>
                                         <div class="form-group">
@@ -56,7 +64,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="datenomin" class="form-label">Date de nomination</label>
-                                            <input type="texte" class="form-control" id="datenomin" name="datenomin">
+                                            <input type="date" class="form-control" id="datenomin" name="datenomin">
                                         </div>
                                         <div class="form-group">
                                             <label for="numerotel" class="form-label">Numero de telephone</label>
@@ -67,7 +75,7 @@
                                             <input type="email" class="form-control" id="email">
                                         </div>
 
-                                        <button type="submit" class="btn btn-info" >Suivant</button>
+                                        <button type="submit" class="btn btn-info"  >Suivant</button>
 
 
 
