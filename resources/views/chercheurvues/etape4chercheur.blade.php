@@ -28,18 +28,27 @@
                             <div class="card ">
                                 <div class="card-head info"> Informations Personnelle</div>
                                 <div class="card-body">
-    <form action="">
+    
         @csrf
         <div class="form-group">
-             <label for="expadmin" class="label-form">Expériences professionnelles exercées au plan national </label>
-             <select name="expadmin" id="expadmin" class="form-control">
+            <label for="expadmin" class="label-form">Expériences professionnelles exercées au plan national</label>
+            <select name="expadmin" id="expadmin" class="form-control">
                 <option value="oui">Oui</option>
                 <option value="non">Non</option>
-             </select>
+            </select>
+        </div><br>
 
+        <div id="dynamic-fields" class="d-none">
+            <h3>Ajouter une expérience</h3>
+            <div id="experience-container">
+                <!-- Champs dynamiques pour ajouter les experiences seront ajoutés ici -->
+            </div>
+            <button type="button" id="add-field" class="btn btn-primary mt-2">Ajouter</button> <br>
         </div>
+
+        <button type="submit" class="btn btn-success mt-4">Soumettre</button> <br>
        
-        <div>
+       
              <label for="respadmin" class="label-form">Responsabilités administratives exercées au plan national </label>
                 <select name="respadmin" id="respadmin" class="form-control">
             <option value="oui">Oui</option>
@@ -48,39 +57,15 @@
 
         </div>
        
- <!-- Champs supplémentaires à afficher pour les experiences au plan nationale -->
-        <div id="expadmin_fields" style="display: none;">
-   
-            <div class="form-group">
-            <label for="nom_fonction">Nom de la fonction</label>
-            <input type="text" name="nom_fonction" id="nom_fonction">
-        </div>
-        <div class="form-group">
-            <label for="periode_debut">Période du commencement</label>
-            <input type="text" name="periode_debut" id="periode_debut">
-        </div>
-        <div class="form-group">
-            <label for="periode_fin">Période de fin</label>
-            <input type="text" name="periode_fin" id="periode_fin">
-        </div>
-        <div class="form-group">
-            <label for="nom_structure">Nom de la structure</label>
-            <input type="text" name="nom_structure" id="nom_structure">
-        </div>
-        <div class="form-group">
-            <label for="ville">Ville</label>
-            <input type="text" name="ville" id="ville">
-        </div>
-    </div>
-
-<button id="toggle_expadmin_fields" style="display: none;">Ajouter les champs</button>
-
-
-<div id="additional-fields" style="display: none;">
-            <!-- Champs supplémentaires à ajouter via JavaScript pour les responsabilités administrative -->
+          <div id="dynamic-container">
+            <button type="button" id="add-button" style="display: none;">Ajouter</button>
+            <div id="fields-container"></div>
         </div>
 
-<button onclick="window.location.href='{{ route('etape5chercheur') }}'" class="btn btn-info">Suivant</button>
+        <input type="submit" value="Soumettre" />
+
+
+
 
     </form>
 
@@ -104,56 +89,100 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
     </script>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        var expadminSelect = document.getElementById('expadmin');
-        var expadminFields = document.getElementById('expadmin_fields');
-        var toggleButton = document.getElementById('toggle_expadmin_fields');
+          document.addEventListener('DOMContentLoaded', function () {
+        const expadminSelect = document.getElementById('expadmin');
+        const dynamicFieldsDiv = document.getElementById('dynamic-fields');
+        const experienceContainer = document.getElementById('experience-container');
+        const addFieldButton = document.getElementById('add-field');
+        let fieldIndex = 0;
 
-        expadminSelect.addEventListener('change', function() {
-            if (expadminSelect.value === 'oui') {
-                expadminFields.style.display = 'block';
-                toggleButton.style.display = 'block'; // Hide the "Ajouter les champs" button
+        expadminSelect.addEventListener('change', function () {
+            if (this.value === 'oui') {
+                dynamicFieldsDiv.classList.remove('d-none');
             } else {
-                expadminFields.style.display = 'none';
-                toggleButton.style.display = 'non'; // Show the "Ajouter les champs" button
+                dynamicFieldsDiv.classList.add('d-none');
+                experienceContainer.innerHTML = ''; // Clear fields if "Non" is selected
             }
         });
 
-        // Show/hide fields on button click
-        toggleButton.addEventListener('click', function() {
-            expadminFields.style.display = 'block';
-            toggleButton.style.display = 'none'; // Hide the "Ajouter les champs" button
-        
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('#respadmin').change(function() {
-            if ($(this).val() === 'oui') {
-                $('#additional-fields').slideDown();  // Afficher les champs supplémentaires
-            } else {
-                $('#additional-fields').slideUp();    // Cacher les champs supplémentaires
-            }
-        });
-
-        // Action du bouton "Ajouter des champs"
-        $('#addFieldsBtn').click(function() {
-            $('#additional-fields').append(`
-                <div class="mt-3">
-                    <input type="text" name="responsibility_name[]" class="form-control" placeholder="Nom de la responsabilité">
-                    <input type="date" name="start_date[]" class="form-control " placeholder="Date début">
-                    <input type="date" name="end_date[]" class="form-control " placeholder="Date fin">
-                    <input type="text" name="structure_name[]" class="form-control " placeholder="Nom de la structure">
-                    <input type="text" name="city[]" class="form-control " placeholder="Ville">
-                    <input type="text" name="country[]" class="form-control " placeholder="Pays">
+        addFieldButton.addEventListener('click', function () {
+            fieldIndex++;
+            const newField = document.createElement('div');
+            newField.classList.add('mb-3');
+            newField.innerHTML = `
+                <div class="form-group">
+                    <label for="intitule_${fieldIndex}">Intitulé de la fonction</label>
+                    <input type="text" name="intitule_${fieldIndex}" id="intitule_${fieldIndex}" class="form-control">
                 </div>
-            `);
+                <div class="form-group">
+                    <label for="debut_${fieldIndex}">Début de la fonction</label>
+                    <input type="date" name="debut_${fieldIndex}" id="debut_${fieldIndex}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="fin_${fieldIndex}">Fin de la fonction</label>
+                    <input type="date" name="fin_${fieldIndex}" id="fin_${fieldIndex}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="ville_${fieldIndex}">Ville</label>
+                    <input type="text" name="ville_${fieldIndex}" id="ville_${fieldIndex}" class="form-control">
+                </div>
+                <button type="button" class="remove-btn" onclick="removeField(this)">Supprimer ce champ</button>
+            `;
+            experienceContainer.appendChild(newField);
         });
+
+        window.removeField = function (button) {
+            button.parentElement.remove();
+        };
     });
-</script>
+    </script>
+
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const respadminSelect = document.getElementById('respadmin');
+            const addButton = document.getElementById('add-button');
+            const fieldsContainer = document.getElementById('fields-container');
+
+            // Afficher ou masquer le bouton Ajouter en fonction de la sélection
+            respadminSelect.addEventListener('change', function() {
+                if (respadminSelect.value === 'oui') {
+                    addButton.style.display = 'block'; // Afficher le bouton Ajouter
+                } else {
+                    addButton.style.display = 'none'; // Masquer le bouton Ajouter
+                    fieldsContainer.innerHTML = ''; // Effacer les champs si 'Non' est sélectionné
+                }
+            });
+
+            // Ajouter de nouveaux champs lorsque le bouton Ajouter est cliqué
+            addButton.addEventListener('click', function() {
+                const index = fieldsContainer.children.length; // Compter les ensembles de champs existants
+                const newFieldSet = document.createElement('fieldset');
+                newFieldSet.innerHTML = `
+                    <legend>Responsabilité ${index + 1}</legend>
+                    <label>Intitulé de la responsabilité:</label>
+                    <input type="text" name="intitule_${index}" /><br/>
+                    <label>Début:</label>
+                    <input type="date" name="debut_${index}" /><br/>
+                    <label>Fin:</label>
+                    <input type="date" name="fin_${index}" /><br/>
+                    <label>Structure:</label>
+                    <input type="text" name="structure_${index}" /><br/>
+                    <label>Ville:</label>
+                    <input type="text" name="ville_${index}" /><br/>
+                    <button type="button" class="remove-button">Supprimer</button>
+                    <hr/>
+                `;
+                fieldsContainer.appendChild(newFieldSet);
+
+                // Ajouter un écouteur d'événements au bouton Supprimer
+                newFieldSet.querySelector('.remove-button').addEventListener('click', function() {
+                    fieldsContainer.removeChild(newFieldSet);
+                });
+            });
+        });
+    </script>
+  
 
 @endsection

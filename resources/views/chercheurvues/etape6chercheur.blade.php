@@ -67,6 +67,23 @@
             <label for="contribution" id="contribution" class="label-form">Indiquer votre contribution scientifique majeure dans les domaines du  collège postulé </label>
             <input type="text" class="form-control">
         </div>
+
+        <div id="distinctionsContainer">
+            <div class="form-group">
+                <label for="distinction">Distinctions Honorifiques et Scientifiques</label>
+                <select name="distinctionTypeCher" class="form-control">
+                    <option value="1">Scientifique</option>
+                    <option value="2">Sociale</option>
+                </select>
+                <label for="nomDistinc">Nom de la distinction</label>
+                <input type="text" name="distinctionsNomCher" class="form-control" id="nomDistinct"> 
+                <label for="dateDistinc">Date de la distinction</label>
+                <input type="date" name="date" id="dateDistinc" class="form-control">
+            </div>
+
+        </div>
+        <button type="button" id="AjouterDistinction">Ajouter</button>
+
         <div class="form-group">
             <label for="">Declaration sur l'honneur</label>
             <input type="checkbox" class="form-control">
@@ -139,10 +156,6 @@
                     <input type="text" id="auteurs-${index}" name="auteurs[]" required>
                 </div>
                 <div class="form-group">
-                    <label for="coauteurs-${index}">Co-auteur(s)</label>
-                    <input type="text" id="coauteurs-${index}" name="coauteurs[]">
-                </div>
-                <div class="form-group">
                     <label for="date-${index}">Date</label>
                     <input type="date" id="date-${index}" name="dates[]" required>
                 </div>
@@ -151,8 +164,8 @@
                     <input type="text" id="intitule-${index}" name="intitules[]" required>
                 </div>
                 <div class="form-group">
-                    <label for="nombre_pages-${index}">Nombre de pages</label>
-                    <input type="number" id="nombre_pages-${index}" name="nombre_pages[]">
+                    <label for="reference-${index}">Reference</label>
+                    <input type="text" id="reference-${index}" name="reference[]" required>
                 </div>
             `;
 
@@ -253,27 +266,38 @@
     <script>
         //script pour ajouter les distinctions honorifiques
 
-        $(document).ready(function() {
-            var fieldIndex = 0;
+      document.addEventListener('DOMContentLoaded', function() {
+        const ajouterDistinctionButton = document.getElementById('AjouterDistinction');
+        const distinctionsContainer = document.getElementById('distinctionsContainer');
+        let index = 0; // L'index pour les nouveaux groupes de champs
 
-            $("#add-field").click(function() {
-                fieldIndex++;
-
-                var newField = '<div class="form-group">' +
-                                    '<h5>Distinction honorifique</h5>' +
-                                    '<label>Intitulé:</label>' +
-                                    '<input type="text" name="distinctions[' + fieldIndex + '][intitule]" required><br>' +
-                                    '<label>Année:</label>' +
-                                    '<input type="number" name="distinctions[' + fieldIndex + '][annee]" required><br>' +
-                                    '<button class="remove-field">Supprimer</button>' +
-                                '</div>';
+        ajouterDistinctionButton.addEventListener('click', function() {
+            const newFormGroup = document.createElement('div');
+            
+            newFormGroup.innerHTML = `
+                <select name="distinctions[${index}][type]" class="form-control">
+                    <option value="1">Scientifique</option>
+                    <option value="2">Sociale</option>
+                </select>
                 
-                $("#distinctions-container").append(newField);
-            });
-
-            // Supprimer un champ dynamique
-            $(document).on("click", ".remove-field", function() {
-                $(this).parent().remove();
-            });
+                <input type="text" name="distinctions[${index}][nom]" class="form-control">
+                <input type="hidden" name="distinctions[${index}][id]" value="" class="form-control" placeholder="nom de la distinction">
+                <button type="button" class="removeDistinctionButton">Supprimer</button>
+            `;
+            
+            distinctionsContainer.appendChild(newFormGroup);
+            index++;
         });
+
+        distinctionsContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('removeDistinctionButton')) {
+                const formGroup = event.target.parentElement;
+                distinctionsContainer.removeChild(formGroup);
+            }
+        });
+    });
     </script>
+
+<script>
+   
+</script>

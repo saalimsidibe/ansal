@@ -41,11 +41,11 @@
             </select>
         </div>
 
-           <div id="additional-fields" style="display: none;">
-            <!-- Champs supplémentaires à ajouter via JavaScript -->
+        <!--Div pour ajouter les fonctions internationales-->
+         <div id="dynamic-container">
+            <button type="button" id="add-button" style="display: none;">Ajouter</button>
+            <div id="fields-container"></div>
         </div>
-
-        <button type="button" id="addFieldsBtn" class="btn btn-primary mt-3">Ajouter des champs</button>
 
        <div class="form-group">
             <label for="respprofint">Responsabilités administratives exercées au plan international</label>
@@ -54,13 +54,14 @@
                 <option value="oui">Oui</option>
                 <option value="non">Non</option>
             </select>
-        <div id="additional-fields-responsibility" style="display: none;">
-            <!-- Champs supplémentaires pour les responsabilités administratives au plan international -->
-        </div> 
+        </div>
 
-        <button type="button" id="addFieldsBtnResponsibility" class="btn btn-primary mt-3">Ajouter des champs</button>
-        </div> <br>
-        
+         <!-- Partie dynamique pour les responsabilites à l'international ID -->
+        <div class="dynamic-section">
+            <button type="button" id="add-btn" style="display: none;">Ajouter</button>
+            <div class="fields-wrapper"></div>
+        </div>
+
         <button onclick="window.location.href='{{ route('etape6chercheur') }}'" class="btn btn-info">Suivant</button>
 
     </form>
@@ -88,59 +89,100 @@
 
     <script>
 
-    //script pour les experiences professionnelles à l'international
-    $(document).ready(function() {
-        $('#expprofint').change(function() {
-            if ($(this).val() === 'oui') {
-                $('#additional-fields').slideDown();  // Afficher les champs supplémentaires
-            } else {
-                $('#additional-fields').slideUp();    // Cacher les champs supplémentaires
-            }
-        });
 
-        // Action du bouton "Ajouter des champs"
-        $('#addFieldsBtn').click(function() {
-            $('#additional-fields').append(`
-                <div class="mt-3">
-                    <input type="text" name="function_name[]" class="form-control" placeholder="Nom de la fonction">
-                    <input type="date" name="function_start[]" class="form-control mt-2" placeholder="Période début de la fonction">
-                    <input type="date" name="function_end[]" class="form-control mt-2" placeholder="Période fin de la fonction">
-                    <input type="text" name="function_structure[]"  class="form-control mt-2" placeholder="Nom de la structure">
-                    <input type="text" name="function_pays[]" id="" class="form-control mt-2" placeholder="Pays">
-                    <input type="text" name="function_ville[]" id="" class="form-control mt-2"  placeholder="Ville">
-                </div>
-            `);
-        });
-    });
-</script>
+//SCRIPT POUR AJOUTER LES FONCTIONS A L'INTERNATIONAL
+ document.addEventListener('DOMContentLoaded', function() {
+            const expprofintSelect = document.getElementById('expprofint');
+            const addButton = document.getElementById('add-button');
+            const fieldsContainer = document.getElementById('fields-container');
 
-<script>
-    //script pour ajouter les responsabilités professionnelles à l'nternational
+            // Afficher ou masquer le bouton Ajouter en fonction de la sélection
+            expprofintSelect.addEventListener('change', function() {
+                if (expprofintSelect.value === 'oui') {
+                    addButton.style.display = 'block'; // Afficher le bouton Ajouter
+                } else {
+                    addButton.style.display = 'none'; // Masquer le bouton Ajouter
+                    fieldsContainer.innerHTML = ''; // Effacer les champs si 'Non' est sélectionné
+                }
+            });
 
-    
-$(document).ready(function() {
-        $('#respprofint').change(function() {
-            if ($(this).val() === 'oui') {
-                $('#additional-fields-responsibility').slideDown();  // Afficher les champs supplémentaires
-            } else {
-                $('#additional-fields-responsibility').slideUp();    // Cacher les champs supplémentaires
-            }
-        });
+            // Ajouter de nouveaux champs lorsque le bouton Ajouter est cliqué
+            addButton.addEventListener('click', function() {
+                const index = fieldsContainer.children.length; // Compter les ensembles de champs existants
+                const newFieldSet = document.createElement('fieldset');
+                newFieldSet.innerHTML = `
+                    <legend>Expérience ${index + 1}</legend>
+                    <label>Intitulé de la fonction:</label>
+                    <input type="text" name="intitule_${index}" /><br/>
+                    <label>Début:</label>
+                    <input type="date" name="debut_${index}" /><br/>
+                    <label>Fin:</label>
+                    <input type="date" name="fin_${index}" /><br/>
+                    <label>Structure:</label>
+                    <input type="text" name="structure_${index}" /><br/>
+                    <label>Ville:</label>
+                    <input type="text" name="ville_${index}" /><br/>
+                    <label>Pays:</label>
+                    <input type="text" name="pays_${index}" /><br/>
+                    <button type="button" class="remove-button">Supprimer</button>
+                    <hr/>
+                `;
+                fieldsContainer.appendChild(newFieldSet);
 
-        // Action du bouton "Ajouter des champs"
-        $('#addFieldsBtnResponsibility').click(function() {
-            $('#additional-fields-responsibility').append(`
-                <div class="mt-3">
-                    <input type="text" name="responsibility_name[]" class="form-control" placeholder="Nom de la fonction">
-                    <input type="date" name="start_date[]" class="form-control mt-2" placeholder="Date de début">
-                    <input type="date" name="end_date[]" class="form-control mt-2" placeholder="Date de fin">
-                    <input type="text" name="structure_name[]" class="form-control mt-2" placeholder="Nom de la structure">
-                    <input type="text" name="city[]" class="form-control mt-2" placeholder="Ville">
-                    <input type="text" name="country[]" class="form-control mt-2" placeholder="Pays">
-                </div>
-            `);
+                // Ajouter un écouteur d'événements au bouton Supprimer
+                newFieldSet.querySelector('.remove-button').addEventListener('click', function() {
+                    fieldsContainer.removeChild(newFieldSet);
+                });
+            });
         });
-    });
-</script>
+    </script>
+
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const respprofintSelect = document.getElementById('respprofint');
+            const addButton = document.getElementById('add-btn');
+            const fieldsWrapper = document.querySelector('.fields-wrapper');
+
+            // Afficher ou masquer le bouton Ajouter en fonction de la sélection
+            respprofintSelect.addEventListener('change', function() {
+                if (respprofintSelect.value === 'oui') {
+                    addButton.style.display = 'block'; // Afficher le bouton Ajouter
+                } else {
+                    addButton.style.display = 'none'; // Masquer le bouton Ajouter
+                    fieldsWrapper.innerHTML = ''; // Effacer les champs si 'Non' est sélectionné
+                }
+            });
+
+            // Ajouter de nouveaux champs lorsque le bouton Ajouter est cliqué
+            addButton.addEventListener('click', function() {
+                const index = fieldsWrapper.children.length; // Compter les ensembles de champs existants
+                const newFieldSet = document.createElement('fieldset');
+                newFieldSet.innerHTML = `
+                    <legend>Responsabilité ${index + 1}</legend>
+                    <label>Intitulé de la fonction:</label>
+                    <input type="text" name="intitule_${index}" /><br/>
+                    <label>Début:</label>
+                    <input type="date" name="debut_${index}" /><br/>
+                    <label>Fin:</label>
+                    <input type="date" name="fin_${index}" /><br/>
+                    <label>Structure:</label>
+                    <input type="text" name="structure_${index}" /><br/>
+                    <label>Ville:</label>
+                    <input type="text" name="ville_${index}" /><br/>
+                    <label>Pays:</label>
+                    <input type="text" name="pays_${index}" /><br/>
+                    <button type="button" class="remove-btn">Supprimer</button>
+                    <hr/>
+                `;
+                fieldsWrapper.appendChild(newFieldSet);
+
+                // Ajouter un écouteur d'événements au bouton Supprimer
+                newFieldSet.querySelector('.remove-btn').addEventListener('click', function() {
+                    fieldsWrapper.removeChild(newFieldSet);
+                });
+            });
+        });
+    </script>
+  
 
 @endsection
