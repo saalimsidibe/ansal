@@ -32,29 +32,41 @@
    <form method="POST" action="">
         @csrf
 
-        <div class="diplomes-container">
-            <!-- Première section de diplôme -->
-            <div class="diplome">
-                <h4>Diplôme universitaire</h4>
-                <div class="form-group">
-                    <label for="intitule_1">Intitulé du diplôme</label>
-                    <input type="text" class="form-control" id="intitule_1" name="intitule_1" required>
-                </div>
-                <div class="form-group">
-                    <label for="periode_1">Période d'obtention</label>
-                    <input type="text" class="form-control" id="periode_1" name="periode_1" placeholder="jjmmaa-jjmmaa" required>
-                </div>
-                <div class="form-group">
-                    <label for="institution_1">Institution d'obtention</label>
-                    <input type="text" class="form-control" id="institution_1" name="institution_1" required>
+         <div id="diplomes-fixed-container">
+                <div class="diplome">
+                    <h4>Diplôme universitaire</h4>
+                    <div class="form-group">
+                        <label for="nomDipAut_0">Intitulé du diplôme</label>
+                        <input type="text" class="form-control" name="diplomes[0][nomDipAut]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="periodObtAu_0">Période d'obtention</label>
+                        <input type="text" class="form-control" name="diplomes[0][periodObtAu]" placeholder="jjmmaa-jjmmaa" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="instObtDip_0">Institution d'obtention</label>
+                        <input type="text" class="form-control" name="diplomes[0][instObtDip]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="paysObtDip_0">Pays</label>
+                        <input type="text" class="form-control" name="diplomes[0][paysObtDip]" id="paysObtDip_0">
+                    </div>
+                    <div class="form-group">
+                        <label for="villeObtDip_0">Ville</label>
+                        <input type="text" class="form-control" name="diplomes[0][villeObtDip]">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Bouton pour ajouter un nouveau diplôme -->
-        <div class="form-group">
-            <button type="button" id="ajouterDiplome" class="btn btn-primary">Ajouter</button>
-        </div><br>
+            <!-- Section dynamique -->
+            <div id="diplomes-container">
+                <!-- Les nouveaux diplômes seront ajoutés ici -->
+            </div>
+
+            <button type="button" class="btn btn-primary" id="add-diplome">Ajouter un diplôme</button>
+            <button type="submit" class="btn btn-success">Soumettre</button>
+        </form>
+    </div>
 
         <!-- Bouton de soumission du formulaire -->
         <button onclick="window.location.href='{{ route('etape4chercheur') }}'" class="btn btn-info">Suivant</button>
@@ -82,42 +94,46 @@
     </script>
 
 <script>
-    $(document).ready(function() {
-        var diplomeCount = 1;
+   //ajouter et supprimer diplome
+   $(document).ready(function() {
+            var index = 1; // Commencez avec l'index 1 pour les nouveaux diplômes
 
-        $('#ajouterDiplome').click(function() {
-            diplomeCount++;
+            $('#add-diplome').click(function() {
+                var newDiplome = `
+                    <div class="diplome">
+                        <h4>Diplôme universitaire</h4>
+                        <div class="form-group">
+                            <label for="nomDipAut_${index}">Intitulé du diplôme</label>
+                            <input type="text" class="form-control" name="diplomes[${index}][nomDipAut]" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="periodObtAu_${index}">Période d'obtention</label>
+                            <input type="text" class="form-control" name="diplomes[${index}][periodObtAu]" placeholder="jjmmaa-jjmmaa" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="instObtDip_${index}">Institution d'obtention</label>
+                            <input type="text" class="form-control" name="diplomes[${index}][instObtDip]" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="paysObtDip_${index}">Pays</label>
+                            <input type="text" class="form-control" name="diplomes[${index}][paysObtDip]" id="paysObtDip_${index}">
+                        </div>
+                        <div class="form-group">
+                            <label for="villeObtDip_${index}">Ville</label>
+                            <input type="text" class="form-control" name="diplomes[${index}][villeObtDip]">
+                        </div>
+                        <button type="button" class="btn btn-danger remove-btn">Supprimer</button>
+                    </div>
+                `;
+                $('#diplomes-container').append(newDiplome);
+                index++;
+            });
 
-            var diplomeHtml = `
-                <div class="diplome">
-                    <hr>
-                    <h4>Diplôme universitaire</h4>
-                    <div class="form-group">
-                        <label for="intitule_${diplomeCount}">Intitulé du diplôme</label>
-                        <input type="text" class="form-control" id="intitule_${diplomeCount}" name="intitule_${diplomeCount}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="periode_${diplomeCount}">Période d'obtention</label>
-                        <input type="text" class="form-control" id="periode_${diplomeCount}" name="periode_${diplomeCount}" placeholder="jjmmaa-jjmmaa" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="institution_${diplomeCount}">Institution d'obtention</label>
-                        <input type="text" class="form-control" id="institution_${diplomeCount}" name="institution_${diplomeCount}" required>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-danger btn-sm supprimerDiplome">Supprimer ce diplôme</button>
-            </div>
-            `;
-                
-            $('.diplomes-container').append(diplomeHtml);
-
-            
+            $(document).on('click', '.remove-btn', function() {
+                $(this).closest('.diplome').remove();
+            });
         });
-
-         $(document).on('click', '.supprimerDiplome', function() {
-        $(this).closest('.diplome').remove();
-    });
-    });
+   
 </script>
 
 @endsection
