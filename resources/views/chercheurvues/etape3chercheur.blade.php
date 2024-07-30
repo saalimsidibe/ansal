@@ -37,29 +37,48 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-10"></div>
-                                                    <button type="button" id="ajouterDiplome" class="col-2 float-right btn btn-primary btn-sm">Ajouter</button>
+                                                    <button type="button" id="ajouterDiplome"
+                                                        class="col-2 float-right btn btn-primary btn-sm">Ajouter</button>
                                                 </div>
                                             </div>
                                             <br>
-                                            <div class="diplome">
-                                                <h4>Diplôme universitaire</h4>
-                                                <div class="form-group">
-                                                    <label for="intitule_1">Intitulé du diplôme</label>
-                                                    <input type="text" class="form-control" id="intitule_1" name="diplomes[0][intitule]" required
-                                                        placeholder="Entrez l'intitulé du diplôme" value="{{ old('diplomes.0.intitule', session('multi_step_form.diplomes.0.intitule')) }}">
+                                            @php
+                                                $diplomes = old('diplomes', session('data3.diplomes', []));
+                                            @endphp
+
+                                            @foreach ($diplomes as $index => $diplome)
+                                                <div class="diplome">
+                                                    <h4>Diplôme universitaire</h4>
+                                                    <div class="form-group">
+                                                        <label for="intitule_{{ $index }}">Intitulé du
+                                                            diplôme</label>
+                                                        <input type="text" class="form-control"
+                                                            id="intitule_{{ $index }}"
+                                                            name="diplomes[{{ $index }}][intitule]" required
+                                                            placeholder="Entrez l'intitulé du diplôme"
+                                                            value="{{ $diplome['intitule'] ?? '' }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="periode_{{ $index }}">Période d'obtention</label>
+                                                        <input type="text" class="form-control"
+                                                            id="periode_{{ $index }}"
+                                                            name="diplomes[{{ $index }}][periode]" required
+                                                            placeholder="jjmmaa-jjmmaa"
+                                                            value="{{ $diplome['periode'] ?? '' }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="institution_{{ $index }}">Institution
+                                                            d'obtention</label>
+                                                        <input type="text" class="form-control"
+                                                            id="institution_{{ $index }}"
+                                                            name="diplomes[{{ $index }}][institution]" required
+                                                            placeholder="Entrez l'institution"
+                                                            value="{{ $diplome['institution'] ?? '' }}">
+                                                    </div>
+                                                    <button type="button"
+                                                        class="btn btn-danger supprimerDiplome">Supprimer</button>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="periode_1">Période d'obtention</label>
-                                                    <input type="text" class="form-control" id="periode_1" name="diplomes[0][periode]" required
-                                                        placeholder="jjmmaa-jjmmaa" value="{{ old('diplomes.0.periode', session('multi_step_form.diplomes.0.periode')) }}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="institution_1">Institution d'obtention</label>
-                                                    <input type="text" class="form-control" id="institution_1" name="diplomes[0][institution]" required
-                                                        placeholder="Entrez l'institution" value="{{ old('diplomes.0.institution', session('multi_step_form.diplomes.0.institution')) }}">
-                                                </div>
-                                                <button type="button" class="btn btn-danger supprimerDiplome btn-sma">Supprimer</button>
-                                            </div>
+                                            @endforeach
                                         </div>
                                         <br>
 
@@ -67,7 +86,8 @@
 
 
                                         <!-- Bouton de soumission du formulaire -->
-                                        <a href="{{route('multi-step-form.previous')}}" class="btn btn-warning">Précédent</a>
+                                        <a href="{{ route('multi-step-form.previous') }}"
+                                            class="btn btn-warning">Précédent</a>
                                         <button type="submit" class="btn btn-info">Suivant</button>
                                     </form>
 
@@ -114,9 +134,6 @@
                                         // Initialement attacher les gestionnaires pour les diplômes existants
                                         attachDeleteHandlers();
                                     </script>
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -139,13 +156,13 @@
     </script>
 
     <script>
-       /*   $(document).ready(function() {
-            var diplomeCount = 1;
+        /*   $(document).ready(function() {
+                var diplomeCount = 1;
 
-            $('#ajouterDiplome').click(function() {
-                diplomeCount++;
+                $('#ajouterDiplome').click(function() {
+                    diplomeCount++;
 
-                var diplomeHtml = `
+                    var diplomeHtml = `
                 <div class="diplome">
                     <hr>
                     <h4>Diplôme universitaire</h4>
@@ -166,14 +183,14 @@
             </div>
             `;
 
-                $('.diplomes-container').append(diplomeHtml);
+                    $('.diplomes-container').append(diplomeHtml);
 
 
-            });
+                });
 
-            $(document).on('click', '.supprimerDiplome', function() {
-                $(this).closest('.diplome').remove();
-            });
-        }); */
+                $(document).on('click', '.supprimerDiplome', function() {
+                    $(this).closest('.diplome').remove();
+                });
+            }); */
     </script>
 @endsection

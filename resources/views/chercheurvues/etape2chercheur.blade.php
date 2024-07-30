@@ -107,7 +107,7 @@
                                         </div>
 
                                         <br/>
-                                        <a href="{{ route('multi-step-form') }}" class="btn btn-warning">Précédent</a>
+                                        <a href="{{ route('multi-step-form.previous') }}" class="btn btn-warning">Précédent</a>
                                         <button type="submit" class="btn btn-info">Suivant</button>
                                     </form>
 

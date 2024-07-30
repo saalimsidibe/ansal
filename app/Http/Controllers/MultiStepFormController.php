@@ -93,27 +93,32 @@ class MultiStepFormController extends Controller
                 ]);
 
                 // Stocker les données en session
-                $request->session()->put('data3', array_merge(  $request->session()->get('data3', []), $validatedData));
+                $request->session()->put('data3', array_merge($request->session()->get('data3', []), $validatedData));
 
                 // Rediriger vers l'étape suivante
                 $request->session()->put('step', "4"); //
                 return redirect()->route('etape4chercheur');
                 break;
             case 4:
-                    /* $validatedData = $request->validate([
-                        'diplomes.*.intitule' => 'required|string|max:255',
-                        'diplomes.*.periode' => 'required|string|max:255',
-                        'diplomes.*.institution' => 'required|string|max:255',
-                    ]); */
+                $validatedData = $request->validate([
+                    'experiences.*.intitule' => 'required|string|max:255',
+                    'experiences.*.debut' => 'required|string|max:255',
+                    'experiences.*.fin' => 'required|string|max:255',
+                    'experiences.*.ville' => 'required|string|max:255',
+                ]);
+                //  dd($validatedData);
 
-                    // Stocker les données en session
-                    // $request->session()->put('data3', array_merge(  $request->session()->get('data3', []), $validatedData));
+                // Stocker les données en session
+                $request->session()->put('data4', array_merge($request->session()->get('data4', []), $validatedData));
 
-                    // Rediriger vers l'étape suivante
-                    $request->session()->put('step', "5 "); //
-                    return redirect()->route('etape4chercheur');
-                    break;
-
+                // Rediriger vers l'étape suivante
+                $request->session()->put('step', "5 "); //
+                return redirect()->route('etape5chercheur');
+                break;
+            case 5:
+                $request->session()->put('step', "6");
+                return redirect()->route('etape6chercheur');;
+                break;
         }
     }
 
@@ -131,12 +136,12 @@ class MultiStepFormController extends Controller
         switch ($step) {
             case 1:
                 $request->session()->put('step', "1");
-                return redirect()->route('etape2chercheur');
+                return redirect()->route('multi-step-form');
 
                 break;
             case 2:
                 $request->session()->put('step', "1");
-                return redirect()->route('etape1chercheur');;
+                return redirect()->route('multi-step-form');;
                 break;
             case 3:
                 $request->session()->put('step', "2");
@@ -150,6 +155,9 @@ class MultiStepFormController extends Controller
                 $request->session()->put('step', "4");
                 return redirect()->route('etape4chercheur');;
                 break;
+            case 6:
+                $request->session()->put('step', "5");
+                return redirect()->route('etape5chercheur');;
                 break;
         }
     }

@@ -11,7 +11,7 @@
                         <li>Etape1</li>
                         <li>Etape2</li>
                         <li>Etape3</li>
-                        <li >Etape4</li>
+                        <li>Etape4</li>
                         <li class="current"><a href="#">Etape5</a></li>
                         <li>Etape6</li>
                     </ol>
@@ -21,7 +21,7 @@
 
 
 
-       <div class="container">
+        <div class="container">
             <section id="contact" class="contact section">
                 <div class="container" data-aos="fade">
                     <div class="row ">
@@ -30,43 +30,49 @@
                             <div class="card ">
                                 <div class="card-head info"> Informations Personnelle</div>
                                 <div class="card-body">
-    <form action="">
-        @csrf
-      <div class="form-group">
-            <label for="expprofint">Expériences professionnelles exercées au plan international</label>
-            <select name="expprofint" id="expprofint" class="form-control">
-                <option value="">Sélectionner</option>
-                <option value="oui">Oui</option>
-                <option value="non">Non</option>
-            </select>
-        </div>
+                                    <form action="">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="expprofint">Expériences professionnelles exercées au plan
+                                                international</label>
+                                            <select name="expprofint" id="expprofint" class="form-control">
+                                                <option value="">Sélectionner</option>
+                                                <option value="oui">Oui</option>
+                                                <option value="non">Non</option>
+                                            </select>
+                                        </div>
 
-        <!--Div pour ajouter les fonctions internationales-->
-         <div id="dynamic-container">
-            <button type="button" id="add-button" style="display: none;">Ajouter</button>
-            <div id="fields-container"></div>
-        </div>
+                                        <!--Div pour ajouter les fonctions internationales-->
+                                        <div id="dynamic-container">
+                                            <button type="button" id="add-button" style="display: none;">Ajouter</button>
+                                            <div id="fields-container"></div>
+                                        </div>
 
-       <div class="form-group">
-            <label for="respprofint">Responsabilités administratives exercées au plan international</label>
-            <select name="respprofint" id="respprofint" class="form-control">
-                <option value="">Sélectionner</option>
-                <option value="oui">Oui</option>
-                <option value="non">Non</option>
-            </select>
-        </div>
+                                        <div class="form-group">
+                                            <label for="respprofint">Responsabilités administratives exercées au plan
+                                                international</label>
+                                            <select name="respprofint" id="respprofint" class="form-control">
+                                                <option value="">Sélectionner</option>
+                                                <option value="oui">Oui</option>
+                                                <option value="non">Non</option>
+                                            </select>
+                                        </div>
 
-         <!-- Partie dynamique pour les responsabilites à l'international ID -->
-        <div class="dynamic-section">
-            <button type="button" id="add-btn" style="display: none;">Ajouter</button>
-            <div class="fields-wrapper"></div>
-        </div>
+                                        <!-- Partie dynamique pour les responsabilites à l'international ID -->
+                                        <div class="dynamic-section">
+                                            <button type="button" id="add-btn" style="display: none;">Ajouter</button>
+                                            <div class="fields-wrapper"></div>
+                                        </div>
 
-        <button onclick="window.location.href='{{ route('etape6chercheur') }}'" class="btn btn-info">Suivant</button>
+                                        <div class="btn-group mt-4">
+                                            <a href="{{ route('multi-step-form.previous') }}"
+                                                class="btn btn-warning">Précédent</a>
+                                            <input type="submit" class="btn btn-info" value="Suivant" />
+                                        </div>
 
-    </form>
+                                    </form>
 
-    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-2"> </div>
@@ -75,11 +81,10 @@
         </div>
     </main>
 
-</div> 
+    </div>
 @endsection
 
 @section('scripts')
-    
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
@@ -88,10 +93,8 @@
     </script>
 
     <script>
-
-
-//SCRIPT POUR AJOUTER LES FONCTIONS A L'INTERNATIONAL
- document.addEventListener('DOMContentLoaded', function() {
+        //SCRIPT POUR AJOUTER LES FONCTIONS A L'INTERNATIONAL
+        document.addEventListener('DOMContentLoaded', function() {
             const expprofintSelect = document.getElementById('expprofint');
             const addButton = document.getElementById('add-button');
             const fieldsContainer = document.getElementById('fields-container');
@@ -137,7 +140,7 @@
         });
     </script>
 
- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const respprofintSelect = document.getElementById('respprofint');
             const addButton = document.getElementById('add-btn');
@@ -183,6 +186,4 @@
             });
         });
     </script>
-  
-
 @endsection
