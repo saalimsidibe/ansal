@@ -101,10 +101,17 @@ class MultiStepFormController extends Controller
                 break;
             case 4:
                 $validatedData = $request->validate([
+                    'expadmin' => 'required|string|max:5|in:oui,non',
+                    'respadmin' => 'required|string|max:5|in:oui,non',
                     'experiences.*.intitule' => 'required|string|max:255',
                     'experiences.*.debut' => 'required|string|max:255',
                     'experiences.*.fin' => 'required|string|max:255',
                     'experiences.*.ville' => 'required|string|max:255',
+                    'responsabilites.*.intitule' => 'required|string|max:255',
+                    'responsabilites.*.debut' => 'required|string|max:255',
+                    'responsabilites.*.fin' => 'required|string|max:255',
+                    'responsabilites.*.ville' => 'required|string|max:255',
+                    'responsabilites.*.structure' => 'required|string|max:255',
                 ]);
                 //  dd($validatedData);
 
@@ -116,6 +123,20 @@ class MultiStepFormController extends Controller
                 return redirect()->route('etape5chercheur');
                 break;
             case 5:
+
+                $validatedData = $request->validate([
+                    'expprofint' => 'required|string|in:oui,non',
+                    'experiences.*.intitule' => 'required_if:expprofint,oui|string|max:255',
+                    'experiences.*.periode' => 'required_if:expprofint,oui|string|max:255',
+                    'experiences.*.institution' => 'required_if:expprofint,oui|string|max:255',
+                    'respprofint' => 'required|string|in:oui,non',
+                    'responsabilites.*.intitule' => 'required_if:respprofint,oui|string|max:255',
+                    'responsabilites.*.periode' => 'required_if:respprofint,oui|string|max:255',
+                    'responsabilites.*.institution' => 'required_if:respprofint,oui|string|max:255',
+                ]);
+
+                $request->session()->put('data5', array_merge($request->session()->get('data5', []), $validatedData));
+
                 $request->session()->put('step', "6");
                 return redirect()->route('etape6chercheur');;
                 break;

@@ -27,18 +27,19 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info"> Parrainage et Collège</div>
+                                <div class="card-head info bg-ligth"> <h3>Parrainage et Collège:</h3> </div>
                                 <div class="card-body">
                                     <form action="{{ route('multi-step-form.next') }}" method="POST">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="nomPremierP" class="label-form">Nom du Premier Parrain</label>
+                                            <label for="nomPremierP" class="label-form">Nom du Premier Parrain:</label>
                                             <input type="text" name="nomPremierP" id="nomPremierP" class="form-control"
                                                    placeholder="Entrez le nom du premier parrain"
                                                    value="{{ old('nomPremierP', session('data2.nomPremierP')) }}">
                                             @error('nomPremierP')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
+                                            <br>
                                         </div>
 
                                         <div class="form-group">
@@ -49,30 +50,33 @@
                                             @error('prenomPremierP')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
+                                            <br>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="nomDeuxiemeP" class="label-form">Nom du Deuxième Parrain</label>
+                                            <label for="nomDeuxiemeP" class="label-form">Nom du Deuxième Parrain:</label>
                                             <input type="text" name="nomDeuxiemeP" id="nomDeuxiemeP" class="form-control"
                                                    placeholder="Entrez le nom du deuxième parrain"
                                                    value="{{ old('nomDeuxiemeP', session('data2.nomDeuxiemeP')) }}">
                                             @error('nomDeuxiemeP')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
+                                            <br>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="prenomDeuxiemeP" class="label-form">Prénom du Deuxième Parrain</label>
+                                            <label for="prenomDeuxiemeP" class="label-form">Prénom du Deuxième Parrain:</label>
                                             <input type="text" name="prenomDeuxiemeP" id="prenomDeuxiemeP" class="form-control"
                                                    placeholder="Entrez le prénom du deuxième parrain"
                                                    value="{{ old('prenomDeuxiemeP', session('data2.prenomDeuxiemeP')) }}">
                                             @error('prenomDeuxiemeP')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
+                                            <br>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="college" class="label-form">Collège dans lequel vous souhaitez postuler</label>
+                                            <label for="college" class="label-form">Collège dans lequel vous souhaitez postuler :</label>
                                             <select name="college" id="college" class="form-control">
                                                 <option value="">-Choisir-</option>
                                                 <option value="1" {{ old('college', session('data2.college')) == '1' ? 'selected' : '' }}>
@@ -94,16 +98,18 @@
                                             @error('college')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
+                                            <br>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="specialite" class="label-form">Précisez votre spécialité dans le collège postulé</label>
+                                            <label for="specialite" class="label label-form">Précisez votre spécialité dans le collège postulé:</label>
                                             <input type="text" name="specialite" id="specialite" class="form-control"
                                                    placeholder="Entrez votre spécialité"
                                                    value="{{ old('specialite', session('data2.specialite')) }}">
                                             @error('specialite')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
+                                            <br>
                                         </div>
 
                                         <br/>

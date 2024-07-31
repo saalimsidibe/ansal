@@ -26,7 +26,7 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelle</div>
+                                <div class="card-head info bg-light"> Experiences Nationales</div>
 
 
                                 <div class="card-body">
@@ -108,7 +108,31 @@
 
                                         <div id="dynamic-container">
                                             <h3>Ajouter une responsabilité</h3>
-                                            <div id="fields-container"></div>
+                                            @php
+                                            $responsabilites = old('responsabilites', session('data4.responsabilites', []));
+                                        @endphp
+                                            <div id="fields-container">
+                                                @foreach ($responsabilites as $index => $responsabilite)
+                                                <label>Intitulé de la responsabilité:</label>
+                                                <input type="text" name="responsabilites[{{ $index }}][intitule]"
+                                                value="{{ $responsabilite['intitule'] ?? '' }}" /><br/>
+                                                <label>Début:</label>
+                                                <input type="date" name="responsabilites[{{ $index }}][debut]"
+                                                value="{{ $responsabilite['debut'] ?? '' }}" /><br/>
+                                                <label>Fin:</label>
+                                                <input type="date" name="responsabilites[{{ $index }}][fin]"
+                                                value="{{ $responsabilite['fin'] ?? '' }}" /><br/>
+                                                <label>Structure:</label>
+                                                <input type="text" name="responsabilites[{{ $index }}][structure]"
+                                                value="{{ $responsabilite['structure'] ?? '' }}"/><br/>
+                                                <label>Ville:</label>
+                                                <input type="text" name="responsabilites[{{ $index }}][ville]"
+                                                value="{{ $responsabilite['ville'] ?? '' }}"/><br/>
+                                                <button type="button" class="remove-button">Supprimer</button>
+                                                <hr/>
+                                                @endforeach
+
+                                            </div>
                                             <button type="button" id="add-button" class="btn btn-primary mt-2"
                                                 style="display: none;">Ajouter</button>
                                             <br>
@@ -221,15 +245,15 @@
                 newFieldSet.innerHTML = `
                     <legend>Responsabilité ${index + 1}</legend>
                     <label>Intitulé de la responsabilité:</label>
-                    <input type="text" name="intitule_${index}" /><br/>
+                    <input type="text" name="responsabilites[${index}][intitule]"" /><br/>
                     <label>Début:</label>
-                    <input type="date" name="debut_${index}" /><br/>
+                    <input type="date" name="responsabilites[${index}][debut]"" /><br/>
                     <label>Fin:</label>
-                    <input type="date" name="fin_${index}" /><br/>
+                    <input type="date" name="responsabilites[${index}][fin]" /><br/>
                     <label>Structure:</label>
-                    <input type="text" name="structure_${index}" /><br/>
+                    <input type="text" name="responsabilites[${index}][structure]" /><br/>
                     <label>Ville:</label>
-                    <input type="text" name="ville_${index}" /><br/>
+                    <input type="text" name="responsabilites[${index}][ville]" /><br/>
                     <button type="button" class="remove-button">Supprimer</button>
                     <hr/>
                 `;

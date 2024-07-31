@@ -26,7 +26,7 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelle</div>
+                                <div class="card-head info bg-light">  <h3>Informations sur les diplômes</h3> </div>
                                 <div class="card-body">
 
                                     <form method="POST" action="{{ route('multi-step-form.next') }}">
