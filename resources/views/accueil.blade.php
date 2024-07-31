@@ -34,25 +34,179 @@
               <div class="px-3">
                 <span class="content-subtitle">Our Mission</span>
                 <h2 class="content-title text-start">
-                  Critères 
+                  Critères Généraux
                 </h2>
+                <p class="fst-italic"><span class="fw-bold">NB:Tout candidat doit avoir moins de 70 ans au 31 octobre 2024, date de clôture du dépôt des dossiers et devra être parrainé par deux (2) Académiciens du Collège concerné.</span></p>
+                <p class="">
+                    1.	Candidat(e) provenant de l’enseignement supérieur ou de la recherche scientifique :
+                </p>
+                
                 <p class="lead">
-                  A small river named Duden flows by their place and supplies it
-                  with the necessary regelialia. It is a paradisematic country.
+                    <ul class="">
+                        <li class="">
+                            être spécialiste d’une discipline parmi celles relevant du Collège considéré ou  avoir conduit des travaux scientifiques avérés de portée internationale dans le domaine ;
+                        </li><br>
+                        <li class="">
+                            disposer d’une thèse de spécialité de doctorat datant d’au moins dix (10) ans à la date de clôture des dépôts des dossiers de candidature 
+                        </li><br>
+                        <li class="">
+                            être de rang A dans l’enseignement supérieur ou dans la recherche scientifique
+                        </li><br>
+                        <li class="">
+                            avoir un rayonnement scientifique international 
+                        </li><br>
+                        <li class="">
+                            prendre l’engagement de respecter ses devoirs vis-à-vis de l’Académie en s’acquittant de sa cotisation annuelle et en participant pleinement aux activités de l’institution pour son rayonnement national et international.
+                        </li>
+                    </ul>
                 </p>
-                <p class="mb-5">
-                  The Big Oxmox advised her not to do so, because there were
-                  thousands of bad Commas, wild Question Marks and devious Semikoli.
+
+                <p class="">
+                    2.	Candidat(e) ne provenant pas de l’enseignement supérieur ou de la recherche scientifique :
                 </p>
-                <p>
-                  <a href="#" class="btn-get-started">Get Started</a>
-                </p>
+
+                <p class="lead">
+                    <ul>
+                        <li class="">
+                            être spécialiste d’une discipline parmi celles relevant du Collège considéré ou avoir conduit des travaux avérés de portée internationale dans le domaine ;
+                        </li><br>
+                        <li>
+                            avoir une notoriété nationale et internationale à travers ses œuvres ou disposer de titres de propriétés intellectuelles  dans le domaine 
+                        </li><br>
+                        <li>
+                            être suffisamment impliqué dans la vie de la communauté
+                        </li><br>
+                        <li>
+                            prendre l’engagement de respecter ses devoirs vis-à-vis de l’Académie en s’acquittant de sa cotisation annuelle et en participant pleinement aux activités de l’institution pour son rayonnement national et international
+                        </li>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section><!-- /About 2 Section -->
+
+ 
+<section id="about-3" class="about-3 section">
+
+      <div class="container">
+        <div class="content">
+          <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-5 col-lg-4 col-xl-4 order-lg-2 offset-xl-1 mb-4">
+              <div class="img-wrap text-center text-md-left" data-aos="fade-up" data-aos-delay="100">
+                <div class="img">
+                  <img src="{{url('active/assets/img/img_v_3.jpg')}}" alt="circle image" class="img-fluid">
+                </div>
+              </div>
+            </div>
+
+            <div class="offset-md-0 offset-lg-1 col-sm-12 col-md-5 col-lg-5 col-xl-4" data-aos="fade-up">
+              <div class="px-3">
+                <span class="content-subtitle">Our Mission</span>
+                <h2 class="content-title text-start">
+                  Critères Spécifiques
+                </h2>
+                <p class="fst-italic"><span class="fw-bold">NB:Tout candidat doit avoir moins de 70 ans au 31 octobre 2024, date de clôture du dépôt des dossiers et devra être parrainé par deux (2) Académiciens du Collège concerné.</span></p>
+                
+                <p class="">
+
+                </p>
+                
+                <p class="lead">
+                    <ul class="">
+                        <li class="">
+                            
+                        </li><br>
+                        <li class="">
+                           
+                        </li><br>
+                        <li class="">
+                           
+                        </li><br>
+                        <li class="">
+                          
+                        </li><br>
+                        <li class="">
+                       
+                    </ul>
+                </p>
+
+                <p class="">
+                  
+                </p>
+
+                <p class="lead">
+                    <ul>
+                        <li class="">
+                          
+                        </li><br>
+                        <li>
+                           
+                        </li><br>
+                        <li>
+                          
+                        </li><br>
+                        <li>
+                          
+                        </li>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><-->
+    </section>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Services Section -->
     <section id="services" class="services section light-background">

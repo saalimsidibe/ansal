@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Ansal | Plateforme de depots des candidatures </title>
+  <title>Ansal BF| Plateforme de depots des candidatures </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -149,7 +149,7 @@
       </div>
 
       <div class="copyright d-flex flex-column flex-md-row align-items-center justify-content-md-between">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">Active.</strong> <span>All Rights Reserved</span></p>
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Active.</strong> <span>Tous droits réservés</span></p>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->
           <!-- You can delete the links only if you've purchased the pro version. -->

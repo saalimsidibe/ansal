@@ -36,6 +36,7 @@ Route::view('/etape3autre', 'autrevues.etape3autre');
 Route::view('/etape4autre', 'autrevues.etape4autre');
 Route::view('/etape5autre', 'autrevues.etape5autre');
 Route::view('/etape6autre', 'autrevues.etape6autre');
+Route::view('/etapefinaleautre', 'autresvues.etapefinaleautre');
 
 //Route::get('/multi-step-form', LivewireChercheurEtape::class)->name('multi-step-form');
 Route::view('/etape1chercheur', 'chercheurvues.etape1chercheur');
@@ -45,3 +46,4 @@ Route::view('/etape4chercheur', 'chercheurvues.etape4chercheur')->name('etape4ch
 Route::view('/etape5chercheur', 'chercheurvues.etape5chercheur')->name('etape5chercheur');
 Route::view('/etape6chercheur', 'chercheurvues.etape6chercheur')->name('etape6chercheur');
 Route::view('/etapefinalechercheur', 'chercheurvues.etapefinalechercheur')->name('etapefinalechercheur');
+Route::view('/accueil', 'accueil');

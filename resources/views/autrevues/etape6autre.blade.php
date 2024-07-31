@@ -1,14 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</head>
-<body>
+@extends('layout.app')
+
+@section('content')
+    <main class="main">
+        <div class="page-title light-background">
+            <div class="container">
+                <h1>Formulaire-Autre</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+
+                        <li>Etape1</li>
+                        <li>Etape2</li>
+                        <li>Etape3</li>
+                        <li>Etape4</li>
+                        <li>Etape5</li>
+                        <li class="current"><a href="#">Etape6</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+              <section id="contact" class="contact section">
+                <div class="container" data-aos="fade">
+                    <div class="row ">
+                        <div class="col-2"> </div>
+                        <div class="col-8">
+                            <div class="card ">
+                                <div class="card-head info"> Informations Personnelle</div>
+                                <div class="card-body">
     <form action="">
         @csrf
 
@@ -58,6 +76,17 @@
         </div>
     </form>
     
+ </div>
+                        </div>
+                        <div class="col-2"> </div>
+                    </div>
+            </section>
+        </div>
+    </main>
+@endsection    
+
+
+@section('scripts')
     <script>
         //ajouter des associations
         document.getElementById('ajouterAssAut').addEventListener('click', function() {
@@ -208,5 +237,4 @@
             selectContainer.removeChild(button.parentElement);
         }
     </script>
-</body>
-</html>
+@endsection
