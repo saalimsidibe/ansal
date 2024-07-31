@@ -46,6 +46,4 @@ Route::view('/etape4chercheur', 'chercheurvues.etape4chercheur')->name('etape4ch
 Route::view('/etape5chercheur', 'chercheurvues.etape5chercheur')->name('etape5chercheur');
 Route::view('/etape6chercheur', 'chercheurvues.etape6chercheur')->name('etape6chercheur');
 Route::view('/etapefinalechercheur', 'chercheurvues.etapefinalechercheur')->name('etapefinalechercheur');
-<<<<<<< HEAD
-=======
->>>>>>> 25568e874dbe0f20c0f06307528103fad33344e1
+Route::view('/Accueil', 'accueil');
