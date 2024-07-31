@@ -18,7 +18,7 @@
                 </nav>
             </div>
         </div><!-- End Page Title -->
-    
+
         <div class="container">
             <section id="contact" class="contact section">
                 <div class="container" data-aos="fade">
@@ -26,53 +26,115 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelle</div>
+                                <div class="card-head info bg-light">  <h3>Informations sur les diplômes</h3> </div>
                                 <div class="card-body">
 
-   <form method="POST" action="">
-        @csrf
+                                    <form method="POST" action="{{ route('multi-step-form.next') }}">
+                                        @csrf
 
-         <div id="diplomes-fixed-container">
-                <div class="diplome">
-                    <h4>Diplôme universitaire</h4>
-                    <div class="form-group">
-                        <label for="nomDipAut_0">Intitulé du diplôme</label>
-                        <input type="text" class="form-control" name="diplomes[0][nomDipAut]" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="periodObtAu_0">Période d'obtention</label>
-                        <input type="text" class="form-control" name="diplomes[0][periodObtAu]" placeholder="jjmmaa-jjmmaa" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="instObtDip_0">Institution d'obtention</label>
-                        <input type="text" class="form-control" name="diplomes[0][instObtDip]" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="paysObtDip_0">Pays</label>
-                        <input type="text" class="form-control" name="diplomes[0][paysObtDip]" id="paysObtDip_0">
-                    </div>
-                    <div class="form-group">
-                        <label for="villeObtDip_0">Ville</label>
-                        <input type="text" class="form-control" name="diplomes[0][villeObtDip]">
-                    </div>
-                </div>
-            </div>
+                                        <div class="diplomes-container">
+                                            <!-- Première section de diplôme -->
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-10"></div>
+                                                    <button type="button" id="ajouterDiplome"
+                                                        class="col-2 float-right btn btn-primary btn-sm">Ajouter</button>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            @php
+                                                $diplomes = old('diplomes', session('data3.diplomes', []));
+                                            @endphp
 
-            <!-- Section dynamique -->
-            <div id="diplomes-container">
-                <!-- Les nouveaux diplômes seront ajoutés ici -->
-            </div>
+                                            @foreach ($diplomes as $index => $diplome)
+                                                <div class="diplome">
+                                                    <h4>Diplôme universitaire</h4>
+                                                    <div class="form-group">
+                                                        <label for="intitule_{{ $index }}">Intitulé du
+                                                            diplôme</label>
+                                                        <input type="text" class="form-control"
+                                                            id="intitule_{{ $index }}"
+                                                            name="diplomes[{{ $index }}][intitule]" required
+                                                            placeholder="Entrez l'intitulé du diplôme"
+                                                            value="{{ $diplome['intitule'] ?? '' }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="periode_{{ $index }}">Période d'obtention</label>
+                                                        <input type="text" class="form-control"
+                                                            id="periode_{{ $index }}"
+                                                            name="diplomes[{{ $index }}][periode]" required
+                                                            placeholder="jjmmaa-jjmmaa"
+                                                            value="{{ $diplome['periode'] ?? '' }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="institution_{{ $index }}">Institution
+                                                            d'obtention</label>
+                                                        <input type="text" class="form-control"
+                                                            id="institution_{{ $index }}"
+                                                            name="diplomes[{{ $index }}][institution]" required
+                                                            placeholder="Entrez l'institution"
+                                                            value="{{ $diplome['institution'] ?? '' }}">
+                                                    </div>
+                                                    <button type="button"
+                                                        class="btn btn-danger supprimerDiplome">Supprimer</button>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <br>
 
-            <button type="button" class="btn btn-primary" id="add-diplome">Ajouter un diplôme</button>
-            <button type="submit" class="btn btn-success">Soumettre</button>
-        </form>
-    </div>
+                                        <!-- Bouton pour ajouter un nouveau diplôme -->
 
-        <!-- Bouton de soumission du formulaire -->
-        <button onclick="window.location.href='{{ route('etape4chercheur') }}'" class="btn btn-info">Suivant</button>
 
-    </form>
-                    </div>
+                                        <!-- Bouton de soumission du formulaire -->
+                                        <a href="{{ route('multi-step-form.previous') }}"
+                                            class="btn btn-warning">Précédent</a>
+                                        <button type="submit" class="btn btn-info">Suivant</button>
+                                    </form>
+
+                                    <script>
+                                        document.getElementById('ajouterDiplome').addEventListener('click', function() {
+                                            var diplomesContainer = document.querySelector('.diplomes-container');
+                                            var diplomeCount = diplomesContainer.children.length;
+
+                                            var newDiplome = document.createElement('div');
+                                            newDiplome.classList.add('diplome');
+                                            newDiplome.innerHTML = `
+                                                <h4>Diplôme universitaire</h4>
+                                                <div class="form-group">
+                                                    <label for="intitule_${diplomeCount}">Intitulé du diplôme</label>
+                                                    <input type="text" class="form-control" id="intitule_${diplomeCount}"
+                                                           name="diplomes[${diplomeCount}][intitule]" required placeholder="Entrez l'intitulé du diplôme">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="periode_${diplomeCount}">Période d'obtention</label>
+                                                    <input type="text" class="form-control" id="periode_${diplomeCount}"
+                                                           name="diplomes[${diplomeCount}][periode]" required placeholder="jjmmaa-jjmmaa">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="institution_${diplomeCount}">Institution d'obtention</label>
+                                                    <input type="text" class="form-control" id="institution_${diplomeCount}"
+                                                           name="diplomes[${diplomeCount}][institution]" required placeholder="Entrez l'institution">
+                                                </div>
+                                                <button type="button" class="btn btn-danger supprimerDiplome">Supprimer</button>
+                                            `;
+                                            diplomesContainer.appendChild(newDiplome);
+
+                                            // Attacher l'événement de suppression
+                                            attachDeleteHandlers();
+                                        });
+
+                                        function attachDeleteHandlers() {
+                                            document.querySelectorAll('.supprimerDiplome').forEach(function(button) {
+                                                button.addEventListener('click', function() {
+                                                    this.closest('.diplome').remove();
+                                                });
+                                            });
+                                        }
+
+                                        // Initialement attacher les gestionnaires pour les diplômes existants
+                                        attachDeleteHandlers();
+                                    </script>
+                                </div>
                             </div>
                         </div>
                         <div class="col-2"> </div>
@@ -81,59 +143,54 @@
         </div>
     </main>
 
-</div> 
+    </div>
 @endsection
 
 
 @section('scripts')
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
     </script>
 
-<script>
-   //ajouter et supprimer diplome
-   $(document).ready(function() {
-            var index = 1; // Commencez avec l'index 1 pour les nouveaux diplômes
+    <script>
+        /*   $(document).ready(function() {
+                var diplomeCount = 1;
 
-            $('#add-diplome').click(function() {
-                var newDiplome = `
-                    <div class="diplome">
-                        <h4>Diplôme universitaire</h4>
-                        <div class="form-group">
-                            <label for="nomDipAut_${index}">Intitulé du diplôme</label>
-                            <input type="text" class="form-control" name="diplomes[${index}][nomDipAut]" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="periodObtAu_${index}">Période d'obtention</label>
-                            <input type="text" class="form-control" name="diplomes[${index}][periodObtAu]" placeholder="jjmmaa-jjmmaa" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="instObtDip_${index}">Institution d'obtention</label>
-                            <input type="text" class="form-control" name="diplomes[${index}][instObtDip]" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="paysObtDip_${index}">Pays</label>
-                            <input type="text" class="form-control" name="diplomes[${index}][paysObtDip]" id="paysObtDip_${index}">
-                        </div>
-                        <div class="form-group">
-                            <label for="villeObtDip_${index}">Ville</label>
-                            <input type="text" class="form-control" name="diplomes[${index}][villeObtDip]">
-                        </div>
-                        <button type="button" class="btn btn-danger remove-btn">Supprimer</button>
+                $('#ajouterDiplome').click(function() {
+                    diplomeCount++;
+
+                    var diplomeHtml = `
+                <div class="diplome">
+                    <hr>
+                    <h4>Diplôme universitaire</h4>
+                    <div class="form-group">
+                        <label for="intitule_${diplomeCount}">Intitulé du diplôme</label>
+                        <input type="text" class="form-control" id="intitule_${diplomeCount}" name="intitule_${diplomeCount}" required>
                     </div>
-                `;
-                $('#diplomes-container').append(newDiplome);
-                index++;
-            });
+                    <div class="form-group">
+                        <label for="periode_${diplomeCount}">Période d'obtention</label>
+                        <input type="text" class="form-control" id="periode_${diplomeCount}" name="periode_${diplomeCount}" placeholder="jjmmaa-jjmmaa" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="institution_${diplomeCount}">Institution d'obtention</label>
+                        <input type="text" class="form-control" id="institution_${diplomeCount}" name="institution_${diplomeCount}" required>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger btn-sm supprimerDiplome">Supprimer ce diplôme</button>
+            </div>
+            `;
 
-            $(document).on('click', '.remove-btn', function() {
-                $(this).closest('.diplome').remove();
-            });
-        });
-   
-</script>
+                    $('.diplomes-container').append(diplomeHtml);
 
+
+                });
+
+                $(document).on('click', '.supprimerDiplome', function() {
+                    $(this).closest('.diplome').remove();
+                });
+            }); */
+    </script>
 @endsection
