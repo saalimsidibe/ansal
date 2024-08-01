@@ -74,6 +74,10 @@
         <input type="checkbox" class="form-control">
         </div>
         </div>
+         <div class="btn-group mt-4">
+            <a href="{{ route('multi-step-form.previous') }}" class="btn btn-warning">Précédent</a>
+             <input type="submit" class="btn btn-info" value="Suivant" />
+        </div>
     </form>
     
  </div>

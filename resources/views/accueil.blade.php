@@ -32,7 +32,7 @@
 
             <div class="offset-md-0 offset-lg-1 col-sm-12 col-md-5 col-lg-5 col-xl-4" data-aos="fade-up">
               <div class="px-3">
-                <span class="content-subtitle">Our Mission</span>
+                <span class="content-subtitle"></span>
                 <h2 class="content-title text-start">
                   Critères Généraux
                 </h2>
@@ -108,52 +108,11 @@
                 </h2>
                 <p class="fst-italic"><span class="fw-bold">NB:Tout candidat doit avoir moins de 70 ans au 31 octobre 2024, date de clôture du dépôt des dossiers et devra être parrainé par deux (2) Académiciens du Collège concerné.</span></p>
                 
-                <p class="">
-
-                </p>
-                
-                <p class="lead">
-                    <ul class="">
-                        <li class="">
-                            
-                        </li><br>
-                        <li class="">
-                           
-                        </li><br>
-                        <li class="">
-                           
-                        </li><br>
-                        <li class="">
-                          
-                        </li><br>
-                        <li class="">
-                       
-                    </ul>
-                </p>
-
-                <p class="">
-                  
-                </p>
-
-                <p class="lead">
-                    <ul>
-                        <li class="">
-                          
-                        </li><br>
-                        <li>
-                           
-                        </li><br>
-                        <li>
-                          
-                        </li><br>
-                        <li>
-                          
-                        </li>
               </div>
             </div>
           </div>
         </div>
-      </div><-->
+      </div>
     </section>
 
  
@@ -199,107 +158,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-    <!-- Services Section -->
-    <section id="services" class="services section light-background">
-
-      <div class="container">
-        <div class="row gy-4 justify-content-center">
-
-          <div class="col-lg-3">
-            <div class="services-item" data-aos="fade-up">
-              <div class="services-icon">
-                <i class="bi bi-bullseye"></i>
-              </div>
-              <div>
-                <h3>Technology</h3>
-                <p>Separated they live in Bookmarksgrove right at the coast</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3">
-            <div class="services-item" data-aos="fade-up" data-aos-delay="100">
-              <div class="services-icon">
-                <i class="bi bi-command"></i>
-              </div>
-              <div>
-                <h3>Web Design</h3>
-                <p>Separated they live in Bookmarksgrove right at the coast</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3">
-            <div class="services-item" data-aos="fade-up" data-aos-delay="200">
-              <div class="services-icon">
-                <i class="bi bi-bar-chart"></i>
-              </div>
-              <div>
-                <h3>Branding</h3>
-                <p>Separated they live in Bookmarksgrove right at the coast</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section><!-- /Services Section -->
-
-    <!-- Stats Section -->
-    <section id="stats" class="stats section light-background">
-
-      <div class="container">
-
-        <div class="row gy-4 justify-content-center">
-
-          <div class="col-lg-5">
-            <div class="images-overlap">
-              <img src="{{url('active/assets/img/img_v_1.jpg')}}" alt="student" class="img-fluid img-1" data-aos="fade-up">
-            </div>
-          </div>
-
-          <div class="col-lg-4 ps-lg-5">
-            <span class="content-subtitle">Why Us</span>
-            <h2 class="content-title">Far far away Behind the Word Mountains</h2>
-            <p class="lead">
-              Far far away, behind the word mountains, far from the countries
-              Vokalia and Consonantia.
-            </p>
-            <p class="mb-5">
-              There live the blind texts. Separated they live in Bookmarksgrove
-              right at the coast of the Semantics, a large language ocean.
-            </p>
-            <div class="row mb-5 count-numbers">
-
               <!-- Start Stats Item -->
-              <div class="col-4 counter" data-aos="fade-up" data-aos-delay="100">
-                <span data-purecounter-separator="true" data-purecounter-start="0" data-purecounter-end="3919" data-purecounter-duration="1" class="purecounter number"></span>
-                <span class="d-block">Coffee</span>
-              </div>
-              <!-- End Stats Item -->
-
-              <!-- Start Stats Item -->
-              <div class="col-4 counter" data-aos="fade-up" data-aos-delay="200">
-                <span data-purecounter-separator="true" data-purecounter-start="0" data-purecounter-end="2831" data-purecounter-duration="1" class="purecounter number"></span>
-                <span class="d-block">Codes</span>
-              </div>
-              <!-- End Stats Item -->
-
-              <!-- Start Stats Item -->
-              <div class="col-4 counter" data-aos="fade-up" data-aos-delay="300">
-                <span data-purecounter-separator="true" data-purecounter-start="0" data-purecounter-end="1914" data-purecounter-duration="1" class="purecounter number"></span>
-                <span class="d-block">Projects</span>
-              </div>
-              <!-- End Stats Item -->
+             
 
             </div>
           </div>
@@ -358,7 +218,7 @@
               <div class="swiper-slide">
                 <div class="team">
                   <div class="pic">
-                    <img src="{{url('active/assets/img/team/team-1.jpg')}}" alt="Image" class="img-fluid">
+                    <img src="{{ asset('images/sciences.jpeg') }}" alt="Image" class="img-fluid">
                   </div>
                   <h3 clas="">
                     <a href="#"><span class="">Jeremy</span> Walker</a>
@@ -376,7 +236,7 @@
               <div class="swiper-slide">
                 <div class="team">
                   <div class="pic">
-                    <img src="{{url('active/assets/img/team/team-2.jpg')}}" alt="Image" class="img-fluid">
+                    <img src="{{ asset('images/sante.jpeg') }}" alt="Image" class="img-fluid">
                   </div>
                   <h3 clas="">
                     <a href="#"><span class="">Lawson</span> Arnold</a>

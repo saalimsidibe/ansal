@@ -65,7 +65,7 @@
        
         <div class="form-group">
             <label for="contribution" id="contribution" class="label-form">Indiquer votre contribution scientifique majeure dans les domaines du  collège postulé </label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name="contributionChecheur">
         </div>
 
         <div id="distinctionsContainer">
@@ -78,7 +78,7 @@
                 <label for="nomDistinc">Nom de la distinction</label>
                 <input type="text" name="distinctionsNomCher" class="form-control" id="nomDistinct"> 
                 <label for="dateDistinc">Date de la distinction</label>
-                <input type="date" name="date" id="dateDistinc" class="form-control">
+                <input type="date" name="dateDistinctCher" id="dateDistinc" class="form-control">
             </div>
 
         </div>
@@ -86,10 +86,13 @@
 
         <div class="form-group">
             <label for="">Declaration sur l'honneur</label>
-            <input type="checkbox" class="form-control">
+            <input type="checkbox" class="form-control" name="honneurChercheur">
         </div>
 
-        <button onclick="window.location.href='{{ route('etapefinalechercheur') }}'">Suivant</button>
+         <div class="btn-group mt-4">
+            <a href="{{ route('multi-step-form.previous') }}" class="btn btn-warning">Précédent</a>
+            <input type="submit" class="btn btn-info" value="Suivant" />
+        </div>
 
         
     </form>

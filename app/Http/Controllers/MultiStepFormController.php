@@ -138,12 +138,40 @@ class MultiStepFormController extends Controller
                 $request->session()->put('data5', array_merge($request->session()->get('data5', []), $validatedData));
 
                 $request->session()->put('step', "6");
-                return redirect()->route('etape6chercheur');;
+                return redirect()->route('etape6chercheur');
                 break;
+
+            case 6:
+
+                $validatedData = $request->validate([
+                    'commissions.*.name' => 'required|string|max:255',
+                    'brevets.*.*.auteur' => 'required|string|max:255',
+                    'brevets.*.date' => 'required---------',
+                    'brevets.*.intitule' => 'required|string|max:255',
+                    'brevets.*.reference' => 'required|string|max:255',
+                    'ouvrages.*.auteur' => 'required|string|max:255',
+                    'ouvrages.*.annee' => 'required|string|max:255',
+                    'ouvrages.*.titre' => 'required|string|max:255',
+                    'ouvrages.*.editeur' => 'required|string|max:255',
+                    'ouvrages.*.nombre_page' => 'required|string|max:255',
+                    'articles.*.auteur' => 'required|string|max:255',
+                    'articles.*.coauteur' => 'required|string|max:255',
+                    'articles.*.annee_publication' => 'required|string|max:255',
+                    'articles.*.titre' => 'required|string|max:255',
+                    'articles.*.editeur' => 'required|string|max:255',
+                    'articles.*.pages' => 'required|string|max:255',
+                    'distinctionTypeCher' => 'required|string|in:oui,non',
+                    'distinctionsNomCher' => 'required|string|',
+                    'dateDistinctCher' => '',
+                    'distinctions.*.type' => 'required|string|in:1,2',
+                    'honneurChercheur' => 'required|string|max:255',
+                    'contributionChecheur' => 'required|string|max:255'
+                ]);
+                $request->session()->put('data6', array_merge($request->session()->get('data6', []), $validatedData));
         }
     }
 
-    /***
+    /*
      * fonction qui gère les recul
      */
 
@@ -178,7 +206,11 @@ class MultiStepFormController extends Controller
                 break;
             case 6:
                 $request->session()->put('step', "5");
-                return redirect()->route('etape5chercheur');;
+                return redirect()->route('etape5chercheur');
+                break;
+            case 7:
+                $request->session()->put('step', "6");
+                return redirect()->route('etape6chercheur');
                 break;
         }
     }
@@ -195,6 +227,7 @@ class MultiStepFormController extends Controller
             'titre' => 'required|string|max:255',
             'tel_mobile' => 'required|string|max:20',
             'email' => 'required|email|max:255',
+
         ]);
 
         // Traitez les données validées ici (par exemple, sauvegardez-les en base de données)
