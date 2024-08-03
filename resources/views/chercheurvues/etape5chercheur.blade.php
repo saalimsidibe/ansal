@@ -44,7 +44,30 @@
                                         <!-- Div pour ajouter les expériences internationales -->
                                         <div id="experience-container" class="mt-3 d-none">
                                             <h4>Ajouter une expérience professionnelle</h4>
-                                            <div id="experience-fields-container"></div>
+
+                                            @php
+                                            $experiences = old('experiences', session('data5.experiences', []));
+                                        @endphp
+                                            <div id="experience-fields-container">
+
+                                                @foreach ($experiences as $index => $experience)
+                                                <div class="form-group">
+                                                    <label for="exp_intitule_{{ $index }}">Intitulé</label>
+                                                    <input type="text" name="experiences[{{ $index }}][intitule]"
+                                                           class="form-control" id="exp_intitule_{{ $index }}"
+                                                           value="{{ $experience['intitule'] ?? '' }}" required>
+                                                    <label for="exp_periode_{{ $index }}" class="mt-2">Période</label>
+                                                    <input type="text" name="experiences[{{ $index }}][periode]"
+                                                    value="{{ $experience['periode'] ?? '' }}"
+                                                           class="form-control" id="exp_periode_{{ $index }}"
+                                                           placeholder="jjmmaaaa-jjmmaaaa" required>
+                                                    <label for="exp_institution_{{ $index }}" class="mt-2">Institution</label>
+                                                    <input type="text" name="experiences[{{ $index }}][institution]"
+                                                    value="{{ $experience['institution'] ?? '' }}"
+                                                           class="form-control" id="exp_institution_{{ $index }}" required>
+                                                </div>
+                                                @endforeach
+                                            </div>
                                             <button type="button" id="add-experience-button" class="btn btn-primary mt-2">Ajouter</button>
                                         </div>
 
@@ -60,7 +83,9 @@
                                         <!-- Div pour ajouter les responsabilités internationales -->
                                         <div id="responsibility-container" class="mt-3 d-none">
                                             <h4>Ajouter une responsabilité administrative</h4>
-                                            <div id="responsibility-fields-container"></div>
+                                            <div id="responsibility-fields-container">
+
+                                            </div>
                                             <button type="button" id="add-responsibility-button" class="btn btn-primary mt-2">Ajouter</button>
                                         </div>
 
