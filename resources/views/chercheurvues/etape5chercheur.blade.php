@@ -44,7 +44,10 @@
                                         <!-- Div pour ajouter les expériences internationales -->
                                         <div id="experience-container" class="mt-3 d-none">
                                             <h4>Ajouter une expérience professionnelle</h4>
-                                            <div id="experience-fields-container"></div>
+                                            <div id="experience-fields-container">
+                                                
+
+                                            </div>
                                             <button type="button" id="add-experience-button" class="btn btn-primary mt-2">Ajouter</button>
                                         </div>
 

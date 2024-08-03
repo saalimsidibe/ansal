@@ -37,20 +37,20 @@
               </script>
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <img src="{{url('active/assets/img/img_h_6.jpg')}}" alt="Image" class="img-fluid">
+                  <img src="{{ asset('images/accueil1.jpg') }}" alt="Image" class="img-fluid">
                 </div>
                 <div class="swiper-slide">
-                  <img src="{{url('active/assets/img/img_h_7.jpg')}}" alt="Image" class="img-fluid">
+                  <img src="{{ asset('images/accueil2.jpg') }}" alt="Image" class="img-fluid">
                 </div>
                 <div class="swiper-slide">
-                  <img src="{{url('active/assets/img/img_h_8.jpg')}}" alt="Image" class="img-fluid">
+                  <img src="{{ asset('images/accueil3.jpg') }}" alt="Image" class="img-fluid">
                 </div>
               </div>
               <div class="swiper-pagination"></div>
             </div>
           </div>
           <div class="col-lg-4 order-lg-1">
-            <span class="section-subtitle" data-aos="fade-up">Welcome</span>
+            <span class="section-subtitle" data-aos="fade-up"></span>
             <h1 class="mb-4" data-aos="fade-up">
             Troisième appel à candidatures pour l’admission
               de nouveaux membres de l’ANSAL-BF
