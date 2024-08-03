@@ -218,7 +218,7 @@
               <div class="swiper-slide">
                 <div class="team">
                   <div class="pic">
-                    <img src="{{ asset('images/sciences.jpeg') }}" alt="Image" class="img-fluid">
+                    <img src="{{ asset('images/sciences.avif') }}" alt="Image" class="img-fluid">
                   </div>
                   <h3 clas="">
                     <a href="#"><span class="">Jeremy</span> Walker</a>

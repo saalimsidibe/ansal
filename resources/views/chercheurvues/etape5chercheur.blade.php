@@ -67,6 +67,9 @@
                                                            class="form-control" id="exp_institution_{{ $index }}" required>
                                                 </div>
                                                 @endforeach
+                                            <div id="experience-fields-container">
+
+
                                             </div>
                                             <button type="button" id="add-experience-button" class="btn btn-primary mt-2">Ajouter</button>
                                         </div>
