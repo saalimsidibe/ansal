@@ -45,5 +45,5 @@ Route::view('/etape3chercheur', 'chercheurvues.etape3chercheur')->name('etape3ch
 Route::view('/etape4chercheur', 'chercheurvues.etape4chercheur')->name('etape4chercheur');
 Route::view('/etape5chercheur', 'chercheurvues.etape5chercheur')->name('etape5chercheur');
 Route::view('/etape6chercheur', 'chercheurvues.etape6chercheur')->name('etape6chercheur');
-Route::view('/etapefinalechercheur', 'chercheurvues.etapefinalechercheur')->name('etapefinalechercheur');
+Route::view('/etape7chercheur', 'chercheurvues.etape7chercheur')->name('etape7chercheur');
 Route::view('/Accueil', 'accueil');

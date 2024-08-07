@@ -8,7 +8,7 @@
                 <nav class="breadcrumbs">
                     <ol>
 
-                        <li >Etape1</li>
+                        <li>Etape1</li>
                         <li>Etape2</li>
                         <li>Etape3</li>
                         <li>Etape4</li>
@@ -28,75 +28,255 @@
                             <div class="card ">
                                 <div class="card-head info"> Informations Personnelle</div>
                                 <div class="card-body">
-    <form action="">
-        @csrf
-        
+                                    <form method="POST" action="{{ route('multi-step-form.next') }}">
+                                        @csrf
+                                        <!-- Affichage des erreurs de validation -->
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
 
-        <div class="form-group">
-            <label for="form-label">Commissions, sociétés savantes/comités d’experts internationaux d’appartenance</label>
-        </div>
+                                        <fieldset class="border p-2">
+                                            <legend class="scheduler-border float-none w-auto">Commissions, sociétés
+                                                savantes/comités d’experts internationaux d’appartenance</legend>
+                                            <div id="commission-fields">
+                                                @php
+                                                    $commissions = old('commissions', session('data6.commissions', []));
+                                                @endphp
+                                                @foreach ($commissions as $index => $commission)
+                                                    <div class="form-group">
+                                                        <input type="text" name="commissions[{{ $index }}]"
+                                                            class="form-control"
+                                                            value="{{ old("commissions.$index.name", $commission['name'] ?? '') }}"
+                                                            required>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            <button type="button" id="addCommissionBtn"
+                                                class="btn btn-primary mt-3">Ajouter</button>
+                                        </fieldset><br>
 
-        <div id="commission-fields">
-            <!-- Champs pour saisir le nom des commissions seront ajoutés ici -->
-        </div>
+                                        <fieldset class="border p-2">
+                                            <legend class="scheduler-border float-none w-auto">Brevets obtenus</legend>
+                                            <div id="brevets">
+                                                <p>(Auteur(s), date, intitulé, références)</p>
+                                                @php
+                                                    $brevets = old('brevets', session('data6.brevets', []));
+                                                @endphp
+                                                @foreach ($brevets as $index => $brevet)
+                                                    <div class="form-group">
+                                                        <legend>Brevet{{ $index }}</legend>
+                                                        <div class="form-group">
+                                                            <label for="auteurs-{{ $index }}">Auteur(s)</label>
+                                                            <input class="form-control" type="text"
+                                                                id="auteurs-{{ $index }}"
+                                                                value="{{ old("brevets.$index.auteur", $brevet['auteur'] ?? '') }}"
+                                                                name="brevets[{{ $index }}][auteur]" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="date-{{ $index }}">Date</label>
+                                                            <input class="form-control" type="date"
+                                                                id="date-{{ $index }}"
+                                                                value="{{ old("brevets.$index.date", $brevet['date'] ?? '') }}"
+                                                                name="brevets[{{ $index }}][date]" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="intitule-{{ $index }}">Intitulé</label>
+                                                            <input class="form-control" type="text"
+                                                                id="intitule-{{ $index }}"
+                                                                value="{{ old("brevets.$index.intitule", $brevet['intitule'] ?? '') }}"
+                                                                name="brevets[{{ $index }}][intitule]" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="reference-{{ $index }}">Reference</label>
+                                                            <input class="form-control" type="text"
+                                                                id="reference-{{ $index }}"
+                                                                value="{{ old("brevets.$index.reference", $brevet['reference'] ?? '') }}"
+                                                                name="brevets[{{ $index }}][reference]" required>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                <button type="button" id="ajouter-champ"
+                                                    class="btn btn-primary mt-3">Ajouter</button>
+                                            </div>
+                                        </fieldset><br>
 
-        <button type="button" id="addCommissionBtn" class="btn btn-primary mt-3">Ajouter</button>
-        
-        <div class="form-group" id="brevets">
-            <h5>Brevets obtenus (Auteur(s), date, intitulé, références)</h5>
-            <button type="button" id="ajouter-champ" class="btn btn-primary mt-3">Ajouter</button>
-        </div>
-        
-        <div class="form-group" id="ouvrages">
-            <h5>Ouvrages scientifiques édités (Auteur(s), année de publication, titre, éditeur, nombre de pages)</h5>
-            <button type="button" id="ajouter-ouvrage" class="btn btn-primary mt-3">Ajouter</button>
-        </div>
-        </div>
-      <div class="container">
-        <div id="articles-container">
-            <h5>Articles dans des ouvrages scientifiques (Auteur(s), année de publication, titre, éditeur, pages )</h5>
-        </div>
-        <button type="button" id="add-field" class="btn btn-primary mt-3">Ajouter un article</button>
-        </div>
+                                        <fieldset class="border p-2">
+                                            <legend class="scheduler-border float-none w-auto">Ouvrages scientifiques édités
+                                            </legend>
+                                            <div id="ouvrages">
+                                                <p>(Auteur(s), année de publication, titre, éditeur, nombre de pages)</p>
+                                                @php
+                                                    $ouvrages = old('ouvrages', session('data6.ouvrages', []));
+                                                @endphp
+                                                @foreach ($ouvrages as $index => $ouvrage)
+                                                    <div class="form-group">
+                                                        <fieldset id="ouvrage-{{ $index }}">
+                                                            <legend>Ouvrage{{ $index }}</legend>
+                                                            <div class="form-group">
+                                                                <label for="auteurs-{{ $index }}">Auteur(s)</label>
+                                                                <input class="form-control" type="text"
+                                                                    id="auteurs-{{ $index }}"
+                                                                    name="ouvrages[{{ $index }}][auteur]" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="annee-{{ $index }}">Année de
+                                                                    publication</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="annee-{{ $index }}"
+                                                                    name="ouvrages[{{ $index }}][annee]" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="titre-{{ $index }}">Titre</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="titre-{{ $index }}"
+                                                                    name="ouvrages[{{ $index }}][titre]" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="editeur-{{ $index }}">Éditeur</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="editeur-{{ $index }}"
+                                                                    name="ouvrages[{{ $index }}][editeur]" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="nombre_pages-{{ $index }}">Nombre de
+                                                                    pages</label>
+                                                                <input type="number" class="form-control"
+                                                                    id="nombre_pages-{{ $index }}"
+                                                                    name="ouvrages[{{ $index }}][nombre_pages]" required>
+                                                            </div>
+                                                            <button type="button"
+                                                                class="supprimer-ouvrage btn btn-danger"
+                                                                data-index="{{ $index }}">Supprimer</button>
+                                                        </fieldset>
+                                                    </div>
+                                                @endforeach
+                                                <button type="button" id="ajouter-ouvrage"
+                                                    class="btn btn-primary mt-3">Ajouter</button>
+                                            </div>
+                                        </fieldset><br>
 
-         <div class="container">
-        <div id="distinctions-container">
-            <!-- Champs seront ajoutés ici -->
-       
-        <div class="form-group">
-            <label for="contribution" id="contribution" class="label-form">Indiquer votre contribution scientifique majeure dans les domaines du  collège postulé </label>
-            <input type="text" class="form-control" name="contributionChecheur">
-        </div>
+                                        <fieldset class="border p-2">
+                                            <legend class="scheduler-border float-none w-auto">Articles dans des ouvrages
+                                                scientifiques</legend>
+                                            <div id="articles-container">
+                                                <p>(Auteur(s), année de publication, titre, éditeur, pages)</p>
+                                                @php
+                                                    $articles = old('articles', session('data6.articles', []));
+                                                @endphp
+                                                @foreach ($articles as $index => $article)
+                                                    <div class="form-group">
+                                                        <label>Auteur(s):</label>
+                                                        <input class="form-control" type="text"
+                                                            name="articles[{{ $index }}][auteur]"
+                                                            value="{{ old("articles.$index.intitule", $article['auteur'] ?? '') }}"
+                                                            required><br>
+                                                        <label>Coauteurs:</label>
+                                                        <input class="form-control" type="text"
+                                                            name="articles[{{ $index }}][coauteur]"
+                                                            value="{{ old("articles.$index.coauteur", $article['coauteur'] ?? '') }}"><br>
+                                                        <label>Année de publication:</label>
+                                                        <input class="form-control" type="number"
+                                                            name="articles[{{ $index }}][annee_publication]"
+                                                            value="{{ old("articles.$index.annee_publication", $article['annee_publication'] ?? '') }}"
+                                                            required><br>
+                                                        <label>Titre:</label>
+                                                        <input class="form-control" type="text"
+                                                            name="articles[{{ $index }}][titre]"
+                                                            value="{{ old("articles.$index.titre", $article['titre'] ?? '') }}"
+                                                            required><br>
+                                                        <label>Éditeur:</label>
+                                                        <input class="form-control" type="text"
+                                                            name="articles[{{ $index }}][editeur]"
+                                                            value="{{ old("articles.$index.editeur", $article['editeur'] ?? '') }}"
+                                                            required><br>
+                                                        <label>Numéro de pages:</label>
+                                                        <input class="form-control" type="number"
+                                                            name="articles[{{ $index }}][pages]"
+                                                            value="{{ old("articles.$index.pages", $article['pages'] ?? '') }}"
+                                                            required><br>
+                                                        <button class="remove-field btn btn-danger">Supprimer</button>
+                                                    </div>
+                                                    <hr />
+                                                @endforeach
+                                                <button type="button" id="add-field"
+                                                    class="btn btn-primary mt-3">Ajouter un article</button>
+                                            </div>
+                                        </fieldset><br>
 
-        <div id="distinctionsContainer">
-            <div class="form-group">
-                <label for="distinction">Distinctions Honorifiques et Scientifiques</label>
-                <select name="distinctionTypeCher" class="form-control">
-                    <option value="1">Scientifique</option>
-                    <option value="2">Sociale</option>
-                </select>
-                <label for="nomDistinc">Nom de la distinction</label>
-                <input type="text" name="distinctionsNomCher" class="form-control" id="nomDistinct"> 
-                <label for="dateDistinc">Date de la distinction</label>
-                <input type="date" name="dateDistinctCher" id="dateDistinc" class="form-control">
-            </div>
+                                        <fieldset class="border p-2">
+                                            <legend class="scheduler-border float-none w-auto">Distinctions</legend>
+                                            <div id="distinctions-container">
+                                                <div class="form-group">
+                                                    <label for="contribution">Indiquer votre contribution scientifique
+                                                        majeure dans les domaines du collège postulé</label>
+                                                    <input type="text" class="form-control"
+                                                        name="contributionChecheur"
+                                                        value="{{ old('contributionChecheur', session('data6.contributionChecheur')) }}"
+                                                        required>
+                                                </div>
 
-        </div>
-        <button type="button" id="AjouterDistinction">Ajouter</button>
+                                                <div id="distinctionsContainer">
+                                                    @php
+                                                        $distinctions = old(
+                                                            'distinctions',
+                                                            session('data6.distinctions', []),
+                                                        );
+                                                        // dd(session('data6', []));
+                                                    @endphp
+                                                    @foreach ($distinctions as $index => $distinction)
+                                                        <div class="form-group">
+                                                            <br />
+                                                            <label for="distinction">Distinctions Honorifiques et
+                                                                Scientifiques</label>
+                                                            <select name="distinctions[{{ $index }}][type]"
+                                                                class="form-control">
+                                                                <option value="1"
+                                                                    {{ $distinction['type'] == '1' ? 'selected' : '' }}>
+                                                                    Scientifique</option>
+                                                                <option value="2"
+                                                                    {{ $distinction['type'] == '2' ? 'selected' : '' }}>
+                                                                    Sociale</option>
+                                                            </select>
+                                                            <label for="distinctions[{{ $index }}][nom]">Nom de la
+                                                                distinction</label>
+                                                            <input type="text"
+                                                                name="distinctions[{{ $index }}][nom]"
+                                                                class="form-control"
+                                                                value="{{ $distinction['nom'] ?? '' }}" required>
+                                                            <label for="distinctions[{{ $index }}][date]">Date de
+                                                                la distinction</label>
+                                                            <input type="date"
+                                                                name="distinctions[{{ $index }}][date]"
+                                                                class="form-control"
+                                                                value="{{ $distinction['date'] ?? '' }}" required>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <button type="button" id="AjouterDistinction"
+                                                    class="btn btn-primary mt-3">Ajouter</button>
+                                            </div>
+                                        </fieldset><br>
 
-        <div class="form-group">
-            <label for="">Declaration sur l'honneur</label>
-            <input type="checkbox" class="form-control" name="honneurChercheur">
-        </div>
+                                        <div class="form-group">
+                                            <label for="honneurChercheur">Déclaration sur l'honneur</label>
+                                            <input type="checkbox" name="honneurChercheur" class="form-group"
+                                                {{ old('honneurChercheur', session('data6honneurChercheur.honneurChercheur')) ? 'checked' : '' }}>
+                                        </div>
 
-         <div class="btn-group mt-4">
-            <a href="{{ route('multi-step-form.previous') }}" class="btn btn-warning">Précédent</a>
-            <input type="submit" class="btn btn-info" value="Suivant" />
-        </div>
+                                        <div class="btn-group mt-4">
+                                            <a href="{{ route('multi-step-form.previous') }}"
+                                                class="btn btn-warning">Précédent</a>
+                                            <input type="submit" class="btn btn-info" value="Suivant" />
+                                        </div>
+                                    </form>
 
-        
-    </form>
-    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-2"> </div>
@@ -107,28 +287,28 @@
 @endsection
 
 
- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
 
 
-    <script>
-        //script pour ajouter les commisions
+<script>
+    //script pour ajouter les commisions
     $(document).ready(function() {
         // Compteur pour les noms de commissions ajoutés
         let commissionCounter = 0;
 
         // Action du bouton "Ajouter"
         $('#addCommissionBtn').click(function() {
-            commissionCounter++;  // Incrémente le compteur
+            commissionCounter++; // Incrémente le compteur
 
             // Ajoute un champ pour saisir le nom de la commission
             $('#commission-fields').append(`
                 <div class="mt-3" id="commission-${commissionCounter}">
-                    <input type="text" name="commission_names[]" class="form-control" placeholder="Nom de la commission">
+                    <input type="text" name="commissions[${commissionCounter}][name]" class="form-control" placeholder="Nom de la commission">
                     <button type="button" class="btn btn-danger mt-2" onclick="removeCommission(${commissionCounter})">Supprimer</button>
                 </div>
             `);
@@ -142,34 +322,35 @@
 </script>
 <script>
     //script pour ajouter des brevets
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const addButton = document.getElementById('ajouter-champ');
         const brevetsDiv = document.getElementById('brevets');
 
         let index = 0;
 
-        addButton.addEventListener('click', function () {
+        addButton.addEventListener('click', function() {
             index++;
 
             const fieldset = document.createElement('fieldset');
             fieldset.innerHTML = `
-                <legend>Brevet ${index}</legend>
+                <legend>Brevet-${index}</legend>
                 <div class="form-group">
                     <label for="auteurs-${index}">Auteur(s)</label>
-                    <input type="text" id="auteurs-${index}" name="auteurs[]" required>
+                    <input class="form-control" type="text" id="auteurs-${index}" name="brevets[${index}][auteur]" required>
                 </div>
                 <div class="form-group">
                     <label for="date-${index}">Date</label>
-                    <input type="date" id="date-${index}" name="dates[]" required>
+                    <input class="form-control" type="date" id="date-${index}" name="brevets[${index}][date]" required>
                 </div>
                 <div class="form-group">
                     <label for="intitule-${index}">Intitulé</label>
-                    <input type="text" id="intitule-${index}" name="intitules[]" required>
+                    <input class="form-control" type="text" id="intitule-${index}" name="brevets[${index}][intitule]" required>
                 </div>
                 <div class="form-group">
                     <label for="reference-${index}">Reference</label>
-                    <input type="text" id="reference-${index}" name="reference[]" required>
+                    <input class="form-control" type="text" id="reference-${index}" name="brevets[${index}][reference]" required>
                 </div>
+                  <hr/>
             `;
 
             brevetsDiv.appendChild(fieldset);
@@ -180,36 +361,36 @@
 
 <script>
     //script pour ajouter les ouvrages scientifiques édités
-    $(document).ready(function () {
+    $(document).ready(function() {
         let index = 0;
 
-        $('#ajouter-ouvrage').click(function () {
+        $('#ajouter-ouvrage').click(function() {
             index++;
 
             const nouvelOuvrage = `
                 <fieldset id="ouvrage-${index}">
-                    <legend>Ouvrage ${index}</legend>
+                    <legend>Ouvrage-${index }</legend>
                     <div class="form-group">
                         <label for="auteurs-${index}">Auteur(s)</label>
-                        <input type="text" id="auteurs-${index}" name="auteurs[]" required>
+                        <input  class="form-control" type="text" id="auteurs-${index}" name="ouvrages[${index}][auteur]" required>
                     </div>
                     <div class="form-group">
                         <label for="annee-${index}">Année de publication</label>
-                        <input type="text" id="annee-${index}" name="annees[]" required>
+                        <input type="text" class="form-control" id="annee-${index}" name="ouvrages[${index}][annee]" required>
                     </div>
                     <div class="form-group">
                         <label for="titre-${index}">Titre</label>
-                        <input type="text" id="titre-${index}" name="titres[]" required>
+                        <input type="text" class="form-control" id="titre-${index}" name="ouvrages[${index}][titre]" required>
                     </div>
                     <div class="form-group">
                         <label for="editeur-${index}">Éditeur</label>
-                        <input type="text" id="editeur-${index}" name="editeurs[]" required>
+                        <input type="text" class="form-control" id="editeur-${index}" name="ouvrages[${index}][editeur]" required>
                     </div>
                     <div class="form-group">
                         <label for="nombre_pages-${index}">Nombre de pages</label>
-                        <input type="number" id="nombre_pages-${index}" name="nombre_pages[]">
+                        <input type="number" class="form-control" id="nombre_pages-${index}" name="ouvrages[${index}][nombre_pages]">
                     </div>
-                    <button type="button" class="supprimer-ouvrage" data-index="${index}">Supprimer</button>
+                    <button type="button" class="supprimer-ouvrage btn btn-danger" data-index="${index}">Supprimer</button>
                 </fieldset>
             `;
 
@@ -217,7 +398,7 @@
         });
 
         // Supprimer un ouvrage
-        $('#ouvrages').on('click', '.supprimer-ouvrage', function () {
+        $('#ouvrages').on('click', '.supprimer-ouvrage', function() {
             const index = $(this).data('index');
             $(`#ouvrage-${index}`).remove();
         });
@@ -226,68 +407,78 @@
 
 
 <br>
- <script>
+<script>
     //script pour ajouter les articles dans des ouvrages scientifiques
-        $(document).ready(function() {
-            var fieldIndex = 0;
+    $(document).ready(function() {
+        var fieldIndex = 0;
 
-            $("#add-field").click(function() {
-                fieldIndex++;
+        $("#add-field").click(function() {
+            fieldIndex++;
 
-                var newField = '<div class="">' +
+            var newField = '<div class="">' +
 
-                                    '<label>Auteur(s):</label>' +
-                                    '<input type="text" name="articles[' + fieldIndex + '][auteurs]" required>' + '<br>'+
-                                    '<label>Coauteurs:</label>' +
-                                    '<input type="text" name="articles[' + fieldIndex + '][coauteurs]">' + '<br>'+
-                                    '<label>Année de publication:</label>' +
-                                    '<input type="number" name="articles[' + fieldIndex + '][annee_publication]" required>' + '<br>'+
-                                    '<label>Titre:</label>' +
-                                    '<input type="text" name="articles[' + fieldIndex + '][titre]" required>' + '<br>'+
-                                    '<label>Éditeur:</label>' +
-                                    '<input type="text" name="articles[' + fieldIndex + '][editeur]" required>' + '<br>'+
-                                    '<label>Numéro de pages:</label>' +
-                                    '<input type="number" name="articles[' + fieldIndex + '][pages]" required>' + '<br>'+
-                                    '<button class="remove-field">Supprimer</button>' +
-                                '</div>';
-                
-                $("#articles-container").append(newField);
-                $("#save-button").show(); // Afficher le bouton Enregistrer une fois qu'un champ est ajouté
-            });
+                '<label>Auteur(s):</label>' +
+                '<input- class="form-control" type="text" name="articles[' + fieldIndex +
+                '][auteur]" required>' + '<br>' +
+                '<label>Coauteurs:</label>' +
+                '<input  class="form-control" type="text" name="articles[' + fieldIndex +
+                '][coauteur]">' + '<br>' +
+                '<label>Année de publication:</label>' +
+                '<input class="form-control" type="number" name="articles[' + fieldIndex +
+                '][annee_publication]" required>' + '<br>' +
+                '<label>Titre:</label>' +
+                '<input  class="form-control" type="text" name="articles[' + fieldIndex +
+                '][titre]" required>' + '<br>' +
+                '<label>Éditeur:</label>' +
+                '<input class="form-control" type="text" name="articles[' + fieldIndex +
+                '][editeur]" required>' + '<br>' +
+                '<label>Numéro de pages:</label>' +
+                '<input class="form-control" type="number" name="articles[' + fieldIndex +
+                '][pages]" required>' + '<br>' +
+                '<button class="remove-field btn btn-danger">Supprimer</button>' +
+                '</div>  <hr/>';
 
-            // Supprimer un champ dynamique
-            $(document).on("click", ".remove-field", function() {
-                $(this).parent().remove();
-                // Cacher le bouton Enregistrer s'il n'y a plus de champs
-                if ($("#articles-container").children().length === 0) {
-                    $("#save-button").hide();
-                }
-            });
+
+            $("#articles-container").append(newField);
+            $("#save-button").show(); // Afficher le bouton Enregistrer une fois qu'un champ est ajouté
         });
-    </script>
 
-    <script>
-        //script pour ajouter les distinctions honorifiques
+        // Supprimer un champ dynamique
+        $(document).on("click", ".remove-field", function() {
+            $(this).parent().remove();
+            // Cacher le bouton Enregistrer s'il n'y a plus de champs
+            if ($("#articles-container").children().length === 0) {
+                $("#save-button").hide();
+            }
+        });
+    });
+</script>
 
-      document.addEventListener('DOMContentLoaded', function() {
+<script>
+    //script pour ajouter les distinctions honorifiques
+
+    document.addEventListener('DOMContentLoaded', function() {
         const ajouterDistinctionButton = document.getElementById('AjouterDistinction');
         const distinctionsContainer = document.getElementById('distinctionsContainer');
         let index = 0; // L'index pour les nouveaux groupes de champs
 
         ajouterDistinctionButton.addEventListener('click', function() {
             const newFormGroup = document.createElement('div');
-            
+
             newFormGroup.innerHTML = `
-                <select name="distinctions[${index}][type]" class="form-control">
+             <br/>
+                <select name="distinctions[${index}][type]" class="form-control" required>
+                     <option value="">Selectionner</option>
                     <option value="1">Scientifique</option>
                     <option value="2">Sociale</option>
                 </select>
-                
-                <input type="text" name="distinctions[${index}][nom]" class="form-control">
+
+                <input type="text" name="distinctions[${index}][nom]" placeholder="Saisir la distinction" class="form-control">
                 <input type="hidden" name="distinctions[${index}][id]" value="" class="form-control" placeholder="nom de la distinction">
-                <button type="button" class="removeDistinctionButton">Supprimer</button>
+                <button type="button" class="removeDistinctionButton btn btn-danger">Supprimer</button>
+                  <hr/>  <br/>
             `;
-            
+
             distinctionsContainer.appendChild(newFormGroup);
             index++;
         });
@@ -299,8 +490,6 @@
             }
         });
     });
-    </script>
-
-<script>
-   
 </script>
+
+<script></script>
