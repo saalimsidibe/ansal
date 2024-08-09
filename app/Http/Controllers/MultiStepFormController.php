@@ -198,41 +198,43 @@ class MultiStepFormController extends Controller
                 return redirect()->route('etape7chercheur');
                 break;
             case 7:
-                /* $request->validate([
-                    'commissions.*' => 'nullable|string|max:255',
-                    'brevets.*' => 'nullable|string|max:255',
-                    'ouvrages.*' => 'nullable|string|max:255',
-                    'articles.*' => 'nullable|string|max:255',
-                    'contributionChecheur' => 'nullable|string|max:1000',
-                    'distinctions.*.type' => 'nullable|integer|in:1,2',
-                    'distinctions.*.nom' => 'nullable|string|max:255',
-                    'distinctions.*.date' => 'nullable|date',
-                    'honneurChercheur' => 'nullable|boolean',
-                ]);
+               // dd($request);
+                try {
+                   /* $validatedData = $request->validate([
+                        'cvchercheurDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'dipChercheurDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'fonctionDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'societeExpertDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'brevetDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'articleDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'ouvrageDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'distinctionsHonorifiquesDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'distinctionsScientifiquesDoc' => 'required|file|mimes:pdf,doc,docx|max:2048'
+                    ]);
 
-                // Récupérer les données du formulaire
-                $commissions = $request->input('commissions', []);
-                $brevets = $request->input('brevets', []);
-                $ouvrages = $request->input('ouvrages', []);
-                $articles = $request->input('articles', []);
-                $contributionChecheur = $request->input('contributionChecheur', '');
-                $distinctions = $request->input('distinctions', []);
-                $honneurChercheur = $request->input('honneurChercheur', false);
+                    $filePaths = [];
 
-                // Enregistrer les données dans la session
-                $request->session()->put('data6', [
-                    'commissions' => $commissions,
-                    'brevets' => $brevets,
-                    'ouvrages' => $ouvrages,
-                    'articles' => $articles,
-                    'contributionChecheur' => $contributionChecheur,
-                    'distinctions' => $distinctions,
-                    'honneurChercheur' => $honneurChercheur,
-                ]);
+                    foreach ($validatedData as $key => $file) {
+                        if ($request->hasFile($key)) {
+                            $path = $file->store('temporary_files');
+                            $filePaths[$key] = $path;
+                        }
+                    }
 
-                // Rediriger vers l'étape suivante
-                $request->session()->put('step', "8");
-                return redirect()->route('multi-step-form.step7');*/
+                    session(['filePaths' => $filePaths]);*/
+                    $request->session()->put('step', "8");
+
+                    return redirect()->route('multi-step-form.summary');
+                } catch (\Exception $e) {
+                    return back()->withErrors(['error' => $e->getMessage()]);
+                }
+                break;
+
+            case 8:
+
+                // $request->session()->put('salim', [4, 2]);
+
+                return view('chercheurvues.summary');
                 break;
             default:
                 $request->session()->put('step', "1");
@@ -286,6 +288,31 @@ class MultiStepFormController extends Controller
                 break;
         }
     }
+
+
+    public function uploadFile(Request $request)
+{
+    $validatedData = $request->validate([
+        'cvchercheurDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'dipChercheurDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'fonctionDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'societeExpertDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'brevetDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'articleDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'ouvrageDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'distinctionsHonorifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'distinctionsScientifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+    ]);
+
+    foreach ($validatedData as $key => $file) {
+        if ($request->hasFile($key)) {
+            $path = $file->store('uploads');
+            session()->push('uploaded_files', ['key' => $key, 'path' => $path]);
+        }
+    }
+
+    return response()->json(['success' => 'File uploaded successfully.']);
+}
 
 
     // app/Http/Controllers/MultiStepFormController.php

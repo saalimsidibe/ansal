@@ -19,7 +19,7 @@ Route::get('/contact', function () {
 });
 
 
-
+Route::post('/multi-step-form/upload', [MultiStepFormController::class, 'uploadFile'])->name('multi-step-form.upload');
 
 Route::get('/etape1chercheur', [MultiStepFormController::class, 'index'])->name('multi-step-form');
 
@@ -46,4 +46,6 @@ Route::view('/etape4chercheur', 'chercheurvues.etape4chercheur')->name('etape4ch
 Route::view('/etape5chercheur', 'chercheurvues.etape5chercheur')->name('etape5chercheur');
 Route::view('/etape6chercheur', 'chercheurvues.etape6chercheur')->name('etape6chercheur');
 Route::view('/etape7chercheur', 'chercheurvues.etape7chercheur')->name('etape7chercheur');
+Route::view('/summary', 'chercheurvues.summary')->name('multi-step-form.summary');
+Route::post('/finish', [MultiStepFormController::class, 'finish'])->name('multi-step-form.finish');
 Route::view('/Accueil', 'accueil');
