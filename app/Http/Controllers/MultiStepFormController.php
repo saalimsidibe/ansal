@@ -3,7 +3,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Candidat;
+use App\Models\Diplome;
+use App\Models\ExpProfChercheur;
+use App\Models\ParrainChercheur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MultiStepFormController extends Controller
 {
@@ -166,7 +171,7 @@ class MultiStepFormController extends Controller
                     //'honneurChercheur' => 'nullable|string|in:checked',
                 ]);
 
-               /*  $validatedData = $request->validate([
+                /*  $validatedData = $request->validate([
                     'commissions.*' => 'required|string|max:255', // Le champ "name" n'est pas nécessaire ici puisque la valeur est directement dans l'array
                     'brevets.*' => 'required|string|max:255', // Assurez-vous que le champ brevets est bien une chaîne de caractères et que chaque élément est bien en string
                     'brevets.*.date' => 'required|date', // La date doit être validée comme un format de date
@@ -191,16 +196,16 @@ class MultiStepFormController extends Controller
                 ]); */
 
 
-              //  dd($request);
+                //  dd($request);
 
                 $request->session()->put('step', "7");
                 $request->session()->put('data6', array_merge($request->session()->get('data6', []), $validatedData));
                 return redirect()->route('etape7chercheur');
                 break;
             case 7:
-               // dd($request);
+                // dd($request);
                 try {
-                   /* $validatedData = $request->validate([
+                    /* $validatedData = $request->validate([
                         'cvchercheurDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
                         'dipChercheurDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
                         'fonctionDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
@@ -291,46 +296,125 @@ class MultiStepFormController extends Controller
 
 
     public function uploadFile(Request $request)
-{
-    $validatedData = $request->validate([
-        'cvchercheurDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        'dipChercheurDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        'fonctionDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        'societeExpertDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        'brevetDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        'articleDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        'ouvrageDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        'distinctionsHonorifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        'distinctionsScientifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-    ]);
+    {
+        $validatedData = $request->validate([
+            'cvchercheurDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'dipChercheurDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'fonctionDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'societeExpertDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'brevetDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'articleDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'ouvrageDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'distinctionsHonorifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'distinctionsScientifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        ]);
 
-    foreach ($validatedData as $key => $file) {
-        if ($request->hasFile($key)) {
-            $path = $file->store('uploads');
-            session()->push('uploaded_files', ['key' => $key, 'path' => $path]);
+        foreach ($validatedData as $key => $file) {
+            if ($request->hasFile($key)) {
+                $path = $file->store('uploads');
+                session()->push('uploaded_files', ['key' => $key, 'path' => $path]);
+            }
         }
-    }
 
-    return response()->json(['success' => 'File uploaded successfully.']);
-}
+        return response()->json(['success' => 'File uploaded successfully.']);
+    }
 
 
     // app/Http/Controllers/MultiStepFormController.php
 
-    public function store(Request $request)
+    public function finish(Request $request)
     {
-        $validatedData = $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenoms' => 'required|string|max:255',
-            'date_naissance' => 'required|date',
-            'titre' => 'required|string|max:255',
-            'tel_mobile' => 'required|string|max:20',
-            'email' => 'required|email|max:255',
+        DB::beginTransaction();
 
-        ]);
+        try {
+            // Récupération des données de la session
+            $data1 = session('data1');//step1
+            $data2 = session('data2');//step2
+            $data3 = session('data3');//step3
+            $data4 = session('data4');//step4
+            $data5 = session('data5');//step5
+            $data6 = session('data6');//step6
+            $files = session('files'); // Pour les fichiers uploadés
 
-        // Traitez les données validées ici (par exemple, sauvegardez-les en base de données)
+            // Exemple d'enregistrement dans la base de données
+            $candidat = new Candidat();
 
-        // Redirigez l'utilisateur vers une page de confirmation ou une autre étape du processus
+            $candidat->nom = $data1['nom'];
+            $candidat->prenom = $data1['prenom'];
+            $candidat->sexe = $data1['sexe'];
+            $candidat->datenaissance = $data1['datenaissance'];
+            $candidat->titre = $data1['titre'];
+            $candidat->telephone = $data1['numerotel'];
+            $candidat->datenomin = $data1['datenomin'];
+            $candidat->email = $data1['email'];
+            $candidat->college = $data1['college'];
+            $candidat->specialite = $data1['specialite'];
+            $candidat->expertise = $data1['expertise'];
+            $candidat->honneur = $data1['honneur'];
+
+            $candidat->save();
+
+
+
+            // les données du step2
+            $parrainChercheur = new ParrainChercheur();
+            $parrainChercheur->prenomPremierP = $data2['prenomPremierP'];
+            $parrainChercheur->nomPremierP = $data2['nomPremierP'];
+            $parrainChercheur->prenomDeuxiemeP = $data2['prenomDeuxiemeP'];
+            $parrainChercheur->nomDeuxiemeP = $data2['nomDeuxiemeP'];
+            $parrainChercheur->college = $data2['college'];
+            $parrainChercheur->specialite = $data2['specialite'];
+            $parrainChercheur->candidat_id = $candidat->id;
+            $parrainChercheur->save();
+
+
+             // les données du step3
+            foreach ($data3['diplomes'] as $key => $dip) {
+                $diplome = new Diplome();
+                $diplome->nom_diplome = $dip['intitule'];
+                $diplome->date_acquisition = $dip['date_acquisition'];
+                $diplome->nom_college = $dip['nom_college'];
+                $diplome->ville = $dip['ville'];
+                $diplome->pays = $dip['pays'];
+                $diplome->candidat_id = $candidat->id;
+                $diplome->save();
+            }
+
+
+
+            foreach ($data4['experiences'] as $key => $dip) {
+                $diplome = new ExpProfChercheur();
+                $diplome->nom_diplome = $dip['intitule'];
+                $diplome->date_acquisition = $dip['date_acquisition'];
+                $diplome->nom_college = $dip['nom_college'];
+                $diplome->ville = $dip['ville'];
+                $diplome->pays = $dip['pays'];
+                $diplome->candidat_id = $candidat->id;
+                $diplome->save();
+            }
+            // Sauvegarde des fichiers si nécessaire
+            if (isset($files['cvchercheurDoc'])) {
+                $cvPath = $files['cvchercheurDoc']->store('cv_docs');
+                $candidat->cv_path = $cvPath;
+            }
+            if (isset($files['dipChercheurDoc'])) {
+                $diplomaPath = $files['dipChercheurDoc']->store('diploma_docs');
+                $candidat->diploma_path = $diplomaPath;
+            }
+            // Continuez pour les autres fichiers...
+
+            // Enregistrement de l'objet dans la base de données
+
+
+            // Suppression des données de session après enregistrement
+            session()->forget(['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'files']);
+
+            DB::commit(); // Commit de la transaction
+
+            return redirect()->route('some.route')->with('success', 'Données enregistrées avec succès!');
+        } catch (\Exception $e) {
+            DB::rollBack(); // Rollback en cas d'erreur
+            return redirect()->back()->withErrors(['error' => 'Une erreur s\'est produite lors de l\'enregistrement.']);
+        }
     }
 }
