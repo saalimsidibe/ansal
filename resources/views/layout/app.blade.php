@@ -37,8 +37,7 @@
 
      
         <!-- Uncomment the line below if you also wish to use an image logo -->
-         <img src="{{ asset('images/ansal.png') }}" alt=""> -->
-        <h1 class="sitename">Active.</h1>
+         <img src="{{ asset('images/ansal.png') }}" alt=""> 
       
 
       <nav id="navmenu" class="navmenu">

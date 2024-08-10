@@ -84,10 +84,10 @@
           </div>
         </div>
       </div>
+     
     </section><!-- /About 2 Section -->
-
  
-<section id="about-3" class="about-3 section">
+<section id="" class="">
 
       <div class="container">
         <div class="content">
@@ -95,16 +95,16 @@
             <div class="col-sm-12 col-md-5 col-lg-4 col-xl-4 order-lg-2 offset-xl-1 mb-4">
               <div class="img-wrap text-center text-md-left" data-aos="fade-up" data-aos-delay="100">
                 <div class="img">
-                  <img src="{{url('active/assets/img/img_v_3.jpg')}}" alt="circle image" class="img-fluid">
+                  <img src="" alt="circle image" class="img-fluid">
                 </div>
               </div>
             </div>
 
             <div class="offset-md-0 offset-lg-1 col-sm-12 col-md-5 col-lg-5 col-xl-4" data-aos="fade-up">
               <div class="px-3">
-                <span class="content-subtitle">Our Mission</span>
+                <span class="content-subtitle"></span>
                 <h2 class="content-title text-start">
-                  Critères Spécifiques
+                  Consulter les critères spécifiques de collège souhaiter avant de passer à la phase de  dépot des candidatures
                 </h2>
                 <p class="fst-italic"><span class="fw-bold">NB:Tout candidat doit avoir moins de 70 ans au 31 octobre 2024, date de clôture du dépôt des dossiers et devra être parrainé par deux (2) Académiciens du Collège concerné.</span></p>
                 
@@ -218,72 +218,60 @@
               <div class="swiper-slide">
                 <div class="team">
                   <div class="pic">
-                    <img src="{{ asset('images/sciences.avif') }}" alt="Image" class="img-fluid">
+                    <img src="{{ asset('images/arts.jpg') }}" alt="Image" class="img-fluid">
                   </div>
                   <h3 clas="">
-                    <a href="#"><span class="">Jeremy</span> Walker</a>
+                    <a href=""><span class=""> Collège Sciences humaines, arts, lettres et culture </span> </a>
                   </h3>
-                  <span class="d-block position">CEO, Founder, Atty.</span>
-                  <p>
-                    Separated they live in. Separated they live in Bookmarksgrove
-                    right at the coast of the Semantics, a large language ocean.
-                  </p>
+                  <span class="d-block position"></span>
+                
                   <p class="mb-0">
-                    <a href="#" class="more dark">Learn More <span class="bi bi-arrow-right-short"></span></a>
+                    <a href="{{route('litterature')}}" class="more dark"> Consulter et Passer au dépôt <span class="bi bi-arrow-right-short"></span></a>
                   </p>
                 </div>
               </div>
               <div class="swiper-slide">
                 <div class="team">
                   <div class="pic">
-                    <img src="{{ asset('images/sante.jpeg') }}" alt="Image" class="img-fluid">
+                    <img src="{{ asset('images/seg.webp') }}" alt="Image" class="img-fluid">
                   </div>
                   <h3 clas="">
-                    <a href="#"><span class="">Lawson</span> Arnold</a>
+                    <a href="#"><span class="">Collège Sciences juridiques, politiques, économiques et de gestion   </span> </a>
                   </h3>
-                  <span class="d-block position">CEO, Founder, Atty.</span>
-                  <p>
-                    Separated they live in. Separated they live in Bookmarksgrove
-                    right at the coast of the Semantics, a large language ocean.
-                  </p>
+                  <span class="d-block position"></span>
+               
                   <p class="mb-0">
-                    <a href="#" class="more dark">Learn More <span class="bi bi-arrow-right-short"></span></a>
+                    <a href="{{route('economie')}}" class="more dark">Consulter et Passer au dépôt  <span class="bi bi-arrow-right-short"></span></a>
                   </p>
                 </div>
               </div>
               <div class="swiper-slide">
                 <div class="team">
                   <div class="pic">
-                    <img src="{{url('active/assets/img/team/team-3.jpg')}}" alt="Image" class="img-fluid">
+                    <img src="{{ asset('images/sante.webp') }}" alt="Image" class="img-fluid">
                   </div>
                   <h3 clas="">
-                    <a href="#"><span class="">Patrik</span> White</a>
+                    <a href="#"><span class="">Collège Sciences de la Santé Humaine et Animale</span></a>
                   </h3>
-                  <span class="d-block position">CEO, Founder, Atty.</span>
-                  <p>
-                    Separated they live in. Separated they live in Bookmarksgrove
-                    right at the coast of the Semantics, a large language ocean.
-                  </p>
+                  <span class="d-block position"></span>
+                
                   <p class="mb-0">
-                    <a href="#" class="more dark">Learn More <span class="bi bi-arrow-right-short"></span></a>
+                    <a href="{{route('sante')}}" class="more dark">Consulter et Passer au dépôt  <span class="bi bi-arrow-right-short"></span></a>
                   </p>
                 </div>
               </div>
               <div class="swiper-slide">
                 <div class="team">
                   <div class="pic">
-                    <img src="{{url('active/assets/img/team/team-4.jpg')}}" alt="Image" class="img-fluid">
+                    <img src="{{ asset('images/agro.jpg') }}" alt="Image" class="img-fluid">
                   </div>
                   <h3 clas="">
-                    <a href="#"><span class="">Kathryn</span> Ryan</a>
+                    <a href="#"><span class="">Collège Sciences naturelles et agricoles</span> </a>
                   </h3>
-                  <span class="d-block position">CEO, Founder, Atty.</span>
-                  <p>
-                    Separated they live in. Separated they live in Bookmarksgrove
-                    right at the coast of the Semantics, a large language ocean.
-                  </p>
+                
+                 
                   <p class="mb-0">
-                    <a href="#" class="more dark">Learn More <span class="bi bi-arrow-right-short"></span></a>
+                    <a href="#" class="more dark">Consulter et Passer au dépôt <span class="bi bi-arrow-right-short"></span></a>
                   </p>
                 </div>
               </div>

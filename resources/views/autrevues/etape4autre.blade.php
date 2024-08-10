@@ -10,7 +10,7 @@
 
                         <li>Etape1</li>
                         <li >Etape2</li>
-                        <li><Etape3></li>
+                        <li>Etape3</li>
                         <li class="current"><a href="#">Etape4</a></li>
                         <li>Etape5</li>
                         <li>Etape6</li>
@@ -26,7 +26,7 @@
                             <div class="card ">
                                 <div class="card-head info"> Informations Personnelle</div>
                                 <div class="card-body">
-     <form action="">
+     <form action="{{Route('valider4.autre')}}" method="POST">
         @csrf
       <div class="form-group">
         <label for="expadminAu" class="label-form">Expériences professionnelles exercées au plan national</label>
@@ -36,7 +36,42 @@
         </select>
       </div>
        <!-- Conteneur pour le bouton et les champs supplémentaires de l'experience -->
-    <div id="experience-section" style="display: none;">
+     <div id="experience-section">
+        @php
+            $fonctionsAAu=old('fonctionsAAu',session('etape4.fonctionsAAu',[]));
+            
+        @endphp
+       
+       @foreach ($fonctionsAAu as $indexAAu =>$fonctionAAu )
+       
+       <div class="experience-item">
+            <div class="form-group">
+                 <label for="fonction_{{$indexAAu}}">Nom de la fonction</label>
+                 <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][intitule]" value="{{$fonctionAAu['intitule'] ?? ''}}" id="fonction_{{$indexAAu}}" required>   
+            </div>
+            <div class="form-group">
+                <label for="Debut_{{$indexAAu}}"> Début</label>
+                <input type="date" class="form-control" name="fonctionsAAu[{{$indexAAu}}][debut]" id="Debut_{{$indexAAu}}" value="{{$fonctionAAu['debut']}}" required>
+            </div>
+            <div class="form-group">
+                <label for="Fin_{{$indexAAu}}"> Fin</label>
+                <input type="date" class="form-control" name="fonctionsAAu[{{$indexAAu}}][fin]" id="Fin_{{$indexAAu}}" value="{{$fonctionAAu['fin'] ?? ''}}"      required>
+            </div>
+            <div class="form-group">
+                <label for="structure_{{$indexAAu}}">Nom de la structure</label>
+                <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][structure]" value="{{$fonctionAAu['structure'] ?? ''}}" id="structure_{{$indexAAu}}" required>   
+            </div>
+            <div class="form-group">
+                  <label for="ville_{{$indexAAu}}">Ville</label>
+                  <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][ville]" id="ville_{{$indexAAu}}" value="{{$fonctionAAu['ville'] ?? ''}}" required>
+            </div>
+            <div class="form-group">
+                <label for="pays_{{$indexAAu}}">Pays</label>
+                <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][pays]" id="pays_{{$indexAAu}}" value="{{$fonctionAAu['pays'] ?? ''}}"  required> 
+            </div>
+       </div>
+        @endforeach 
+
         <button type="button" id="add-experience" class="btn btn-primary">Ajouter une expérience</button>
         <div id="experiences-list"></div>
     </div>
@@ -51,15 +86,60 @@
 
 <!-- Conteneur pour les champs supplémentaires de la responsabilite -->
 
-         <div id="respadminDynamic" class="respadmin-dynamic"></div>
+@php
+    $resAdau=old('resAdau',session('etape4.resAdau',[]));
+@endphp
+         <div id="respadminDynamic" class="respadmin-dynamic">
+            @foreach ($resAdau as $j => $reAdau )
+                  <div class="field">
+             <div class="form-group">
+                    <label for="responsibilite_{{$j}}">Intitulé de la responsabilité</label>
+                    <input type="text" name="resAdau[{{$j}}][intitule]"  value="{{$reAdau['intitule'] ??'' }}"       placeholder="Titre" class="form-control" id="responsibilite_{{$j}}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="debut_{{$j}}">Debut</label>
+                    <input type="date" name="resAdau[{{$j}}][debut]" value="{{$reAdau['debut'] ?? ''}}" class="form-control" id="debut_{{$j}}">
+                </div>
+                <div class="form-group">
+                    <label for="fin_{{$j}}"> Fin</label>
+                    <input type="date" name="resAdau[{{$j}}][fin]" value="{{$reAdau['fin'] ?? ''}}"  id="fin_{{$j}}"        class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="structure_{{$j}}">Structure</label>
+                    <input type="text" name="resAdau[{{$j}}][structure]"value="{{$reAdau['structure'] ?? ''}} " id="structure_{{$j}}"       placeholder="Structure" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="ville_{{$j}}">Ville</label>
+                    <input type="text" name="resAdau[{{$j}}][ville]" value="{{$reAdau['ville'] ?? ''}}"   id="ville_{{$j}}"     placeholder="Ville" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="Pays_{{$j}}">Pays</label>
+                    <input type="text" name="resAdau[{{$j}}][pays]" value="{{$reAdau['pays'] ?? ''}}" placeholder="Pays" id="Pays_{{$j}}" class="form-control">
+                </div>
+        </div>
+        
+        
+        
+        
+        
+        </div> <br>
+            @endforeach
+      
+        
+          <button type="submit" class="btn btn-info" value="">Suivant</button>
     </form>
 
 
                             </div>
+                           
                         </div>
+                        
                         <div class="col-2"> </div>
+                         
                     </div>
             </section>
+           
         </div>
     </main>
 @endsection    
@@ -89,31 +169,28 @@
             <div class="experience-item">
                 <div class="form-group">
                     <label for="fonction${index}">Nom de la fonction</label>
-                    <input type="text" class="form-control" name="fonction[]" id="fonction${index}" required>
+                    <input type="text" class="form-control" name="fonctionsAAu[${index}][intitule]" id="fonction${index}" required>
                 </div>
                 <div class="form-group">
-                    <label for="dateDebut${index}">Date de début</label>
-                    <input type="date" class="form-control" name="dateDebut[]" id="dateDebut${index}" required>
+                    <label for="Debut${index}"> Début</label>
+                    <input type="date" class="form-control" name="fonctionsAAu[${index}][debut]" id="Debut${index}" required>
                 </div>
                 <div class="form-group">
-                    <label for="dateFin${index}">Date de fin</label>
-                    <input type="date" class="form-control" name="dateFin[]" id="dateFin${index}">
+                    <label for="Fin${index}"> Fin</label>
+                    <input type="date" class="form-control" name="fonctionsAAu[${index}][fin]" id="Fin${index}">
                 </div>
-                <div class="form-group">
-                    <label for="type${index}">Type</label>
-                    <input type="text" class="form-control" name="type[]" id="type${index}" required>
-                </div>
+                
                 <div class="form-group">
                     <label for="structure${index}">Nom de la structure</label>
-                    <input type="text" class="form-control" name="structure[]" id="structure${index}" required>
+                    <input type="text" class="form-control" name="fonctionsAAu[${index}][structure]" id="structure${index}" required>
                 </div>
                 <div class="form-group">
                     <label for="ville${index}">Ville</label>
-                    <input type="text" class="form-control" name="ville[]" id="ville${index}" required>
+                    <input type="text" class="form-control" name="fonctionsAAu[${index}][ville]" id="ville${index}" required>
                 </div>
                 <div class="form-group">
                     <label for="pays${index}">Pays</label>
-                    <input type="text" class="form-control" name="pays[]" id="pays${index}" required>
+                    <input type="text" class="form-control" name="fonctionsAAu[${index}][pays]" id="pays${index}" required>
                 </div>
                 <button type="button" class="remove-experience btn btn-danger">Supprimer</button>
             </div>
@@ -131,7 +208,8 @@
 
     <script>
         //script pour ajouter dynamiquement les responsabilités administrative nationales
-
+        let i=0;
+     
         document.getElementById('respadminAu').addEventListener('change', function() {
             const dynamicFields = document.getElementById('respadminDynamic');
             dynamicFields.innerHTML = ''; // Clear previous fields
@@ -142,7 +220,10 @@
                 addBtn.textContent = 'Ajouter une responsabilité';
                 addBtn.className = 'add-btn';
                 addBtn.type = 'button'; // Prevent form submission
+                
                 addBtn.addEventListener('click', function() {
+                 
+                   
                     addResponsibilityField();
                 });
                 dynamicFields.appendChild(addBtn);
@@ -153,39 +234,35 @@
         });
 
         function addResponsibilityField() {
+            i++;
             const container = document.createElement('div');
             container.className = 'field';
-
+            
             container.innerHTML = `
                 <div class="form-group">
                     <label for="responsibilityTitle">Intitulé de la responsabilité</label>
-                    <input type="text" name="responsibilityTitle[]" placeholder="Titre">
+                    <input type="text" name="resAdau[i][intitule]" placeholder="Titre" class="form-control">
                 </div>
 
-                 <div class="form-group">
-                    <label for="responsibilityType">Type de la responsabilité</label>
-                    <input type="text" name="responsibilityType[]" placeholder="Titre">
-                </div>
-                
                 <div class="form-group">
                     <label for="startDate">Date de commencement</label>
-                    <input type="date" name="startDate[]">
+                    <input type="date" name="resAdau[i][debut]" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="endDate">Date de fin</label>
-                    <input type="date" name="endDate[]">
+                    <input type="date" name="resAdau[i][fin]" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="structure">Structure</label>
-                    <input type="text" name="structure[]" placeholder="Structure">
+                    <input type="text" name="resAdau[i][structure]" placeholder="Structure" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="city">Ville</label>
-                    <input type="text" name="city[]" placeholder="Ville">
+                    <input type="text" name="resAdau[i][ville]" placeholder="Ville" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="country">Pays</label>
-                    <input type="text" name="country[]" placeholder="Pays">
+                    <input type="text" name="resAdau[i][pays]" placeholder="Pays" class="form-control">
                 </div>
                 <button type="button" class="remove-btn" onclick="removeField(this)">Supprimer</button>
             `;
@@ -199,5 +276,8 @@
         }
         
     </script>
+    @php
+        @dump($request);
+    @endphp
     
 @endsection

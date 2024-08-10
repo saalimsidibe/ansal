@@ -29,6 +29,7 @@
                                 <div class="card-head info"> Informations Personnelle</div>
                                 <div class="card-body">
     <form action="">
+        @csrf
         <div class="form-group">
             <label for="cvchercheurDoc">Joindre une copie de votre cv</label><br>
             <input type="file" class="form-control">

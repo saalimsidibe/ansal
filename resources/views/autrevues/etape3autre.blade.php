@@ -26,38 +26,54 @@
                             <div class="card ">
                                 <div class="card-head info"> Informations Personnelle</div>
                                 <div class="card-body">
+                                    <form action="{{Route('valider3.autre')}}"  method="POST">
+                                        {{ csrf_field() }}
+                             
+                                        @php
+                                            $diplomesAu=old('diplomesAu',session('etape3.diplomesAu',[]));
+                                        @endphp
  <div class="diplome" id="diplome-section">
+    @foreach ($diplomesAu as $indexAu => $diplomeAu )
+        
+   
     <h4>Diplôme universitaire</h4>
     <div class="form-group">
-        <label for="nomDipAu">Intitulé du diplôme</label>
-        <input type="text" class="form-control" id="nomDipAu" name="nomDipAu[]" required>
+        <label for="intitule_{{ $indexAu }}">Intitulé du diplôme</label>
+        <input type="text" class="form-control" id="intitule_{{ $indexAu }}" name="diplomesAu[{{$indexAu}}][nom]" value="{{$diplomeAu['nom'] ?? ''}}" required>
     </div>
     <div class="form-group">
-        <label for="periodDipAu">Période d'obtention</label>
-        <input type="text" class="form-control" id="periodDipAu" name="periodDipAu[]" placeholder="jjmmaa-jjmmaa" required>
+        <label for="periode_{{ $indexAu }}">Période d'obtention</label>
+        <input type="date" class="form-control" id="periode_{{ $indexAu }}" name="diplomesAu[{{$indexAu}}][periode]" placeholder="jjmmaa-jjmmaa" value="{{$diplomeAu['periode']??''}}" required>
     </div>
     <div class="form-group">
-        <label for="instituDipAu">Institution d'obtention</label>
-        <input type="text" class="form-control" id="instituDipAu" name="instituDipAu[]" required>
+        <label for="institut_{{ $indexAu }}">Institution d'obtention</label>
+        <input type="text" class="form-control" id="institut_{{ $indexAu }}" name="diplomesAu[{{$indexAu}}][institut]" value="{{$diplomeAu['institut']??''}}"        required>
     </div>
     <div class="form-group">
-        <label for="villeAu">Ville</label>
-        <input type="text" name="villeAu[]" id="villeAu" class="form-control" required>
+        <label for="ville_{{ $indexAu }}">Ville</label>
+        <input type="text"  id="ville_{{ $indexAu }}" name="diplomesAu[{{$indexAu}}][ville]" value="{{$diplomeAu['ville']??''}}"     class="form-control" required>
     </div>
     <div class="form-group">
-        <label for="paysAu">Pays</label>
-        <input type="text" name="paysAu[]" id="paysAu" class="form-control" required>
+        <label for="pays_{{ $indexAu }}">Pays</label>
+        <input type="text" name="diplomesAu[{{$indexAu}}][pays]" id="paysAu_{{ $indexAu }}" value="{{$diplomeAu['pays']??''}}"    class="form-control" required>
     </div>
+     @endforeach
+
     <button type="button" id="add-field" class="btn btn-primary">Ajouter un diplôme</button>
 </div>
 </div>
                             </div>
                         </div>
-                        <div class="col-2"> </div>
+                        <button type="submit" class="btn btn-info" value="">Suivant</button>
+                        <div class="col-2">  </div>
+                        
                     </div>
             </section>
         </div>
+        
+    </form>
     </main>
+   
 @endsection    
 
 @section('scripts')
@@ -69,30 +85,32 @@
     
     <script>
         //ajouter diplomes
+        let comptDip=0;
         
     document.getElementById('add-field').addEventListener('click', function() {
         var section = document.getElementById('diplome-section');
+        comptDip++;
         var newFields = `
             <div class="diplome-item">
                 <div class="form-group">
                     <label for="nomDipAu">Intitulé du diplôme</label>
-                    <input type="text" class="form-control" name="nomDipAu[]" required>
+                    <input type="text" class="form-control" name="diplomesAu[${comptDip}][nom]" id="intitule_${comptDip}" required>
                 </div>
                 <div class="form-group">
                     <label for="periodDipAu">Période d'obtention</label>
-                    <input type="text" class="form-control" name="periodDipAu[]" placeholder="jjmmaa-jjmmaa" required>
+                    <input type="date" class="form-control" name="diplomesAu[${comptDip}][periode]" id="periode_${comptDip}" placeholder="jjmmaa-jjmmaa" required>
                 </div>
                 <div class="form-group">
                     <label for="instituDipAu">Institution d'obtention</label>
-                    <input type="text" class="form-control" name="instituDipAu[]" required>
+                    <input type="text" class="form-control" name="diplomesAu[${comptDip}][institut]" id="institut_${comptDip}" required>
                 </div>
                 <div class="form-group">
                     <label for="villeAu">Ville</label>
-                    <input type="text" name="villeAu[]" class="form-control" required>
+                    <input type="text" name="diplomesAu[${comptDip}][ville]" id="ville_${comptDip}"  class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="paysAu">Pays</label>
-                    <input type="text" name="paysAu[]" class="form-control" required>
+                    <input type="text" name="diplomesAu[${comptDip}][pays]" id="pays__${comptDip}" class="form-control" required>
                 </div>
                 <button type="button" class="remove-field btn btn-danger">Supprimer</button>
             </div>

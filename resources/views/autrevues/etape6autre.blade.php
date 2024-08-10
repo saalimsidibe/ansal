@@ -27,24 +27,24 @@
                             <div class="card ">
                                 <div class="card-head info"> Informations Personnelle</div>
                                 <div class="card-body">
-    <form action="">
+    <form action="{{route('valider6.autre')}}" method="POST">
         @csrf
 
             <div class="form-group">
                 <label for="associationAut" class="control-label">Associations, commissions, réseaux, comités d’experts internationaux d’appartenance</label><br>
-                <button type="button" id="ajouterAssAut">Ajouter</button>
+                <button type="button" id="ajouterAssAut"  class="btn btn-info">Ajouter</button>
             </div>
             <div class="fields-containerAssocAut"></div>
 
               <div class="form-group">
                 <label for="ouvrageEditeAut" class="form-label">Œuvres, ouvrages et principaux documents édités dont vous êtes auteur ou coauteur </label>
-                <button type="button" id="ouvrageEditeAut">Ajouter</button>
+                <button type="button" id="ouvrageEditeAut" class="btn btn-info">Ajouter</button>
             </div>
             <div class="ouvrageEditeAut"></div>
 
            <div class="form-group">
                 <label for="ouvrageNonEditeAut" class="form-label">Œuvres, ouvrages et principaux documents non édités dont vous êtes auteur ou coauteur</label>
-                <button type="button" id="ajouterOuvrageNonEditeAut">Ajouter</button>
+                <button type="button" id="ajouterOuvrageNonEditeAut"  class="btn btn-info">Ajouter</button>
             </div>
 
             <div class="ouvrageNonEditeAut"></div>
@@ -54,13 +54,13 @@
        
         <div class="form-group">
             <h5>Distinctions honorifiques et scientifiques</h5>
-            <select name="" id="" name="distinctionsAut" class="form-control">
+            <select  id="" name="distinctionsAut" class="form-control">
                 <option value="honorifique">Distinction Honorifique</option>
                 <option value="scientifique">Distinction Scientifique</option>
             </select>
             <label for="distinctAu" class="form-label">Nom de la distinction</label>
             <input type="text" name="distinctAu" class="form-control">
-            <button type="button" id="add-select">Ajouter</button>
+            <button type="button" id="add-select"  class="btn btn-info"> Ajouter</button>
         </div>
 
          <div id="select-container">
@@ -68,10 +68,10 @@
         </div>
 
         <label for="">Indiquer quel pourrait être votre apport particulier à l’Académie </label><br>
-        <textarea rows="4" cols="50" placeholder="" name=""></textarea><br>
+        <textarea rows="4" cols="50" placeholder="" name="apportAu"></textarea><br>
 
         <label for="">Je déclare sur l’honneur n’avoir jamais été condamné par la justice.</label>
-        <input type="checkbox" class="form-control">
+        <input  name="honneurAu" type="checkbox" class="form-control" required>
         </div>
         </div>
          <div class="btn-group mt-4">
@@ -107,7 +107,7 @@
 
             newField.innerHTML = `
                 <div>
-                    <label for="nomCommission${fieldCount}">Nom de la commission</label>
+                    <label for="nomCommission${fieldCount}" class="form-label">Nom de la commission</label>
                     <input type="text" name="nomCommission[]" id="nomCommission${fieldCount}">
                 </div>
                 <button type="button" class="remove-field">Supprimer ce champ</button>
@@ -192,15 +192,15 @@
             newFields.innerHTML = `
                 <div>
                     <label for="titre${fieldCount}">Titre</label>
-                    <input type="text" name="titre[]" id="titre${fieldCount}" required>
+                    <input type="text" name="titreNe[]" id="titre${fieldCount}" required>
                 </div>
                 <div>
                     <label for="nomAuteur${fieldCount}">Nom de l'auteur</label>
-                    <input type="text" name="nomAuteur[]" id="nomAuteur${fieldCount}" required>
+                    <input type="text" name="nomAuteurNe[]" id="nomAuteur${fieldCount}" required>
                 </div>
                 <div>
                     <label for="nomCoauteur${fieldCount}">Nom du coauteur</label>
-                    <input type="text" name="nomCoauteur[]" id="nomCoauteur${fieldCount}">
+                    <input type="text" name="nomCoauteurNe[]" id="nomCoauteur${fieldCount}">
                 </div>
                 <button type="button" class="remove-field">Supprimer ces champs</button>
                 <hr>
@@ -224,7 +224,7 @@
                 // Crée un nouveau conteneur pour le select
                 const newSelectDiv = document.createElement('div');
                 newSelectDiv.innerHTML = `
-                    <select name="distinctions[]" class="form-control">
+                    <select name="distinctionsAu[]" class="form-control">
                         <option value="honorifique">Distinction Honorifique</option>
                         <option value="scientifique">Distinction Scientifique</option>
                     </select>

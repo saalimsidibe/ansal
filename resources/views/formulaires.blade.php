@@ -30,8 +30,8 @@
                 <i class="bi bi-bullseye"></i>
               </div>
               <div>
-                <h3>Chercheur</h3>
-                <p>Candidatures pour les chercheurs</p>
+                <h3></h3>
+                <p>Candidatures pour les chercheurs et enseignants-chercheurs</p>
                 <a href="{{url('/etape1chercheur')}}" class="btn btn-success"> S'inscrire</a>
 
               </div>
@@ -44,7 +44,7 @@
                 <i class="bi bi-command"></i>
               </div>
               <div>
-                <h3>Autres </h3>
+                <h3> </h3>
                 <p>Candidatures pour les autres profils</p>
                 <a href="{{url('/etape1autre')}}" class="btn btn-success"> S'inscrire</a>
               </div>

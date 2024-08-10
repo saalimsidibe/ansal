@@ -27,38 +27,39 @@
                             <div class="card ">
                                 <div class="card-head info"> Informations Personnelle</div>
                                 <div class="card-body">
-    <form action="">
+    <form action="{{Route('valider2.autre')}}" method="POST">
          @csrf
         <div class="form-group">
             <label for="nomPremierPautre" class="label-form" >Nom du Premier Parrain</label>
-            <input type="text" name="nomPremierPautre" id="nomPremierPautre" class="form-control">
+            <input type="text" name="nomPremierPautre" id="nomPremierPautre"  value="{{old('nomPremierPautre',session('etape2.nomPremierPautre',''))}}"     class="form-control">
         </div>
         <div class="form-group">
             <label for="prenomPremierPautre" class="label-form" id="prenomPremierPautre">Prenom du Premier Parrain</label>
-            <input type="text" name="prenomPremierPautre" id="prenomPremierPautre" class="form-control">
+            <input type="text" name="prenomPremierPautre" id="prenomPremierPautre" value="{{old('prenomPremierPautre',session('etape2.prenomPremierPautre','')) }}" class="form-control">
         </div>
         <div class="form-group">
             <label for="nomDeuxiemePautre" class="label-form"> Nom du Deuxième Parrain</label>
-            <input type="text" name="nomDeuxiemePautre" id="nomDeuxiemePautre" class="form-control">
+            <input type="text" name="nomDeuxiemePautre" id="nomDeuxiemePautre" value="{{old('nomDeuxiemePautre',session('etape2.nomDeuxiemePautre','')) }}" class="form-control">
         </div>
         <div class="form-group">
             <label for="prenomDeuxiemePautre" class="label-form">Prenom du Deuxième Parrain</label>
-            <input type="text" name="prenomDeuxiemePautre" id="prenomDeuxiemePautre" class="form-control">
+            <input type="text" name="prenomDeuxiemePautre" id="prenomDeuxiemePautre" class="form-control" value="{{old('prenomDeuxiemePautre',session('etape2.prenomDeuxiemePautre'))}}">
         </div>
         <div class="form-group">
             <label for="college" class="label-form">Collège dans lequel vous souhaitez postuler</label>
             <select name="collegeAutre" id="titre" class="form-control">
-                <option value="1">Sciences et Techniques</option>
-                <option value="2">Sciences juridiques, politiques, économiques et de gestion</option>
-                <option value="3">Sciences de la santé humaine et animale</option>
-                <option value="4">Sciences naturelles et agronomiques</option>
-                <option value="5">Sciences humaines, des arts, des lettres et de la communication </option>
+                <option value="1" {{old('collegeAutre',session('etape2.collegeAutre'))=='1'? 'selected' : ''}}>Sciences et Techniques</option>
+                <option value="2" {{old('collegeAutre',session('etape2.collegeAutre'))=='2' ? 'selected': ''}}>Sciences juridiques, politiques, économiques et de gestion</option>
+                <option value="3"{{old('collegeAutre',session('etape2.collegeAutre'))=='3' ? 'selected': ''}}>Sciences de la santé humaine et animale</option>
+                <option value="4" {{old('collegeAutre',session('etape2.collegeAutre'))=='4' ? 'selected':''}}>Sciences naturelles et agronomiques</option>
+                <option value="5" {{old('collegeAutre',session('etape2.collegeAutre'))=='5' ? 'selected':''}}>Sciences humaines, des arts, des lettres et de la communication </option>
             </select>
         </div>
         <div class="form-group">
             <label for="specialiteAutre">Precisez votre spécialité dans le collège postulé</label>
-            <input type="text" name="specialiteAutre" id="specialiteAutre" class="form-control">
+            <input type="text" name="specialiteAutre" id="specialiteAutre"  value="{{old('specialiteAutre',session('etape2.specialiteAutre',''))}}"   class="form-control">
         </div>
+         <button type="submit" class="btn btn-info" value="{{''}}">Suivant</button>
     </form>
     </div>
                             </div>

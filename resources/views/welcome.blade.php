@@ -68,7 +68,7 @@
                   dossiers et devra être parrainé par deux (2) Académiciens du Collège concerné.</strong>
             </p>
             <p class="mt-5" data-aos="fade-up">
-              <a href="#" class="btn btn-get-started">Voir</a>
+              <a href="{{route('accueil')}}" class="btn btn-get-started">Voir</a>
             </p>
           </div>
         </div>
