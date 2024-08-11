@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nomDeuxiemeP');
             $table->string('college');
             $table->string('specialite');
+            $table->foreignId('candidat_id')->constrained('candidats')->onDelete('cascade'); // Clé étrangère
             $table->timestamps();
         });
     }

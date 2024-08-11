@@ -7,6 +7,7 @@ use App\Models\Candidat;
 use App\Models\Diplome;
 use App\Models\ExpProfChercheur;
 use App\Models\ParrainChercheur;
+use App\Models\Responsabilite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -93,8 +94,10 @@ class MultiStepFormController extends Controller
             case 3:
                 $validatedData = $request->validate([
                     'diplomes.*.intitule' => 'required|string|max:255',
-                    'diplomes.*.periode' => 'required|string|max:255',
+                    'diplomes.*.periode' => 'required|date|max:255',
                     'diplomes.*.institution' => 'required|string|max:255',
+                    'diplomes.*.ville' => 'required|string|max:255',
+                    'diplomes.*.pays' => 'required|string|max:255',
                 ]);
 
                 // Stocker les données en session
@@ -132,11 +135,14 @@ class MultiStepFormController extends Controller
                 $validatedData = $request->validate([
                     'expprofint' => 'required|string|in:oui,non',
                     'experiences.*.intitule' => 'required_if:expprofint,oui|string|max:255',
-                    'experiences.*.periode' => 'required_if:expprofint,oui|string|max:255',
+                    'experiences.*.debut' => 'required_if:expprofint,oui|date|max:255',
+                    'experiences.*.fin' => 'required_if:expprofint,oui|date|max:255',
+
                     'experiences.*.institution' => 'required_if:expprofint,oui|string|max:255',
                     'respprofint' => 'required|string|in:oui,non',
                     'responsabilites.*.intitule' => 'required_if:respprofint,oui|string|max:255',
-                    'responsabilites.*.periode' => 'required_if:respprofint,oui|string|max:255',
+                    'responsabilites.*.debut' => 'required_if:respprofint,oui|date',
+                    'responsabilites.*.fin' => 'required_if:respprofint,oui|date',
                     'responsabilites.*.institution' => 'required_if:respprofint,oui|string|max:255',
                 ]);
 
@@ -324,9 +330,9 @@ class MultiStepFormController extends Controller
 
     public function finish(Request $request)
     {
-        DB::beginTransaction();
+      //  DB::beginTransaction();
 
-        try {
+       // try {
             // Récupération des données de la session
             $data1 = session('data1');//step1
             $data2 = session('data2');//step2
@@ -342,15 +348,15 @@ class MultiStepFormController extends Controller
             $candidat->nom = $data1['nom'];
             $candidat->prenom = $data1['prenom'];
             $candidat->sexe = $data1['sexe'];
-            $candidat->datenaissance = $data1['datenaissance'];
+            $candidat->datenaissance = $data1['datenaiss'];
             $candidat->titre = $data1['titre'];
             $candidat->telephone = $data1['numerotel'];
             $candidat->datenomin = $data1['datenomin'];
             $candidat->email = $data1['email'];
-            $candidat->college = $data1['college'];
-            $candidat->specialite = $data1['specialite'];
-            $candidat->expertise = $data1['expertise'];
-            $candidat->honneur = $data1['honneur'];
+            $candidat->college = $data2['college'];
+            $candidat->specialite = $data2['specialite'];
+          //  $candidat->expertise = $data1['expertise'];
+          //  $candidat->honneur = $data1['honneur'];
 
             $candidat->save();
 
@@ -372,49 +378,63 @@ class MultiStepFormController extends Controller
             foreach ($data3['diplomes'] as $key => $dip) {
                 $diplome = new Diplome();
                 $diplome->nom_diplome = $dip['intitule'];
-                $diplome->date_acquisition = $dip['date_acquisition'];
-                $diplome->nom_college = $dip['nom_college'];
+                $diplome->date_acquisition = $dip['periode'];
+                $diplome->nom_college = $dip['institution'];
                 $diplome->ville = $dip['ville'];
                 $diplome->pays = $dip['pays'];
                 $diplome->candidat_id = $candidat->id;
                 $diplome->save();
             }
 
+ // les données du step4
 
+            foreach ($data4['experiences'] as $key => $ex) {
+                $exp = new ExpProfChercheur();
+                $exp->intitule = $ex['intitule'];
+                $exp->debut = $ex['debut'];
+                $exp->fin = $ex['fin'];
+                $exp->ville = $ex['ville'];
+                $exp->candidat_id = $candidat->id;
+                $exp->save();
+            }
 
-            foreach ($data4['experiences'] as $key => $dip) {
-                $diplome = new ExpProfChercheur();
-                $diplome->nom_diplome = $dip['intitule'];
-                $diplome->date_acquisition = $dip['date_acquisition'];
-                $diplome->nom_college = $dip['nom_college'];
-                $diplome->ville = $dip['ville'];
-                $diplome->pays = $dip['pays'];
-                $diplome->candidat_id = $candidat->id;
-                $diplome->save();
+             // les données du step5
+
+             foreach ($data4['responsabilites'] as $key => $resp) {
+                $responsabilite = new Responsabilite();
+                $responsabilite->intitule = $resp['intitule'];
+                $responsabilite->type = "resp['type']";
+                $responsabilite->debut = $resp['debut'];
+                $responsabilite->fin = $resp['fin'];
+                $responsabilite->structure = $resp['structure'];
+                $responsabilite->ville = $resp['ville'];
+                $responsabilite->pays = $resp['ville'];
+                $responsabilite->candidat_id = $candidat->id;
+                $responsabilite->save();
             }
             // Sauvegarde des fichiers si nécessaire
-            if (isset($files['cvchercheurDoc'])) {
+          /*  if (isset($files['cvchercheurDoc'])) {
                 $cvPath = $files['cvchercheurDoc']->store('cv_docs');
                 $candidat->cv_path = $cvPath;
             }
             if (isset($files['dipChercheurDoc'])) {
                 $diplomaPath = $files['dipChercheurDoc']->store('diploma_docs');
                 $candidat->diploma_path = $diplomaPath;
-            }
+            }*/
             // Continuez pour les autres fichiers...
 
             // Enregistrement de l'objet dans la base de données
 
 
             // Suppression des données de session après enregistrement
-            session()->forget(['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'files']);
+           // session()->forget(['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'files']);
 
-            DB::commit(); // Commit de la transaction
+          //  DB::commit(); // Commit de la transaction
 
-            return redirect()->route('some.route')->with('success', 'Données enregistrées avec succès!');
-        } catch (\Exception $e) {
-            DB::rollBack(); // Rollback en cas d'erreur
+            return view('chercheurvues.summary')->with('success', 'Données enregistrées avec succès!');
+       /*} catch (\Exception $e) {
+         //   DB::rollBack(); // Rollback en cas d'erreur
             return redirect()->back()->withErrors(['error' => 'Une erreur s\'est produite lors de l\'enregistrement.']);
-        }
+        }*/
     }
 }

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->date('fin');
             $table->string('ville');
             $table->timestamps();
+            $table->foreignId('candidat_id')->constrained('candidats')->onDelete('cascade'); // Clé étrangère
+
         });
     }
 

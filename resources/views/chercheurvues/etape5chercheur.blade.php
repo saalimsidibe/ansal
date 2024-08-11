@@ -32,7 +32,15 @@
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('multi-step-form.next') }}">
                                         @csrf
-
+                                        @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                         <!-- Expériences professionnelles exercées au plan international -->
                                         <div class="form-group">
                                             <label for="expprofint">Expériences professionnelles exercées au plan international</label>
@@ -60,11 +68,17 @@
                                                                class="form-control" id="exp_intitule_{{ $index }}"
                                                                value="{{ old("experiences.$index.intitule", $experience['intitule'] ?? '') }}" required>
 
-                                                        <label for="exp_periode_{{ $index }}" class="mt-2">Période</label>
-                                                        <input type="text" name="experiences[{{ $index }}][periode]"
-                                                               class="form-control" id="exp_periode_{{ $index }}"
-                                                               value="{{ old("experiences.$index.periode", $experience['periode'] ?? '') }}"
-                                                               placeholder="jjmmaaaa-jjmmaaaa" required>
+                                                        <label for="exp_debut_{{ $index }}" class="mt-2">Date debut</label>
+                                                        <input type="date" name="experiences[{{ $index }}][debut]"
+                                                               class="form-control" id="exp_debut_{{ $index }}"
+                                                               value="{{ old("experiences.$index.debut", $experience['debut'] ?? '') }}"
+                                                               placeholder="jj/mm/aaaa" required>
+
+                                                         <label for="exp_fin_{{ $index }}" class="mt-2">Date fin</label>
+                                                        <input type="date" name="experiences[{{ $index }}][fin]"
+                                                                      class="form-control" id="exp_fin_{{ $index }}"
+                                                                      value="{{ old("experiences.$index.fin", $experience['fin'] ?? '') }}"
+                                                                      placeholder="jj/mm/aaaa" required>
 
                                                         <label for="exp_institution_{{ $index }}" class="mt-2">Institution</label>
                                                         <input type="text" name="experiences[{{ $index }}][institution]"
@@ -104,11 +118,16 @@
                                                                class="form-control" id="resp_intitule_{{ $index }}"
                                                                value="{{ old("responsabilites.$index.intitule", $responsibility['intitule'] ?? '') }}" required>
 
-                                                        <label for="resp_periode_{{ $index }}" class="mt-2">Période</label>
-                                                        <input type="text" name="responsabilites[{{ $index }}][periode]"
+                                                        <label for="resp_debut_{{ $index }}" class="mt-2">Date debut</label>
+                                                        <input type="date" name="responsabilites[{{ $index }}][debut]"
                                                                class="form-control" id="resp_periode_{{ $index }}"
-                                                               value="{{ old("responsabilites.$index.periode", $responsibility['periode'] ?? '') }}"
-                                                               placeholder="jjmmaaaa-jjmmaaaa" required>
+                                                               value="{{ old("responsabilites.$index.debut", $responsibility['debut'] ?? '') }}"
+                                                               placeholder="jj/mm/aaaa" required>
+                                                        <label for="resp_fin_{{ $index }}" class="mt-2">Date fin</label>
+                                                        <input type="date" name="responsabilites[{{ $index }}][fin]"
+                                                                      class="form-control" id="resp_fin_{{ $index }}"
+                                                                      value="{{ old("responsabilites.$index.fin", $responsibility['fin'] ?? '') }}"
+                                                                      placeholder="jj/mm/aaaa" required>
 
                                                         <label for="resp_institution_{{ $index }}" class="mt-2">Institution</label>
                                                         <input type="text" name="responsabilites[{{ $index }}][institution]"
@@ -147,10 +166,14 @@
                                                     <label for="exp_intitule_${experienceIndex}">Intitulé</label>
                                                     <input type="text" name="experiences[${experienceIndex}][intitule]"
                                                            class="form-control" id="exp_intitule_${experienceIndex}" required>
-                                                    <label for="exp_periode_${experienceIndex}" class="mt-2">Période</label>
-                                                    <input type="text" name="experiences[${experienceIndex}][periode]"
-                                                           class="form-control" id="exp_periode_${experienceIndex}"
+                                                    <label for="exp_debut_${experienceIndex}" class="mt-2">Date Debut</label>
+                                                    <input type="date" name="experiences[${experienceIndex}][debut]"
+                                                           class="form-control" id="exp_debut_${experienceIndex}"
                                                            placeholder="jjmmaaaa-jjmmaaaa" required>
+                                                    <label for="exp_fin_${experienceIndex}" class="mt-2">Date fin</label>
+                                                        <input type="date" name="experiences[${experienceIndex}][fin]"
+                                                                      class="form-control" id="exp_fin_${experienceIndex}"
+                                                                       placeholder="jj/mm/aaaa" required>
                                                     <label for="exp_institution_${experienceIndex}" class="mt-2">Institution</label>
                                                     <input type="text" name="experiences[${experienceIndex}][institution]"
                                                            class="form-control" id="exp_institution_${experienceIndex}" required>
@@ -178,10 +201,14 @@
                                                     <label for="resp_intitule_${responsibilityIndex}">Intitulé</label>
                                                     <input type="text" name="responsabilites[${responsibilityIndex}][intitule]"
                                                            class="form-control" id="resp_intitule_${responsibilityIndex}" required>
-                                                    <label for="resp_periode_${responsibilityIndex}" class="mt-2">Période</label>
-                                                    <input type="text" name="responsabilites[${responsibilityIndex}][periode]"
-                                                           class="form-control" id="resp_periode_${responsibilityIndex}"
-                                                           placeholder="jjmmaaaa-jjmmaaaa" required>
+                                                    <label for="resp_debut_${responsibilityIndex}" class="mt-2">Date debut</label>
+                                                    <input type="date" name="responsabilites[${responsibilityIndex}][debut]"
+                                                           class="form-control" id="resp_debut_${responsibilityIndex}"
+                                                           placeholder="jj/mm/aaaa" required>
+                                                     <label for="resp_fin_${responsibilityIndex}" class="mt-2">Date fin</label>
+                                                        <input type="date" name="responsabilites[${responsibilityIndex}][fin]"
+                                                                      class="form-control" id="resp_fin_${responsibilityIndex}"
+                                                                       placeholder="jj/mm/aaaa" required>
                                                     <label for="resp_institution_${responsibilityIndex}" class="mt-2">Institution</label>
                                                     <input type="text" name="responsabilites[${responsibilityIndex}][institution]"
                                                            class="form-control" id="resp_institution_${responsibilityIndex}" required>

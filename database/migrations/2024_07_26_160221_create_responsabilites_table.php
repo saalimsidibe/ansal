@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('responsabilites', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->string('nomResp');
-            $table->string('dateDebutResp');
-            $table->string('dateFinResp');
-            $table->string('nomStrucResp');
+            $table->string('intitule');
+            $table->string('debut');
+            $table->string('fin');
+            $table->string('structure');
             $table->string('ville');
             $table->string('pays');
             $table->foreignId('candidat_id')->constrained('candidats')->onDelete('cascade'); // Clé étrangère

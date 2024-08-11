@@ -3,6 +3,15 @@
 @section('content')
 <div class="container">
     <h2>Résumé de vos informations</h2>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
     <!-- Étape 1: Informations personnelles -->
     <h3>Étape 1: Informations personnelles</h3>
