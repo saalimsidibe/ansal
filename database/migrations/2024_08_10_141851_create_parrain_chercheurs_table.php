@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('responsabilites', function (Blueprint $table) {
+        Schema::create('parrain_chercheurs', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('intitule');
-            $table->string('debut');
-            $table->string('fin');
-            $table->string('structure');
-            $table->string('ville');
-            $table->string('pays');
+            $table->string('prenomPremierP');
+            $table->string('nomPremierP');
+            $table->string('prenomDeuxiemeP');
+            $table->string('nomDeuxiemeP');
+            $table->string('college');
+            $table->string('specialite');
             $table->foreignId('candidat_id')->constrained('candidats')->onDelete('cascade'); // Clé étrangère
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('responsabilites');
+        Schema::dropIfExists('parrain_chercheurs');
     }
 };

@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('college');
             $table->string('specialite');
-            $table->string('expertise');
-            $table->string('honneur');
+            $table->string('expertise')->nullable();
+            $table->string('honneur')->nullable();
             $table->timestamps();
         });
     }

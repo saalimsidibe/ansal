@@ -3,6 +3,15 @@
 @section('content')
 <div class="container">
     <h2>Résumé de vos informations</h2>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
     <!-- Étape 1: Informations personnelles -->
     <h3>Étape 1: Informations personnelles</h3>
@@ -21,9 +30,9 @@
 
     <!-- Étape 2: Informations académiques -->
     <h3>Étape 2: Informations académiques</h3>
-    <p><strong>Diplôme:</strong> {{ session('diplome') ?? 'Non renseigné' }}</p>
-    <p><strong>Université:</strong> {{ session('universite') ?? 'Non renseigné' }}</p>
-    <p><strong>Année d'obtention:</strong> {{ session('annee_obtention') ?? 'Non renseigné' }}</p>
+    <p><strong>Diplôme:</strong> {{ session('data2')['diplome'] ?? 'Non renseigné' }}</p>
+    <p><strong>Université:</strong> {{ session('data2')['universite'] ?? 'Non renseigné' }}</p>
+    <p><strong>Année d'obtention:</strong> {{ session('data2')['annee_obtention'] ?? 'Non renseigné' }}</p>
     <p><strong>Spécialité:</strong> {{ session('specialite') ?? 'Non renseigné' }}</p>
 
     <!-- Étape 3: Expériences professionnelles -->

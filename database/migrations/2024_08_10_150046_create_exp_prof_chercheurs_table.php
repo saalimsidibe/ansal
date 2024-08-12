@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('responsabilites', function (Blueprint $table) {
+        Schema::create('exp_prof_chercheurs', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
             $table->string('intitule');
-            $table->string('debut');
-            $table->string('fin');
-            $table->string('structure');
+            $table->date('debut');
+            $table->date('fin');
             $table->string('ville');
-            $table->string('pays');
-            $table->foreignId('candidat_id')->constrained('candidats')->onDelete('cascade'); // Clé étrangère
             $table->timestamps();
+            $table->foreignId('candidat_id')->constrained('candidats')->onDelete('cascade'); // Clé étrangère
+
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('responsabilites');
+        Schema::dropIfExists('exp_prof_chercheurs');
     }
 };

@@ -60,10 +60,10 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="periode_{{ $index }}">Période d'obtention</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="date" class="form-control"
                                                             id="periode_{{ $index }}"
                                                             name="diplomes[{{ $index }}][periode]" required
-                                                            placeholder="jjmmaa-jjmmaa"
+                                                            placeholder="jj/mm/aaaa"
                                                             value="{{ $diplome['periode'] ?? '' }}">
                                                     </div>
                                                     <div class="form-group">
@@ -74,6 +74,23 @@
                                                             name="diplomes[{{ $index }}][institution]" required
                                                             placeholder="Entrez l'institution"
                                                             value="{{ $diplome['institution'] ?? '' }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="pays_{{ $index }}">Pays</label>
+                                                        <input type="text" class="form-control"
+                                                            id="pays_{{ $index }}"
+                                                            name="diplomes[{{ $index }}][pays]" required
+                                                            placeholder="Entrez le pays"
+                                                            value="{{ $diplome['pays'] ?? '' }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="ville_{{ $index }}">Institution
+                                                            d'obtention</label>
+                                                        <input type="text" class="form-control"
+                                                            id="ville_{{ $index }}"
+                                                            name="diplomes[{{ $index }}][ville]" required
+                                                            placeholder="Entrez la ville"
+                                                            value="{{ $diplome['ville'] ?? '' }}">
                                                     </div>
                                                     <button type="button"
                                                         class="btn btn-danger supprimerDiplome">Supprimer</button>
@@ -108,12 +125,22 @@
                                                 <div class="form-group">
                                                     <label for="periode_${diplomeCount}">Période d'obtention</label>
                                                     <input type="text" class="form-control" id="periode_${diplomeCount}"
-                                                           name="diplomes[${diplomeCount}][periode]" required placeholder="jjmmaa-jjmmaa">
+                                                           name="diplomes[${diplomeCount}][periode]" required placeholder="jj/mm/aaaa">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="institution_${diplomeCount}">Institution d'obtention</label>
                                                     <input type="text" class="form-control" id="institution_${diplomeCount}"
                                                            name="diplomes[${diplomeCount}][institution]" required placeholder="Entrez l'institution">
+                                                </div>
+                                                 <div class="form-group">
+                                                    <label for="pays_${diplomeCount}">Pays d'obtention</label>
+                                                    <input type="text" class="form-control" id="pays_${diplomeCount}"
+                                                           name="diplomes[${diplomeCount}][pays]" required placeholder="Entrez le pays">
+                                                </div>
+                                                 <div class="form-group">
+                                                    <label for="ville_${diplomeCount}">Ville d'obtention</label>
+                                                    <input type="text" class="form-control" id="ville_${diplomeCount}"
+                                                           name="diplomes[${diplomeCount}][ville]" required placeholder="Entrez la ville">
                                                 </div>
                                                 <button type="button" class="btn btn-danger supprimerDiplome">Supprimer</button>
                                             `;
