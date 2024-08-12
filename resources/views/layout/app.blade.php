@@ -43,8 +43,8 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="{{url('/')}}" class="active">Accueil</a></li>
-          <li><a href="{{url('/apropos')}}">Apropos</a></li>
-          <li><a href="{{url('/formulaires')}}">Formulaires</a></li>
+       
+        
 
 
           <li><a href="{{url('/contact')}}">Contact</a></li>

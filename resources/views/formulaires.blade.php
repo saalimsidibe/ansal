@@ -6,12 +6,12 @@
     <!-- Page Title -->
     <div class="page-title light-background">
       <div class="container">
-        <h1>Services</h1>
         <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Services</li>
-          </ol>
+           <Center>
+          <p>
+         <H3> Soumettre  candidature</H3> 
+         </p>
+         </Center>
         </nav>
       </div>
     </div><!-- End Page Title -->
@@ -45,7 +45,7 @@
               </div>
               <div>
                 <h3> </h3>
-                <p>Candidatures pour les autres profils</p>
+                <p>Candidatures pour les autres types de profils</p>
                 <a href="{{url('/etape1autre')}}" class="btn btn-success"> S'inscrire</a>
               </div>
             </div>

@@ -6,12 +6,12 @@
     <!-- Page Title -->
     <div class="page-title light-background">
         <div class="container">
-            <h1>About</h1>
+            
             <nav class="breadcrumbs">
-                <ol>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="current">About</li>
-                </ol>
+                <Center>
+          <p>
+         <H3>   Sciences et Techniques   </H3> 
+         </p>
             </nav>
         </div>
     </div><!-- End Page Title -->
@@ -85,146 +85,28 @@
                                           	avoir fait au moins deux publications au cours des cinq (05) dernières années 
                                         </li><br>
                                         <li class>
+                                            pour les enseignants-chercheurs, avoir encadré seul et fait soutenir au moins deux thèses de doctorat     
+                                        </li><br>
+                                            <li class="">
+                                            pour les chercheurs, avoir encadré seul et fait soutenir deux thèses ou avoir co-encadré et fait soutenir au moins quatre thèses de doctorat         
+                                            </li><br>
+                                                <li>
+                                                reconnaissance internationale s’il y en a (Prix d’excellence scientifique, Brevets, Appartenance à des sociétés savantes, etc.).
                                             
-                                            <ul>
-                                                <li>
-                                                    des publications avec
-                                                    h-index
+                                                  
                                                 </li>
-                                                <li>
-                                                    des résultats des recherches
-                                                    utilisés
-                                                </li>
-                                                <li>
-                                                    un ou plusieurs titres de
-                                                    propriété intellectuelle
-                                                    (brevet d’invention…) à fort
-                                                    impact économique, social ou
-                                                    environnemental dans le
-                                                    domaine
-                                                </li>
-                                            </ul>
+                                            
                                         </li><br>
-                                        <li class>
-                                            - avoir un rayonnement scientifique,
-                                            notamment un leadership scientifique
-                                            apprécié à travers des
-                                            responsabilités scientifiques tels
-                                            que chef de projet, coordonnateur de
-                                            projet, directeur ou toute autre
-                                            haute responsabilité
-                                        </li><br>
-                                        <li>
-                                            avoir encadré seul et fait soutenir
-                                            au moins une (01) thèse ou avoir
-                                            co-encadré et fait soutenir au moins
-                                            deux thèses de doctorat ;
-                                        </li><br>
-                                        <li>
-                                            avoir des distinctions scientifiques
-                                            (décorations, prix d’excellence,
-                                            etc.)
-                                        </li><br>
-                                        <li>
-                                            avoir une bonne connaissance des
-                                            enjeux et défis pour ce domaine et
-                                            les politiques y relatives au plan
-                                            national, régional et international
-                                            ;
-
-                                            <li>
-                                                - avoir participé au niveau
-                                                national, régional et
-                                                international à des fora et
-                                                rencontres scientifiques
-                                                concernant ce domaine
-                                            </li>
-
-                                        </ul>
+                                    
+                                        
+                                  
 
                                     </p>
 
-                                    <p class="fst-italic">
-                                        <span class="fw-bold"> Candidat(e) ne
-                                            provenant pas de l’enseignement
-                                            supérieur ou de la recherche
-                                            scientifique :</span>
-                                    </p>
-
-                                    <p class="lead">
-                                        <ul>
-                                            <li class>
-                                                - être titulaire d’un diplôme
-                                                universitaire de niveau BAC + 5
-                                                au moins, et/ou doctorat dans le
-                                                domaine ;
-                                            </li><br>
-                                            <li>
-                                                - avoir au minimum 15 années
-                                                d'expérience professionnelle
-                                                dans le domaine
-                                            </li><br>
-                                            <li>
-                                                avoir effectué des travaux
-                                                scientifiques à fort impact
-                                                apprécié à travers : <br>
-                                                <ul>
-                                                    <li>
-                                                        des résultats de
-                                                        recherches utilisés
-                                                    </li><br>
-                                                    <li>
-                                                        un ou plusieurs titres
-                                                        de propriété
-                                                        intellectuelle (brevet
-                                                        d’invention…) à fort
-                                                        impact économique,
-                                                        social ou
-                                                        environnemental dans le
-                                                        domaine ;
-                                                    </ul>
-                                                </li><br>
-                                                <li>
-                                                    - avoir un rayonnement
-                                                    scientifique et technique,
-                                                    notamment un leadership
-                                                    apprécié à travers des
-                                                    responsabilités
-                                                    scientifiques et techniques
-                                                    tels que conception et
-                                                    gestion de projet,
-                                                    coordonnateur de projet,
-                                                    directeur ou toute autre
-                                                    haute responsabilité
-                                                </li><br>
-
-                                                <li>
-                                                    - avoir élaboré ou contribué
-                                                    à élaborer des politiques,
-                                                    stratégies et programmes de
-                                                    développement de son secteur
-                                                </li><br>
-
-                                                <li>
-                                                    avoir une bonne connaissance
-                                                    des enjeux et défis pour son
-                                                    secteur et les politiques y
-                                                    relatives au plan national,
-                                                    régional et international
-                                                </li><br>
-
-                                                <li>
-                                                    - avoir participé au niveau
-                                                    national, régional et
-                                                    international à des fora et
-                                                    rencontres scientifiques
-                                                    concernant son secteur ;
-                                                </div>
-                                            </div>
-                                        </div>
+                                   
                                         <center>
                                             <p class="mt-5" data-aos="fade-up">
-                                                <a href="#"
+                                                <a href="{{route('formulaire')}}"
                                                     class="btn btn-get-started">Passer
                                                     à la phase de dépôt des
                                                     candidatures</a>

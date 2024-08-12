@@ -6,12 +6,11 @@
     <!-- Page Title -->
     <div class="page-title light-background">
       <div class="container">
-        <h1>About</h1>
-        <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">About</li>
-          </ol>
+         <Center>
+          <p>
+         <H3>Sciences juridiques, politiques, économiques et de gestion   </H3> 
+         </p>
+         </Center>
         </nav>
       </div>
     </div><!-- End Page Title -->
@@ -116,7 +115,7 @@
           </div>
           <center>
              <p class="mt-5" data-aos="fade-up">
-              <a href="" class="btn btn-get-started">Passer à la phase de dépôt des candidatures</a>
+              <a href="{{route('formulaire')}}" class="btn btn-get-started">Passer à la phase de dépôt des candidatures</a>
             </p>
           </center>
           

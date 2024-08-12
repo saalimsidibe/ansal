@@ -15,15 +15,15 @@ Route::get('/apropos', function () {
     return view('apropos');
 });
 Route::get('/formulaires', function () {
-    return view('formulaires')->name('formulaire');
-});
+    return view('formulaires');
+})->name('formulaire');
 Route::get('/contact', function () {
     return view('contact');
 });
 
 
 Route::post('/multi-step-form/upload', [MultiStepFormController::class, 'uploadFile'])->name('multi-step-form.upload');
-Route::view('/formulaire', 'formulaires');
+Route::view('/formulaire', 'formulaires')->name('formulaire');
 Route::get('/etape1chercheur', [MultiStepFormController::class, 'index'])->name('multi-step-form');
 
 Route::post('/multi-step-form/store', [MultiStepFormController::class, 'store'])->name('multi-step-form.store');

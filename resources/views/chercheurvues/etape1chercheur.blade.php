@@ -29,7 +29,7 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelle</div>
+                                <div class="card-head info"> Informations Personnelles</div>
                                 <div class="card-body">
                                     <form action="{{ Route('multi-step-form.next') }}" method="POST">
                                         @csrf

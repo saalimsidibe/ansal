@@ -6,12 +6,14 @@
     <!-- Page Title -->
     <div class="page-title light-background">
       <div class="container">
-        <h1>About</h1>
+
         <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">About</li>
-          </ol>
+            <Center>
+          <p>
+         <H3>   Sciences naturelles et agricoles   </H3> 
+         </p>
+         </Center>
+       
         </nav>
       </div>
     </div><!-- End Page Title -->
@@ -141,13 +143,13 @@
                         </li><br>
 
                         <li>
-                           -	avoir participé au niveau national, régional et international à des fora et rencontres scientifiques concernant son secteur ;
+                           avoir participé au niveau national, régional et international à des fora et rencontres scientifiques concernant son secteur ;
               </div>
             </div>
           </div>
           <center>
              <p class="mt-5" data-aos="fade-up">
-              <a href="#" class="btn btn-get-started">Passer à la phase de dépôt des candidatures</a>
+              <a href="{{route('formulaire')}}" class="btn btn-get-started">Passer à la phase de dépôt des candidatures</a>
             </p>
           </center>
           

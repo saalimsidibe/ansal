@@ -6,12 +6,12 @@
     <!-- Page Title -->
     <div class="page-title light-background">
       <div class="container">
-        <h1>About</h1>
         <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">About</li>
-          </ol>
+          <Center>
+          <p>
+         <H3>Critères</H3> 
+         </p>
+         </Center>
         </nav>
       </div>
     </div><!-- End Page Title -->
@@ -269,7 +269,7 @@
                     <a href="#"><span class="">Collège Sciences naturelles et agricoles</span> </a>
                   </h3>
                   <p class="mb-0">
-                    <a href="#" class="more dark">Consulter et Passer au dépôt <span class="bi bi-arrow-right-short"></span></a>
+                    <a href="{{route('agro')}}" class="more dark">Consulter et Passer au dépôt <span class="bi bi-arrow-right-short"></span></a>
                   </p>
                 </div>
               </div>
@@ -281,11 +281,11 @@
                     <img src="{{ asset('images/st.jpeg') }}" alt="Image" class="img-fluid">
                   </div>
                   <h3 clas="">
-                    <a href=""><span class=""> Collège Sciences humaines, arts, lettres et culture </span> </a>
+                    <a href=""><span class=""> Collège Sciences et <br> Techniques </span> </a>
                   </h3>
                 
                   <p class="mb-0">
-                    <a href="{{route('litterature')}}" class="more dark"> Consulter et Passer au dépôt <span class="bi bi-arrow-right-short"></span></a>
+                    <a href="{{route('sciencestech')}}" class="more dark"> Consulter et Passer au dépôt <span class="bi bi-arrow-right-short"></span></a>
                   </p>
                 </div>
               </div>
