@@ -52,7 +52,7 @@
         </div>
        
         <div class="form-group">
-            <label for="">Joindre un fichier unique contenant l'ensemble de vos ouvrages .Pour chaque ouvrage il est demandé un à deux pages sur  la/lesquelles on peut distinguer  le titre, les auteurs et l'éditeur</label>
+            <label for="">Joindre un fichier unique contenant l'ensemble de vos ouvrages .Pour chaque ouvrage il est demandé une à deux pages sur  la/lesquelles on peut distinguer  le titre, les auteurs et l'éditeur</label>
             <input type="file" name="" id="" class="form-control">
         </div>
         <div class="form-group">
