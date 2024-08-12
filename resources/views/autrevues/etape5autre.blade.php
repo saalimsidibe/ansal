@@ -29,72 +29,57 @@
                                 <div class="card-body">
     <form action="{{Route('valider5.autre')}}" method="POST">
       @csrf
-         <div class="form-group">
-                <label for="expprofintAu">Expériences professionnelles exercées au plan international</label>
-                <select name="expprofintAu" id="expprofintAu" class="form-control" required>
-                    <option value="non">Non</option>
-                    <option value="oui">Oui</option>
-                </select>
-            </div>
+                         <div class="form-group">
+                        <label for="expprofintAu">Expériences professionnelles exercées au plan international</label>
+                        <select name="expprofintAu" id="expprofintAu" class="form-control" required>
+                            <option value="non" {{ old('expprofintAu', session('form.expprofintAu')) == 'non' ? 'selected' : '' }}>Non</option>
+                            <option value="oui" {{ old('expprofintAu', session('form.expprofintAu')) == 'oui' ? 'selected' : '' }}>Oui</option>
+                        </select>
+                    </div>
 
+                    <!-- Sections additionnelles qui apparaissent en fonction de la sélection -->
+                    <div id="additional-fields" style="{{ old('expprofintAu', session('form.expprofintAu')) == 'oui' ? 'block' : 'none' }}">
 
-            @php
-                $fncIau = old('foncsIau', session('etape5.foncsIau', []));
-            @endphp
+                        @php
+                            $foncsIau = old('foncsIau', session('form.foncsIau', []));
+                        @endphp
 
-                <div id="additional-fields" style="display: none;">
-            
-                <div id="fields-container">
-                    <div class="field-group">
-                          <hr>
-                    <h5>Fonction ${fieldCount}</h5>
-                    <div class="form-group">
-                        <label for="title_${fieldCount}">Intitulé de la fonction</label>
-                        <input type="text" name="foncsIau[fieldCount][intitule]" id="title_${fieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="start_${fieldCount}">Début</label>
-                        <input type="date" name="foncsIau[fieldCount][debut]" id="start_${fieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="end_${fieldCount}">Fin</label>
-                        <input type="date" name="foncsIau[fieldCount][fin]" id="end_${fieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="organization_${fieldCount}">Structure</label>
-                        <input type="text" name="foncsIau[fieldCount][structure]" id="organization_${fieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="country_${fieldCount}">Pays</label>
-                        <input type="text" name="foncsIau[fieldCount][pays]" id="country_${fieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="city_${fieldCount}">Ville</label>
-                        <input type="text" name="foncsIau[fieldCount][ville]" id="city_${fieldCount}" class="form-control" required>
-                    </div>
-                    </div>
-                </div>
-            </div>
-          
+                        @foreach ($foncsIau as $l => $foncIau)
+                            <div class="form-group">
+                                <label for="title_{{$l}}">Intitulé de la fonction</label>
+                                <input type="text" name="foncsIau[{{$l}}][intitule]" value="{{ $foncIau['intitule'] ?? '' }}" id="title_{{$l}}" class="form-control" required>
+                            </div>
+                            <!-- Autres champs pour chaque fonction -->
+                        @endforeach
 
-          
+                        <button type="button" class="btn btn-primary" id="add-field">Ajouter une fonction</button>
+                    </div>
 
- 
-      
-        <div class="form-group">
-                <label for="respintAu">Responsabilités professionnelles exercées au plan international</label>
-                <select name="respintAu" id="respintAu" class="form-control" required>
-                    <option value="non">Non</option>
-                    <option value="oui">Oui</option>
-                </select>
-            </div>
+                    <div class="form-group">
+                        <label for="respintAu">Responsabilités professionnelles exercées au plan international</label>
+                        <select name="respintAu" id="respintAu" class="form-control" required>
+                            <option value="non" {{ old('respintAu', session('form.respintAu')) == 'non' ? 'selected' : '' }}>Non</option>
+                            <option value="oui" {{ old('respintAu', session('form.respintAu')) == 'oui' ? 'selected' : '' }}>Oui</option>
+                        </select>
+                    </div>
 
-             <div id="responsibility-section" style="display: none;">
-                <div class="form-group">
-                    <button type="button" class="btn btn-primary" id="add-responsibility">Ajouter une responsabilité</button>
-                </div>
-                <div id="responsibility-fields-container"></div>
-            </div>
+                    <div id="responsibility-section" style="{{ old('respintAu', session('form.respintAu')) == 'oui' ? 'block' : 'none' }}">
+                        <div id="responsibility-fields-container">
+                            @php
+                                $responsibilities = old('responsibility_titles', session('form.responsibility_titles', []));
+                            @endphp
+
+                            @foreach ($responsibilities as $i => $responsibility)
+                                <div class="form-group">
+                                    <label for="responsibility_title_{{$i}}">Intitulé de la responsabilité</label>
+                                    <input type="text" name="responsibility_titles[]" value="{{ $responsibility }}" id="responsibility_title_{{$i}}" class="form-control" required>
+                                </div>
+                                <!-- Autres champs pour chaque responsabilité -->
+                            @endforeach
+
+                            <button type="button" class="btn btn-primary" id="add-responsibility">Ajouter une responsabilité</button>
+                        </div>
+                    </div>
 
          <button type="submit" class="btn btn-info" value="">Suivant</button>   
          
@@ -104,7 +89,7 @@
                         </div>
                         <div class="col-2"> </div>
                     </div>
-            </section>
+            </section> 
         </div>
     </main>
 @endsection    
@@ -117,125 +102,80 @@
    <script>
     //Ajouter une fonction
      document.addEventListener('DOMContentLoaded', function() {
-            const selectField = document.getElementById('expprofintAu');
-            const additionalFields = document.getElementById('additional-fields');
-            const fieldsContainer = document.getElementById('fields-container');
-            const addFieldButton = document.getElementById('add-field');
+        const selectField = document.getElementById('expprofintAu');
+        const additionalFields = document.getElementById('additional-fields');
+        const responsibilitySection = document.getElementById('responsibility-section');
+        const fieldsContainer = document.getElementById('fields-container');
+        const addFieldButton = document.getElementById('add-field');
+        const respintSelect = document.getElementById('respintAu');
+        const responsibilityFieldsContainer = document.getElementById('responsibility-fields-container');
+        const addResponsibilityButton = document.getElementById('add-responsibility');
 
-            selectField.addEventListener('change', function() {
-                if (this.value === 'oui') {
-                    additionalFields.style.display = 'block';
-                } else {
-                    additionalFields.style.display = 'none';
-                }
-            });
-
-            let fieldCount = 0;
-
-            addFieldButton.addEventListener('click', function() {
-                fieldCount++;
-                const fieldDiv = document.createElement('div');
-                fieldDiv.classList.add('field-group');
-                fieldDiv.innerHTML = `
-                    <hr>
-                    <h5>Fonction ${fieldCount}</h5>
-                    <div class="form-group">
-                        <label for="title_${fieldCount}">Intitulé de la fonction</label>
-                        <input type="text" name="foncsIau[fieldCount][intitule]" id="title_${fieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="start_${fieldCount}">Début</label>
-                        <input type="date" name="foncsIau[fieldCount][debut]" id="start_${fieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="end_${fieldCount}">Fin</label>
-                        <input type="date" name="foncsIau[fieldCount][fin]" id="end_${fieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="organization_${fieldCount}">Structure</label>
-                        <input type="text" name="foncsIau[fieldCount][structure]" id="organization_${fieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="country_${fieldCount}">Pays</label>
-                        <input type="text" name="foncsIau[fieldCount][pays]" id="country_${fieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="city_${fieldCount}">Ville</label>
-                        <input type="text" name="foncsIau[fieldCount][ville]" id="city_${fieldCount}" class="form-control" required>
-                    </div>
-                    <button type="button" class="btn btn-danger remove-field">Supprimer</button>
-                `;
-                fieldsContainer.appendChild(fieldDiv);
-            });
-
-            fieldsContainer.addEventListener('click', function(e) {
-                if (e.target && e.target.classList.contains('remove-field')) {
-                    e.target.parentElement.remove();
-                }
-            });
+        selectField.addEventListener('change', function() {
+            if (this.value === 'oui') {
+                additionalFields.style.display = 'block';
+            } else {
+                additionalFields.style.display = 'none';
+            }
         });
+
+        addFieldButton.addEventListener('click', function() {
+            let fieldCount = fieldsContainer.children.length;
+            const fieldDiv = document.createElement('div');
+            fieldDiv.classList.add('field-group');
+            fieldDiv.innerHTML = `
+                <hr>
+                <h5>Fonction ${fieldCount + 1}</h5>
+                <div class="form-group">
+                    <label for="title_${fieldCount}">Intitulé de la fonction</label>
+                    <input type="text" name="foncsIau[${fieldCount}][intitule]" id="title_${fieldCount}" class="form-control" required>
+                </div>
+                <!-- Autres champs pour la nouvelle fonction -->
+                <button type="button" class="btn btn-danger remove-field">Supprimer</button>
+            `;
+            fieldsContainer.appendChild(fieldDiv);
+        });
+
+        fieldsContainer.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('remove-field')) {
+                e.target.parentElement.remove();
+            }
+        });
+
+        respintSelect.addEventListener('change', function() {
+            if (this.value === 'oui') {
+                responsibilitySection.style.display = 'block';
+            } else {
+                responsibilitySection.style.display = 'none';
+            }
+        });
+
+        addResponsibilityButton.addEventListener('click', function() {
+            let responsibilityFieldCount = responsibilityFieldsContainer.children.length;
+            const fieldDiv = document.createElement('div');
+            fieldDiv.classList.add('field-group');
+            fieldDiv.innerHTML = `
+                <hr>
+                <h5>Responsabilité ${responsibilityFieldCount + 1}</h5>
+                <div class="form-group">
+                    <label for="responsibility_title_${responsibilityFieldCount}">Intitulé de la responsabilité</label>
+                    <input type="text" name="responsibility_titles[]" id="responsibility_title_${responsibilityFieldCount}" class="form-control" required>
+                </div>
+                <!-- Autres champs pour la nouvelle responsabilité -->
+                <button type="button" class="btn btn-danger remove-responsibility-field">Supprimer</button>
+            `;
+            responsibilityFieldsContainer.appendChild(fieldDiv);
+        });
+
+        responsibilityFieldsContainer.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('remove-responsibility-field')) {
+                e.target.parentElement.remove();
+            }
+        });
+    });
    </script>
 
    <script>
-    //Ajouter les responsabilites
-    document.addEventListener('DOMContentLoaded', function() {
-            const respintSelect = document.getElementById('respintAu');
-            const responsibilitySection = document.getElementById('responsibility-section');
-            const responsibilityFieldsContainer = document.getElementById('responsibility-fields-container');
-            const addResponsibilityButton = document.getElementById('add-responsibility');
-
-            respintSelect.addEventListener('change', function() {
-                if (this.value === 'oui') {
-                    responsibilitySection.style.display = 'block';
-                } else {
-                    responsibilitySection.style.display = 'none';
-                }
-            });
-
-            let responsibilityFieldCount = 0;
-
-            addResponsibilityButton.addEventListener('click', function() {
-                responsibilityFieldCount++;
-                const fieldDiv = document.createElement('div');
-                fieldDiv.classList.add('field-group');
-                fieldDiv.innerHTML = `
-                    <hr>
-                    <h5>Responsabilité ${responsibilityFieldCount}</h5>
-                    <div class="form-group">
-                        <label for="responsibility_title_${responsibilityFieldCount}">Intitulé de la responsabilité</label>
-                        <input type="text" name="responsibility_titles[]" id="responsibility_title_${responsibilityFieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="responsibility_start_${responsibilityFieldCount}">Début</label>
-                        <input type="date" name="responsibility_starts[]" id="responsibility_start_${responsibilityFieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="responsibility_end_${responsibilityFieldCount}">Fin</label>
-                        <input type="date" name="responsibility_ends[]" id="responsibility_end_${responsibilityFieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="responsibility_organization_${responsibilityFieldCount}">Structure</label>
-                        <input type="text" name="responsibility_organizations[]" id="responsibility_organization_${responsibilityFieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="responsibility_country_${responsibilityFieldCount}">Pays</label>
-                        <input type="text" name="responsibility_countries[]" id="responsibility_country_${responsibilityFieldCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="responsibility_city_${responsibilityFieldCount}">Ville</label>
-                        <input type="text" name="responsibility_cities[]" id="responsibility_city_${responsibilityFieldCount}" class="form-control" required>
-                    </div>
-                    <button type="button" class="btn btn-danger remove-responsibility-field">Supprimer</button>
-                `;
-                responsibilityFieldsContainer.appendChild(fieldDiv);
-            });
-
-            responsibilityFieldsContainer.addEventListener('click', function(e) {
-                if (e.target && e.target.classList.contains('remove-responsibility-field')) {
-                    e.target.parentElement.remove();
-                }
-            });
-        });
-        
+   
    </script>
 @endsection

@@ -22,7 +22,7 @@ Route::get('/contact', function () {
 });
 
 
-
+Route::post('/multi-step-form/upload', [MultiStepFormController::class, 'uploadFile'])->name('multi-step-form.upload');
 Route::view('/formulaire', 'formulaires');
 Route::get('/etape1chercheur', [MultiStepFormController::class, 'index'])->name('multi-step-form');
 
@@ -50,7 +50,9 @@ Route::view('/etape3chercheur', 'chercheurvues.etape3chercheur')->name('etape3ch
 Route::view('/etape4chercheur', 'chercheurvues.etape4chercheur')->name('etape4chercheur');
 Route::view('/etape5chercheur', 'chercheurvues.etape5chercheur')->name('etape5chercheur');
 Route::view('/etape6chercheur', 'chercheurvues.etape6chercheur')->name('etape6chercheur');
-Route::view('/etapefinalechercheur', 'chercheurvues.etapefinalechercheur')->name('etapefinalechercheur');
+Route::view('/etape7chercheur', 'chercheurvues.etape7chercheur')->name('etape7chercheur');
+Route::view('/summary', 'chercheurvues.summary')->name('multi-step-form.summary');
+Route::post('/finish', [MultiStepFormController::class, 'finish'])->name('multi-step-form.finish');
 Route::view('/Accueil', 'accueil')->name('accueil');
 Route::view('/criterespecifique', 'critereSpecifique')->name('specifique');
 Route::view('/economie', 'criterevues.economie')->name('economie');
@@ -67,3 +69,6 @@ Route::post('/etape4au', [AutreControllerNouveau::class, 'validerEtape4'])->name
 Route::post('/etape5au', [AutreControllerNouveau::class, 'validerEtape5'])->name('valider5.autre');
 Route::post('/etape6au', [AutreControllerNouveau::class, 'validerEtape6'])->name('valider6.autre');
 //Route::post('/etapefinaleautre',[AutreController::class,]);
+
+
+Route::view('/evaluations', 'evaluateurs');

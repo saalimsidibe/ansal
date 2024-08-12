@@ -27,69 +27,141 @@
                             <div class="card ">
                                 <div class="card-head info"> Informations Personnelle</div>
                                 <div class="card-body">
-    <form action="{{route('valider6.autre')}}" method="POST">
-        @csrf
+   <form action="{{ route('valider6.autre') }}" method="POST">
+    @csrf
+    @php
+        $commissionsAu = old('commissionAu', session('etape6.commissionAu', []));
+        $ouvragesEdite = old('ouvrageEdite', session('etape6.ouvrageEdite', []));
+        $ouvragesNonEdite = old('ouvrageNonEdite', session('etape6.ouvrageNonEdite', []));
+        $distinctionsAut = old('distinctionsAut', session('etape6.distinctionsAut', []));
+        $distinctAu = old('distinctAu', session('etape6.distinctAu', ''));
+        $apportAu = old('apportAu', session('etape6.apportAu', ''));
+        $honneurAu = old('honneurAu', session('etape6.honneurAu', ''));
+    @endphp
 
-            <div class="form-group">
-                <label for="associationAut" class="control-label">Associations, commissions, réseaux, comités d’experts internationaux d’appartenance</label><br>
-                <button type="button" id="ajouterAssAut"  class="btn btn-info">Ajouter</button>
+    <!-- Associations, commissions, réseaux, comités d’experts internationaux d’appartenance -->
+    <div class="form-group">
+        <label for="associationAut" class="control-label">Associations, commissions, réseaux, comités d’experts internationaux d’appartenance</label><br>
+        <button type="button" id="ajouterAssAut" class="btn btn-info">Ajouter</button>
+    </div>
+    <div class="fields-containerAssocAut">
+        @foreach ($commissionsAu as $index => $commission)
+            <div class="dynamic-field">
+                <div>
+                    <label for="nomCommission{{ $index }}" class="form-label">Nom de la commission</label>
+                    <input type="text" name="commissionAu[{{ $index }}][nom]" id="nomCommission{{ $index }}" value="{{ $commission['nom'] ?? '' }}">
+                </div>
+                <button type="button" class="remove-field">Supprimer ce champ</button>
             </div>
-            <div class="fields-containerAssocAut"></div>
+        @endforeach
+    </div>
 
-              <div class="form-group">
-                <label for="ouvrageEditeAut" class="form-label">Œuvres, ouvrages et principaux documents édités dont vous êtes auteur ou coauteur </label>
-                <button type="button" id="ouvrageEditeAut" class="btn btn-info">Ajouter</button>
+    <!-- Œuvres, ouvrages et principaux documents édités dont vous êtes auteur ou coauteur -->
+    <div class="form-group">
+        <label for="ouvrageEditeAut" class="form-label">Œuvres, ouvrages et principaux documents édités dont vous êtes auteur ou coauteur</label>
+        <button type="button" id="ouvrageEditeAut" class="btn btn-info">Ajouter</button>
+    </div>
+    <div class="ouvrageEditeAut">
+        @foreach ($ouvragesEdite as $index => $ouvrage)
+            <div class="dynamic-field">
+                <div>
+                    <label for="titre{{ $index }}">Titre</label>
+                    <input type="text" name="titre[]" id="titre{{ $index }}" value="{{ $ouvrage['titre'] ?? '' }}" required>
+                </div>
+                <div>
+                    <label for="anneePublication{{ $index }}">Année de publication</label>
+                    <input type="number" name="anneePublication[]" id="anneePublication{{ $index }}" value="{{ $ouvrage['anneePublication'] ?? '' }}" required>
+                </div>
+                <div>
+                    <label for="nomAuteur{{ $index }}">Nom de l'auteur</label>
+                    <input type="text" name="nomAuteur[]" id="nomAuteur{{ $index }}" value="{{ $ouvrage['nomAuteur'] ?? '' }}" required>
+                </div>
+                <div>
+                    <label for="nomCoauteur{{ $index }}">Nom du coauteur</label>
+                    <input type="text" name="nomCoauteur[]" id="nomCoauteur{{ $index }}" value="{{ $ouvrage['nomCoauteur'] ?? '' }}" required>
+                </div>
+                <div>
+                    <label for="editeur{{ $index }}">Éditeur</label>
+                    <input type="text" name="editeur[]" id="editeur{{ $index }}" value="{{ $ouvrage['editeur'] ?? '' }}" required>
+                </div>
+                <div>
+                    <label for="nombrePage{{ $index }}">Nombre de pages</label>
+                    <input type="number" name="nombrePage[]" id="nombrePage{{ $index }}" value="{{ $ouvrage['nombrePage'] ?? '' }}" required>
+                </div>
+                <button type="button" class="remove-field">Supprimer ces champs</button>
+                <hr>
             </div>
-            <div class="ouvrageEditeAut"></div>
+        @endforeach
+    </div>
 
-           <div class="form-group">
-                <label for="ouvrageNonEditeAut" class="form-label">Œuvres, ouvrages et principaux documents non édités dont vous êtes auteur ou coauteur</label>
-                <button type="button" id="ajouterOuvrageNonEditeAut"  class="btn btn-info">Ajouter</button>
+    <!-- Œuvres, ouvrages et principaux documents non édités dont vous êtes auteur ou coauteur -->
+    <div class="form-group">
+        <label for="ouvrageNonEditeAut" class="form-label">Œuvres, ouvrages et principaux documents non édités dont vous êtes auteur ou coauteur</label>
+        <button type="button" id="ajouterOuvrageNonEditeAut" class="btn btn-info">Ajouter</button>
+    </div>
+    <div class="ouvrageNonEditeAut">
+        @foreach ($ouvragesNonEdite as $index => $ouvrage)
+            <div class="dynamic-field">
+                <div>
+                    <label for="titreNe{{ $index }}">Titre</label>
+                    <input type="text" name="titreNe[]" id="titreNe{{ $index }}" value="{{ $ouvrage['titre'] ?? '' }}" required>
+                </div>
+                <div>
+                    <label for="nomAuteurNe{{ $index }}">Nom de l'auteur</label>
+                    <input type="text" name="nomAuteurNe[]" id="nomAuteurNe{{ $index }}" value="{{ $ouvrage['nomAuteur'] ?? '' }}" required>
+                </div>
+                <div>
+                    <label for="nomCoauteurNe{{ $index }}">Nom du coauteur</label>
+                    <input type="text" name="nomCoauteurNe[]" id="nomCoauteurNe{{ $index }}" value="{{ $ouvrage['nomCoauteur'] ?? '' }}">
+                </div>
+                <button type="button" class="remove-field">Supprimer ces champs</button>
+                <hr>
             </div>
+        @endforeach
+    </div>
 
-            <div class="ouvrageNonEditeAut"></div>
+    <!-- Distinctions honorifiques et scientifiques -->
+    <div class="form-group">
+        <h5>Distinctions honorifiques et scientifiques</h5>
+        <select id="" name="distinctionsAut" class="form-control">
+            <option value="honorifique" {{ $distinctionsAut == 'honorifique' ? 'selected' : '' }}>Distinction Honorifique</option>
+            <option value="scientifique" {{ $distinctionsAut == 'scientifique' ? 'selected' : '' }}>Distinction Scientifique</option>
+        </select>
+        <label for="distinctAu" class="form-label">Nom de la distinction</label>
+        <input type="text" name="distinctAu" class="form-control" value="{{ $distinctAu }}">
+        <button type="button" id="add-select" class="btn btn-info">Ajouter</button>
+    </div>
 
-       
-       
-       
-        <div class="form-group">
-            <h5>Distinctions honorifiques et scientifiques</h5>
-            <select  id="" name="distinctionsAut" class="form-control">
-                <option value="honorifique">Distinction Honorifique</option>
-                <option value="scientifique">Distinction Scientifique</option>
-            </select>
-            <label for="distinctAu" class="form-label">Nom de la distinction</label>
-            <input type="text" name="distinctAu" class="form-control">
-            <button type="button" id="add-select"  class="btn btn-info"> Ajouter</button>
-        </div>
+    <div id="select-container">
+        @foreach ($distinctionsAut as $index => $distinction)
+            <div>
+                <select name="distinctionsAu[]" class="form-control">
+                    <option value="honorifique" {{ $distinction == 'honorifique' ? 'selected' : '' }}>Distinction Honorifique</option>
+                    <option value="scientifique" {{ $distinction == 'scientifique' ? 'selected' : '' }}>Distinction Scientifique</option>
+                </select>
+                <button type="button" onclick="removeSelect(this)">Supprimer</button>
+            </div>
+        @endforeach
+    </div>
 
-         <div id="select-container">
-                <!-- Les sélecteurs seront ajoutés ici -->
-        </div>
+    <!-- Apport particulier à l’Académie -->
+    <label for="">Indiquer quel pourrait être votre apport particulier à l’Académie </label><br>
+    <textarea rows="4" cols="50" name="apportAu">{{ $apportAu }}</textarea><br>
 
-        <label for="">Indiquer quel pourrait être votre apport particulier à l’Académie </label><br>
-        <textarea rows="4" cols="50" placeholder="" name="apportAu"></textarea><br>
+    <!-- Déclaration sur l’honneur -->
+    <div class="form-group">
+          <label for="declaration">.</label>
+          <input name="honneurAu" id="declaration" type="checkbox" placeholder="" value="1"   class="form-control" {{ $honneurAu ? 'checked' : '' }} required> 
 
-        <label for="">Je déclare sur l’honneur n’avoir jamais été condamné par la justice.</label>
-        <input  name="honneurAu" type="checkbox" class="form-control" required>
-        </div>
-        </div>
-         <div class="btn-group mt-4">
-            <a href="{{ route('multi-step-form.previous') }}" class="btn btn-warning">Précédent</a>
-             <input type="submit" class="btn btn-info" value="Suivant" />
-        </div>
+    </div>
+    <input type="checkbox" name="" id="">
+    <input type="submit" value="valider">
     </form>
+
+    @endsection
+  
     
- </div>
-                        </div>
-                        <div class="col-2"> </div>
-                    </div>
-            </section>
-        </div>
-    </main>
-@endsection    
-
-
+        
 @section('scripts')
     <script>
         //ajouter des associations
@@ -108,7 +180,7 @@
             newField.innerHTML = `
                 <div>
                     <label for="nomCommission${fieldCount}" class="form-label">Nom de la commission</label>
-                    <input type="text" name="nomCommission[]" id="nomCommission${fieldCount}">
+                    <input type="text" name="commissionAu[${fieldCount}][nom]" id="nomCommission${fieldCount}">
                 </div>
                 <button type="button" class="remove-field">Supprimer ce champ</button>
             `;

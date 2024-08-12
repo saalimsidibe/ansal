@@ -142,32 +142,106 @@ class MultiStepFormController extends Controller
                 break;
 
             case 6:
-
                 $validatedData = $request->validate([
-                    'commissions.*.name' => 'required|string|max:255',
-                    'brevets.*.*.auteur' => 'required|string|max:255',
-                    'brevets.*.date' => 'required---------',
+                    //'commissions.*' => 'nullable|string|max:255',
+                    'commissions.*.name' => 'nullable|string|max:255',
+                    'brevets.*.date' => 'nullable|date',
+                    'brevets.*.auteur' => 'nullable|string|max:255',
+                    'brevets.*.reference' => 'nullable|string|max:255',
+                    'contributionChecheur' => 'nullable|string|max:1000',
+                    'distinctions.*.type' => 'nullable|integer|in:1,2',
+                    'distinctions.*.nom' => 'nullable|string|max:255',
+                    'distinctions.*.date' => 'nullable|date',
+                    'ouvrages.*.auteur' => 'required|string|max:255',
+                    'ouvrages.*.annee' => 'required|integer|min:1900|max:' . date('Y'), // Validation pour une année de publication valide
+                    'ouvrages.*.titre' => 'required|string|max:255',
+                    'ouvrages.*.editeur' => 'required|string|max:255',
+                    'ouvrages.*.nombre_pages' => 'required|integer|min:1', // Doit être un nombre entier positif
+                    'articles.*.auteur' => 'required|string|max:255',
+                    'articles.*.coauteur' => 'nullable|string|max:255', // Coauteur peut être nullable si non obligatoire
+                    'articles.*.annee_publication' => 'required|integer|min:1900|max:' . date('Y'), // Validation pour une année de publication valide
+                    'articles.*.titre' => 'required|string|max:255',
+                    'articles.*.editeur' => 'required|string|max:255',
+                    'articles.*.pages' => 'required|integer|min:1', // Doit être un nombre entier positif
+                    //'honneurChercheur' => 'nullable|string|in:checked',
+                ]);
+
+               /*  $validatedData = $request->validate([
+                    'commissions.*' => 'required|string|max:255', // Le champ "name" n'est pas nécessaire ici puisque la valeur est directement dans l'array
+                    'brevets.*' => 'required|string|max:255', // Assurez-vous que le champ brevets est bien une chaîne de caractères et que chaque élément est bien en string
+                    'brevets.*.date' => 'required|date', // La date doit être validée comme un format de date
                     'brevets.*.intitule' => 'required|string|max:255',
                     'brevets.*.reference' => 'required|string|max:255',
                     'ouvrages.*.auteur' => 'required|string|max:255',
-                    'ouvrages.*.annee' => 'required|string|max:255',
+                    'ouvrages.*.annee' => 'required|integer|min:1900|max:' . date('Y'), // Validation pour une année de publication valide
                     'ouvrages.*.titre' => 'required|string|max:255',
                     'ouvrages.*.editeur' => 'required|string|max:255',
-                    'ouvrages.*.nombre_page' => 'required|string|max:255',
+                    'ouvrages.*.nombre_page' => 'required|integer|min:1', // Doit être un nombre entier positif
                     'articles.*.auteur' => 'required|string|max:255',
-                    'articles.*.coauteur' => 'required|string|max:255',
-                    'articles.*.annee_publication' => 'required|string|max:255',
+                    'articles.*.coauteur' => 'nullable|string|max:255', // Coauteur peut être nullable si non obligatoire
+                    'articles.*.annee_publication' => 'required|integer|min:1900|max:' . date('Y'), // Validation pour une année de publication valide
                     'articles.*.titre' => 'required|string|max:255',
                     'articles.*.editeur' => 'required|string|max:255',
-                    'articles.*.pages' => 'required|string|max:255',
-                    'distinctionTypeCher' => 'required|string|in:oui,non',
-                    'distinctionsNomCher' => 'required|string|',
-                    'dateDistinctCher' => '',
-                    'distinctions.*.type' => 'required|string|in:1,2',
-                    'honneurChercheur' => 'required|string|max:255',
+                    'articles.*.pages' => 'required|integer|min:1', // Doit être un nombre entier positif
+                    'distinctions.*.type' => 'required|string|in:1,2', // Correction pour s'assurer que le type est parmi les valeurs acceptées
+                    'distinctions.*.nom' => 'required|string|max:255',
+                    'distinctions.*.date' => 'required|date', // Doit être une date valide
+                    'honneurChercheur' => 'required|boolean', // Validation en tant que booléen
                     'contributionChecheur' => 'required|string|max:255'
-                ]);
+                ]); */
+
+
+              //  dd($request);
+
+                $request->session()->put('step', "7");
                 $request->session()->put('data6', array_merge($request->session()->get('data6', []), $validatedData));
+                return redirect()->route('etape7chercheur');
+                break;
+            case 7:
+               // dd($request);
+                try {
+                   /* $validatedData = $request->validate([
+                        'cvchercheurDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'dipChercheurDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'fonctionDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'societeExpertDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'brevetDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'articleDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'ouvrageDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'distinctionsHonorifiquesDoc' => 'required|file|mimes:pdf,doc,docx|max:2048',
+                        'distinctionsScientifiquesDoc' => 'required|file|mimes:pdf,doc,docx|max:2048'
+                    ]);
+
+                    $filePaths = [];
+
+                    foreach ($validatedData as $key => $file) {
+                        if ($request->hasFile($key)) {
+                            $path = $file->store('temporary_files');
+                            $filePaths[$key] = $path;
+                        }
+                    }
+
+                    session(['filePaths' => $filePaths]);*/
+                    $request->session()->put('step', "8");
+
+                    return redirect()->route('multi-step-form.summary');
+                } catch (\Exception $e) {
+                    return back()->withErrors(['error' => $e->getMessage()]);
+                }
+                break;
+
+            case 8:
+
+                // $request->session()->put('salim', [4, 2]);
+
+                return view('chercheurvues.summary');
+                break;
+            default:
+                $request->session()->put('step', "1");
+                // $request->session()->put('salim', [4, 2]);
+
+                return view('chercheurvues.etape1chercheur');
+                break;
         }
     }
 
@@ -214,6 +288,31 @@ class MultiStepFormController extends Controller
                 break;
         }
     }
+
+
+    public function uploadFile(Request $request)
+{
+    $validatedData = $request->validate([
+        'cvchercheurDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'dipChercheurDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'fonctionDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'societeExpertDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'brevetDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'articleDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'ouvrageDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'distinctionsHonorifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'distinctionsScientifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+    ]);
+
+    foreach ($validatedData as $key => $file) {
+        if ($request->hasFile($key)) {
+            $path = $file->store('uploads');
+            session()->push('uploaded_files', ['key' => $key, 'path' => $path]);
+        }
+    }
+
+    return response()->json(['success' => 'File uploaded successfully.']);
+}
 
 
     // app/Http/Controllers/MultiStepFormController.php

@@ -90,16 +90,20 @@ class AutreControllerNouveau extends Controller
     public function validerEtape5(Request $request)
     {
         $donnees5 = $request->validate([
-            'expprofintAu' => 'required|string|in:oui,non',
-            'titles.*' => 'required|string|max:255',
-            'starts.*' => 'required|date',
-            'ends.*' => 'required|date',
-            'foncsIau.*.intitule' => 'required|string|max:255',
-            'foncsIau.*.structure' => 'required|string|max:255',
-            'foncsIau.*.ville' => 'required|string|max:255',
-            'foncsIau.*.pays' => 'required|string|max:255',
-            'foncsIau.*.debut' => 'required|date',
-            'foncsIau.*.fin' => 'required|date',
+            'expprofintAu' => 'required|in:oui,non',
+            'foncsIau.*.intitule' => 'nullable|string|max:255',
+            'foncsIau.*.debut' => 'nullable|date|before_or_equal:fin',
+            'foncsIau.*.fin' => 'nullable|date|after_or_equal:debut',
+            'foncsIau.*.structure' => 'nullable|string|max:255',
+            'foncsIau.*.pays' => 'nullable|string|max:255',
+            'foncsIau.*.ville' => 'nullable|string|max:255',
+            'respintAu' => 'required|in:oui,non',
+            'responsibility_titles.*' => 'nullable|string|max:255',
+            'responsibility_starts.*' => 'nullable|date|before_or_equal:responsibility_ends.*',
+            'responsibility_ends.*' => 'nullable|date|after_or_equal:responsibility_starts.*',
+            'responsibility_organizations.*' => 'nullable|string|max:255',
+            'responsibility_countries.*' => 'nullable|string|max:255',
+            'responsibility_cities.*' => 'nullable|string|max:255',
 
 
 
@@ -107,28 +111,31 @@ class AutreControllerNouveau extends Controller
         ]);
         $request->session()->put('etape5', $donnees5);
         dd($request);
+
         return redirect()->route('etape6.autre');
     }
 
     public function validerEtape6(Request $request)
     {
         $donnees6 = $request->validate([
-            'distinctionsAut' => 'required|in:honorifique,scientifique',
-            'apportAu' => 'required|max:200',
-            'honneurAu' => 'accepted',
+            'commissionAu.*.nom' => 'required|string|max:255',
             'titre.*' => 'required|string|max:255',
-            'anneePublication.*' => 'required|date',
+            'anneePublication.*' => 'required|integer|digits:4', // Année de publication doit être une année valide
             'nomAuteur.*' => 'required|string|max:255',
-            'nomCoauteur.*' => 'required|string|max:255',
-            'editeur.*' => 'required|string|max:255',
-            'nombrePage.*' => 'required|string|max:255',
-            'titreNe.*' => 'required|string|max:255',
-            'nomAuteurNe.*' => 'required|string|max:255',
-            'nomCoauteurNe.*' => 'required|string|max:255',
-            'distinctionsAu.*' => 'required|string|in:honorifique,scientifique',
+            'nomCoauteur.*' => 'nullable|string|max:255', // Coauteur peut être optionnel
+            'editeur.*' => 'nullable|string|max:255',
+            'nombrePage.*' => 'nullable|integer|min:1', // Nombre de pages peut être optionnel mais doit être un nombre positif
+            'titreNe.*' => 'nullable|string|max:255',
+            'nomAuteurNe.*' => 'nullable|string|max:255',
+            'nomCoauteurNe.*' => 'nullable|string|max:255',
+            'distinctionsAu.*' => 'nullable|in:honorifique,scientifique', // Valeur doit être l'une des options spécifiées
+            'distinctAu' => 'nullable|string|max:255',
+            'apportAu' => 'nullable|string|max:1000', // Limiter la taille du texte
+            'honneurAu' => 'required|boolean',
 
         ]);
         $request->session()->put('etape6', $donnees6);
+        dd($request);
         return redirect()->route('etapefinale.autre');
     }
 }

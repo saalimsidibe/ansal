@@ -32,38 +32,92 @@
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('multi-step-form.next') }}">
                                         @csrf
+
+                                        <!-- Expériences professionnelles exercées au plan international -->
                                         <div class="form-group">
                                             <label for="expprofint">Expériences professionnelles exercées au plan international</label>
                                             <select name="expprofint" id="expprofint" class="form-control">
                                                 <option value="">Sélectionner</option>
-                                                <option value="oui">Oui</option>
-                                                <option value="non">Non</option>
+                                                <option value="oui" {{ old('expprofint', session('data5.expprofint')) == 'oui' ? 'selected' : '' }}>Oui</option>
+                                                <option value="non" {{ old('expprofint', session('data5.expprofint')) == 'non' ? 'selected' : '' }}>Non</option>
                                             </select>
                                         </div>
 
                                         <!-- Div pour ajouter les expériences internationales -->
-                                        <div id="experience-container" class="mt-3 d-none">
+                                        <div id="experience-container" class="mt-3 {{ old('expprofint', session('data5.expprofint')) == 'oui' ? '' : 'd-none' }}">
                                             <h4>Ajouter une expérience professionnelle</h4>
-                                            <div id="experience-fields-container">
-                                                
 
+                                            @php
+                                                $experiences = old('experiences', session('data5.experiences', []));
+
+                                            @endphp
+
+                                            <div id="experience-fields-container">
+                                                @foreach ($experiences as $index => $experience)
+                                                    <div class="form-group">
+                                                        <label for="exp_intitule_{{ $index }}">Intitulé</label>
+                                                        <input type="text" name="experiences[{{ $index }}][intitule]"
+                                                               class="form-control" id="exp_intitule_{{ $index }}"
+                                                               value="{{ old("experiences.$index.intitule", $experience['intitule'] ?? '') }}" required>
+
+                                                        <label for="exp_periode_{{ $index }}" class="mt-2">Période</label>
+                                                        <input type="text" name="experiences[{{ $index }}][periode]"
+                                                               class="form-control" id="exp_periode_{{ $index }}"
+                                                               value="{{ old("experiences.$index.periode", $experience['periode'] ?? '') }}"
+                                                               placeholder="jjmmaaaa-jjmmaaaa" required>
+
+                                                        <label for="exp_institution_{{ $index }}" class="mt-2">Institution</label>
+                                                        <input type="text" name="experiences[{{ $index }}][institution]"
+                                                               class="form-control" id="exp_institution_{{ $index }}"
+                                                               value="{{ old("experiences.$index.institution", $experience['institution'] ?? '') }}" required>
+                                                    </div>
+                                                @endforeach
                                             </div>
+
                                             <button type="button" id="add-experience-button" class="btn btn-primary mt-2">Ajouter</button>
                                         </div>
 
+                                        <!-- Responsabilités administratives exercées au plan international -->
                                         <div class="form-group mt-3">
                                             <label for="respprofint">Responsabilités administratives exercées au plan international</label>
                                             <select name="respprofint" id="respprofint" class="form-control">
                                                 <option value="">Sélectionner</option>
-                                                <option value="oui">Oui</option>
-                                                <option value="non">Non</option>
+                                                <option value="oui" {{ old('respprofint', session('data5.respprofint')) == 'oui' ? 'selected' : '' }}>Oui</option>
+                                                <option value="non" {{ old('respprofint', session('data5.respprofint')) == 'non' ? 'selected' : '' }}>Non</option>
                                             </select>
                                         </div>
 
                                         <!-- Div pour ajouter les responsabilités internationales -->
-                                        <div id="responsibility-container" class="mt-3 d-none">
+                                        <div id="responsibility-container" class="mt-3 {{ old('respprofint', session('data5.respprofint')) == 'oui' ? '' : 'd-none' }}">
                                             <h4>Ajouter une responsabilité administrative</h4>
-                                            <div id="responsibility-fields-container"></div>
+
+                                            @php
+                                                $responsabilites = old('responsabilites', session('data5.responsabilites', []));
+
+                                            @endphp
+
+                                            <div id="responsibility-fields-container">
+                                                @foreach ($responsabilites as $index => $responsibility)
+                                                    <div class="form-group">
+                                                        <label for="resp_intitule_{{ $index }}">Intitulé</label>
+                                                        <input type="text" name="responsabilites[{{ $index }}][intitule]"
+                                                               class="form-control" id="resp_intitule_{{ $index }}"
+                                                               value="{{ old("responsabilites.$index.intitule", $responsibility['intitule'] ?? '') }}" required>
+
+                                                        <label for="resp_periode_{{ $index }}" class="mt-2">Période</label>
+                                                        <input type="text" name="responsabilites[{{ $index }}][periode]"
+                                                               class="form-control" id="resp_periode_{{ $index }}"
+                                                               value="{{ old("responsabilites.$index.periode", $responsibility['periode'] ?? '') }}"
+                                                               placeholder="jjmmaaaa-jjmmaaaa" required>
+
+                                                        <label for="resp_institution_{{ $index }}" class="mt-2">Institution</label>
+                                                        <input type="text" name="responsabilites[{{ $index }}][institution]"
+                                                               class="form-control" id="resp_institution_{{ $index }}"
+                                                               value="{{ old("responsabilites.$index.institution", $responsibility['institution'] ?? '') }}" required>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+
                                             <button type="button" id="add-responsibility-button" class="btn btn-primary mt-2">Ajouter</button>
                                         </div>
 
@@ -72,6 +126,7 @@
                                             <input type="submit" class="btn btn-info" value="Suivant" />
                                         </div>
                                     </form>
+
 
                                     <script>
                                         // Gestion des expériences professionnelles internationales
