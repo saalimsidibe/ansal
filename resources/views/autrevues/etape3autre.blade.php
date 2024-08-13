@@ -24,7 +24,7 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelle</div>
+                                <div class="card-head info bg-light">  <h3>Informations sur les diplômes</h3> </div>
                                 <div class="card-body">
                                     <form action="{{Route('valider3.autre')}}"  method="POST">
                                         {{ csrf_field() }}
@@ -33,11 +33,13 @@
                                             $diplomesAu=old('diplomesAu',session('etape3.diplomesAu',[]));
                                         @endphp
  <div class="diplome" id="diplome-section">
+     <h4>Diplôme universitaire</h4>
     @foreach ($diplomesAu as $indexAu => $diplomeAu )
         
    
-    <h4>Diplôme universitaire</h4>
+    
     <div class="form-group">
+    
         <label for="intitule_{{ $indexAu }}">Intitulé du diplôme</label>
         <input type="text" class="form-control" id="intitule_{{ $indexAu }}" name="diplomesAu[{{$indexAu}}][nom]" value="{{$diplomeAu['nom'] ?? ''}}" required>
     </div>
@@ -59,7 +61,7 @@
     </div>
      @endforeach
 
-    <button type="button" id="add-field" class="btn btn-primary">Ajouter un diplôme</button>
+    <button type="button" id="add-field" class="  float-right btn btn-primary">Ajouter un diplôme</button>
 </div>
 </div>
                             </div>
@@ -91,6 +93,7 @@
         var section = document.getElementById('diplome-section');
         comptDip++;
         var newFields = `
+         <h4>Diplôme universitaire</h4>
             <div class="diplome-item">
                 <div class="form-group">
                     <label for="nomDipAu">Intitulé du diplôme</label>

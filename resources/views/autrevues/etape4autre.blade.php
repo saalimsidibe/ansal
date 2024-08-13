@@ -218,7 +218,7 @@
                 // Create and append the button to add fields
                 const addBtn = document.createElement('button');
                 addBtn.textContent = 'Ajouter une responsabilité';
-                addBtn.className = 'add-btn';
+                addBtn.className = 'add-btn  btn btn-primary';
                 addBtn.type = 'button'; // Prevent form submission
                 
                 addBtn.addEventListener('click', function() {
@@ -264,7 +264,7 @@
                     <label for="country">Pays</label>
                     <input type="text" name="resAdau[i][pays]" placeholder="Pays" class="form-control">
                 </div>
-                <button type="button" class="remove-btn" onclick="removeField(this)">Supprimer</button>
+                <button type="button" class="remove-btn btn btn-danger" onclick="removeField(this)">Supprimer</button>
             `;
 
             document.getElementById('respadminDynamic').appendChild(container);
@@ -277,7 +277,7 @@
         
     </script>
     @php
-        @dump($request);
+    
     @endphp
     
 @endsection

@@ -49,9 +49,9 @@
             <div class="dynamic-field">
                 <div>
                     <label for="nomCommission{{ $index }}" class="form-label">Nom de la commission</label>
-                    <input type="text" name="commissionAu[{{ $index }}][nom]" id="nomCommission{{ $index }}" value="{{ $commission['nom'] ?? '' }}">
+                    <input  class='form-control'      type="text" name="commissionAu[{{ $index }}][nom]" id="nomCommission{{ $index }}" value="{{ $commission['nom'] ?? '' }}">
                 </div>
-                <button type="button" class="remove-field">Supprimer ce champ</button>
+                <button type="button" class="remove-field btn btn-primary">Supprimer ce champ</button>
             </div>
         @endforeach
     </div>
@@ -149,12 +149,12 @@
     <textarea rows="4" cols="50" name="apportAu">{{ $apportAu }}</textarea><br>
 
     <!-- Déclaration sur l’honneur -->
-    <div class="form-group">
-          <label for="declaration">.</label>
-          <input name="honneurAu" id="declaration" type="checkbox" placeholder="" value="1"   class="form-control" {{ $honneurAu ? 'checked' : '' }} required> 
+  
+          <label for="declaration">Declaration sur l'honneur</label>
+       <!--   <input name="honneurAu" id="declaration" type="checkbox" placeholder="" value="1"   class="form-control" {{ $honneurAu ? 'checked' : '' }} required> --> 
 
-    </div>
-    <input type="checkbox" name="" id="">
+    
+   
     <input type="submit" value="valider">
     </form>
 
@@ -210,7 +210,7 @@
             newFields.innerHTML = `
                 <div>
                     <label for="titre${fieldCount}">Titre</label>
-                    <input type="text" name="titre[]" id="titre${fieldCount}" required>
+                    <input type="text" name="titre[]" id="titre${fieldCount}"  class=required>
                 </div>
                 <div>
                     <label for="anneePublication${fieldCount}">Année de publication</label>

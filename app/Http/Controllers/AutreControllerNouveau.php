@@ -110,7 +110,7 @@ class AutreControllerNouveau extends Controller
 
         ]);
         $request->session()->put('etape5', $donnees5);
-        dd($request);
+
 
         return redirect()->route('etape6.autre');
     }
@@ -135,7 +135,7 @@ class AutreControllerNouveau extends Controller
 
         ]);
         $request->session()->put('etape6', $donnees6);
-        dd($request);
+
         return redirect()->route('etapefinale.autre');
     }
 }

@@ -412,6 +412,11 @@ class MultiStepFormController extends Controller
                 $responsabilite->candidat_id = $candidat->id;
                 $responsabilite->save();
             }
+
+            foreach($data5['expprofint'] as $key=> $expint)
+            {
+                
+            }
             // Sauvegarde des fichiers si nécessaire
           /*  if (isset($files['cvchercheurDoc'])) {
                 $cvPath = $files['cvchercheurDoc']->store('cv_docs');
