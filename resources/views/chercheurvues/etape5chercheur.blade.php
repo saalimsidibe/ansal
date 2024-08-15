@@ -48,7 +48,7 @@
                                                 <option value="">Sélectionner</option>
                                                 <option value="oui" {{ old('expprofint', session('data5.expprofint')) == 'oui' ? 'selected' : '' }}>Oui</option>
                                                 <option value="non" {{ old('expprofint', session('data5.expprofint')) == 'non' ? 'selected' : '' }}>Non</option>
-                                            </select>
+                                            </select> 
                                         </div>
 
                                         <!-- Div pour ajouter les expériences internationales -->
