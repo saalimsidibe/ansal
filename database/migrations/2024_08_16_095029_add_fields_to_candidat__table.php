@@ -11,9 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('articles', function (Blueprint $table) {
+        Schema::table('candidats', function (Blueprint $table) {
+            $table->string('communautaire')->nullable();
+            $table->string('apport')->nullable();
+            $table->string('travauxSign')->nullable();
+            $table->string('image')->nullable();
+            $table->string('multimedia')->nullable();
+
+
+
+
             //
-            $table->foreignId('candidat_id')->constrained('candidats')->onDelete('cascade');
         });
     }
 
@@ -22,7 +30,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('articles', function (Blueprint $table) {
+        Schema::table('candidats', function (Blueprint $table) {
             //
         });
     }

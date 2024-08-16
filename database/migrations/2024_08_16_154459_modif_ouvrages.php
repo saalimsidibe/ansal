@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('commission_chercheurs', function (Blueprint $table) {
-            $table->id();
-            $table->string('nomComm');
-            $table->foreignId('candidat_id')->constrained('candidats')->onDelete('cascade'); // Clé étrangère
-            $table->timestamps();
+        Schema::table('ouvrages', function (Blueprint $table) {
+            $table->string('');
         });
     }
 
@@ -24,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('commission_chercheurs');
+        Schema::table('ouvrages', function (Blueprint $table) {
+            //
+            $table->string('nom_coauteur')->nullable();
+        });
     }
 };

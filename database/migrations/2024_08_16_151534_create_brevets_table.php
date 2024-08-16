@@ -11,20 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('parrain_auts', function (Blueprint $table) {
+        Schema::create('brevets', function (Blueprint $table) {
             $table->id();
-            $table->string('nomAut');
-            $table->string('prenomAut');
-            $table->foreignId('autre_id')->constrained('autres')->onDelete('cascade');
+            $table->string('Auteurs');
+            $table->date('date');
+            $table->string('intitule');
+            $table->string('ref');
+            $table->foreignId('candidat_id')->constrained('candidats')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
-    /**
+    /** 
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('parrain_auts');
+        Schema::dropIfExists('brevets');
     }
 };

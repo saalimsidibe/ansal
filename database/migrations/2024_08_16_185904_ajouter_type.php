@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('distinctions', function (Blueprint $table) {
+        Schema::table('candidats', function (Blueprint $table) {
             //
-            $table->foreignId('candidat_id')->constrained('candidats')->onDelete('cascade');
+            $table->string('nom_diplome');
         });
     }
 
@@ -22,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('distinctions', function (Blueprint $table) {
-            //
+        Schema::table('candidats', function (Blueprint $table) {
+            $table->string('type');
         });
     }
 };
