@@ -424,7 +424,7 @@
                 '<input  class="form-control" type="text" name="articles[' + fieldIndex +
                 '][coauteur]">' + '<br>' +
                 '<label>Année de publication:</label>' +
-                '<input class="form-control" type="number" name="articles[' + fieldIndex +
+                '<input class="form-control" type="date" name="articles[' + fieldIndex +
                 '][annee_publication]" required>' + '<br>' +
                 '<label>Titre:</label>' +
                 '<input  class="form-control" type="text" name="articles[' + fieldIndex +

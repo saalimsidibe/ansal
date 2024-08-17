@@ -27,7 +27,11 @@
 
     <p><strong>Email:</strong> {{ session('data1')['email'] ?? 'Non renseigné' }}</p>
     <p><strong>Numéro de téléphone:</strong> {{ session('data1')['numerotel'] ?? 'Non renseigné' }}</p>
-
+    <p> <strong>Nom du Premier Parrain</strong>{{session('data')}}</p>
+    
+    
+    
+    
     <!-- Étape 2: Informations académiques -->
     <h3>Étape 2: Informations académiques</h3>
     <p><strong>Diplôme:</strong> {{ session('data2')['diplome'] ?? 'Non renseigné' }}</p>

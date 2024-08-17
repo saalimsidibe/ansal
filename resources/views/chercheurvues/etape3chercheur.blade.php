@@ -124,7 +124,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="periode_${diplomeCount}">Période d'obtention</label>
-                                                    <input type="text" class="form-control" id="periode_${diplomeCount}"
+                                                    <input type="date" class="form-control" id="periode_${diplomeCount}"
                                                            name="diplomes[${diplomeCount}][periode]" required placeholder="jj/mm/aaaa">
                                                 </div>
                                                 <div class="form-group">

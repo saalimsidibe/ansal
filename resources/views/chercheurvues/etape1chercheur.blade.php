@@ -114,6 +114,11 @@
                                             @enderror
                                         </div>
 
+                                        <div class="form-group">
+                                            <label for="expertise" class="form-label" >Domaines d'expertise</label>
+                                            <input type="expertise" name="expertise" id="expertise" class="form-control">
+                                        </div> <br>
+
                                         <button type="submit" class="btn btn-info">Suivant</button>
                                     </form>
 

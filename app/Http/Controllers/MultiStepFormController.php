@@ -8,6 +8,7 @@ use App\Models\CommissionChercheur;
 use App\Models\Diplome;
 use App\Models\ExpProfChercheur;
 use App\Models\Ouvrage;
+use App\Models\Parrain;
 use App\Models\ParrainChercheur;
 use App\Models\Responsabilite;
 use Illuminate\Http\Request;
@@ -51,6 +52,7 @@ class MultiStepFormController extends Controller
                     // 'datenomin' => 'required|date', // Décommentez cette ligne si ce champ est nécessaire
                     'numerotel' => 'required|string|max:15', // Limite de longueur typique pour un numéro de téléphone
                     'email' => 'required|string|email|max:255',
+                    'expertise' => 'required|string|max:255'
 
                     // Ajoutez ici les règles de validation pour les autres champs
                 ]);
@@ -67,7 +69,8 @@ class MultiStepFormController extends Controller
                     'titre' => $validatedData['titre'],
                     'datenomin' => $request['datenomin'],
                     'numerotel' => $validatedData['numerotel'],
-                    'email' => $validatedData['email']
+                    'email' => $validatedData['email'],
+                    'expertise' => $validatedData['expertise']
 
                 ]);
 
@@ -91,6 +94,7 @@ class MultiStepFormController extends Controller
 
                 // Rediriger vers l'étape suivante ou finaliser
                 $request->session()->put('step', "3"); //
+
                 return redirect()->route('etape3chercheur');
                 break;
             case 3:
@@ -107,6 +111,7 @@ class MultiStepFormController extends Controller
 
                 // Rediriger vers l'étape suivante
                 $request->session()->put('step', "4"); //
+
                 return redirect()->route('etape4chercheur');
                 break;
             case 4:
@@ -176,7 +181,7 @@ class MultiStepFormController extends Controller
                     'articles.*.titre' => 'required|string|max:255',
                     'articles.*.editeur' => 'required|string|max:255',
                     'articles.*.pages' => 'required|integer|min:1', // Doit être un nombre entier positif
-                    //'honneurChercheur' => 'nullable|string|in:checked',
+                    'honneurChercheur' => 'required',
                 ]);
 
                 /*  $validatedData = $request->validate([
@@ -208,6 +213,7 @@ class MultiStepFormController extends Controller
 
                 $request->session()->put('step', "7");
                 $request->session()->put('data6', array_merge($request->session()->get('data6', []), $validatedData));
+
                 return redirect()->route('etape7chercheur');
                 break;
             case 7:
@@ -345,8 +351,25 @@ class MultiStepFormController extends Controller
         $files = session('files'); // Pour les fichiers uploadés
 
         // Exemple d'enregistrement dans la base de données
-        $candidat = new Candidat();
+        //  $candidat = new Candidat();
 
+        // $candidat->nom = $data1['nom'];
+        // $candidat->prenom = $data1['prenom'];
+        // $candidat->sexe = $data1['sexe'];
+        //$candidat->datenaissance = $data1['datenaiss'];
+        //$candidat->titre = $data1['titre'];
+        //$candidat->telephone = $data1['numerotel'];
+        //$candidat->datenomin = $data1['datenomin'];
+        //$candidat->email = $data1['email'];
+        //$candidat->college = $data2['college'];
+        //$candidat->specialite = $data2['specialite'];
+        //  $candidat->expertise = $data1['expertise'];
+        //  $candidat->honneur = $data1['honneur'];
+
+        //  $candidat->save();
+
+        $candidat = new Candidat();
+        $candidat->categorie = 'chercheur';
         $candidat->nom = $data1['nom'];
         $candidat->prenom = $data1['prenom'];
         $candidat->sexe = $data1['sexe'];
@@ -357,26 +380,24 @@ class MultiStepFormController extends Controller
         $candidat->email = $data1['email'];
         $candidat->college = $data2['college'];
         $candidat->specialite = $data2['specialite'];
-        //  $candidat->expertise = $data1['expertise'];
-        //  $candidat->honneur = $data1['honneur'];
+        $candidat->expertise = $data1['expertise'];
+        $candidat->honneur = 'valide';
+        $candidat->contribution = $data6['contributionChecheur'];
 
         $candidat->save();
 
 
 
-        // les données du step2
-        $parrainChercheur = new ParrainChercheur();
-        $parrainChercheur->prenomPremierP = $data2['prenomPremierP'];
-        $parrainChercheur->nomPremierP = $data2['nomPremierP'];
-        $parrainChercheur->prenomDeuxiemeP = $data2['prenomDeuxiemeP'];
-        $parrainChercheur->nomDeuxiemeP = $data2['nomDeuxiemeP'];
-        $parrainChercheur->college = $data2['college'];
-        $parrainChercheur->specialite = $data2['specialite'];
-        $parrainChercheur->candidat_id = $candidat->id;
-        $parrainChercheur->save();
+        $parrain = new Parrain();
+        $parrain->nomPreParrain = $data2['nomPremierP'];
+        $parrain->PrenomPreParrain = $data2['prenomPremierP'];
+        $parrain->nomDeuxParrain = $data2['nomDeuxiemeP'];
+        $parrain->PrenomDeuxParrain = $data2['prenomDeuxiemeP'];
+        $parrain->candidat_id = $candidat->id;
+
+        $parrain->save();
 
 
-        // les données du step3
         foreach ($data3['diplomes'] as $key => $dip) {
             $diplome = new Diplome();
             $diplome->nom_diplome = $dip['intitule'];
@@ -388,7 +409,45 @@ class MultiStepFormController extends Controller
             $diplome->save();
         }
 
+
+
+
+
+
+
+
+
+
+
+
+        // les données du step2
+        /*
+        $parrainChercheur = new ParrainChercheur();
+        $parrainChercheur->prenomPremierP = $data2['prenomPremierP'];
+        $parrainChercheur->nomPremierP = $data2['nomPremierP'];
+        $parrainChercheur->prenomDeuxiemeP = $data2['prenomDeuxiemeP'];
+        $parrainChercheur->nomDeuxiemeP = $data2['nomDeuxiemeP'];
+        $parrainChercheur->college = $data2['college'];
+        $parrainChercheur->specialite = $data2['specialite'];
+        $parrainChercheur->candidat_id = $candidat->id;
+        $parrainChercheur->save();
+*/
+
+        // les données du step3
+        /*
+        foreach ($data3['diplomes'] as $key => $dip) {
+            $diplome = new Diplome();
+            $diplome->nom_diplome = $dip['intitule'];
+            $diplome->date_acquisition = $dip['periode'];
+            $diplome->nom_college = $dip['institution'];
+            $diplome->ville = $dip['ville'];
+            $diplome->pays = $dip['pays'];
+            $diplome->candidat_id = $candidat->id;
+            $diplome->save();
+        }*/
+
         // les données du step4
+        /*
 
         foreach ($data4['experiences'] as $key => $ex) {
             $exp = new ExpProfChercheur();
@@ -399,9 +458,9 @@ class MultiStepFormController extends Controller
             $exp->candidat_id = $candidat->id;
             $exp->save();
         }
-
+*/
         // les données du step5
-
+        /*
         foreach ($data4['responsabilites'] as $key => $resp) {
             $responsabilite = new Responsabilite();
             $responsabilite->intitule = $resp['intitule'];
@@ -413,7 +472,8 @@ class MultiStepFormController extends Controller
             $responsabilite->pays = $resp['ville'];
             $responsabilite->candidat_id = $candidat->id;
             $responsabilite->save();
-        }
+        }*/
+        /*
 
         foreach ($data5['experiences'] as $key => $expint) {
             $experience = new  ExpProfChercheur();
@@ -426,8 +486,8 @@ class MultiStepFormController extends Controller
             $experience->candidat_id = $candidat->id;
             $experience->save();
         }
-
-        foreach ($data5['responsabilites'] as $key => $respint) {
+           */
+        /*     foreach ($data5['responsabilites'] as $key => $respint) {
             $responsabilite = new Responsabilite();
             $responsabilite->type = 'internationale';
             $responsabilite->debut = $respint['debut'];
@@ -437,13 +497,18 @@ class MultiStepFormController extends Controller
             $responsabilite->pays = $respint['pays'];
             $responsabilite->candidat_id = $candidat->id;
             $experience->save();
-        }
+            
+            }
+           */
 
-        foreach ($data6['commissions'] as $key => $comm) {
+        /*        foreach ($data6['commissions'] as $key => $comm) {
             $CommissionChercheur = new CommissionChercheur();
             $CommissionChercheur->Comm = $comm['name'];
             $CommissionChercheur->candidat_id = $candidat->id;
-        }
+             }
+           */
+
+
 
         foreach ($data6['ouvrages'] as $key => $ouvrage) {
             $ouvragesChercheur = new Ouvrage();
