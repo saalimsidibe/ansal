@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Candidat;
 use App\Models\CommissionChercheur;
 use App\Models\Diplome;
+use App\Models\Experience;
 use App\Models\ExpProfChercheur;
 use App\Models\Ouvrage;
 use App\Models\Parrain;
@@ -122,11 +123,12 @@ class MultiStepFormController extends Controller
                     'experiences.*.debut' => 'required|string|max:255',
                     'experiences.*.fin' => 'required|string|max:255',
                     'experiences.*.ville' => 'required|string|max:255',
+                    'experiences.*.structure' => 'required|string|max:255',
                     'responsabilites.*.intitule' => 'required|string|max:255',
                     'responsabilites.*.debut' => 'required|string|max:255',
                     'responsabilites.*.fin' => 'required|string|max:255',
                     'responsabilites.*.ville' => 'required|string|max:255',
-                    'responsabilites.*.structure' => 'required|string|max:255',
+                    'responsabilites.*.structure' => 'required|string|max:255'
                 ]);
                 //  dd($validatedData);
 
@@ -145,11 +147,17 @@ class MultiStepFormController extends Controller
                     'experiences.*.debut' => 'required_if:expprofint,oui|date|max:255',
                     'experiences.*.fin' => 'required_if:expprofint,oui|date|max:255',
 
+
                     'experiences.*.institution' => 'required_if:expprofint,oui|string|max:255',
+                    'experiences.*.pays' => 'required_if:expprofint,oui|string|max:255',
+                    'experiences.*.ville' => 'required_if:expprofint,oui|string|max:255',
+
                     'respprofint' => 'required|string|in:oui,non',
                     'responsabilites.*.intitule' => 'required_if:respprofint,oui|string|max:255',
                     'responsabilites.*.debut' => 'required_if:respprofint,oui|date',
                     'responsabilites.*.fin' => 'required_if:respprofint,oui|date',
+                    'responsabilites.*.ville' => 'required_if:respprofint,oui|string|max:255',
+                    'responsabilites.*.pays' => 'required_if:respprofint,oui|string|max:255',
                     'responsabilites.*.institution' => 'required_if:respprofint,oui|string|max:255',
                 ]);
 
@@ -166,6 +174,7 @@ class MultiStepFormController extends Controller
                     'brevets.*.date' => 'nullable|date',
                     'brevets.*.auteur' => 'nullable|string|max:255',
                     'brevets.*.reference' => 'nullable|string|max:255',
+                    'brevets.*.intitule' => 'nullable|string|max:255',
                     'contributionChecheur' => 'nullable|string|max:1000',
                     'distinctions.*.type' => 'nullable|integer|in:1,2',
                     'distinctions.*.nom' => 'nullable|string|max:255',
@@ -174,6 +183,7 @@ class MultiStepFormController extends Controller
                     'ouvrages.*.annee' => 'required|integer|min:1900|max:' . date('Y'), // Validation pour une année de publication valide
                     'ouvrages.*.titre' => 'required|string|max:255',
                     'ouvrages.*.editeur' => 'required|string|max:255',
+                    'ouvrages.*.coauteur' => 'nullable|string|max:255',
                     'ouvrages.*.nombre_pages' => 'required|integer|min:1', // Doit être un nombre entier positif
                     'articles.*.auteur' => 'required|string|max:255',
                     'articles.*.coauteur' => 'nullable|string|max:255', // Coauteur peut être nullable si non obligatoire
@@ -409,16 +419,120 @@ class MultiStepFormController extends Controller
             $diplome->save();
         }
 
+        foreach ($data4['experiences'] as $key => $ex) {
+            $exp = new Experience();
+            $exp->intitule = $ex['intitule'];
+            $exp->type = 'nationale';
+            $exp->structure = $ex['structure'];;
+            $exp->debut = $ex['debut'];
+            $exp->fin = $ex['fin'];
+            $exp->ville = $ex['ville'];
+            $exp->pays = 'Burkina Faso';
+            $exp->candidat_id = $candidat->id;
+            $exp->save();
+        }
+
+
+
+        foreach ($data4['responsabilites'] as $key => $resp) {
+            $responsabilite = new Responsabilite();
+            $responsabilite->intitule = $resp['intitule'];
+            $responsabilite->type = "nationale";
+            $responsabilite->debut = $resp['debut'];
+            $responsabilite->fin = $resp['fin'];
+            $responsabilite->structure = $resp['structure'];
+            $responsabilite->ville = $resp['ville'];
+            $responsabilite->pays = 'Burkina Faso';
+            $responsabilite->candidat_id = $candidat->id;
+            $responsabilite->save();
+        }
+
+        foreach ($data5['experiences'] as $key => $ex) {
+            $exp = new Experience();
+            $exp->intitule = $ex['intitule'];
+            $exp->type = 'internationale';
+            $exp->structure = $ex['institution'];
+            $exp->debut = $ex['debut'];
+            $exp->fin = $ex['fin'];
+            $exp->ville = $ex['ville'];
+            $exp->pays = $ex['pays'];
+            $exp->candidat_id = $candidat->id;
+            $exp->save();
+        }
+
+        foreach ($data5['responsabilites'] as $key => $resp) {
+            $responsabilite = new Responsabilite();
+            $responsabilite->intitule = $resp['intitule'];
+            $responsabilite->type = "internationale";
+            $responsabilite->debut = $resp['debut'];
+            $responsabilite->fin = $resp['fin'];
+            $responsabilite->structure = $resp['institution'];
+            $responsabilite->ville = $resp['ville'];
+            $responsabilite->pays = $resp['pays'];
+            $responsabilite->candidat_id = $candidat->id;
+            $responsabilite->save();
+        }
+
+        foreach ($data6['commissions'] as $key => $comm) {
+            $commission = new Commission();
+            $commission->nom = $comm['name'];
+            $commission->candidat_id = $candidat->id;
+            $commission->save();
+        }
+
+        foreach ($data6['brevets'] as $key =>  $brev) {
+            $brevet = new Brevet();
+            $brevet->auteurs = $brev['auteur'];
+            $brevet->date = $brev['date'];
+            $brevet->intitule = $brev['intitule'];
+            $brevet->ref = $brev['reference'];
+            $brevet->candidat_id = $candidat->id;
+            $brevet->save();
+        }
+
+        foreach ($data6['ouvrages'] as $key => $ouvr) {
+            $ouvrage = new Ouvrage();
+            $ouvrage->nom = $ouvr['titre'];
+            $ouvrage->nom_auteur = $ouvr['auteur'];
+            $ouvrage->nom_coauteur = $ouvr['coauteur'];
+            $ouvrage->annee_publication = $ouvr['annee'];
+            $ouvrage->nom_editeur = $ouvr['editeur'];
+            $ouvrage->nombrePage = $ouvr['nombre_pages'];
+            $ouvrage->candidat_id = $candidat->id;
+
+            $ouvrage->save();
+        }
+
+        foreach ($data6['articles'] as $key => $art) {
+            $article = new Article();
+            $article->auteur = $art['auteur'];
+            $article->datePub = $art['annee_publication'];
+            $article->titre = $art['titre'];
+            $article->editeur = $art['editeur'];
+            $article->refPage = $art['pages'];
+            $article->coauteur = $art['coauteur'];
+            $article->candidat_id = $candidat->id;
+
+            $article->save();
+        }
 
 
 
 
 
-
-
-
-
-
+ /*'distinctions.*.type' => 'nullable|integer|in:1,2',
+                    'distinctions.*.nom' => 'nullable|string|max:255',
+                    'distinctions.*.date' => 'nullable|date',
+    */   
+    foreach($data6['distinctions'] as $key as $dist){
+        $distinction=new Distinction();
+        $distinction->nom=$dist['nom'];
+        $distinction->type=$dist['type'];
+        $distinction->date=
+        
+        
+    }
+     
 
         // les données du step2
         /*

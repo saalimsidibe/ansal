@@ -62,6 +62,10 @@
                                                             value="{{ $experience['intitule'] ?? '' }}">
                                                     </div>
                                                     <div class="form-group">
+                                                        <label for="structure_{{$index }}">Structure</label>
+                                                        <input type="text" value="{{ $experience['structure'] ?? '' }}" name="experiences[{{ $index }}][structure]" id="structure_{{$index }}">
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label for="debut_{{ $index }}">Début de la fonction</label>
                                                         <input type="date" name="experiences[{{ $index }}][debut]"
                                                             id="debut_{{ $index }}" class="form-control"
@@ -198,6 +202,12 @@
                     <label for="intitule_${fieldIndex}">Intitulé de la fonction</label>
                     <input type="text" name="experiences[${fieldIndex}][intitule]" id="intitule_${fieldIndex}" class="form-control">
                 </div>
+
+                 <div class="form-group">
+                    <label for="structure_${fieldIndex}">Structure</label>
+                    <input type="text" name="experiences[${fieldIndex}][structure]" id="structure_${fieldIndex}" class="form-control">
+                </div>
+
                 <div class="form-group">
                     <label for="debut_${fieldIndex}">Début de la fonction</label>
                     <input type="date" name="experiences[${fieldIndex}][debut]" id="debut_${fieldIndex}" class="form-control">
@@ -220,6 +230,9 @@
             };
         });
     </script>
+    
+
+    
         
 
     <script>
@@ -245,19 +258,19 @@
                 newFieldSet.innerHTML = `
                     <legend>Responsabilité ${index + 1}</legend>
                     <label>Intitulé de la responsabilité:</label>
-                    <input type="text" name="responsabilites[${index}][intitule]"" /><br/>
+                    <input type="text" class="form-control" name="responsabilites[${index}][intitule]"" /><br/>
                     <label>Début:</label>
-                    <input type="date" name="responsabilites[${index}][debut]"" /><br/>
+                    <input type="date" class="form-control" name="responsabilites[${index}][debut]"" /><br/>
                     <label>Fin:</label>
-                    <input type="date" name="responsabilites[${index}][fin]" /><br/>
+                    <input type="date" class="form-control" name="responsabilites[${index}][fin]" /><br/>
                     <label>Structure:</label>
-                    <input type="text" name="responsabilites[${index}][structure]" /><br/>
+                    <input type="text"  class="form-control" name="responsabilites[${index}][structure]" /><br/>
                     <label>Ville:</label>
-                    <input type="text" name="responsabilites[${index}][ville]" /><br/>
+                    <input type="text" class="form-control" name="responsabilites[${index}][ville]" /><br/>
                     <button type="button" class="remove-button">Supprimer</button>
                     <hr/>
                 `;
-                fieldsContainer.appendChild(newFieldSet);
+                fieldsContainer.appendChild(newFieldSet); 
 
                 // Ajouter un écouteur d'événements au bouton Supprimer
                 newFieldSet.querySelector('.remove-button').addEventListener('click', function() {

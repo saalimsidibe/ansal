@@ -84,6 +84,12 @@
                                                         <input type="text" name="experiences[{{ $index }}][institution]"
                                                                class="form-control" id="exp_institution_{{ $index }}"
                                                                value="{{ old("experiences.$index.institution", $experience['institution'] ?? '') }}" required>
+
+                                                        <label for="exp_ville_{{$index}}" class="mt-2">Ville</label>
+                                                        <input type="text" name="experiences[{{ $index }}][ville]" id="exp_ville_{{$index}}"  value="{{ old("experiences.$index.ville       ", $experience['ville'] ?? '') }}" class="form-control"><br>
+
+                                                        <label for="exp_pays_{{$index}}" class="mt-2">Pays</label>
+                                                        <input type="text" name="experiences[{{ $index }}][pays]" id="exp_pays_{{$index}}"  value="{{ old("experiences.$index.pays", $experience['pays'] ?? '') }}" class="form-control">
                                                     </div>
                                                 @endforeach
                                             </div>
@@ -133,6 +139,13 @@
                                                         <input type="text" name="responsabilites[{{ $index }}][institution]"
                                                                class="form-control" id="resp_institution_{{ $index }}"
                                                                value="{{ old("responsabilites.$index.institution", $responsibility['institution'] ?? '') }}" required>
+
+                                                        
+                                                        <label for="resp_ville_{{$index}}" class="mt-2">Ville</label>
+                                                        <input type="text" name="responsabilites[{{ $index }}][ville]" id="resp_ville_{{$index}}" value="{{ old("responsabilites.$index.ville", $responsibility['ville'] ?? '') }}"> 
+
+                                                        <label for="res_pays_{{$index}}" class="mt-2">Pays</label>
+                                                        <input type="text" name="responsabilites[{{ $index }}][pays]" id="res_pays_{{$index}}" {{ old("responsabilites.$index.pays", $responsibility['pays'] ?? '') }}>
                                                     </div>
                                                 @endforeach
                                             </div>
@@ -177,6 +190,19 @@
                                                     <label for="exp_institution_${experienceIndex}" class="mt-2">Institution</label>
                                                     <input type="text" name="experiences[${experienceIndex}][institution]"
                                                            class="form-control" id="exp_institution_${experienceIndex}" required>
+                                                    
+                                                           <label for="exp_ville_${experienceIndex}" class="mt-2">Ville</label>
+                                                    <input type="text" name="experiences[${experienceIndex}][ville]"
+                                                           class="form-control" id="exp_ville_${experienceIndex}" required>
+
+
+                                                          <label for="exp_pays_${experienceIndex}" class="mt-2">Pays</label>
+                                                    <input type="text" name="experiences[${experienceIndex}][pays]"
+                                                           class="form-control" id="exp_pays_${experienceIndex}" required>
+
+
+
+                                                           
                                                 </div>
                                             `;
 
@@ -212,6 +238,17 @@
                                                     <label for="resp_institution_${responsibilityIndex}" class="mt-2">Institution</label>
                                                     <input type="text" name="responsabilites[${responsibilityIndex}][institution]"
                                                            class="form-control" id="resp_institution_${responsibilityIndex}" required>
+
+                                                 <label for="resp_ville_${responsibilityIndex}" class="mt-2">Ville</label>
+                                                    <input type="text" name="responsabilites[${responsibilityIndex}][ville]"
+                                                           class="form-control" id="resp_ville_${responsibilityIndex}" required>
+                                                        
+                                                <label for="resp_pays_${responsibilityIndex}" class="mt-2">Pays</label>
+                                                    <input type="text" name="responsabilites[${responsibilityIndex}][pays]"
+                                                           class="form-control" id="resp_pays_${responsibilityIndex}" required>
+
+                                                
+
                                                 </div>
                                             `;
 
@@ -317,7 +354,7 @@
                     <label>Structure:</label>
                     <input type="text" name="structure_${index}" /><br/>
                     <label>Ville:</label>
-                    <input type="text" name="ville_${index}" /><br/>
+                    <input type="text" name="ville_${index}" /> <br/>
                     <label>Pays:</label>
                     <input type="text" name="pays_${index}" /><br/>
                     <button type="button" class="remove-btn">Supprimer</button>

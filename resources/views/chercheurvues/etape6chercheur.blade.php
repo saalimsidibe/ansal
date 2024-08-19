@@ -122,8 +122,14 @@
                                                                 <label for="auteurs-{{ $index }}">Auteur(s)</label>
                                                                 <input class="form-control" type="text"
                                                                     id="auteurs-{{ $index }}"
-                                                                    name="ouvrages[{{ $index }}][auteur]" required>
+                                                                    name="ouvrages[{{ $index }}][auteur]"       required>
+                                                            </div >
+
+                                                            <div class="form-group">
+                                                                <label for="coauteurs-{{$index }}">Coauteur</label>
+                                                                <input class="form-control" type="text" id="coauteurs-{{$index }}" name="ouvrages[{{ $index }}][coauteur]">
                                                             </div>
+                                                            
                                                             <div class="form-group">
                                                                 <label for="annee-{{ $index }}">Année de
                                                                     publication</label>
@@ -260,6 +266,7 @@
                                                 </div>
                                                 <button type="button" id="AjouterDistinction"
                                                     class="btn btn-primary mt-3">Ajouter</button>
+                                                    OU SE TROUVE MES DISTINCTIONS
                                             </div>
                                         </fieldset><br>
 
@@ -374,6 +381,11 @@
                         <label for="auteurs-${index}">Auteur(s)</label>
                         <input  class="form-control" type="text" id="auteurs-${index}" name="ouvrages[${index}][auteur]" required>
                     </div>
+                       <div class="form-group">
+                        <label for="coauteurs-${index}">Coauteurs</label>
+                        <input  class="form-control" type="text" id="coauteurs-${index}" name="ouvrages[${index}][coauteur]">
+                    </div>
+                    
                     <div class="form-group">
                         <label for="annee-${index}">Année de publication</label>
                         <input type="text" class="form-control" id="annee-${index}" name="ouvrages[${index}][annee]" required>
@@ -473,8 +485,9 @@
                     <option value="2">Sociale</option>
                 </select>
 
-                <input type="text" name="distinctions[${index}][nom]" placeholder="Saisir la distinction" class="form-control">
-                <input type="hidden" name="distinctions[${index}][id]" value="" class="form-control" placeholder="nom de la distinction">
+                <input type="text" name="distinctions[${index}][nom]" placeholder="Saisir la distinction" class="form-control"><br>
+                <input type="hidden" name="distinctions[${index}][id]" value="" class="form-control" placeholder="nom de la distinction"><br>
+                 <input type="text" name="distinctions[${index}][date]" placeholder="Saisir la date de la distinction" class="form-control">
                 <button type="button" class="removeDistinctionButton btn btn-danger">Supprimer</button>
                   <hr/>  <br/>
             `;
@@ -489,6 +502,7 @@
                 distinctionsContainer.removeChild(formGroup);
             }
         });
+        
     });
 </script>
 
