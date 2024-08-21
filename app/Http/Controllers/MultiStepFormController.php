@@ -13,6 +13,10 @@ use App\Models\Parrain;
 use App\Models\ParrainChercheur;
 use App\Models\Responsabilite;
 use Illuminate\Http\Request;
+use  App\Models\Commission;
+use  App\Models\Brevet;
+use App\Models\Article;
+use App\Models\Distinction;
 use Illuminate\Support\Facades\DB;
 
 class MultiStepFormController extends Controller
@@ -180,14 +184,14 @@ class MultiStepFormController extends Controller
                     'distinctions.*.nom' => 'nullable|string|max:255',
                     'distinctions.*.date' => 'nullable|date',
                     'ouvrages.*.auteur' => 'required|string|max:255',
-                    'ouvrages.*.annee' => 'required|integer|min:1900|max:' . date('Y'), // Validation pour une année de publication valide
+                    'ouvrages.*.annee' => 'required|date', // Validation pour une année de publication valide
                     'ouvrages.*.titre' => 'required|string|max:255',
                     'ouvrages.*.editeur' => 'required|string|max:255',
                     'ouvrages.*.coauteur' => 'nullable|string|max:255',
                     'ouvrages.*.nombre_pages' => 'required|integer|min:1', // Doit être un nombre entier positif
                     'articles.*.auteur' => 'required|string|max:255',
                     'articles.*.coauteur' => 'nullable|string|max:255', // Coauteur peut être nullable si non obligatoire
-                    'articles.*.annee_publication' => 'required|integer|min:1900|max:' . date('Y'), // Validation pour une année de publication valide
+                    'articles.*.annee_publication' => 'required|date', // Validation pour une année de publication valide
                     'articles.*.titre' => 'required|string|max:255',
                     'articles.*.editeur' => 'required|string|max:255',
                     'articles.*.pages' => 'required|integer|min:1', // Doit être un nombre entier positif
@@ -520,19 +524,20 @@ class MultiStepFormController extends Controller
 
 
 
- /*'distinctions.*.type' => 'nullable|integer|in:1,2',
+        /*'distinctions.*.type' => 'nullable|integer|in:1,2',
                     'distinctions.*.nom' => 'nullable|string|max:255',
                     'distinctions.*.date' => 'nullable|date',
-    */   
-    foreach($data6['distinctions'] as $key as $dist){
-        $distinction=new Distinction();
-        $distinction->nom=$dist['nom'];
-        $distinction->type=$dist['type'];
-        $distinction->date=
-        
-        
-    }
-     
+    */
+        foreach ($data6['distinctions'] as $key => $dist) {
+            $distinction = new Distinction();
+            $distinction->nom = $dist['nom'];
+            $distinction->type = $dist['type'];
+            $distinction->date = $dist['date'];
+            $distinction->candidat_id = $candidat->id;
+
+            $distinction->save();
+        }
+
 
         // les données du step2
         /*
@@ -621,7 +626,6 @@ class MultiStepFormController extends Controller
             $CommissionChercheur->candidat_id = $candidat->id;
              }
            */
-
 
 
         foreach ($data6['ouvrages'] as $key => $ouvrage) {

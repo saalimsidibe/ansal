@@ -3,6 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Candidat;
+use App\Models\CommissionChercheur;
+use App\Models\Diplome;
+use App\Models\Experience;
+use App\Models\ExpProfChercheur;
+use App\Models\Ouvrage;
+use App\Models\Parrain;
+use App\Models\Responsabilite;
+use  App\Models\Commission;
+use  App\Models\Brevet;
+use App\Models\Article;
+use App\Models\Distinction;
 
 class AutreControllerNouveau extends Controller
 {
@@ -58,6 +70,19 @@ class AutreControllerNouveau extends Controller
 
         ]);
         $request->session()->put('etape3', $donnees3);
+
+        return redirect()->route('etapexautre');
+
+        // return redirect()->route('etape4.autre');
+    }
+
+    public function validerEtapeX(Request $request)
+    {
+        $donneesX = $request->validate([
+            'travaux' => 'required|string|max:255',
+            'implication' => 'required|string|max:255'
+        ]);
+        $request->session()->put('etapeX', $donneesX);
 
         return redirect()->route('etape4.autre');
     }
@@ -130,6 +155,7 @@ class AutreControllerNouveau extends Controller
             'nomCoauteurNe.*' => 'nullable|string|max:255',
             'distinctionsAu.*' => 'nullable|in:honorifique,scientifique', // Valeur doit être l'une des options spécifiées
             'distinctAu' => 'nullable|string|max:255',
+            'contribution' => 'nullable|string|max:255',
             'apportAu' => 'nullable|string|max:1000', // Limiter la taille du texte
             'honneurAu' => 'required|boolean',
 
@@ -137,5 +163,48 @@ class AutreControllerNouveau extends Controller
         $request->session()->put('etape6', $donnees6);
 
         return redirect()->route('etapefinale.autre');
+    }
+
+
+    public function finir()
+    {
+
+
+
+
+        $d1 = session()->get('etape1');
+        $d2 = session()->get('etape2');
+        $d3 = session()->get('etape3');
+        $d4 = session()->get('etape4');
+        $d5 = session()->get('etape5');
+        $d6 = session()->get('etape6');
+        $dx = session()->get('etapeX');
+
+        $candidat = new Candidat();
+        $candidat->categorie = 'autre';
+        $candidat->nom = $d1['nomAutre'];
+        $candidat->prenom = $d1['prenomAutre'];
+        $candidat->sexe = $d1['sexeAu'];
+        $candidat->datenaissance = $d1['datenaissanceAutre'];
+        $candidat->titre = $d1['titreAutre'];
+        $candidat->telephone = $d1['numerotelAutre'];
+        $candidat->email = $d1['emailAutre'];
+        $candidat->college = $d2['collegeAutre'];
+        $candidat->specialite = $d2['specialiteAutre'];
+        $candidat->travauxSign = $dx['travaux'];
+        $candidat->communautaire = $dx['implication'];
+        $candidat->apport = $d6['apportAu'];
+        $candidat->honneur = $d6['honneurAu'];
+        $candidat->contribution = $d6['contribution'];
+
+        $candidat->save();
+
+
+        $parrain = new Parrain();
+        $parrain->nomPreParrain = $d2['nomPremierPautre']; 
+        $parrain->PrenomPreParrain = 
+        $parrain->nomDeuxParrain = 
+        $parrain->PrenomDeuxParrain = 
+        $parrain->candidat_id = $candidat->id;
     }
 }

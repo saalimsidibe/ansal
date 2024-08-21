@@ -63,7 +63,7 @@
             <label for="">Joindre un fichier unique contenant l'ensemble des distinctions scientifiques </label><br>
             <input type="file" name= "">
         </div>
-        <button type="button" class="btn btn-danger mt-4">Terminer</button>
+        <input type="submit" class="btn btn-danger mt-4" a href="{{ route('resume') }}">Suivant</button>
     </form>
 
                                 </div>

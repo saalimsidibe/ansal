@@ -50,7 +50,7 @@
                                                 @endphp
                                                 @foreach ($commissions as $index => $commission)
                                                     <div class="form-group">
-                                                        <input type="text" name="commissions[{{ $index }}]"
+                                                        <input type="text" name="commissions[{{ $index }}]['name']"
                                                             class="form-control"
                                                             value="{{ old("commissions.$index.name", $commission['name'] ?? '') }}"
                                                             required>
@@ -133,7 +133,7 @@
                                                             <div class="form-group">
                                                                 <label for="annee-{{ $index }}">Année de
                                                                     publication</label>
-                                                                <input type="text" class="form-control"
+                                                                <input type="date" class="form-control"
                                                                     id="annee-{{ $index }}"
                                                                     name="ouvrages[{{ $index }}][annee]" required>
                                                             </div>
@@ -266,7 +266,7 @@
                                                 </div>
                                                 <button type="button" id="AjouterDistinction"
                                                     class="btn btn-primary mt-3">Ajouter</button>
-                                                    OU SE TROUVE MES DISTINCTIONS
+                                                
                                             </div>
                                         </fieldset><br>
 
@@ -388,7 +388,7 @@
                     
                     <div class="form-group">
                         <label for="annee-${index}">Année de publication</label>
-                        <input type="text" class="form-control" id="annee-${index}" name="ouvrages[${index}][annee]" required>
+                        <input type="date" class="form-control" id="annee-${index}" name="ouvrages[${index}][annee]" required>
                     </div>
                     <div class="form-group">
                         <label for="titre-${index}">Titre</label>
@@ -430,7 +430,7 @@
             var newField = '<div class="">' +
 
                 '<label>Auteur(s):</label>' +
-                '<input- class="form-control" type="text" name="articles[' + fieldIndex +
+                '<input class="form-control" type="text" name="articles[' + fieldIndex +
                 '][auteur]" required>' + '<br>' +
                 '<label>Coauteurs:</label>' +
                 '<input  class="form-control" type="text" name="articles[' + fieldIndex +
@@ -487,7 +487,7 @@
 
                 <input type="text" name="distinctions[${index}][nom]" placeholder="Saisir la distinction" class="form-control"><br>
                 <input type="hidden" name="distinctions[${index}][id]" value="" class="form-control" placeholder="nom de la distinction"><br>
-                 <input type="text" name="distinctions[${index}][date]" placeholder="Saisir la date de la distinction" class="form-control">
+                 <input type="date" name="distinctions[${index}][date]" placeholder="Saisir la date de la distinction" class="form-control">
                 <button type="button" class="removeDistinctionButton btn btn-danger">Supprimer</button>
                   <hr/>  <br/>
             `;

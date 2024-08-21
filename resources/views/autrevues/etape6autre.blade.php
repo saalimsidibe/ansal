@@ -142,21 +142,49 @@
                 <button type="button" onclick="removeSelect(this)">Supprimer</button>
             </div>
         @endforeach
+    </div><br>
+
+    <div class="form-group">
+        <textarea id="description" name="contribution" rows="4" cols="50" placeholder="Indiquer votre contribution majeure dans les domaines du  collège postulé "></textarea>
     </div>
 
+     
+    <div class="form-group">
+         <textarea name="apportAu" id="" cols="50" rows="4" placeholder="Indiquer quel pourrait etre votre apprt particulier à l'academie"></textarea>
+    </div><br>
+     
     <!-- Apport particulier à l’Académie -->
-    <label for="">Indiquer quel pourrait être votre apport particulier à l’Académie </label><br>
-    <textarea rows="4" cols="50" name="apportAu">{{ $apportAu }}</textarea><br>
+           
+        
 
     <!-- Déclaration sur l’honneur -->
   
           <label for="declaration">Declaration sur l'honneur</label>
-       <!--   <input name="honneurAu" id="declaration" type="checkbox" placeholder="" value="1"   class="form-control" {{ $honneurAu ? 'checked' : '' }} required> --> 
+         <input name="honneurAu" id="declaration" type="checkbox" placeholder="" value="1"  {{ $honneurAu ? 'checked' : '' }} required> <br>
 
-    
+            
    
-    <input type="submit" value="valider">
+    <button type="submit" value="" class="btn btn-info">Suivant</button>
     </form>
+     </div>
+
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2"> </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    </div>
 
     @endsection
   

@@ -54,18 +54,21 @@ Route::view('/etape7chercheur', 'chercheurvues.etape7chercheur')->name('etape7ch
 Route::view('/summary', 'chercheurvues.summary')->name('multi-step-form.summary');
 Route::post('/finish', [MultiStepFormController::class, 'finish'])->name('multi-step-form.finish');
 Route::view('/Accueil', 'accueil')->name('accueil');
+Route::view('/resume', 'autrevues.summaryautre')->name('resume');
 Route::view('/criterespecifique', 'critereSpecifique')->name('specifique');
 Route::view('/economie', 'criterevues.economie')->name('economie');
 Route::view('/litterature', 'criterevues.litterature')->name('litterature');
 Route::view('/sante', 'criterevues.sante')->name('sante');
 Route::view('/sciencesnat', 'criterevues.sciencesnat')->name('agro');
 Route::view('/st', 'criterevues.sciencestechniques')->name('sciencestech');
-
+Route::view('/implicationAutre', 'autrevues.etapexautre')->name('etapexautre');
+Route::post('/finir', [AutreControllerNouveau::class, 'finir'])->name('AutreControllerNouveau.finir');
 
 Route::get('/etape1au', [AutreControllerNouveau::class, 'etape1']);
 Route::post('/etape1au', [AutreControllerNouveau::class, 'validerEtape1'])->name('valider1.autre');
 Route::post('/etap2au', [AutreControllerNouveau::class, 'validerEtape2'])->name('valider2.autre');
 Route::post('/etape3au', [AutreControllerNouveau::class, 'validerEtape3'])->name('valider3.autre');
+Route::post('/etapecontriau', [AutreControllerNouveau::class, 'validerEtapeX'])->name('validerX.autre');
 Route::post('/etape4au', [AutreControllerNouveau::class, 'validerEtape4'])->name('valider4.autre');
 Route::post('/etape5au', [AutreControllerNouveau::class, 'validerEtape5'])->name('valider5.autre');
 Route::post('/etape6au', [AutreControllerNouveau::class, 'validerEtape6'])->name('valider6.autre');
