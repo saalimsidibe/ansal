@@ -117,17 +117,15 @@
                     <label for="Pays_{{$j}}">Pays</label>
                     <input type="text" name="resAdau[{{$j}}][pays]" value="{{$reAdau['pays'] ?? ''}}" placeholder="Pays" id="Pays_{{$j}}" class="form-control">
                 </div>
-        </div>
-        
-        
-        
-        
-        
-        </div> <br>
-            @endforeach
       
+            @endforeach
+              </div>        
+        </div> 
+       <div class="form-group">
+           <button type="submit" class="btn btn-info" value="">Suivant</button>
+       </div>
         
-          <button type="submit" class="btn btn-info" value="">Suivant</button>
+       
     </form>
 
 
@@ -208,7 +206,7 @@
 
     <script>
         //script pour ajouter dynamiquement les responsabilités administrative nationales
-        let i=0;
+        var i=0;
      
         document.getElementById('respadminAu').addEventListener('change', function() {
             const dynamicFields = document.getElementById('respadminDynamic');
@@ -241,28 +239,28 @@
             container.innerHTML = `
                 <div class="form-group">
                     <label for="responsibilityTitle">Intitulé de la responsabilité</label>
-                    <input type="text" name="resAdau[i][intitule]" placeholder="Titre" class="form-control">
+                    <input type="text" name="resAdau[${i}][intitule]" placeholder="Titre" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="startDate">Date de commencement</label>
-                    <input type="date" name="resAdau[i][debut]" class="form-control">
+                    <input type="date" name="resAdau[${i}][debut]" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="endDate">Date de fin</label>
-                    <input type="date" name="resAdau[i][fin]" class="form-control">
+                    <input type="date" name="resAdau[${i}][fin]" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="structure">Structure</label>
-                    <input type="text" name="resAdau[i][structure]" placeholder="Structure" class="form-control">
+                    <input type="text" name="resAdau[${i}][structure]" placeholder="Structure" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="city">Ville</label>
-                    <input type="text" name="resAdau[i][ville]" placeholder="Ville" class="form-control">
+                    <input type="text" name="resAdau[${i}][ville]" placeholder="Ville" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="country">Pays</label>
-                    <input type="text" name="resAdau[i][pays]" placeholder="Pays" class="form-control">
+                    <input type="text" name="resAdau[${i}][pays]" placeholder="Pays" class="form-control">
                 </div>
                 <button type="button" class="remove-btn btn btn-danger" onclick="removeField(this)">Supprimer</button>
             `;

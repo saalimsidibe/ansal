@@ -114,6 +114,10 @@
                     <label for="nomCoauteurNe{{ $index }}">Nom du coauteur</label>
                     <input type="text" name="nomCoauteurNe[]" id="nomCoauteurNe{{ $index }}" value="{{ $ouvrage['nomCoauteur'] ?? '' }}">
                 </div>
+                <div>
+                    <label for="nbrePage{{ $index}}">Nombre de pages</label>
+                    <input type="text" name="nbrePNe[]" id="nbrePage{{ $index}}"  value="{{ $ouvrage['nbrePage'] ?? '' ">
+                </div>
                 <button type="button" class="remove-field">Supprimer ces champs</button>
                 <hr>
             </div>
@@ -301,6 +305,11 @@
                 <div>
                     <label for="nomCoauteur${fieldCount}">Nom du coauteur</label>
                     <input type="text" name="nomCoauteurNe[]" id="nomCoauteur${fieldCount}">
+                </div>
+
+                <div>
+                    <label for="nbrePage${fieldCount}">Nombre de pages</label>
+                    <input type="text" name="nbrePNe[]" id=""nbrePage${fieldCount}">
                 </div>
                 <button type="button" class="remove-field">Supprimer ces champs</button>
                 <hr>

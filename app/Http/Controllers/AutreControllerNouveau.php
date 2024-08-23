@@ -109,6 +109,7 @@ class AutreControllerNouveau extends Controller
 
         $request->session()->put('etape4', $donnees4);
 
+
         return redirect()->route('etape5.autre');
     }
 
@@ -149,10 +150,12 @@ class AutreControllerNouveau extends Controller
             'nomAuteur.*' => 'required|string|max:255',
             'nomCoauteur.*' => 'nullable|string|max:255', // Coauteur peut être optionnel
             'editeur.*' => 'nullable|string|max:255',
+
             'nombrePage.*' => 'nullable|integer|min:1', // Nombre de pages peut être optionnel mais doit être un nombre positif
             'titreNe.*' => 'nullable|string|max:255',
             'nomAuteurNe.*' => 'nullable|string|max:255',
             'nomCoauteurNe.*' => 'nullable|string|max:255',
+            'nbrePNe.*' => 'required|string|max:255',
             'distinctionsAu.*' => 'nullable|in:honorifique,scientifique', // Valeur doit être l'une des options spécifiées
             'distinctAu' => 'nullable|string|max:255',
             'contribution' => 'nullable|string|max:255',
@@ -201,10 +204,74 @@ class AutreControllerNouveau extends Controller
 
 
         $parrain = new Parrain();
-        $parrain->nomPreParrain = $d2['nomPremierPautre']; 
-        $parrain->PrenomPreParrain = 
-        $parrain->nomDeuxParrain = 
-        $parrain->PrenomDeuxParrain = 
+        $parrain->nomPreParrain = $d2['nomPremierPautre'];
+        $parrain->PrenomPreParrain = $d2['prenomPremierPautre'];
+        $parrain->nomDeuxParrain = $d2['nomDeuxiemePautre'];
+        $parrain->PrenomDeuxParrain = $d2['prenomDeuxiemePautre'];
         $parrain->candidat_id = $candidat->id;
+
+        $parrain->save();
+
+
+        foreach ($d3['diplomesAu'] as $key => $dip) {
+            $diplome = new Diplome();
+            $diplome->nom_diplome = $dip['nom'];
+            $diplome->date_acquisition = $dip['periode'];
+            $diplome->nom_college = $dip['institut'];
+            $diplome->ville = $dip['ville'];
+            $diplome->pays = $dip['pays'];
+            $diplome->candidat_id = $candidat->id;
+
+            $diplome->save();
+        }
+
+        foreach ($d4['fonctionsAAu'] as $key => $ex) {
+            $exp = new Experience();
+            $exp->intitule = $ex['intitule'];
+            $exp->type = 'nationale';
+            $exp->structure = $ex['structure'];;
+            $exp->debut = $ex['debut'];
+            $exp->fin = $ex['fin'];
+            $exp->ville = $ex['ville'];
+            $exp->pays = 'Burkina Faso';
+            $exp->candidat_id = $candidat->id;
+            $exp->save();
+        }
+
+        foreach ($d4['resAdau'] as $key => $resp) {
+            $responsabilite = new Responsabilite();
+            $responsabilite->intitule = $resp['intitule'];
+            $responsabilite->type = "nationale";
+            $responsabilite->debut = $resp['debut'];
+            $responsabilite->fin = $resp['fin'];
+            $responsabilite->structure = $resp['structure'];
+            $responsabilite->ville = $resp['ville'];
+            $responsabilite->pays = 'Burkina Faso';
+            $responsabilite->candidat_id = $candidat->id;
+            $responsabilite->save();
+        }
+
+        foreach ($d6['commissionAu'] as  $key => $comm) {
+            $commission = new Commission();
+            $commission->nom = $comm['nom'];
+            $commission->candidat_id = $candidat->id;
+            $commission->save();
+        }
+
+        //enregistrer les ouvrages non edites
+        foreach ($d6['titreNe'] as $index => $titre) {
+            $nomAuteurNe = $d6['nomAuteurNe'][$index];
+            $nomCoauteurNe = $d6['nomCoauteurNe'][$index];
+            $titreNe = $titre;
+
+            $ouvrage = new Ouvrage();
+            $ouvrage->nom = $titre;
+            $ouvrage->nom_auteur =  $nomAuteurNe;
+            $ouvrage->nom_coauteur = $nomCoauteurNe;
+            $ouvrage->nombrePage = $ouvr['nombre_pages'];
+            $ouvrage->candidat_id = $candidat->id;
+
+            $ouvrage->save();
+        }
     }
 }
