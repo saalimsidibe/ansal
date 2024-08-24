@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\ChercheurEtape as LivewireChercheurEtape;
 use App\Http\Controllers\MultiStepFormController;
 use App\Livewire\Etape1;
+use App\Http\Controllers\EvaluatorController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -75,4 +77,14 @@ Route::post('/etape6au', [AutreControllerNouveau::class, 'validerEtape6'])->name
 //Route::post('/etapefinaleautre',[AutreController::class,]);
 
 
-Route::view('/evaluations', 'evaluateurs');
+Route::view('/evaluations', 'evaluateurs'); // Routes pour les espaces membres des évaluateurs
+Route::middleware(['auth'])->group(function () {
+    Route::get('/evaluator/dashboard/medecine', [EvaluatorController::class, 'MedecineDashboard'])->name('evaluator.dashboard.medecine');
+    Route::get('/evaluator/dashboard/litterature', [EvaluatorController::class, 'seniorDashboard'])->name('evaluator.dashboard.litterature');
+    //Route::get('/evaluator/dashboard/lead', [EvaluatorController::class, 'leadDashboard'])->name('evaluator.dashboard.lead');
+});
+
+// Routes pour l'authentification
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

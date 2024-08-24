@@ -158,6 +158,7 @@ class AutreControllerNouveau extends Controller
             'nbrePNe.*' => 'required|string|max:255',
             'distinctionsAu.*' => 'nullable|in:honorifique,scientifique', // Valeur doit être l'une des options spécifiées
             'distinctAu' => 'nullable|string|max:255',
+            'distinctions_nom.*' => 'required|string|max:255',
             'contribution' => 'nullable|string|max:255',
             'apportAu' => 'nullable|string|max:1000', // Limiter la taille du texte
             'honneurAu' => 'required|boolean',
@@ -263,15 +264,51 @@ class AutreControllerNouveau extends Controller
             $nomAuteurNe = $d6['nomAuteurNe'][$index];
             $nomCoauteurNe = $d6['nomCoauteurNe'][$index];
             $titreNe = $titre;
+            $NbrePage = $d6['nbrePNe'][$index];
 
             $ouvrage = new Ouvrage();
             $ouvrage->nom = $titre;
             $ouvrage->nom_auteur =  $nomAuteurNe;
             $ouvrage->nom_coauteur = $nomCoauteurNe;
-            $ouvrage->nombrePage = $ouvr['nombre_pages'];
+            $ouvrage->nombrePage = $NbrePage;
+            $ouvrage->type = 'non edite';
             $ouvrage->candidat_id = $candidat->id;
 
             $ouvrage->save();
+        }
+
+        //Pour les ouvrages edités
+        foreach ($d6['titre'] as $index => $t) {
+            $nomAuteur = $d6['nomAuteur'][$index];
+            $nomCoAuteur = $d6['nomCoauteur'][$index];
+            $anneePublication = $d6['anneePublication'][$index];
+            $titre = $t;
+            $editeur = $d6['editeur'][$index];
+            $nombrePage = $d6['nombrePage'][$index];
+
+            $ouvrage = new Ouvrage();
+            $ouvrage->nom = $titre;
+            $ouvrage->nom_auteur = $nomAuteur;
+            $ouvrage->nom_coauteur = $nomCoAuteur;
+            $ouvrage->annee_publication = $anneePublication;
+            $ouvrage->nom_editeur = $editeur;
+            $ouvrage->nombrePage = $nombrePage;
+            $ouvrage->type = 'edite';
+            $ouvrage->candidat_id = $candidat->id;
+
+            $ouvrage->save();
+        }
+
+        foreach ($d6['distinctions_nom'] as $index => $distinction) {
+            $type = $d6['distinctionsAu'][$index];
+            $nom = $distinction;
+
+            $distinction = new Distinction();
+            $distinction->type = $type;
+            $distinction->nom = $nom;
+            $distinction->candidat_id = $candidat->id;
+
+            $distinction->save();
         }
     }
 }

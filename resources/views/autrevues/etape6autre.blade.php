@@ -116,7 +116,7 @@
                 </div>
                 <div>
                     <label for="nbrePage{{ $index}}">Nombre de pages</label>
-                    <input type="text" name="nbrePNe[]" id="nbrePage{{ $index}}"  value="{{ $ouvrage['nbrePage'] ?? '' ">
+                    <input type="text" name="nbrePNe[]" id="nbrePage{{ $index}}"  value="{{ $ouvrage['nbrePage'] ?? '' }}">
                 </div>
                 <button type="button" class="remove-field">Supprimer ces champs</button>
                 <hr>
@@ -127,12 +127,7 @@
     <!-- Distinctions honorifiques et scientifiques -->
     <div class="form-group">
         <h5>Distinctions honorifiques et scientifiques</h5>
-        <select id="" name="distinctionsAut" class="form-control">
-            <option value="honorifique" {{ $distinctionsAut == 'honorifique' ? 'selected' : '' }}>Distinction Honorifique</option>
-            <option value="scientifique" {{ $distinctionsAut == 'scientifique' ? 'selected' : '' }}>Distinction Scientifique</option>
-        </select>
-        <label for="distinctAu" class="form-label">Nom de la distinction</label>
-        <input type="text" name="distinctAu" class="form-control" value="{{ $distinctAu }}">
+      
         <button type="button" id="add-select" class="btn btn-info">Ajouter</button>
     </div>
 
@@ -143,6 +138,8 @@
                     <option value="honorifique" {{ $distinction == 'honorifique' ? 'selected' : '' }}>Distinction Honorifique</option>
                     <option value="scientifique" {{ $distinction == 'scientifique' ? 'selected' : '' }}>Distinction Scientifique</option>
                 </select>
+
+                <input type="text" name="distinctions_nom[]" id="">
                 <button type="button" onclick="removeSelect(this)">Supprimer</button>
             </div>
         @endforeach
@@ -192,7 +189,9 @@
 
     @endsection
   
-    
+   <div class="form-control">
+    <input type="date">
+    </div> 
         
 @section('scripts')
     <script>
@@ -228,10 +227,10 @@
     <script>
         //Ajouter ouvrage edité par autre
           document.getElementById('ouvrageEditeAut').addEventListener('click', function() {
-            addDynamicFields();
+            addDynamicFieldOuvrageEdite();
         });
 
-        function addDynamicFields() {
+        function addDynamicFieldOuvrageEdite() {
             const container = document.querySelector('.ouvrageEditeAut');
             const fieldCount = container.querySelectorAll('.dynamic-field').length;
 
@@ -258,13 +257,14 @@
                     <input type="text" name="nomCoauteur[]" id="nomCoauteur${fieldCount}" required>
                 </div>
 
-                <div>
-                    <label for="editeur${fieldCount}">Éditeur</label>
-                    <input type="text" name="editeur[]" id="editeur${fieldCount}" required>
-                </div>
+             
                 <div>
                     <label for="nombrePage${fieldCount}">Nombre de pages</label>
                     <input type="number" name="nombrePage[]" id="nombrePage${fieldCount}" required>
+                </div>
+                   <div>
+                    <label for="editeur${fieldCount}">Éditeur</label>
+                    <input type="text" name="editeur[]" id="editeur${fieldCount}" required>
                 </div>
                 <button type="button" class="remove-field">Supprimer ces champs</button>
                 <hr>
@@ -282,10 +282,10 @@
     <script>
         //script pour ajouter les ouvrages non edités
         document.getElementById('ajouterOuvrageNonEditeAut').addEventListener('click', function() {
-            addDynamicFields();
+            addDynamicFieldOuvrageNonEdite();
         });
 
-        function addDynamicFields() {
+        function  addDynamicFieldOuvrageNonEdite() {
             const container = document.querySelector('.ouvrageNonEditeAut');
             const fieldCount = container.querySelectorAll('.dynamic-field').length;
 
@@ -311,6 +311,7 @@
                     <label for="nbrePage${fieldCount}">Nombre de pages</label>
                     <input type="text" name="nbrePNe[]" id=""nbrePage${fieldCount}">
                 </div>
+                   
                 <button type="button" class="remove-field">Supprimer ces champs</button>
                 <hr>
             `;
@@ -329,6 +330,9 @@
             const selectContainer = document.getElementById('select-container');
             const addSelectButton = document.getElementById('add-select');
             
+                
+
+
             addSelectButton.addEventListener('click', function () {
                 // Crée un nouveau conteneur pour le select
                 const newSelectDiv = document.createElement('div');
@@ -337,6 +341,13 @@
                         <option value="honorifique">Distinction Honorifique</option>
                         <option value="scientifique">Distinction Scientifique</option>
                     </select>
+
+                    <div class="form-group">
+                        <label for="nom_distinction">Nom de la distinction</label>
+                        <input type="text" name="distinctions_nom[]" id="" class="form-control">
+                    </div>
+                    
+
                     <button type="button" onclick="removeSelect(this)">Supprimer</button>
                 `;
 
