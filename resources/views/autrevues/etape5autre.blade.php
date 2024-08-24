@@ -37,22 +37,42 @@
                         </select>
                     </div>
 
-                    <!-- Sections additionnelles qui apparaissent en fonction de la sélection -->
-                    <div id="additional-fields" style="{{ old('expprofintAu', session('form.expprofintAu')) == 'oui' ? 'block' : 'none' }}">
+                      <div id="extraFieldsContainer" style="display: none;">
+                    <label for="intitule">Intitulé</label>
+                    <input type="text" id="intitule" name="intitule" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="debut">Début</label>
+                    <input type="date" id="debut" name="debut" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="fin">Fin</label>
+                    <input type="date" id="fin" name="fin" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="structure">Structure</label>
+                    <input type="text" id="structure" name="structure" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="ville">Ville</label>
+                    <input type="text" id="ville" name="ville" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="pays">Pays</label>
+                    <input type="text" id="pays" name="pays" class="form-control">
+                </div>
+                <!-- Button to remove fields -->
+                <div id="removeButtonContainer">
+                    <button type="button" id="removeFields" class="btn btn-danger">Supprimer</button>
+                </div>
+            </div>
 
-                        @php
-                            $foncsIau = old('foncsIau', session('form.foncsIau', []));
-                        @endphp
+            <!-- Button to add fields -->
+            <div id="buttons" class="mt-3">
+                <button type="button" id="addFields" class="btn btn-primary">Ajouter</button>
+            </div>
 
-                        @foreach ($foncsIau as $l => $foncIau)
-                            <div class="form-group">
-                                <label for="title_{{$l}}">Intitulé de la fonction</label>
-                                <input type="text" name="foncsIau[{{$l}}][intitule]" value="{{ $foncIau['intitule'] ?? '' }}" id="title_{{$l}}" class="form-control" required>
-                            </div>
-                            <!-- Autres champs pour chaque fonction -->
-                        @endforeach
-
-                        <button type="button" class="btn btn-primary" id="add-field">Ajouter une fonction</button>
+                       
                     </div>
 
                     <div class="form-group">
@@ -63,22 +83,7 @@
                         </select>
                     </div>
 
-                    <div id="responsibility-section" style="{{ old('respintAu', session('form.respintAu')) == 'oui' ? 'block' : 'none' }}">
-                        <div id="responsibility-fields-container">
-                            @php
-                                $responsibilities = old('responsibility_titles', session('form.responsibility_titles', []));
-                            @endphp
-
-                            @foreach ($responsibilities as $i => $responsibility)
-                                <div class="form-group">
-                                    <label for="responsibility_title_{{$i}}">Intitulé de la responsabilité</label>
-                                    <input type="text" name="responsibility_titles[]" value="{{ $responsibility }}" id="responsibility_title_{{$i}}" class="form-control" required>
-                                </div>
-                                <!-- Autres champs pour chaque responsabilité -->
-                            @endforeach
-
-                            <button type="button" class="btn btn-primary" id="add-responsibility">Ajouter une responsabilité</button>
-                        </div>
+               
                     </div>
 
          <button type="submit" class="btn btn-info" value="">Suivant</button>   
@@ -99,83 +104,45 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
     
-   <script>
+
     //Ajouter une fonction
-     document.addEventListener('DOMContentLoaded', function() {
-        const selectField = document.getElementById('expprofintAu');
-        const additionalFields = document.getElementById('additional-fields');
-        const responsibilitySection = document.getElementById('responsibility-section');
-        const fieldsContainer = document.getElementById('fields-container');
-        const addFieldButton = document.getElementById('add-field');
-        const respintSelect = document.getElementById('respintAu');
-        const responsibilityFieldsContainer = document.getElementById('responsibility-fields-container');
-        const addResponsibilityButton = document.getElementById('add-responsibility');
-
-        selectField.addEventListener('change', function() {
-            if (this.value === 'oui') {
-                additionalFields.style.display = 'block';
-            } else {
-                additionalFields.style.display = 'none';
-            }
-        });
-
-        addFieldButton.addEventListener('click', function() {
-            let fieldCount = fieldsContainer.children.length;
-            const fieldDiv = document.createElement('div');
-            fieldDiv.classList.add('field-group');
-            fieldDiv.innerHTML = `
-                <hr>
-                <h5>Fonction ${fieldCount + 1}</h5>
-                <div class="form-group">
-                    <label for="title_${fieldCount}">Intitulé de la fonction</label>
-                    <input type="text" name="foncsIau[${fieldCount}][intitule]" id="title_${fieldCount}" class="form-control" required>
-                </div>
-                <!-- Autres champs pour la nouvelle fonction -->
-                <button type="button" class="btn btn-danger remove-field">Supprimer</button>
-            `;
-            fieldsContainer.appendChild(fieldDiv);
-        });
-
-        fieldsContainer.addEventListener('click', function(e) {
-            if (e.target && e.target.classList.contains('remove-field')) {
-                e.target.parentElement.remove();
-            }
-        });
-
-        respintSelect.addEventListener('change', function() {
-            if (this.value === 'oui') {
-                responsibilitySection.style.display = 'block';
-            } else {
-                responsibilitySection.style.display = 'none';
-            }
-        });
-
-        addResponsibilityButton.addEventListener('click', function() {
-            let responsibilityFieldCount = responsibilityFieldsContainer.children.length;
-            const fieldDiv = document.createElement('div');
-            fieldDiv.classList.add('field-group');
-            fieldDiv.innerHTML = `
-                <hr>
-                <h5>Responsabilité ${responsibilityFieldCount + 1}</h5>
-                <div class="form-group">
-                    <label for="responsibility_title_${responsibilityFieldCount}">Intitulé de la responsabilité</label>
-                    <input type="text" name="responsibility_titles[]" id="responsibility_title_${responsibilityFieldCount}" class="form-control" required>
-                </div>
-                <!-- Autres champs pour la nouvelle responsabilité -->
-                <button type="button" class="btn btn-danger remove-responsibility-field">Supprimer</button>
-            `;
-            responsibilityFieldsContainer.appendChild(fieldDiv);
-        });
-
-        responsibilityFieldsContainer.addEventListener('click', function(e) {
-            if (e.target && e.target.classList.contains('remove-responsibility-field')) {
-                e.target.parentElement.remove();
-            }
-        });
-    });
-   </script>
-
+    
    <script>
-   
+    document.addEventListener('DOMContentLoaded', function() {
+            const selectElement = document.getElementById('expprofintAu');
+            const extraFieldsContainer = document.getElementById('extraFieldsContainer');
+            const addFieldsButton = document.getElementById('addFields');
+            const removeFieldsButton = document.getElementById('removeFields');
+
+            // Function to show or hide additional fields
+            function toggleFields() {
+                if (selectElement.value === 'oui') {
+                    extraFieldsContainer.style.display = 'block';
+                } else {
+                    extraFieldsContainer.style.display = 'none';
+                }
+            }
+
+            // Initial check on page load
+            toggleFields();
+
+            // Add event listener for select element change
+            selectElement.addEventListener('change', toggleFields);
+
+            // Add event listener for "Add" button
+            addFieldsButton.addEventListener('click', function() {
+                extraFieldsContainer.style.display = 'block';
+                // Move the remove button to the end of the fields
+                const removeButtonContainer = document.getElementById('removeButtonContainer');
+                extraFieldsContainer.appendChild(removeButtonContainer);
+            });
+
+            // Add event listener for "Remove" button
+            removeFieldsButton.addEventListener('click', function() {
+                extraFieldsContainer.style.display = 'none';
+                // Clear the input values
+                document.querySelectorAll('#extraFieldsContainer input').forEach(input => input.value = '');
+            });
+        });
    </script>
 @endsection

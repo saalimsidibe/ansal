@@ -159,6 +159,7 @@ class AutreControllerNouveau extends Controller
             'distinctionsAu.*' => 'nullable|in:honorifique,scientifique', // Valeur doit être l'une des options spécifiées
             'distinctAu' => 'nullable|string|max:255',
             'distinctions_nom.*' => 'required|string|max:255',
+            'distinctions_date.*' => 'required|string|max:255',
             'contribution' => 'nullable|string|max:255',
             'apportAu' => 'nullable|string|max:1000', // Limiter la taille du texte
             'honneurAu' => 'required|boolean',
@@ -302,10 +303,13 @@ class AutreControllerNouveau extends Controller
         foreach ($d6['distinctions_nom'] as $index => $distinction) {
             $type = $d6['distinctionsAu'][$index];
             $nom = $distinction;
+            $date = $d6['distinctions_date'][$index];
 
             $distinction = new Distinction();
             $distinction->type = $type;
             $distinction->nom = $nom;
+            $distinction->date=$date;
+
             $distinction->candidat_id = $candidat->id;
 
             $distinction->save();

@@ -139,7 +139,16 @@
                     <option value="scientifique" {{ $distinction == 'scientifique' ? 'selected' : '' }}>Distinction Scientifique</option>
                 </select>
 
-                <input type="text" name="distinctions_nom[]" id="">
+                <div>
+                    <label for="">Nom de la distinction</label> 
+                    <input type="text" name="distinctions_nom[]" id="">
+
+                </div>
+               
+                 
+                
+                                <input type="date" name="distinctions_date[]" id="date" class="form-control">
+                         
                 <button type="button" onclick="removeSelect(this)">Supprimer</button>
             </div>
         @endforeach
@@ -279,6 +288,8 @@
         }
     </script>
 
+
+
     <script>
         //script pour ajouter les ouvrages non edités
         document.getElementById('ajouterOuvrageNonEditeAut').addEventListener('click', function() {
@@ -317,6 +328,9 @@
             `;
 
             container.appendChild(newFields);
+            
+
+            
 
             // Add event listener to the remove button
             newFields.querySelector('.remove-field').addEventListener('click', function() {
@@ -330,7 +344,7 @@
             const selectContainer = document.getElementById('select-container');
             const addSelectButton = document.getElementById('add-select');
             
-                
+          
 
 
             addSelectButton.addEventListener('click', function () {
@@ -347,6 +361,10 @@
                         <input type="text" name="distinctions_nom[]" id="" class="form-control">
                     </div>
                     
+                        <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="date" name="distinctions_date[]" id="date" class="form-control">
+                         </div>
 
                     <button type="button" onclick="removeSelect(this)">Supprimer</button>
                 `;
