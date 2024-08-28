@@ -18,21 +18,21 @@
 
     
     <h3>Étape 1: Informations personnelles</h3>
-    <p><strong>Nom:</strong> {{ session('data1')['nom'] ?? 'Non renseigné' }}</p>
-    <p><strong>Prénom:</strong> {{ session('data1')['prenom'] ?? 'Non renseigné' }}</p>
-    <p><strong>Date de naissance:</strong> {{ session('data1')['datenaiss'] ?? 'Non renseigné' }}</p>
-    <p><strong>Sexe:</strong> {{ session('data1')['sexe'] ?? 'Non renseigné' }}</p>
-    <p><strong>Nationalité:</strong> {{ session('data1')['nationalite']?? 'Non renseigné' }}</p>
-    <p><strong>Titre:</strong> {{ session('data1')['titre']?? 'Non renseigné' }}</p>
-    <p><strong>Date de nomination(Titre):</strong> {{ session('data1')['datenomin']?? 'Non renseigné' }}</p>
-
-
-
-    <p><strong>Email:</strong> {{ session('data1')['email'] ?? 'Non renseigné' }}</p>
-    <p><strong>Numéro de téléphone:</strong> {{ session('data1')['numerotel'] ?? 'Non renseigné' }}</p>
-    <p> <strong>Nom du Premier Parrain</strong>{{session('data')}}</p>
+    <p><strong>Nom:</strong> {{ session('etape1.nomAutre') ?? 'Non renseigné' }}</p>
+    <p><strong>Prénom:</strong> {{ session('etape1.prenomAutre') ?? 'Non renseigné' }}</p>
+    <p><strong>Date de naissance:</strong> {{ session('etape1.datenaissanceAutre') ?? 'Non renseigné' }}</p>
+    <p><strong>Sexe:</strong> {{ session('etape1.sexeAu') ?? 'Non renseigné' }}</p>
+    <p><strong>Numero de Téléphone:</strong> {{ session('etape1.numerotelAutre')?? 'Non renseigné' }}</p>
+    <p><strong>Titre:</strong> {{ session('etape1.titreAutre') ?? 'Non renseigné' }}</p>
+    <p> <strong>Email:</strong>{{ session('etape1.emailAutre') ?? 'Non renseigné' }}</p>
+    <p> <strong>Nom du Premier Parrain</strong>{{session('etape2.nomPremierPautre') ?? 'Non renseigné'}}</p>
+    <p> <strong>Prénom du Premier  Parrain</strong>{{session('etape2.prenomPremierPautre') ?? 'Non renseigné'}}</p>
+    <p> <strong>Nom du Deuxième Parrain</strong>{{session('etape2.nomDeuxiemePautre') ?? 'Non renseigné'}} </p>
+    <p> <strong>Prenom du Deuxième Parrain</strong>{{session('etape2.prenomDeuxiemePautre') ?? 'Non renseigné'}} </p>
+    <p> <strong>Collège dans lequel vous souhaitez postuler</strong></p>
     
     
+     
     
     
     <!-- Étape 2: Informations académiques -->
@@ -45,7 +45,7 @@
     <!-- Étape 3: Expériences professionnelles -->
     <h3>Étape 3: Expériences professionnelles</h3>
     @foreach (session('experiences', []) as $index => $experience)
-        <p><strong>Expérience {{ $index + 1 }}:</strong></p>
+        <p><strong>Expérience {{ $index + 1 }}:< /strong></p>
         <p><strong>Entreprise:</strong> {{ $experience['entreprise'] ?? 'Non renseigné' }}</p>
         <p><strong>Poste:</strong> {{ $experience['poste'] ?? 'Non renseigné' }}</p>
         <p><strong>Durée:</strong> {{ $experience['duree'] ?? 'Non renseigné' }}</p>

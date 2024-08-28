@@ -27,53 +27,30 @@
                             <div class="card ">
                                 <div class="card-head info"> Informations Personnelle</div>
                                 <div class="card-body">
-    <form action="{{Route('valider5.autre')}}" method="POST">
-      @csrf
-                         <div class="form-group">
-                        <label for="expprofintAu">Expériences professionnelles exercées au plan international</label>
-                        <select name="expprofintAu" id="expprofintAu" class="form-control" required>
-                            <option value="non" {{ old('expprofintAu', session('form.expprofintAu')) == 'non' ? 'selected' : '' }}>Non</option>
-                            <option value="oui" {{ old('expprofintAu', session('form.expprofintAu')) == 'oui' ? 'selected' : '' }}>Oui</option>
-                        </select>
-                    </div>
+                                         <form action="{{Route('valider5.autre')}}" method="POST">
+                                                 @csrf
+                                     <div class="form-group">
+                                            <label for="expprofintAu">Expériences professionnelles exercées au plan international</label>
+                                            <select name="expprofintAu" id="expprofintAu" class="form-control" required>
+                                                    <option value="non" {{ old('expprofintAu', session('form.expprofintAu')) == 'non' ? 'selected' : '' }}>Non</option>
+                                                    <option value="oui" {{ old('expprofintAu', session('form.expprofintAu')) == 'oui' ? 'selected' : '' }}>Oui</option>
+                                            </select>
+                                    </div>
 
-                      <div id="extraFieldsContainer" style="display: none;">
-                    <label for="intitule">Intitulé</label>
-                    <input type="text" id="intitule" name="intitule" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="debut">Début</label>
-                    <input type="date" id="debut" name="debut" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="fin">Fin</label>
-                    <input type="date" id="fin" name="fin" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="structure">Structure</label>
-                    <input type="text" id="structure" name="structure" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="ville">Ville</label>
-                    <input type="text" id="ville" name="ville" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="pays">Pays</label>
-                    <input type="text" id="pays" name="pays" class="form-control">
-                </div>
-                <!-- Button to remove fields -->
-                <div id="removeButtonContainer">
-                    <button type="button" id="removeFields" class="btn btn-danger">Supprimer</button>
-                </div>
-            </div>
+             
+                      <div id="experience-fields-container" class="d-none">
+                            <!-- Container for dynamic fields -->
+                            <div id="dynamic-fields-container">
+                                <!-- Dynamic fields will be appended here -->
+                            </div>
 
-            <!-- Button to add fields -->
-            <div id="buttons" class="mt-3">
-                <button type="button" id="addFields" class="btn btn-primary">Ajouter</button>
-            </div>
+                            <!-- Button to add fields -->
+                            <button type="button" id="add-field" class="btn btn-primary mt-3">Ajouter</button>
+                        </div>
 
-                       
-                    </div>
+                      
+        
+                
 
                     <div class="form-group">
                         <label for="respintAu">Responsabilités professionnelles exercées au plan international</label>
@@ -83,9 +60,23 @@
                         </select>
                     </div>
 
-               
-                    </div>
+                    
+                     <div id="responsibility-fields-container" class="d-none">
+                                        <!-- Container for dynamic responsibility fields -->
+                                        <div id="dynamic-responsibility-fields-container">
+                                            <!-- Dynamic fields will be appended here -->
+                                        </div>
 
+                                        <!-- Button to add responsibility fields -->
+                                        <button type="button" id="add-responsibility-field" class="btn btn-primary mt-3">Ajouter</button>
+                
+                                   
+                                   
+                                   
+                         </div>
+               
+
+                  
          <button type="submit" class="btn btn-info" value="">Suivant</button>   
          
     </form>
@@ -108,41 +99,135 @@
     //Ajouter une fonction
     
    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-            const selectElement = document.getElementById('expprofintAu');
-            const extraFieldsContainer = document.getElementById('extraFieldsContainer');
-            const addFieldsButton = document.getElementById('addFields');
-            const removeFieldsButton = document.getElementById('removeFields');
+  document.addEventListener('DOMContentLoaded', function() {
+    const expprofintSelect = document.getElementById('expprofintAu');
+    const experienceFieldsContainer = document.getElementById('experience-fields-container');
+    const dynamicFieldsContainer = document.getElementById('dynamic-fields-container');
+    const addFieldButton = document.getElementById('add-field');
+    let fieldIndex = 0;
 
-            // Function to show or hide additional fields
-            function toggleFields() {
-                if (selectElement.value === 'oui') {
-                    extraFieldsContainer.style.display = 'block';
-                } else {
-                    extraFieldsContainer.style.display = 'none';
-                }
-            }
+    // Toggle dynamic fields visibility based on the select value
+    expprofintSelect.addEventListener('change', function() {
+        if (this.value === 'oui') {
+            experienceFieldsContainer.classList.remove('d-none');
+        } else {
+            experienceFieldsContainer.classList.add('d-none');
+            dynamicFieldsContainer.innerHTML = ''; // Clear fields if "Non" is selected
+        }
+    });
 
-            // Initial check on page load
-            toggleFields();
+    // Add new field group
+    addFieldButton.addEventListener('click', function() {
+        fieldIndex++;
+        const newField = document.createElement('div');
+        newField.classList.add('mb-3');
+        newField.innerHTML = `
+            <div class="form-group">
+                <label for="functionTitle_${fieldIndex}">Intitulé de la fonction</label>
+                <input type="text" name="experiences[${fieldIndex}][functionTitle]" id="functionTitle_${fieldIndex}" class="form-control">
+            </div>
 
-            // Add event listener for select element change
-            selectElement.addEventListener('change', toggleFields);
+            <div class="form-group">
+                <label for="startDate_${fieldIndex}">Début de la fonction</label>
+                <input type="date" name="experiences[${fieldIndex}][startDate]" id="startDate_${fieldIndex}" class="form-control">
+            </div>
 
-            // Add event listener for "Add" button
-            addFieldsButton.addEventListener('click', function() {
-                extraFieldsContainer.style.display = 'block';
-                // Move the remove button to the end of the fields
-                const removeButtonContainer = document.getElementById('removeButtonContainer');
-                extraFieldsContainer.appendChild(removeButtonContainer);
-            });
+            <div class="form-group">
+                <label for="endDate_${fieldIndex}">Fin de la fonction</label>
+                <input type="date" name="experiences[${fieldIndex}][endDate]" id="endDate_${fieldIndex}" class="form-control">
+            </div>
 
-            // Add event listener for "Remove" button
-            removeFieldsButton.addEventListener('click', function() {
-                extraFieldsContainer.style.display = 'none';
-                // Clear the input values
-                document.querySelectorAll('#extraFieldsContainer input').forEach(input => input.value = '');
-            });
-        });
+            <div class="form-group">
+                <label for="structure_${fieldIndex}">Structure</label>
+                <input type="text" name="experiences[${fieldIndex}][structure]" id="structure_${fieldIndex}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="city_${fieldIndex}">Ville</label>
+                <input type="text" name="experiences[${fieldIndex}][city]" id="city_${fieldIndex}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="country_${fieldIndex}">Pays</label>
+                <input type="text" name="experiences[${fieldIndex}][country]" id="country_${fieldIndex}" class="form-control">
+            </div>
+
+            <button type="button" class="btn btn-danger remove-field" onclick="removeField(this)">Supprimer ce champ</button>
+        `;
+        dynamicFieldsContainer.appendChild(newField);
+    });
+
+    // Function to remove a field group
+    window.removeField = function(button) {
+        button.parentElement.remove();
+    };
+});
    </script>
+
+   <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const respintSelect = document.getElementById('respintAu');
+            const responsibilityFieldsContainer = document.getElementById('responsibility-fields-container');
+            const dynamicResponsibilityFieldsContainer = document.getElementById('dynamic-responsibility-fields-container');
+            const addResponsibilityFieldButton = document.getElementById('add-responsibility-field');
+            var Index = 0;
+
+            // Toggle dynamic fields visibility based on the select value
+            respintSelect.addEventListener('change', function() {
+                if (this.value === 'oui') {
+                    responsibilityFieldsContainer.classList.remove('d-none');
+                } else {
+                    responsibilityFieldsContainer.classList.add('d-none');
+                    dynamicResponsibilityFieldsContainer.innerHTML = ''; // Clear fields if "Non" is selected
+                }
+            });
+
+            // Add new field group
+            addResponsibilityFieldButton.addEventListener('click', function() {
+                Index++;
+                const newFieldset = document.createElement('fieldset');
+                newFieldset.classList.add('mb-3');
+                newFieldset.innerHTML = `
+                    <legend>Responsabilité ${Index}</legend>
+                    <div class="form-group">
+                        <label for="responsibilityTitle_${Index}">Intitulé de la responsabilité</label>
+                        <input type="text" name="responsibilities[${Index}][responsibilityTitle]" id="responsibilityTitle_${Index}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="responsibilityStartDate_${Index}">Début de la responsabilité</label>
+                        <input type="date" name="responsibilities[${Index}][startDate]" id="responsibilityStartDate_${Index}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="responsibilityEndDate_${Index}">Fin de la responsabilité</label>
+                        <input type="date" name="responsibilities[${Index}][endDate]" id="responsibilityEndDate_${Index}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="responsibilityStructure_${Index}">Structure</label>
+                        <input type="text" name="responsibilities[${Index}][structure]" id="responsibilityStructure_${Index}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="responsibilityCity_${Index}">Ville</label>
+                        <input type="text" name="responsibilities[${Index}][city]" id="responsibilityCity_${Index}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="responsibilityCountry_${Index}">Pays</label>
+                        <input type="text" name="responsibilities[${Index}][country]" id="responsibilityCountry_${Index}" class="form-control">
+                    </div>
+
+                    <button type="button" class="btn btn-danger remove-field" onclick="removeField(this)">Supprimer ce champ</button>
+                `;
+                dynamicResponsibilityFieldsContainer.appendChild(newFieldset);
+            });
+
+            // Function to remove a field group
+            window.removeField = function(button) {
+                button.parentElement.remove();
+            }
+        }); 
+    </script>
 @endsection

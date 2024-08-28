@@ -59,7 +59,7 @@
              Dans le cadre de sa mission de mobilisation de tous les savoirs pour contribuer au
               développement socio-économique du Burkina Faso , l’Académie Nationale des Sciences, des
               Arts et des Lettres du Burkina Faso (ANSAL-BF) lance un troisième appel à candidatures
-              pour l’admission de nouveaux membres, ouvert à partir du ..
+              pour l’admission de nouveaux membres.
               Cet appel s’adresse aux hommes et femmes des sciences, des lettres, des arts, de la culture,
               des détenteurs de savoirs endogènes ainsi qu’aux spécialistes des disciplines relevant des
               champs d’expertise de l’Académie, reconnues par leurs pairs et désireux de mettre leurs

@@ -95,7 +95,7 @@
             <div class="col-sm-12 col-md-5 col-lg-4 col-xl-4 order-lg-2 offset-xl-1 mb-4">
               <div class="img-wrap text-center text-md-left" data-aos="fade-up" data-aos-delay="100">
                 <div class="img">
-                  <img src="" alt="circle image" class="img-fluid">
+                
                 </div>
               </div>
             </div>
@@ -104,7 +104,7 @@
               <div class="px-3">
                 <span class="content-subtitle"></span>
                 <h2 class="content-title text-start">
-                  Consulter les critères spécifiques de collège souhaiter avant de passer à la phase de  dépot des candidatures
+                  Consulter les critères spécifiques du collège souhaité avant de passer à la phase de  dépot des candidatures
                 </h2>
                 <p class="fst-italic"><span class="fw-bold">NB:Tout candidat doit avoir moins de 70 ans au 31 octobre 2024, date de clôture du dépôt des dossiers et devra être parrainé par deux (2) Académiciens du Collège concerné.</span></p>
                 

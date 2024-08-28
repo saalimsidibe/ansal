@@ -117,20 +117,20 @@ class AutreControllerNouveau extends Controller
     {
         $donnees5 = $request->validate([
             'expprofintAu' => 'required|in:oui,non',
-            'foncsIau.*.intitule' => 'nullable|string|max:255',
-            'foncsIau.*.debut' => 'nullable|date|before_or_equal:fin',
-            'foncsIau.*.fin' => 'nullable|date|after_or_equal:debut',
-            'foncsIau.*.structure' => 'nullable|string|max:255',
-            'foncsIau.*.pays' => 'nullable|string|max:255',
-            'foncsIau.*.ville' => 'nullable|string|max:255',
             'respintAu' => 'required|in:oui,non',
-            'responsibility_titles.*' => 'nullable|string|max:255',
-            'responsibility_starts.*' => 'nullable|date|before_or_equal:responsibility_ends.*',
-            'responsibility_ends.*' => 'nullable|date|after_or_equal:responsibility_starts.*',
-            'responsibility_organizations.*' => 'nullable|string|max:255',
-            'responsibility_countries.*' => 'nullable|string|max:255',
-            'responsibility_cities.*' => 'nullable|string|max:255',
+            'experiences.*.functionTitle' => 'required|string|max:255',
+            'experiences.*.startDate' => 'required|date',
+            'experiences.*.endDate' => 'required|date',
+            'experiences.*.structure' => 'required|string|max:255',
+            'experiences.*.city' => 'required|string|max:255',
+            'experiences.*.country' => 'required|string|max:255',
 
+            'responsibilities.*.responsibilityTitle' => 'required|string|max:255',
+            'responsibilities.*.startDate' => 'required|date',
+            'responsibilities.*.endDate' => 'required|date',
+            'responsibilities.*.country' => 'required|string|max:255',
+            'responsibilities.*.city' => 'required|string|max:255',
+            'responsibilities.*.structure' => 'required|string|max:255',
 
 
 
@@ -253,6 +253,38 @@ class AutreControllerNouveau extends Controller
             $responsabilite->save();
         }
 
+
+
+        foreach ($d5['experiences'] as $key => $ex) {
+            $exp = new Experience();
+            $exp->intitule = $ex['functionTitle'];
+            $exp->type = 'internationale';
+            $exp->structure = $ex['structure'];;
+            $exp->debut = $ex['startDate'];
+            $exp->fin = $ex['endDate'];
+            $exp->ville = $ex['city'];
+            $exp->pays = $ex['country'];
+            $exp->candidat_id = $candidat->id;
+            $exp->save();
+        }
+
+
+
+
+
+        foreach ($d5['responsibilities'] as $key => $resp) {
+            $responsabilite = new Responsabilite();
+            $responsabilite->intitule = $resp['responsibilityTitle'];
+            $responsabilite->type = "internationale";
+            $responsabilite->debut = $resp['startDate'];
+            $responsabilite->fin = $resp['endDate'];
+            $responsabilite->structure = $resp['structure'];
+            $responsabilite->ville = $resp['city'];
+            $responsabilite->pays =  $resp['country'];
+            $responsabilite->candidat_id = $candidat->id;
+            $responsabilite->save();
+        }
+
         foreach ($d6['commissionAu'] as  $key => $comm) {
             $commission = new Commission();
             $commission->nom = $comm['nom'];
@@ -308,7 +340,7 @@ class AutreControllerNouveau extends Controller
             $distinction = new Distinction();
             $distinction->type = $type;
             $distinction->nom = $nom;
-            $distinction->date=$date;
+            $distinction->date = $date;
 
             $distinction->candidat_id = $candidat->id;
 

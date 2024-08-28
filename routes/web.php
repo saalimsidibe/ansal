@@ -26,7 +26,7 @@ Route::get('/contact', function () {
 
 Route::post('/multi-step-form/upload', [MultiStepFormController::class, 'uploadFile'])->name('multi-step-form.upload');
 Route::view('/formulaire', 'formulaires')->name('formulaire');
-Route::get('/etape1chercheur', [MultiStepFormController::class, 'index'])->name('multi-step-form');
+//Route::get('/etape1chercheur', [MultiStepFormController::class, 'index'])->name('multi-step-form');
 
 Route::post('/multi-step-form/store', [MultiStepFormController::class, 'store'])->name('multi-step-form.store');
 Route::post('/multi-step-form/next', [MultiStepFormController::class, 'next'])->name('multi-step-form.next');
@@ -37,7 +37,7 @@ Route::view('/admin', 'admin');
 
 Route::view('/chercheur', 'chercheur')->name('chercheur');
 
-Route::view('/etape1autre', 'autrevues.etape1autre')->name('etape1.autre');
+//Route::view('/etape1autre', 'autrevues.etape1autre')->name('etape1.autre');
 Route::view('/etape2autre', 'autrevues.etape2autre')->name('etape2.autre');
 Route::view('/etape3autre', 'autrevues.etape3autre')->name('etape3.autre');
 Route::view('/etape4autre', 'autrevues.etape4autre')->name('etape4.autre');
