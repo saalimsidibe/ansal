@@ -15,6 +15,7 @@ use  App\Models\Commission;
 use  App\Models\Brevet;
 use App\Models\Article;
 use App\Models\Distinction;
+use App\Models\PreuveAutre;
 
 class AutreControllerNouveau extends Controller
 {
@@ -169,7 +170,35 @@ class AutreControllerNouveau extends Controller
 
         return redirect()->route('etapefinale.autre');
     }
+  
 
+    public function fichierAutre(Request $request)
+    {
+        $fichiers = $request->validate([
+           
+            'cv'=> 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'diplomes'=> 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'justifications_professionnelles'=> 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'commites'=> 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'ouvrages'=> 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'distinctions_honorifiques'=> 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'distinctions_scientifiques' => 'nullable|file|mimes:pdf,doc,docx|max:2048'
+            
+             ]);
+
+        foreach ($fichiers as $key => $file) {
+            if ($request->hasFile($key)) {
+                $path = $file->store('uploads');
+                $type=$key;
+                $nom_originale=$file->getClientOriginalName();             
+                session()->push('uploaded_files', ['key' => $key, 'path' => $path,'type' => $type, 'nom_originale' => $nom_originale]);
+            }
+        }
+
+        return response()->json(['success' => 'File uploaded successfully.']);
+    }
+
+   
 
     public function finir()
     {
@@ -184,6 +213,7 @@ class AutreControllerNouveau extends Controller
         $d5 = session()->get('etape5');
         $d6 = session()->get('etape6');
         $dx = session()->get('etapeX');
+        $documents = session('uploaded_files');
 
         $candidat = new Candidat();
         $candidat->categorie = 'autre';
@@ -345,6 +375,17 @@ class AutreControllerNouveau extends Controller
             $distinction->candidat_id = $candidat->id;
 
             $distinction->save();
+        }
+
+        foreach($documents as $document)
+        {
+            $preuve= new PreuveAutre();
+            $preuve->type=$document['key'];
+            $preuve->chemin=$document['path'];
+            $preuve->nom_originale=$document['nom_originale'];
+            $preuve->candidat_id=$candidat->id;
+
+            $preuve->save();
         }
     }
 }

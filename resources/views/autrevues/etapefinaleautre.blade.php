@@ -26,42 +26,39 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelle</div>
+                                <div class="card-head info"> Informations Personnelles</div>
                                 <div class="card-body">
     <form action="">
         @csrf
         <div class="form-group">
             <label for="cvchercheurDoc">Joindre une copie de votre cv</label><br>
-            <input type="file" class="form-control">
+            <input type="file" class="form-control" name="cv">
         </div>
         <div class="form-group">
             <label for="dipChercheurDoc">Joindre un fichier unique composé de l'ensemble des diplomes et attestations</label> <br>
-            <input type="file" class="form-control">
+            <input type="file" class="form-control" name="diplomes">
         </div>
         <div class="form-group">
             <label for="fonctionDoc">Joindre un fichier unique composé de l'ensemble des arrêtés justifiants les fonctions et responsabiltés professionnelles</label><br>
-            <input type="file" class="form-control">
+            <input type="file" class="form-control" name="justifications_professionnelles">
         </div>
         <div class="form-group">
             <label for="societeExpertDoc">Joindre un fichier unique justifiant l'appartenance à un ou plusieurs comités ou sociétés savantes</label><br>
-            <input type="file" class="form-control">
+            <input type="file" class="form-control" name="commites">
         </div>
-        <div class="form-group">
-            <label for="brevetDoc">Joindre un fichier unique des brevets obtenus</label> <br>
-            <input type="file" class="form-control"> 
-        </div>
+       
        
         <div class="form-group">
             <label for="">Joindre un fichier unique contenant l'ensemble de vos ouvrages .Pour chaque ouvrage il est demandé une à deux pages sur  la/lesquelles on peut distinguer  le titre, les auteurs et l'éditeur</label>
-            <input type="file" name="" id="" class="form-control">
+            <input type="file" name="ouvrages" id="" class="form-control">
         </div>
         <div class="form-group">
             <label for="">Joindre un fichier unique contenant l'ensemble de vos  distinctions honorifiques</label>
-             <input type="file" name="" class="form-control">
+             <input type="file" name="distinctions_honorifiques" class="form-control">
         </div>
         <div class="form-group">
             <label for="">Joindre un fichier unique contenant l'ensemble des distinctions scientifiques </label><br>
-            <input type="file" name= "">
+            <input type="file" name= "distinctions_scientifiques">
         </div>
         <input type="submit" class="btn btn-danger mt-4" a href="{{ route('resume') }}">Suivant</button>
     </form>

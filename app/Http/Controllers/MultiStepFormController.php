@@ -337,15 +337,27 @@ class MultiStepFormController extends Controller
             'distinctionsScientifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
-        foreach ($validatedData as $key => $file) {
+        /*  foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
                 $path = $file->store('uploads');
                 session()->push('uploaded_files', ['key' => $key, 'path' => $path]);
             }
         }
 
+        return response()->json(['success' => 'File uploaded successfully.']); */
+
+        foreach ($validatedData as $key => $file) {
+            if ($request->hasFile($key)) {
+                $path = $file->store('uploads');
+                $type = $key;
+                $nom_originale = $file->getClientOriginalName();
+                session()->push('preuves_chercheurs', ['key' => $key, 'path' => $path, 'type' => $type, 'nom_originale' => $nom_originale]);
+            }
+        }
+
         return response()->json(['success' => 'File uploaded successfully.']);
     }
+
 
 
     // app/Http/Controllers/MultiStepFormController.php
@@ -362,7 +374,9 @@ class MultiStepFormController extends Controller
         $data4 = session('data4'); //step4
         $data5 = session('data5'); //step5
         $data6 = session('data6'); //step6
-        $files = session('files'); // Pour les fichiers uploadés
+        $files = session('preuves_chercheurs'); // Pour les fichiers uploadés
+
+
 
         // Exemple d'enregistrement dans la base de données
         //  $candidat = new Candidat();
@@ -628,6 +642,16 @@ class MultiStepFormController extends Controller
            */
 
 
+
+
+
+
+
+
+
+
+        /*
+           
         foreach ($data6['ouvrages'] as $key => $ouvrage) {
             $ouvragesChercheur = new Ouvrage();
             $ouvragesChercheur->nom =
@@ -638,6 +662,8 @@ class MultiStepFormController extends Controller
                 $ouvragesChercheur->nombrePage =
                 $ouvragesChercheur->candidat_id = $candidat->id;
         }
+
+        */
         // Sauvegarde des fichiers si nécessaire
         /*  if (isset($files['cvchercheurDoc'])) {
                 $cvPath = $files['cvchercheurDoc']->store('cv_docs');
@@ -656,6 +682,17 @@ class MultiStepFormController extends Controller
         // session()->forget(['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'files']);
 
         //  DB::commit(); // Commit de la transaction
+
+
+        foreach ($files as $file) {
+            $preuve = new PreuveChercheur();
+            $preuve->type = $file['key'];
+            $preuve->chemin = $file['path'];
+            $preuve->nom_originale = $file['nom_originale'];
+            $preuve->candidat_id = $candidat->id;
+
+            $preuve->save();
+        }
 
         return view('chercheurvues.summary')->with('success', 'Données enregistrées avec succès!');
         /*} catch (\Exception $e) {
