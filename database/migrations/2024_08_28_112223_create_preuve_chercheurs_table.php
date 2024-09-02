@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('preuve_chercheurs', function (Blueprint $table) {
             $table->id();
             $table->string('chemin');
+            $table->string('type');
             $table->string('nom_originale');
             $table->foreignId('candidat_id')->constrained('candidats')->onDelete('cascade');
             $table->timestamps();

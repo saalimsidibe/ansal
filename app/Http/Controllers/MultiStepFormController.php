@@ -17,6 +17,7 @@ use  App\Models\Commission;
 use  App\Models\Brevet;
 use App\Models\Article;
 use App\Models\Distinction;
+use App\Models\PreuveChercheur;
 use Illuminate\Support\Facades\DB;
 
 class MultiStepFormController extends Controller
@@ -516,6 +517,7 @@ class MultiStepFormController extends Controller
             $ouvrage->annee_publication = $ouvr['annee'];
             $ouvrage->nom_editeur = $ouvr['editeur'];
             $ouvrage->nombrePage = $ouvr['nombre_pages'];
+            $ouvrage->type = "édité";
             $ouvrage->candidat_id = $candidat->id;
 
             $ouvrage->save();
@@ -528,7 +530,7 @@ class MultiStepFormController extends Controller
             $article->titre = $art['titre'];
             $article->editeur = $art['editeur'];
             $article->refPage = $art['pages'];
-            $article->coauteur = $art['coauteur'];
+           # $article->coauteur = $art['coauteur'];
             $article->candidat_id = $candidat->id;
 
             $article->save();
@@ -630,7 +632,7 @@ class MultiStepFormController extends Controller
             $responsabilite->pays = $respint['pays'];
             $responsabilite->candidat_id = $candidat->id;
             $experience->save();
-            
+
             }
            */
 
@@ -651,7 +653,7 @@ class MultiStepFormController extends Controller
 
 
         /*
-           
+
         foreach ($data6['ouvrages'] as $key => $ouvrage) {
             $ouvragesChercheur = new Ouvrage();
             $ouvragesChercheur->nom =

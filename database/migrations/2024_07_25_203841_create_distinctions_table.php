@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('type');
             $table->string('nom');
-            $table->string('docuDistinction');
+         #   $table->string('docuDistinction');
             $table->foreignId('candidat_id')->constrained('candidats')->onDelete('cascade');
             $table->timestamps();
         });
