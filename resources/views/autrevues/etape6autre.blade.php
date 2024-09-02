@@ -31,7 +31,7 @@
     @csrf
     @php
         $commissionsAu = old('commissionAu', session('etape6.commissionAu', []));
-        $ouvragesEdite = old('ouvrageEdite', session('etape6.ouvrageEdite', []));
+        $ouvragesEdite = old('edites', session('etape6.edites', []));
         $ouvragesNonEdite = old('ouvrageNonEdite', session('etape6.ouvrageNonEdite', []));
         $distinctionsAut = old('distinctionsAut', session('etape6.distinctionsAut', []));
         $distinctAu = old('distinctAu', session('etape6.distinctAu', ''));
@@ -66,27 +66,27 @@
             <div class="dynamic-field">
                 <div>
                     <label for="titre{{ $index }}">Titre</label>
-                    <input type="text" name="titre[]" id="titre{{ $index }}" value="{{ $ouvrage['titre'] ?? '' }}" required>
+                    <input type="text" name="" id="titre{{ $index }}" value="{{ $ouvrage['titre'] ?? '' }}" required>
                 </div>
                 <div>
                     <label for="anneePublication{{ $index }}">Année de publication</label>
-                    <input type="number" name="anneePublication[]" id="anneePublication{{ $index }}" value="{{ $ouvrage['anneePublication'] ?? '' }}" required>
+                    <input type="number" name="" id="anneePublication{{ $index }}" value="{{ $ouvrage['anneePublication'] ?? '' }}" required>
                 </div>
                 <div>
                     <label for="nomAuteur{{ $index }}">Nom de l'auteur</label>
-                    <input type="text" name="nomAuteur[]" id="nomAuteur{{ $index }}" value="{{ $ouvrage['nomAuteur'] ?? '' }}" required>
+                    <input type="text" name="" id="nomAuteur{{ $index }}" value="{{ $ouvrage['nomAuteur'] ?? '' }}" required>
                 </div>
                 <div>
                     <label for="nomCoauteur{{ $index }}">Nom du coauteur</label>
-                    <input type="text" name="nomCoauteur[]" id="nomCoauteur{{ $index }}" value="{{ $ouvrage['nomCoauteur'] ?? '' }}" required>
+                    <input type="text" name="" id="nomCoauteur{{ $index }}" value="{{ $ouvrage['nomCoauteur'] ?? '' }}" required>
                 </div>
                 <div>
                     <label for="editeur{{ $index }}">Éditeur</label>
-                    <input type="text" name="editeur[]" id="editeur{{ $index }}" value="{{ $ouvrage['editeur'] ?? '' }}" required>
+                    <input type="text" name="" id="editeur{{ $index }}" value="{{ $ouvrage['editeur'] ?? '' }}" required>
                 </div>
                 <div>
                     <label for="nombrePage{{ $index }}">Nombre de pages</label>
-                    <input type="number" name="nombrePage[]" id="nombrePage{{ $index }}" value="{{ $ouvrage['nombrePage'] ?? '' }}" required>
+                    <input type="number" name="" id="nombrePage{{ $index }}" value="{{ $ouvrage['nombrePage'] ?? '' }}" required>
                 </div>
                 <button type="button" class="remove-field">Supprimer ces champs</button>
                 <hr>
@@ -234,8 +234,10 @@
         }
     </script>
     <script>
-        //Ajouter ouvrage edité par autre
+        //Ajouter ouvrage edité 
+         let u=0;
           document.getElementById('ouvrageEditeAut').addEventListener('click', function() {
+         
             addDynamicFieldOuvrageEdite();
         });
 
@@ -245,35 +247,36 @@
 
             const newFields = document.createElement('div');
             newFields.className = 'dynamic-field';
+            u++;
             newFields.dataset.index = fieldCount;
 
             newFields.innerHTML = `
                 <div>
-                    <label for="titre${fieldCount}">Titre</label>
-                    <input type="text" name="titre[]" id="titre${fieldCount}"  class=required>
+                    <label for="titre${u}">Titre</label>
+                    <input type="text" name="edites[${u}][titre]" id="titre${u}"  class=required>
                 </div>
                 <div>
-                    <label for="anneePublication${fieldCount}">Année de publication</label>
-                    <input type="number" name="anneePublication[]" id="anneePublication${fieldCount}" required>
+                    <label for="anneePublication${u}">Année de publication</label>
+                    <input type="number" name="edites[${u}][anneePublication]" id="anneePublication${u}" required>
                 </div>
                 <div>
-                    <label for="nomAuteur${fieldCount}">Nom de l'auteur</label>
-                    <input type="text" name="nomAuteur[]" id="nomAuteur${fieldCount}" required>
+                    <label for="nomAuteur${u}">Nom de l'auteur</label>
+                    <input type="text" name="edites[${u}][nomAuteur]"  id="nomAuteur${u}" required>
                 </div>
 
                  <div>
-                    <label for="nomCoauteur${fieldCount}">Nom du coauteur</label>
-                    <input type="text" name="nomCoauteur[]" id="nomCoauteur${fieldCount}" required>
+                    <label for="nomCoauteur${u}">Nom du coauteur</label>
+                    <input type="text" name="edites[${u}][nomCoauteur]" id="nomCoauteur${u}" required>
                 </div>
 
              
                 <div>
-                    <label for="nombrePage${fieldCount}">Nombre de pages</label>
-                    <input type="number" name="nombrePage[]" id="nombrePage${fieldCount}" required>
+                    <label for="nombrePage${u}">Nombre de pages</label>
+                    <input type="number" name="edites[${u}][nombrePage]" id="nombrePage${u}" required>
                 </div>
                    <div>
-                    <label for="editeur${fieldCount}">Éditeur</label>
-                    <input type="text" name="editeur[]" id="editeur${fieldCount}" required>
+                    <label for="editeur${u}">Éditeur</label>
+                    <input type="text" name="edites[${u}][editeur]" id="editeur${u}" required>
                 </div>
                 <button type="button" class="remove-field">Supprimer ces champs</button>
                 <hr>
@@ -292,6 +295,7 @@
 
     <script>
         //script pour ajouter les ouvrages non edités
+        let y=0;
         document.getElementById('ajouterOuvrageNonEditeAut').addEventListener('click', function() {
             addDynamicFieldOuvrageNonEdite();
         });
@@ -299,30 +303,31 @@
         function  addDynamicFieldOuvrageNonEdite() {
             const container = document.querySelector('.ouvrageNonEditeAut');
             const fieldCount = container.querySelectorAll('.dynamic-field').length;
-
+            y++;
             const newFields = document.createElement('div');
             newFields.className = 'dynamic-field';
             newFields.dataset.index = fieldCount;
 
             newFields.innerHTML = `
                 <div>
-                    <label for="titre${fieldCount}">Titre</label>
-                    <input type="text" name="titreNe[]" id="titre${fieldCount}" required>
+                    <label for="titre${y}">Titre</label>
+                    <input type="text" name="Nedites[${y}][titreNe]" id="titre${y}" required>
                 </div>
                 <div>
-                    <label for="nomAuteur${fieldCount}">Nom de l'auteur</label>
-                    <input type="text" name="nomAuteurNe[]" id="nomAuteur${fieldCount}" required>
+                    <label for="nomAuteur${y}">Nom de l'auteur</label>
+                    <input type="text" name="Nedites[${y}][nomAuteurNe]" id="nomAuteur${y}" required>
                 </div>
                 <div>
-                    <label for="nomCoauteur${fieldCount}">Nom du coauteur</label>
-                    <input type="text" name="nomCoauteurNe[]" id="nomCoauteur${fieldCount}">
+                    <label for="nomCoauteur${y}">Nom du coauteur</label>
+                    <input type="text" name="Nedites[${y}][nomCoauteurNe]" id="nomCoauteur${y}">
                 </div>
 
                 <div>
-                    <label for="nbrePage${fieldCount}">Nombre de pages</label>
-                    <input type="text" name="nbrePNe[]" id=""nbrePage${fieldCount}">
+                    <label for="nbrePage${y}">Nombre de pages</label>
+                    <input type="text" name="Nedites[${y}][nbrePNe]" id="nbrePage${y}">
                 </div>
-                   
+
+                
                 <button type="button" class="remove-field">Supprimer ces champs</button>
                 <hr>
             `;
@@ -340,30 +345,32 @@
     </script>
     <script>
         //ajouter les distinctions
+        let v=0;
         document.addEventListener('DOMContentLoaded', function () {
             const selectContainer = document.getElementById('select-container');
             const addSelectButton = document.getElementById('add-select');
             
-          
+          //Nedites[${y}][nbrePNe]
 
 
             addSelectButton.addEventListener('click', function () {
                 // Crée un nouveau conteneur pour le select
                 const newSelectDiv = document.createElement('div');
+                v++;
                 newSelectDiv.innerHTML = `
-                    <select name="distinctionsAu[]" class="form-control">
+                    <select name="distinctionsAu[${v}][type]" class="form-control">
                         <option value="honorifique">Distinction Honorifique</option>
                         <option value="scientifique">Distinction Scientifique</option>
                     </select>
 
                     <div class="form-group">
-                        <label for="nom_distinction">Nom de la distinction</label>
-                        <input type="text" name="distinctions_nom[]" id="" class="form-control">
+                        <label for="nom_distinction_${v}">Nom de la distinction</label>
+                        <input type="text" name="distinctionsAu[${v}][distinctions_nom]" id="nom_distinction_${v}" class="form-control">
                     </div>
                     
                         <div class="form-group">
-                                <label for="date">Date</label>
-                                <input type="date" name="distinctions_date[]" id="date" class="form-control">
+                                <label for="date_${v}">Date</label>
+                                <input type="date" name="distinctionsAu[${v}][distinctions_date]" id="date_${v}" class="form-control">
                          </div>
 
                     <button type="button" onclick="removeSelect(this)">Supprimer</button>

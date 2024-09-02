@@ -146,21 +146,22 @@ class AutreControllerNouveau extends Controller
     {
         $donnees6 = $request->validate([
             'commissionAu.*.nom' => 'required|string|max:255',
-            'titre.*' => 'required|string|max:255',
-            'anneePublication.*' => 'required|integer|digits:4', // Année de publication doit être une année valide
-            'nomAuteur.*' => 'required|string|max:255',
-            'nomCoauteur.*' => 'nullable|string|max:255', // Coauteur peut être optionnel
-            'editeur.*' => 'nullable|string|max:255',
+            'edites.*.titre' => 'required|string|max:255',
+            'edites.*.anneePublication' => 'required|integer|digits:4', // Année de publication doit être une année valide
+            'edites.*.nomAuteur' => 'required|string|max:255',
+            'edites.*.nomCoauteur' => 'nullable|string|max:255', // Coauteur peut être optionnel
+            'edites.*.editeur' => 'nullable|string|max:255',
+            'edites.*.nombrePage' => 'nullable|integer|min:1', // Nombre de pages peut être optionnel mais doit être un nombre positif
 
-            'nombrePage.*' => 'nullable|integer|min:1', // Nombre de pages peut être optionnel mais doit être un nombre positif
-            'titreNe.*' => 'nullable|string|max:255',
-            'nomAuteurNe.*' => 'nullable|string|max:255',
-            'nomCoauteurNe.*' => 'nullable|string|max:255',
-            'nbrePNe.*' => 'required|string|max:255',
-            'distinctionsAu.*' => 'nullable|in:honorifique,scientifique', // Valeur doit être l'une des options spécifiées
-            'distinctAu' => 'nullable|string|max:255',
-            'distinctions_nom.*' => 'required|string|max:255',
-            'distinctions_date.*' => 'required|string|max:255',
+
+            'Nedites.*.titreNe' => 'nullable|string|max:255',
+            'Nedites.*.nomAuteurNe' => 'nullable|string|max:255',
+            'Nedites.*.nomCoauteurNe' => 'nullable|string|max:255',
+            'Nedites.*.nbrePNe' => 'required|string|max:255',
+            'distinctionsAu.*.type' => 'nullable|in:honorifique,scientifique', // Valeur doit être l'une des options spécifiées
+            //'distinctAu' => 'nullable|string|max:255',
+            'distinctionsAu.*.distinctions_nom' => 'required|string|max:255',
+            'distinctionsAu.*.distinctions_date' => 'required|string|max:255',
             'contribution' => 'nullable|string|max:255',
             'apportAu' => 'nullable|string|max:1000', // Limiter la taille du texte
             'honneurAu' => 'required|boolean',
@@ -170,35 +171,35 @@ class AutreControllerNouveau extends Controller
 
         return redirect()->route('etapefinale.autre');
     }
-  
+
 
     public function fichierAutre(Request $request)
     {
         $fichiers = $request->validate([
-           
-            'cv'=> 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'diplomes'=> 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'justifications_professionnelles'=> 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'commites'=> 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'ouvrages'=> 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'distinctions_honorifiques'=> 'nullable|file|mimes:pdf,doc,docx|max:2048',
+
+            'cv' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'diplomes' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'justifications_professionnelles' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'commites' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'ouvrages' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'distinctions_honorifiques' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'distinctions_scientifiques' => 'nullable|file|mimes:pdf,doc,docx|max:2048'
-            
-             ]);
+
+        ]);
 
         foreach ($fichiers as $key => $file) {
             if ($request->hasFile($key)) {
                 $path = $file->store('uploads');
-                $type=$key;
-                $nom_originale=$file->getClientOriginalName();             
-                session()->push('uploaded_files', ['key' => $key, 'path' => $path,'type' => $type, 'nom_originale' => $nom_originale]);
+                $type = $key;
+                $nom_originale = $file->getClientOriginalName();
+                session()->push('uploaded_files', ['key' => $key, 'path' => $path, 'type' => $type, 'nom_originale' => $nom_originale]);
             }
         }
 
         return response()->json(['success' => 'File uploaded successfully.']);
     }
 
-   
+
 
     public function finir()
     {
@@ -377,13 +378,12 @@ class AutreControllerNouveau extends Controller
             $distinction->save();
         }
 
-        foreach($documents as $document)
-        {
-            $preuve= new PreuveAutre();
-            $preuve->type=$document['key'];
-            $preuve->chemin=$document['path'];
-            $preuve->nom_originale=$document['nom_originale'];
-            $preuve->candidat_id=$candidat->id;
+        foreach ($documents as $document) {
+            $preuve = new PreuveAutre();
+            $preuve->type = $document['key'];
+            $preuve->chemin = $document['path'];
+            $preuve->nom_originale = $document['nom_originale'];
+            $preuve->candidat_id = $candidat->id;
 
             $preuve->save();
         }

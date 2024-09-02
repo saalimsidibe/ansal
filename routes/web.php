@@ -8,6 +8,9 @@ use App\Http\Controllers\MultiStepFormController;
 use App\Livewire\Etape1;
 use App\Http\Controllers\EvaluatorController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Evaluateur;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,9 +27,24 @@ Route::get('/contact', function () {
 });
 
 
+Route::get('/evaluateur_medecine', [Evaluateur::class, 'EvMedecine'])->name('evaluateur.medecine');
+
+Route::get('/evaluateur_lettre', [Evaluateur::class, 'EvLettre'])->name('evaluateur.litterature');
+
+Route::get('/evaluateur_agricole', [Evaluateur::class, 'EvAgricole'])->name('evaluateur.agricole');
+
+Route::get('/evaluateur_sciences', [Evaluateur::class, 'EvSciences'])->name('evaluateur.sciences');
+
+Route::get('/evaluateur_economie', [Evaluateur::class, 'EvEconomie'])->name('evaluateur.economie');
+
+
+
+
+
+
 Route::post('/multi-step-form/upload', [MultiStepFormController::class, 'uploadFile'])->name('multi-step-form.upload');
 Route::view('/formulaire', 'formulaires')->name('formulaire');
-//Route::get('/etape1chercheur', [MultiStepFormController::class, 'index'])->name('multi-step-form');
+Route::get('/etape1chercheur', [MultiStepFormController::class, 'index'])->name('multi-step-form');
 
 Route::post('/multi-step-form/store', [MultiStepFormController::class, 'store'])->name('multi-step-form.store');
 Route::post('/multi-step-form/next', [MultiStepFormController::class, 'next'])->name('multi-step-form.next');
@@ -37,7 +55,7 @@ Route::view('/admin', 'admin');
 
 Route::view('/chercheur', 'chercheur')->name('chercheur');
 
-//Route::view('/etape1autre', 'autrevues.etape1autre')->name('etape1.autre');
+Route::view('/etape1autre', 'autrevues.etape1autre')->name('etape1.autre');
 Route::view('/etape2autre', 'autrevues.etape2autre')->name('etape2.autre');
 Route::view('/etape3autre', 'autrevues.etape3autre')->name('etape3.autre');
 Route::view('/etape4autre', 'autrevues.etape4autre')->name('etape4.autre');
@@ -46,7 +64,7 @@ Route::view('/etape6autre', 'autrevues.etape6autre')->name('etape6.autre');
 Route::view('/etapefinaleautre', 'autrevues.etapefinaleautre')->name('etapefinale.autre');
 
 //Route::get('/multi-step-form', LivewireChercheurEtape::class)->name('multi-step-form');
-//Route::view('/etape1chercheur', 'chercheurvues.etape1chercheur')->name('etape1chercheur');
+Route::view('/etape1chercheur', 'chercheurvues.etape1chercheur')->name('etape1chercheur');
 Route::view('/etape2chercheur', 'chercheurvues.etape2chercheur')->name('etape2chercheur');
 Route::view('/etape3chercheur', 'chercheurvues.etape3chercheur')->name('etape3chercheur');
 Route::view('/etape4chercheur', 'chercheurvues.etape4chercheur')->name('etape4chercheur');
@@ -77,14 +95,12 @@ Route::post('/etape6au', [AutreControllerNouveau::class, 'validerEtape6'])->name
 //Route::post('/etapefinaleautre',[AutreController::class,]);
 
 
-Route::view('/evaluations', 'evaluateurs'); // Routes pour les espaces membres des évaluateurs
-Route::middleware(['auth'])->group(function () {
-    Route::get('/evaluator/dashboard/medecine', [EvaluatorController::class, 'MedecineDashboard'])->name('evaluator.dashboard.medecine');
-    Route::get('/evaluator/dashboard/litterature', [EvaluatorController::class, 'seniorDashboard'])->name('evaluator.dashboard.litterature');
-    //Route::get('/evaluator/dashboard/lead', [EvaluatorController::class, 'leadDashboard'])->name('evaluator.dashboard.lead');
-});
 
-// Routes pour l'authentification
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Routes pour l'authentificationRoute::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
