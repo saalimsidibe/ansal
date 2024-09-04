@@ -14,6 +14,7 @@
                         <li>Etape4</li>
                         <li>Etape5</li>
                         <li>Etape6</li>
+                        <li>Etape7</li>
                         <li class="current"> <a href="#">Etape Finale</a></li>
                     </ol>
                 </nav>
@@ -26,42 +27,66 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelles</div>
+                                <div class="card-head info bg-light"><H3>Pieces Justificatives</H3> </div>
                                 <div class="card-body">
-    <form action="">
-        @csrf
-        <div class="form-group">
-            <label for="cvchercheurDoc">Joindre une copie de votre cv</label><br>
-            <input type="file" class="form-control" name="cv">
+    
+                                <form  method="POST" id="fileUploadForm" action="" enctype="multipart/form-data">
+                                    @csrf
+                                     @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                    <div class="form-group">
+            <label for="cv">Joindre une copie de votre cv</label><br>
+            <input type="file" class="form-control" name="cv" id="cv">
+            <button type="button" onclick="uploadFile('cv')">Telecharger</button>
+            <span id="cv"></span>
         </div>
         <div class="form-group">
-            <label for="dipChercheurDoc">Joindre un fichier unique composé de l'ensemble des diplomes et attestations</label> <br>
-            <input type="file" class="form-control" name="diplomes">
+            <label for="dip">Joindre un fichier unique composé de l'ensemble des diplomes et attestations</label> <br>
+            <input type="file" class="form-control" name="diplomes" id="dip">
+             <button type="button" onclick="uploadFile('diplomes')">Telecharger</button>
         </div>
         <div class="form-group">
-            <label for="fonctionDoc">Joindre un fichier unique composé de l'ensemble des arrêtés justifiants les fonctions et responsabiltés professionnelles</label><br>
-            <input type="file" class="form-control" name="justifications_professionnelles">
+            <label for="fonction">Joindre un fichier unique composé de l'ensemble des arrêtés justifiants les fonctions et responsabiltés professionnelles</label><br>
+            <input type="file" class="form-control" name="justifications_professionnelles" id="fonction">
+            <button type="button" onclick="uploadFile('justifications_professionnelles')">Telecharger</button>
         </div>
         <div class="form-group">
-            <label for="societeExpertDoc">Joindre un fichier unique justifiant l'appartenance à un ou plusieurs comités ou sociétés savantes</label><br>
-            <input type="file" class="form-control" name="commites">
+            <label for="commite">Joindre un fichier unique justifiant l'appartenance à un ou plusieurs comités ou sociétés savantes</label><br>
+            <input type="file" class="form-control" name="commites" id="commite">
+             <button type="button" onclick="uploadFile('commites')">Telecharger</button>
         </div>
        
        
         <div class="form-group">
-            <label for="">Joindre un fichier unique contenant l'ensemble de vos ouvrages .Pour chaque ouvrage il est demandé une à deux pages sur  la/lesquelles on peut distinguer  le titre, les auteurs et l'éditeur</label>
-            <input type="file" name="ouvrages" id="" class="form-control">
+            <label for="ouvrage">Joindre un fichier unique contenant l'ensemble de vos ouvrages .Pour chaque ouvrage il est demandé une à deux pages sur  la/lesquelles on peut distinguer  le titre, les auteurs et l'éditeur</label>
+            <input type="file" name="ouvrages" class="form-control" id="ouvrage" >
+            <button type="button" onclick="uploadFile('ouvrages')">Telecharger</button>
+        </div>
+
+        <div class="form-group">
+            <label for="distinctions_honorifiques">Joindre un fichier unique contenant l'ensemble de vos  distinctions honorifiques</label>
+             <input type="file" name="distinctions_honorifiques" class="form-control" id="distinctions_honorifiques">
+             <button type="button" onclick="uploadFile('distinctions_honorifiques')">Telecharger</button>
         </div>
         <div class="form-group">
-            <label for="">Joindre un fichier unique contenant l'ensemble de vos  distinctions honorifiques</label>
-             <input type="file" name="distinctions_honorifiques" class="form-control">
+            <label for="distinctions_scientifiques">Joindre un fichier unique contenant l'ensemble des distinctions scientifiques </label><br>
+            <input type="file" name= "distinctions_scientifiques" class="form-control" id="distinctions_scientifiques">
+            <button type="button" onclick="uploadFile('distinctions_scientifiques')">Telecharger</button>
         </div>
-        <div class="form-group">
-            <label for="">Joindre un fichier unique contenant l'ensemble des distinctions scientifiques </label><br>
-            <input type="file" name= "distinctions_scientifiques">
-        </div>
-        <input type="submit" class="btn btn-danger mt-4" a href="{{ route('resume') }}">Suivant</button>
+        <button type="submit" class="btn btn-danger mt-4" a href="{{ route('resume') }}">Suivant</button>
+
+          
     </form>
+
+      
+
 
                                 </div>
                             </div>
@@ -69,6 +94,60 @@
                         <div class="col-2"> </div>
                     </div>
             </section>
+
         </div>
     </main>
 @endsection
+
+@section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ 
+                                          <script>
+                                        let csrf_token = "{{csrf_token()}}";
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            const fileInputs = document.querySelectorAll('input[type="file"]');
+                                            fileInputs.forEach(input => {
+                                                input.addEventListener('change', function() {
+                                                    const fileName = this.files[0]?.name || 'Aucun fichier sélectionné';
+                                                    const spanId = this.id + '-name';
+                                                    document.getElementById(spanId).textContent = fileName;
+                                                });
+                                            });
+                                        });
+
+                                        function uploadFile(fileInputId) {
+                                            let formData = new FormData();
+                                            let fileInput = document.getElementById(fileInputId);
+                                            let statusSpan = document.getElementById(fileInputId + 'Status');
+
+                                            if (fileInput.files.length === 0) {
+                                                alert("Veuillez sélectionner un fichier.");
+                                                return;
+                                            }
+
+
+                                            formData.append("csrf_token", csrf_token);
+
+                                            formData.append(fileInput.name, fileInput.files[0]);
+
+                                            $.ajax({
+                                                url: '{{ route('multi-step-form.upload') }}', // Assurez-vous que cette route est correcte
+                                                type: 'POST',
+                                                data: formData,
+                                                processData: false,
+                                                contentType: false,
+                                                headers: {
+                                                    'X-CSRF-TOKEN':  csrf_token  //$('meta[name="csrf-token"]').attr('content')
+                                                },
+                                                success: function(response) {
+                                                    statusSpan.innerHTML = "Fichier téléchargé avec succès.";
+                                                    statusSpan.style.color = 'green';
+                                                },
+                                                error: function(xhr) {
+                                                    statusSpan.innerHTML = "Erreur lors du téléchargement du fichier.";
+                                                    statusSpan.style.color = 'red';
+                                                }
+                                            });
+                                        }
+                                    </script>
+

@@ -11,9 +11,11 @@
                         <li>Etape1</li>
                         <li >Etape2</li>
                         <li>Etape3</li>
-                        <li class="current"><a href="#">Etape4</a></li>
-                        <li>Etape5</li>
+                        <li >Etape4</li>
+                        <li class="current"><a href="#">Etape5</a></li>
                         <li>Etape6</li>
+                         <li>Etape7</li>
+                        <li class="current"> Etape Finale</li>
                     </ol>
                 </nav>
             </div>
@@ -24,10 +26,19 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelle</div>
+                                <div class="card-head info bg-light"> <H3>Experiences nationales</H3>
                                 <div class="card-body">
      <form action="{{Route('valider4.autre')}}" method="POST">
         @csrf
+         @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
       <div class="form-group">
         <label for="expadminAu" class="label-form">Expériences professionnelles exercées au plan national</label>
         <select name="expadminAu" id="expadminAu" class="form-control">

@@ -11,9 +11,11 @@
                         <li>Etape1</li>
                         <li>Etape2</li>
                         <li>Etape3</li>
-                        <li>Etape4</li>
+                        <li class="current"><a href="#">Etape4</a></li>
                         <li>Etape5</li>
-                        <li class="current"><a href="#">Etape6</a></li>
+                        <li >Etape6</a></li>
+                         <li>Etape7</li>
+                        <li>Etape Finale</li>
                     </ol>
                 </nav>
             </div>
@@ -25,11 +27,19 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelle</div>
+                                <div class="card-head info bg-light"> <h3>Contributions et Implications</h3></div>
                                 <div class="card-body">
    <form action="{{Route('validerX.autre')}}" method="POST">
     @csrf
-
+ @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
        
      <textarea name="travaux" id="" cols="30" rows="10" class="form-control" placeholder="Décrire vos contributions et travaux les plus significatives"></textarea><br>
      <textarea name="implication" id="" cols="30" rows="10" class="form-control" placeholder="Décrire votre implication dans  la vie de la communauté"></textarea>

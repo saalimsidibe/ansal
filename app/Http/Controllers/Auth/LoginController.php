@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,22 +26,20 @@ class LoginController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
+
+
             if ($user->categorie === 'medecine')
                 return redirect()->route('evaluateur.medecine');
-          
-                elseif ($user->categorie === 'litterature') {
+
+            elseif ($user->categorie === 'litterature') {
                 return redirect()->route('evaluateur.litterature');
-            } 
-            elseif ($user->categorie === 'sciences') {
+            } elseif ($user->categorie === 'sciences') {
                 return redirect()->route('evaluateur.sciences');
-            } 
-            else if ($user->categorie === 'agricole') {
+            } else if ($user->categorie === 'agricole') {
                 return redirect()->route('evaluateur.agricole');
-            } 
-            else if ($user->categorie === 'economie') {
+            } else if ($user->categorie === 'economie') {
                 return redirect()->route('evaluateur.economie');
-            } 
-            else {
+            } else {
                 echo 'erreur';
             }
         }

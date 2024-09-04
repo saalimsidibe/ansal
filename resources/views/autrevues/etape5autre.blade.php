@@ -12,8 +12,10 @@
                         <li>Etape2</li>
                         <li>Etape3</li>
                         <li>Etape4</li>
-                        <li class="current"><a href="#">Etape5</a></li>
-                        <li>Etape6</li>
+                        <li >Etape5 </li>
+                        <li class="current"><a href="">Etape6</a></li>
+                        <li>Etape7</li>
+                        <li >Etape Finale</li>
                     </ol>
                 </nav>
             </div>
@@ -25,10 +27,19 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelle</div>
+                                <div class="card-head info bg-light "> <h3>Experiences internationales</h3></div>
                                 <div class="card-body">
                                          <form action="{{Route('valider5.autre')}}" method="POST">
                                                  @csrf
+                                                  @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
                                      <div class="form-group">
                                             <label for="expprofintAu">Expériences professionnelles exercées au plan international</label>
                                             <select name="expprofintAu" id="expprofintAu" class="form-control" required>
@@ -152,7 +163,7 @@
                 <input type="text" name="experiences[${fieldIndex}][country]" id="country_${fieldIndex}" class="form-control">
             </div>
 
-            <button type="button" class="btn btn-danger remove-field" onclick="removeField(this)">Supprimer ce champ</button>
+            <button type="button" class="btn btn-danger remove-field" onclick="removeField(this)">Supprimer </button>
         `;
         dynamicFieldsContainer.appendChild(newField);
     });
@@ -219,7 +230,7 @@
                         <input type="text" name="responsibilities[${Index}][country]" id="responsibilityCountry_${Index}" class="form-control">
                     </div>
 
-                    <button type="button" class="btn btn-danger remove-field" onclick="removeField(this)">Supprimer ce champ</button>
+                    <button type="button" class="btn btn-danger remove-field" onclick="removeField(this)">Supprimer </button>
                 `;
                 dynamicResponsibilityFieldsContainer.appendChild(newFieldset);
             });

@@ -13,7 +13,9 @@
                         <li>Etape3</li>
                         <li>Etape4</li>
                         <li>Etape5</li>
-                        <li class="current"><a href="#">Etape6</a></li>
+                        <li >Etape6</li>
+                        <li class="current"><a href="#">Etape 7</a></li>
+                         <li >Etape Finale</li>
                     </ol>
                 </nav>
             </div>
@@ -25,10 +27,19 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelle</div>
+                                <div class="card-head info"></div>
                                 <div class="card-body">
    <form action="{{ route('valider6.autre') }}" method="POST">
     @csrf
+     @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
     @php
         $commissionsAu = old('commissionAu', session('etape6.commissionAu', []));
         $ouvragesEdite = old('edites', session('etape6.edites', []));
@@ -41,7 +52,7 @@
 
     <!-- Associations, commissions, réseaux, comités d’experts internationaux d’appartenance -->
     <div class="form-group">
-        <label for="associationAut" class="control-label">Associations, commissions, réseaux, comités d’experts internationaux d’appartenance</label><br>
+        <label for="associationAut" class="control-label"><h5>Associations, commissions, réseaux, comités d’experts internationaux d’appartenance</h5></label><br>
         <button type="button" id="ajouterAssAut" class="btn btn-info">Ajouter</button>
     </div>
     <div class="fields-containerAssocAut">
@@ -58,7 +69,7 @@
 
     <!-- Œuvres, ouvrages et principaux documents édités dont vous êtes auteur ou coauteur -->
     <div class="form-group">
-        <label for="ouvrageEditeAut" class="form-label">Œuvres, ouvrages et principaux documents édités dont vous êtes auteur ou coauteur</label>
+        <label for="ouvrageEditeAut" class="form-label bg-light"><h5>Œuvres, ouvrages et principaux documents édités dont vous êtes auteur ou coauteur</h5></label>
         <button type="button" id="ouvrageEditeAut" class="btn btn-info">Ajouter</button>
     </div>
     <div class="ouvrageEditeAut">
@@ -66,7 +77,7 @@
             <div class="dynamic-field">
                 <div>
                     <label for="titre{{ $index }}">Titre</label>
-                    <input type="text" name="" id="titre{{ $index }}" value="{{ $ouvrage['titre'] ?? '' }}" required>
+                    <input type="text" class="form-control" name="" id="titre{{ $index }}" value="{{ $ouvrage['titre'] ?? '' }}" required>
                 </div>
                 <div>
                     <label for="anneePublication{{ $index }}">Année de publication</label>
@@ -96,7 +107,7 @@
 
     <!-- Œuvres, ouvrages et principaux documents non édités dont vous êtes auteur ou coauteur -->
     <div class="form-group">
-        <label for="ouvrageNonEditeAut" class="form-label">Œuvres, ouvrages et principaux documents non édités dont vous êtes auteur ou coauteur</label>
+        <label for="ouvrageNonEditeAut" class="form-label"> <h5>Œuvres, ouvrages et principaux documents non édités dont vous êtes auteur ou coauteur</h5></label>
         <button type="button" id="ajouterOuvrageNonEditeAut" class="btn btn-info">Ajouter</button>
     </div>
     <div class="ouvrageNonEditeAut">
@@ -145,8 +156,6 @@
 
                 </div>
                
-                 
-                
                                 <input type="date" name="distinctions_date[]" id="date" class="form-control">
                          
                 <button type="button" onclick="removeSelect(this)">Supprimer</button>
@@ -169,7 +178,7 @@
 
     <!-- Déclaration sur l’honneur -->
   
-          <label for="declaration">Declaration sur l'honneur</label>
+          <label for="declaration"> <h5>Declaration sur l'honneur</h5></label>
          <input name="honneurAu" id="declaration" type="checkbox" placeholder="" value="1"  {{ $honneurAu ? 'checked' : '' }} required> <br>
 
             
@@ -220,9 +229,9 @@
             newField.innerHTML = `
                 <div>
                     <label for="nomCommission${fieldCount}" class="form-label">Nom de la commission</label>
-                    <input type="text" name="commissionAu[${fieldCount}][nom]" id="nomCommission${fieldCount}">
+                    <input type="text"class="form-control" name="commissionAu[${fieldCount}][nom]" id="nomCommission${fieldCount}">
                 </div>
-                <button type="button" class="remove-field">Supprimer ce champ</button>
+                <button type="button" class=" btn btn-danger remove-field">Supprimer </button>
             `;
 
             container.appendChild(newField);
@@ -231,7 +240,7 @@
             newField.querySelector('.remove-field').addEventListener('click', function() {
                 container.removeChild(newField);
             });
-        }
+        }       
     </script>
     <script>
         //Ajouter ouvrage edité 
@@ -253,32 +262,32 @@
             newFields.innerHTML = `
                 <div>
                     <label for="titre${u}">Titre</label>
-                    <input type="text" name="edites[${u}][titre]" id="titre${u}"  class=required>
+                    <input type="text" class="form-control" name="edites[${u}][titre]" id="titre${u}"  class=required>
                 </div>
                 <div>
                     <label for="anneePublication${u}">Année de publication</label>
-                    <input type="number" name="edites[${u}][anneePublication]" id="anneePublication${u}" required>
+                    <input type="number" class="form-control" name="edites[${u}][anneePublication]" id="anneePublication${u}" required>
                 </div>
                 <div>
                     <label for="nomAuteur${u}">Nom de l'auteur</label>
-                    <input type="text" name="edites[${u}][nomAuteur]"  id="nomAuteur${u}" required>
+                    <input type="text" class="form-control" name="edites[${u}][nomAuteur]"  id="nomAuteur${u}" required>
                 </div>
 
                  <div>
                     <label for="nomCoauteur${u}">Nom du coauteur</label>
-                    <input type="text" name="edites[${u}][nomCoauteur]" id="nomCoauteur${u}" required>
+                    <input type="text" class="form-control" name="edites[${u}][nomCoauteur]" id="nomCoauteur${u}" required>
                 </div>
 
              
                 <div>
                     <label for="nombrePage${u}">Nombre de pages</label>
-                    <input type="number" name="edites[${u}][nombrePage]" id="nombrePage${u}" required>
+                    <input type="number" class="form-control" name="edites[${u}][nombrePage]" id="nombrePage${u}" required>
                 </div>
                    <div>
                     <label for="editeur${u}">Éditeur</label>
-                    <input type="text" name="edites[${u}][editeur]" id="editeur${u}" required>
+                    <input type="text"class="form-control" name="edites[${u}][editeur]" id="editeur${u}" required>
                 </div>
-                <button type="button" class="remove-field">Supprimer ces champs</button>
+                <button type="button" class=" btn btn-danger remove-field">Supprimer </button>
                 <hr>
             `;
 
@@ -311,24 +320,24 @@
             newFields.innerHTML = `
                 <div>
                     <label for="titre${y}">Titre</label>
-                    <input type="text" name="Nedites[${y}][titreNe]" id="titre${y}" required>
+                    <input type="text" class="form-control" name="Nedites[${y}][titreNe]" id="titre${y}" required>
                 </div>
                 <div>
                     <label for="nomAuteur${y}">Nom de l'auteur</label>
-                    <input type="text" name="Nedites[${y}][nomAuteurNe]" id="nomAuteur${y}" required>
+                    <input type="text"class="form-control" name="Nedites[${y}][nomAuteurNe]" id="nomAuteur${y}" required>
                 </div>
                 <div>
                     <label for="nomCoauteur${y}">Nom du coauteur</label>
-                    <input type="text" name="Nedites[${y}][nomCoauteurNe]" id="nomCoauteur${y}">
+                    <input type="text"class="form-control" name="Nedites[${y}][nomCoauteurNe]" id="nomCoauteur${y}">
                 </div>
 
                 <div>
                     <label for="nbrePage${y}">Nombre de pages</label>
-                    <input type="text" name="Nedites[${y}][nbrePNe]" id="nbrePage${y}">
+                    <input type="text" class="form-control" name="Nedites[${y}][nbrePNe]" id="nbrePage${y}">
                 </div>
 
                 
-                <button type="button" class="remove-field">Supprimer ces champs</button>
+                <button type="button" class=" btn btn-danger remove-field">Supprimer </button>
                 <hr>
             `;
 
@@ -373,7 +382,7 @@
                                 <input type="date" name="distinctionsAu[${v}][distinctions_date]" id="date_${v}" class="form-control">
                          </div>
 
-                    <button type="button" onclick="removeSelect(this)">Supprimer</button>
+                    <button type="button" class="btn btn-danger" onclick="removeSelect(this)">Supprimer</button>
                 `;
 
                 // Ajoute le nouveau select au conteneur

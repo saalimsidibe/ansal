@@ -14,11 +14,14 @@
                         <li>Etape4</li>
                         <li>Etape5</li>
                         <li>Etape6</li>
+                        <li>Etape7</li>
+                        <li > Etape Finale</li>
                     </ol>
                 </nav>
             </div>
         </div><!-- End Page Title -->
-<section id="contact" class="contact section">
+        <div class="container">
+                <section id="contact" class="contact section">
                 <div class="container" data-aos="fade">
                     <div class="row ">
                         <div class="col-2"> </div>
@@ -28,12 +31,21 @@
                                 <div class="card-body">
                                     <form action="{{Route('valider3.autre')}}"  method="POST">
                                         {{ csrf_field() }}
+                                         @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
                              
                                         @php
                                             $diplomesAu=old('diplomesAu',session('etape3.diplomesAu',[]));
                                         @endphp
- <div class="diplome" id="diplome-section">
-     <h4>Diplôme universitaire</h4>
+                             <div class="diplome" id="diplome-section">
+                                 <h4>Diplôme universitaire</h4>
     @foreach ($diplomesAu as $indexAu => $diplomeAu )
         
    
@@ -61,19 +73,28 @@
     </div>
      @endforeach
 
-    <button type="button" id="add-field" class="  float-right btn btn-primary">Ajouter un diplôme</button>
-</div>
-</div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-info" value="">Suivant</button>
-                        <div class="col-2">  </div>
-                        
+    <button type="button" id="add-field" class="btn btn-primary">Ajouter un diplôme</button>
+
+  <div class="form-group">
+                           <button type="submit" class="btn btn-info" value="">Suivant</button> 
+                     </div>
+                     
+ </div>
+                   
+                      
                     </div>
             </section>
-        </div>
-        
+            
     </form>
+      </div>
+                           
+                        </div>
+                        
+                        <div class="col-2"> </div>
+                         
+                    </div>
+        </div>
+         
     </main>
    
 @endsection    

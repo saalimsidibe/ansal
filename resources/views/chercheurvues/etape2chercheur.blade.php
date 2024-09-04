@@ -31,6 +31,15 @@
                                 <div class="card-body">
                                     <form action="{{ route('multi-step-form.next') }}" method="POST">
                                         @csrf
+                                         @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
                                         <div class="form-group">
                                             <label for="nomPremierP" class="label-form">Nom du Premier Parrain:</label>
                                             <input type="text" name="nomPremierP" id="nomPremierP" class="form-control"

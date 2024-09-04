@@ -28,7 +28,7 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info bg-light"><h3>Informationssur les expériences</h3> </div>
+                                <div class="card-head info bg-light"><h3>Informations sur les expériences</h3> </div>
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('multi-step-form.next') }}">
                                         @csrf
@@ -201,13 +201,15 @@
                                                            class="form-control" id="exp_pays_${experienceIndex}" required>
 
 
-
+                                                    
                                                            
                                                 </div>
                                             `;
 
                                             experienceContainer.insertAdjacentHTML('beforeend', experienceField);
                                         });
+
+                                           
 
                                         // Gestion des responsabilités administratives internationales
                                         document.getElementById('respprofint').addEventListener('change', function() {

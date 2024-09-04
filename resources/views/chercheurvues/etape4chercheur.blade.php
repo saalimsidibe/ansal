@@ -26,13 +26,21 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info bg-light"> Experiences Nationales</div>
+                                <div class="card-head info bg-light"> <h3>Experiences Nationales</h3></div>
 
 
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('multi-step-form.next') }}">
                                         @csrf
-
+                                         @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
                                         <!-- Expériences professionnelles -->
                                         <div class="form-group">
                                             <label for="expadmin" class="label-form">Expériences professionnelles exercées
@@ -83,7 +91,7 @@
                                                             id="ville_{{ $index }}" class="form-control"
                                                             value="{{ $experience['ville'] ?? '' }}">
                                                     </div>
-                                                    <button type="button" class="remove-btn"
+                                                    <button type="button" class=" btn btn-danger remove-btn"
                                                         onclick="removeField(this)">Supprimer ce champ</button>
                                                 @endforeach
 
@@ -132,7 +140,7 @@
                                                 <label>Ville:</label>
                                                 <input type="text" name="responsabilites[{{ $index }}][ville]"
                                                 value="{{ $responsabilite['ville'] ?? '' }}"/><br/>
-                                                <button type="button" class="remove-button">Supprimer</button>
+                                                <button type="button" class=" btn btn-danger remove-button">Supprimer</button>
                                                 <hr/>
                                                 @endforeach
 
@@ -220,7 +228,7 @@
                     <label for="ville_${fieldIndex}">Ville</label>
                     <input type="text" name="experiences[${fieldIndex}][ville]" id="ville_${fieldIndex}" class="form-control">
                 </div>
-                <button type="button" class="remove-btn" onclick="removeField(this)">Supprimer ce champ</button>
+                <button type="button" class=" btn btn-danger remove-btn" onclick="removeField(this)">Supprimer</button>
             `;
                 experienceContainer.appendChild(newField);
             });
@@ -267,7 +275,7 @@
                     <input type="text"  class="form-control" name="responsabilites[${index}][structure]" /><br/>
                     <label>Ville:</label>
                     <input type="text" class="form-control" name="responsabilites[${index}][ville]" /><br/>
-                    <button type="button" class="remove-button">Supprimer</button>
+                    <button type="button" class="remove-button btn btn-danger">Supprimer</button>
                     <hr/>
                 `;
                 fieldsContainer.appendChild(newFieldSet); 

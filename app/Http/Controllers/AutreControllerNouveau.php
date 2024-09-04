@@ -11,8 +11,8 @@ use App\Models\ExpProfChercheur;
 use App\Models\Ouvrage;
 use App\Models\Parrain;
 use App\Models\Responsabilite;
-use  App\Models\Commission;
-use  App\Models\Brevet;
+use App\Models\Commission;
+use App\Models\Brevet;
 use App\Models\Article;
 use App\Models\Distinction;
 use App\Models\PreuveAutre;
@@ -173,7 +173,7 @@ class AutreControllerNouveau extends Controller
     }
 
 
-    public function fichierAutre(Request $request)
+    public function uploadFile(Request $request)
     {
         $fichiers = $request->validate([
 
@@ -192,11 +192,13 @@ class AutreControllerNouveau extends Controller
                 $path = $file->store('uploads');
                 $type = $key;
                 $nom_originale = $file->getClientOriginalName();
-                session()->push('uploaded_files', ['key' => $key, 'path' => $path, 'type' => $type, 'nom_originale' => $nom_originale]);
+                session()->put('documents', ['key' => $key, 'path' => $path, 'type' => $type, 'nom_originale' => $nom_originale]);
             }
         }
 
         return response()->json(['success' => 'File uploaded successfully.']);
+
+        
     }
 
 
@@ -214,7 +216,12 @@ class AutreControllerNouveau extends Controller
         $d5 = session()->get('etape5');
         $d6 = session()->get('etape6');
         $dx = session()->get('etapeX');
-        $documents = session('uploaded_files');
+        $documents = session('documents');
+        dd($documents);
+        $edites = $d6['edites'];
+        $Nedites = $d6['Nedites'];
+        $distinctions = $d6['distinctionsAu'];
+
 
         $candidat = new Candidat();
         $candidat->categorie = 'autre';
@@ -324,14 +331,14 @@ class AutreControllerNouveau extends Controller
         }
 
         //enregistrer les ouvrages non edites
-        foreach ($d6['titreNe'] as $index => $titre) {
-            $nomAuteurNe = $d6['nomAuteurNe'][$index];
-            $nomCoauteurNe = $d6['nomCoauteurNe'][$index];
-            $titreNe = $titre;
-            $NbrePage = $d6['nbrePNe'][$index];
+        foreach ($Nedites as $Nedite) {
+            $nomAuteurNe = $Nedite['nomAuteurNe'];
+            $nomCoauteurNe = $Nedite['nomCoauteurNe'];
+            $titreNe = $Nedite['titreNe'];
+            $NbrePage = $Nedite['nbrePNe'];
 
             $ouvrage = new Ouvrage();
-            $ouvrage->nom = $titre;
+            $ouvrage->nom = $titreNe;
             $ouvrage->nom_auteur =  $nomAuteurNe;
             $ouvrage->nom_coauteur = $nomCoauteurNe;
             $ouvrage->nombrePage = $NbrePage;
@@ -342,13 +349,13 @@ class AutreControllerNouveau extends Controller
         }
 
         //Pour les ouvrages edités
-        foreach ($d6['titre'] as $index => $t) {
-            $nomAuteur = $d6['nomAuteur'][$index];
-            $nomCoAuteur = $d6['nomCoauteur'][$index];
-            $anneePublication = $d6['anneePublication'][$index];
-            $titre = $t;
-            $editeur = $d6['editeur'][$index];
-            $nombrePage = $d6['nombrePage'][$index];
+        foreach ($edites as $edite) {
+            $nomAuteur = $edite['nomAuteur'];
+            $nomCoAuteur = $edite['nomCoauteur'];
+            $anneePublication = $edite['anneePublication'];
+            $titre = $edite['titre'];
+            $editeur = $edite['editeur'];
+            $nombrePage = $edite['nombrePage'];
 
             $ouvrage = new Ouvrage();
             $ouvrage->nom = $titre;
@@ -363,10 +370,10 @@ class AutreControllerNouveau extends Controller
             $ouvrage->save();
         }
 
-        foreach ($d6['distinctions_nom'] as $index => $distinction) {
-            $type = $d6['distinctionsAu'][$index];
-            $nom = $distinction;
-            $date = $d6['distinctions_date'][$index];
+        foreach ($distinctions as $distinction) {
+            $type = $distinction['type'];
+            $nom = $distinction['distinctions_nom'];
+            $date = $distinction['distinctions_date'];
 
             $distinction = new Distinction();
             $distinction->type = $type;

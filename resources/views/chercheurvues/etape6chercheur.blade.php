@@ -26,7 +26,7 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelle</div>
+                                <div class="card-head info"></div>
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('multi-step-form.next') }}">
                                         @csrf

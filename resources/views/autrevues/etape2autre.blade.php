@@ -14,21 +14,32 @@
                         <li>Etape4</li>
                         <li>Etape5</li>
                         <li>Etape6</li>
+                        <li>Etape7</li>
+                        <li> Etape Finale</li>
                     </ol>
                 </nav>
             </div>
         </div><!-- End Page Title -->
-
+            <div class="container">
               <section id="contact" class="contact section">
                 <div class="container" data-aos="fade">
                     <div class="row ">
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelle</div>
+                                <div class="card-head info bg-light ">  <H3>Parrainage et College</H3></div>
                                 <div class="card-body">
     <form action="{{Route('valider2.autre')}}" method="POST">
          @csrf
+          @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
         <div class="form-group">
             <label for="nomPremierPautre" class="label-form" >Nom du Premier Parrain</label>
             <input type="text" name="nomPremierPautre" id="nomPremierPautre"  value="{{old('nomPremierPautre',session('etape2.nomPremierPautre',''))}}"     class="form-control">

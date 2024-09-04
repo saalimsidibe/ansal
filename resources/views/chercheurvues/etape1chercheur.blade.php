@@ -26,13 +26,22 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             @error('name')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="alert alert-danger ">{{ $message }}</div>
                             @enderror
                             <div class="card ">
-                                <div class="card-head info"> Informations Personnelles</div>
+                                <div class="card-head info bg-ligth"> <h3>Informations Personnelles</h3> </div>
                                 <div class="card-body">
                                     <form action="{{ Route('multi-step-form.next') }}" method="POST">
                                         @csrf
+                                         @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
 
                                         <div class="form-group">
                                             <label for="nom" class="form-label">Nom</label>
