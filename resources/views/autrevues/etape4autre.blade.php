@@ -132,7 +132,8 @@
             @endforeach
               </div>        
         </div> 
-       <div class="form-group">
+       <div class="btn-group mt-4">
+             <a href="{{route('etapexautre')}}" class="btn btn-warning">Précédent</a>
            <button type="submit" class="btn btn-info" value="">Suivant</button>
        </div>
         

@@ -183,7 +183,11 @@
 
             
    
-    <button type="submit" value="" class="btn btn-info">Suivant</button>
+     <div class="btn-group mt-4">
+         <a href="{{route('etape5.autre')}}" class="btn btn-warning">Précédent</a>
+         <button type="submit" class="btn btn-info">Suivant</button>
+        </div>
+         
     </form>
      </div>
 

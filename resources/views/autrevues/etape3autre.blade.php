@@ -73,18 +73,23 @@
     </div>
      @endforeach
 
-    <button type="button" id="add-field" class="btn btn-primary">Ajouter un diplôme</button>
+     <div>
+        <button type="button" id="add-field" class="btn btn-primary">Ajouter un diplôme</button>
+     </div>
+    
 
-  <div class="form-group">
-                           <button type="submit" class="btn btn-info" value="">Suivant</button> 
-                     </div>
+ 
                      
  </div>
                    
-                      
+                       <div class="btn-group mt-4">
+     <a href="{{route('etape2.autre')}}" class="btn btn-warning">Précédent</a>                      
+    <button type="submit" class="btn btn-info" value="">Suivant</button> 
+    </div> 
                     </div>
+                      
             </section>
-            
+         
     </form>
       </div>
                            
@@ -114,8 +119,9 @@
         var section = document.getElementById('diplome-section');
         comptDip++;
         var newFields = `
-         <h4>Diplôme universitaire</h4>
+        
             <div class="diplome-item">
+                 <h4>Diplôme universitaire</h4>
                 <div class="form-group">
                     <label for="nomDipAu">Intitulé du diplôme</label>
                     <input type="text" class="form-control" name="diplomesAu[${comptDip}][nom]" id="intitule_${comptDip}" required>

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2>Résumé de vos informations</h2>
+    <h2></h2>
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -13,105 +13,179 @@
     </div>
 @endif
 
-    <!-- Étape 1: Informations personnelles -->
-    <h3>Étape 1: Informations personnelles</h3>
-    <p><strong>Nom:</strong> {{ session('data1')['nom'] ?? 'Non renseigné' }}</p>
-    <p><strong>Prénom:</strong> {{ session('data1')['prenom'] ?? 'Non renseigné' }}</p>
-    <p><strong>Date de naissance:</strong> {{ session('data1')['datenaiss'] ?? 'Non renseigné' }}</p>
-    <p><strong>Sexe:</strong> {{ session('data1')['sexe'] ?? 'Non renseigné' }}</p>
-    <p><strong>Nationalité:</strong> {{ session('data1')['nationalite']?? 'Non renseigné' }}</p>
-    <p><strong>Titre:</strong> {{ session('data1')['titre']?? 'Non renseigné' }}</p>
-    <p><strong>Date de nomination(Titre):</strong> {{ session('data1')['datenomin']?? 'Non renseigné' }}</p>
 
-
-
-    <p><strong>Email:</strong> {{ session('data1')['email'] ?? 'Non renseigné' }}</p>
-    <p><strong>Numéro de téléphone:</strong> {{ session('data1')['numerotel'] ?? 'Non renseigné' }}</p>
-    <p> <strong>Nom du Premier Parrain</strong>{{session('data')}}</p>
+@php
     
+@endphp
     
+ <!--p><strong>Nom:</strong> {{ session('data1')['nom'] ?? 'Non renseigné' }}</p> -->
+
+<h1>Résumé des Informations</h1>
+
+    <!-- Affichage des données personnelles -->
+    <h2>Informations Personnelles</h2>
+    <p><strong>Nom:</strong> {{ session('data1.nom') ?? 'Non renseigné' }}</p>
+    <p><strong>Prénom:</strong> {{ session('data1.prenom') ?? 'Non renseigné' }}</p>
+    <p><strong>Sexe:</strong> {{ session('data1.sexe') ?? 'Non renseigné' }}</p>
+    <p><strong>Date de Naissance:</strong> {{ session('data1.datenaiss') ?? 'Non renseigné'}}</p>
+    <p><strong>Titre:</strong> {{ session('data1.titre') ?? 'Non renseigné' }}</p>
+    <p><strong>Date de Nomination:</strong> {{ session('data1.datenomin') ?? 'Non renseigné'}}</p>
+    <p><strong>Numéro de Téléphone:</strong> {{ session('data1.numerotel') ?? 'Non renseigné' }}</p>
+    <p><strong>Email:</strong> {{ session('data1.email') ?? 'Non renseigné' }}</p>
+    <p><strong>Expertise:</strong> {{ session('data1.expertise') ?? 'Non renseigné' }}</p>
+    <p><strong>Collège:</strong> {{ session('data2.college') ?? 'Non renseigné' }}</p>
+    <p><strong>Spécialité:</strong> {{ session('data2.specialite') ?? 'Non renseigné' }}</p>
+
+    <!-- Affichage des informations sur les parents -->
+    <h2>Informations sur les Parrains</h2>
+    <p><strong>Nom du Premier Parent:</strong> {{ session('data2.nomPremierP') ?? 'Non renseigné' }}</p>
+    <p><strong>Prénom du Premier Parent:</strong> {{ session('data2.prenomPremierP') ?? 'Non renseigné' }}</p>
+    <p><strong>Nom du Deuxième Parent:</strong> {{ session('data2.nomDeuxiemeP') ?? 'Non renseigné'}}</p>
+    <p><strong>Prénom du Deuxième Parent:</strong> {{ session('data2.prenomDeuxiemeP') ?? 'Non renseigné' }}</p>
     
+
+    <!-- Affichage des diplômes -->
+    <h2>Diplômes</h2>
+    @foreach (session('data3.diplomes', []) as $diplome)
+        <div>
+            <p><strong>Intitulé:</strong> {{ $diplome['intitule'] ?? 'Non renseigné' }}</p>
+            <p><strong>Période:</strong> {{ $diplome['periode'] ?? 'Non renseigné'}}</p>
+            <p><strong>Institution:</strong> {{ $diplome['institution'] ?? 'Non renseigné' }}</p>
+            <p><strong>Ville:</strong> {{ $diplome['ville'] ?? 'Non renseigné' }}</p>
+            <p><strong>Pays:</strong> {{ $diplome['pays'] ?? 'Non renseigné' }}</p>
+        </div>
+    @endforeach
+
+    <!-- Affichage des expériences administratives et responsabilités -->
+    <h2>Expériences Administratives et Responsabilités au plan national</h2>
     
-    <!-- Étape 2: Informations académiques -->
-    <h3>Étape 2: Informations académiques</h3>
-    <p><strong>Diplôme:</strong> {{ session('data2')['diplome'] ?? 'Non renseigné' }}</p>
-    <p><strong>Université:</strong> {{ session('data2')['universite'] ?? 'Non renseigné' }}</p>
-    <p><strong>Année d'obtention:</strong> {{ session('data2')['annee_obtention'] ?? 'Non renseigné' }}</p>
-    <p><strong>Spécialité:</strong> {{ session('specialite') ?? 'Non renseigné' }}</p>
 
-    <!-- Étape 3: Expériences professionnelles -->
-    <h3>Étape 3: Expériences professionnelles</h3>
-    @foreach (session('experiences', []) as $index => $experience)
-        <p><strong>Expérience {{ $index + 1 }}:</strong></p>
-        <p><strong>Entreprise:</strong> {{ $experience['entreprise'] ?? 'Non renseigné' }}</p>
-        <p><strong>Poste:</strong> {{ $experience['poste'] ?? 'Non renseigné' }}</p>
-        <p><strong>Durée:</strong> {{ $experience['duree'] ?? 'Non renseigné' }}</p>
+    <h3>Expériences</h3>
+    @foreach (session('data4.experiences', []) as $experience)
+        <div>
+            <p><strong>Intitulé:</strong> {{ $experience['intitule'] ?? 'Non renseigné' }}</p>
+            <p><strong>Début:</strong> {{ $experience['debut'] ?? 'Non renseigné'}}</p>
+            <p><strong>Fin:</strong> {{ $experience['fin'] ?? 'Non renseigné'}}</p>
+            <p><strong>Ville:</strong> {{ $experience['ville'] ?? 'Non renseigné' }}</p>
+            <p><strong>Structure:</strong> {{ $experience['structure'] ?? 'Non renseigné' }}</p>
+        </div>
     @endforeach
 
-    <!-- Étape 4: Projets réalisés -->
-    <h3>Étape 4: Projets réalisés</h3>
-    @foreach (session('projets', []) as $index => $projet)
-        <p><strong>Projet {{ $index + 1 }}:</strong></p>
-        <p><strong>Nom du projet:</strong> {{ $projet['nom_projet'] ?? 'Non renseigné' }}</p>
-        <p><strong>Description:</strong> {{ $projet['description'] ?? 'Non renseigné' }}</p>
-        <p><strong>Année:</strong> {{ $projet['annee'] ?? 'Non renseigné' }}</p>
+    <h3>Responsabilités</h3>
+    @foreach (session('data4.responsabilites', []) as $responsabilite)
+        <div>
+            <p><strong>Intitulé:</strong> {{ $responsabilite['intitule'] ?? 'Non renseigné' }}</p>
+            <p><strong>Début:</strong> {{ $responsabilite['debut'] ?? 'Non renseigné' }}</p>
+            <p><strong>Fin:</strong> {{ $responsabilite['fin'] ?? 'Non renseigné' }}</p>
+            <p><strong>Ville:</strong> {{ $responsabilite['ville'] ?? 'Non renseigné' }}</p>
+            <p><strong>Pays</strong>Burkina</p>
+            <p><strong>Structure:</strong> {{ $responsabilite['structure'] ?? 'Non renseigné' }}</p>
+        </div>
     @endforeach
 
-    <!-- Étape 5: Publications -->
-    <h3>Étape 5: Publications</h3>
-    @foreach (session('publications', []) as $index => $publication)
-        <p><strong>Publication {{ $index + 1 }}:</strong></p>
-        <p><strong>Titre:</strong> {{ $publication['titre'] ?? 'Non renseigné' }}</p>
-        <p><strong>Revue:</strong> {{ $publication['revue'] ?? 'Non renseigné' }}</p>
-        <p><strong>Année:</strong> {{ $publication['annee'] ?? 'Non renseigné' }}</p>
+    <!-- Affichage des informations professionnelles -->
+    <h2>Expériences Administratives et Responsabilités au plan international</h2>
+    
+    @if (session('data5.expprofint') == 'oui')
+        <h3>Expériences Professionnelles</h3>
+        @foreach (session('data5.experiences', []) as $experience)
+            <div>
+                <p><strong>Intitulé:</strong> {{ $experience['intitule'] ?? 'Non renseigné' }}</p>
+                <p><strong>Début:</strong> {{ $experience['debut'] ?? 'Non renseigné' }}</p>
+                <p><strong>Fin:</strong> {{ $experience['fin'] ?? 'Non renseigné' }}</p>
+                <p><strong>Institution:</strong> {{ $experience['institution'] ?? 'Non renseigné' }}</p>
+                <p><strong>Ville:</strong> {{ $experience['ville'] ?? 'Non renseigné' }}</p>
+                <p><strong>Pays:</strong> {{ $experience['pays'] ?? 'Non renseigné' }}</p>
+            </div>
+        @endforeach
+
+        <h3>Responsabilités Professionnelles</h3>
+        @foreach (session('data5.responsabilites', []) as $responsabilite)
+            <div>
+                <p><strong>Intitulé:</strong> {{ $responsabilite['intitule'] ?? 'Non renseigné' }}</p>
+                <p><strong>Début:</strong> {{ $responsabilite['debut'] ?? 'Non renseigné' }}</p>
+                <p><strong>Fin:</strong> {{ $responsabilite['fin'] ?? 'Non renseigné' }}</p>
+                <p><strong>Institution:</strong> {{ $responsabilite['institution'] ?? 'Non renseigné' }}</p>
+                <p><strong>Ville:</strong> {{ $responsabilite['ville'] ?? 'Non renseigné'}}</p>
+                <p><strong>Pays:</strong> {{ $responsabilite['pays'] ?? 'Non renseigné'}}</p>
+            </div>
+        @endforeach
+    @endif
+
+    <!-- Affichage des publications, brevets, distinctions -->
+    <h2>Ouvrages</h2>
+    @foreach (session('data6.ouvrages', []) as $ouvrage)
+        <div>
+            <p><strong>Auteur: </strong> {{ $ouvrage['auteur'] ?? 'Non renseigné' }}</p>
+            <p><strong>Co Auteur: </strong> {{ $ouvrage['coauteur'] ?? 'Non renseigné' }}</p>
+            <p><strong>Année:</strong> {{ $ouvrage['annee'] ?? 'Non renseigné' }}</p>
+            <p><strong>Titre:</strong> {{ $ouvrage['titre'] ?? 'Non renseigné' }}</p>
+            <p><strong>Éditeur:</strong> {{ $ouvrage['editeur'] ?? 'Non renseigné' }}</p>
+            <p><strong>Nombre de Pages:</strong> {{ $ouvrage['nombre_pages'] ?? 'Non renseigné' }}</p>
+        </div>
     @endforeach
 
-    <!-- Étape 6: Contributions et distinctions -->
-    <h3>Étape 6: Contributions et distinctions</h3>
-    <p><strong>Commissions, sociétés savantes/comités d’experts internationaux:</strong></p>
-    @foreach (session('commissions', []) as $commission)
-        <p>{{ $commission }}</p>
+
+         <h2>Articles</h2>
+    @foreach (session('data6.articles', []) as $article)
+        <div>
+            <p><strong>Auteur:</strong> {{ $article['auteur'] ?? 'Non renseigné' }}</p>
+            <p><strong>Co-auteur:</strong> {{ $article['coauteur'] ?? 'Non renseigné' }}</p>
+            <p><strong>Année de Publication:</strong> {{ $article['annee_publication'] ?? 'Non renseigné' }}</p>
+            <p><strong>Titre:</strong> {{ $article['titre'] ?? 'Non renseigné'}}</p>
+            <p><strong>Éditeur:</strong> {{ $article['editeur'] ?? 'Non renseigné' }}</p>
+            <p><strong>Pages:</strong> {{ $article['pages'] ?? 'Non renseigné' }}</p>
+        </div>
     @endforeach
 
-    <p><strong>Brevets obtenus:</strong></p>
-    @foreach (session('brevets', []) as $brevet)
-        <p>{{ $brevet['auteur'] ?? 'Non renseigné' }} - {{ $brevet['intitule'] ?? 'Non renseigné' }} ({{ $brevet['date'] ?? 'Non renseigné' }})</p>
+    <H2>Brevets</H2>
+    @foreach (session('data6.brevets',[]) as $brevet)
+        <div>
+              <p><strong>Reference: </strong> {{$brevet['reference'] ?? 'Non renseigné' }}</p>
+              <p><strong>Intitule: </strong> {{$brevet['intitule'] ?? 'Non renseigné' }}</p>
+              <p><strong>Auteurs: </strong>{{$brevet['auteur'] ?? 'Non renseigné'}}</p>
+        </div>
+        
     @endforeach
 
-    <p><strong>Ouvrages scientifiques édités:</strong></p>
-    @foreach (session('ouvrages', []) as $ouvrage)
-        <p>{{ $ouvrage['auteur'] ?? 'Non renseigné' }} - {{ $ouvrage['titre'] ?? 'Non renseigné' }} ({{ $ouvrage['annee'] ?? 'Non renseigné' }})</p>
+
+        <h2>Commissions</h2>
+        @foreach (session('data6.commissions',[]) as $comm)
+            <div>
+               <p><strong>Nom: </strong> {{$comm['name'] ?? 'Non renseigné' }}</p>  
+            </div>
+        @endforeach
+
+
+
+         <h2>Distinctions</h2>
+    @foreach (session('data6.distinctions',[]) as $distinction)
+   
+    <div>
+        <p><strong>Type: </strong>{{$distinction['type'] ?? 'Non renseigné'}}</p>
+        <p><strong>Nom: </strong>{{$distinction['nom'] ?? 'Non renseigné'}}</p>
+        <p><strong>Date: </strong>{{$distinction['date'] ?? 'Non renseigné'}}</p>
+    </div>
+        
     @endforeach
 
-    <p><strong>Articles dans des ouvrages scientifiques:</strong></p>
-    @foreach (session('articles', []) as $article)
-        <p><strong>Auteur:</strong> {{ $article['auteur'] ?? 'Non renseigné' }}</p>
-        <p><strong>Coauteurs:</strong> {{ $article['coauteur'] ?? 'Non renseigné' }}</p>
-        <p><strong>Année:</strong> {{ $article['annee_publication'] ?? 'Non renseigné' }}</p>
-        <p><strong>Titre:</strong> {{ $article['titre'] ?? 'Non renseigné' }}</p>
-        <p><strong>Éditeur:</strong> {{ $article['editeur'] ?? 'Non renseigné' }}</p>
-        <p><strong>Pages:</strong> {{ $article['pages'] ?? 'Non renseigné' }}</p>
+    <!-- Affichage des fichiers téléchargés -->
+    <h2>Fichiers Téléchargés</h2>
+    @foreach (session('preuves_chercheurs', []) as $file)
+        <div>
+            <p><strong>Type:</strong> {{ $file['type'] }}</p>
+            <p><strong>Nom Original:</strong> {{ $file['nom_originale'] }}</p>
+            <p><strong>Chemin:</strong> <a href="{{ Storage::url($file['path']) }}">Voir le fichier</a></p>
+        </div>
     @endforeach
 
-    <p><strong>Distinctions:</strong></p>
-    @foreach (session('distinctions', []) as $distinction)
-        <p>{{ $distinction['nom'] ?? 'Non renseigné' }} - {{ $distinction['type'] == '1' ? 'Scientifique' : 'Sociale' }}</p>
-    @endforeach
-
-    <p><strong>Contribution scientifique majeure:</strong> {{ session('contributionChecheur') ?? 'Non renseigné' }}</p>
-    <p><strong>Déclaration sur l'honneur:</strong> {{ session('honneurChercheur') ? 'Oui' : 'Non' }}</p>
-
+    <!-- Affichage de la contribution et des honneurs -->
+    <h2>Contribution</h2>
+    <p><strong>Contribution majeure dans les domaines du  collège postulé  :</strong> {{ session('data6.contributionChecheur') }}</p>
+    
+</body>
     <!-- Étape 7: Fichiers joints -->
-    <h3>Étape 7: Fichiers joints</h3>
-    <p><strong>CV:</strong> {{ session('cvchercheurDoc') ? session('cvchercheurDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Diplômes et attestations:</strong> {{ session('dipChercheurDoc') ? session('dipChercheurDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Fonctions et responsabilités:</strong> {{ session('fonctionDoc') ? session('fonctionDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Sociétés savantes:</strong> {{ session('societeExpertDoc') ? session('societeExpertDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Brevets:</strong> {{ session('brevetDoc') ? session('brevetDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Articles:</strong> {{ session('articleDoc') ? session('articleDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Ouvrages scientifiques:</strong> {{ session('ouvrageDoc') ? session('ouvrageDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Distinctions honorifiques:</strong> {{ session('distinctionsHonorifiquesDoc') ? session('distinctionsHonorifiquesDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Distinctions scientifiques:</strong> {{ session('distinctionsScientifiquesDoc') ? session('distinctionsScientifiquesDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
+    
 
     <!-- Formulaire de soumission finale -->
     <form method="POST" action="{{ route('multi-step-form.finish') }}">

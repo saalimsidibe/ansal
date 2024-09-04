@@ -70,7 +70,12 @@
             <label for="specialiteAutre">Precisez votre spécialité dans le collège postulé</label>
             <input type="text" name="specialiteAutre" id="specialiteAutre"  value="{{old('specialiteAutre',session('etape2.specialiteAutre',''))}}"   class="form-control">
         </div>
-         <button type="submit" class="btn btn-info" value="{{''}}">Suivant</button>
+            
+        <div class="btn-group mt-4">
+         <a href="{{route('etape1.autre')}}" class="btn btn-warning">Précédent</a>
+         <button type="submit" class="btn btn-info">Suivant</button>
+        </div>
+         
     </form>
     </div>
                             </div>

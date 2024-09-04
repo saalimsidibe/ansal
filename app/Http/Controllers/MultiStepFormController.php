@@ -530,7 +530,7 @@ class MultiStepFormController extends Controller
             $article->titre = $art['titre'];
             $article->editeur = $art['editeur'];
             $article->refPage = $art['pages'];
-           # $article->coauteur = $art['coauteur'];
+            # $article->coauteur = $art['coauteur'];
             $article->candidat_id = $candidat->id;
 
             $article->save();

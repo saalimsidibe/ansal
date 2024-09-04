@@ -88,7 +88,10 @@
                
 
                   
-         <button type="submit" class="btn btn-info" value="">Suivant</button>   
+        <div class="btn-group mt-4">
+         <a href="{{route('etape4.autre')}}" class="btn btn-warning">Précédent</a>
+         <button type="submit" class="btn btn-info">Suivant</button>
+        </div>
          
     </form>
 
