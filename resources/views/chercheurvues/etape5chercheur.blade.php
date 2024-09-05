@@ -142,10 +142,9 @@
 
                                                         
                                                         <label for="resp_ville_{{$index}}" class="mt-2">Ville</label>
-                                                        <input type="text" name="responsabilites[{{ $index }}][ville]" id="resp_ville_{{$index}}" value="{{ old("responsabilites.$index.ville", $responsibility['ville'] ?? '') }}"> 
-
+                                                        <input type="text" class="form-control"  name="responsabilites[{{ $index }}][ville]" id="resp_ville_{{$index}}" value="{{ old("responsabilites.$index.ville", $responsibility['ville'] ?? '') }}"><br>
                                                         <label for="res_pays_{{$index}}" class="mt-2">Pays</label>
-                                                        <input type="text" name="responsabilites[{{ $index }}][pays]" id="res_pays_{{$index}}" {{ old("responsabilites.$index.pays", $responsibility['pays'] ?? '') }}>
+                                                        <input type="text" class="form-control" name="responsabilites[{{ $index }}][pays]" id="res_pays_{{$index}}"    value=" {{ old("responsabilites.$index.pays", $responsibility['pays'] ?? '') }}">
                                                     </div>
                                                 @endforeach
                                             </div>

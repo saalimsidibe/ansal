@@ -125,7 +125,7 @@
 
                                         <div class="form-group">
                                             <label for="expertise" class="form-label" >Domaines d'expertise</label>
-                                            <input type="expertise" name="expertise" id="expertise" class="form-control">
+                                            <input type="expertise" name="expertise" id="expertise" class="form-control" value="{{ old('expertise', session('data1.expertise')) }}">
                                         </div> <br>
 
                                         <button type="submit" class="btn btn-info">Suivant</button>

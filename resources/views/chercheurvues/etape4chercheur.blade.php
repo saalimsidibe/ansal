@@ -65,34 +65,34 @@
                                                     <div class="form-group">
                                                         <label for="intitule_{{ $index }}">Intitulé de la
                                                             fonction</label>
-                                                        <input type="text"    name="experiences[{{ $index }}][intitule]"
+                                                        <input class="form-control"   type="text"    name="experiences[{{ $index }}][intitule]"
                                                             id="intitule_{{ $index }}" class="form-control"
                                                             value="{{ $experience['intitule'] ?? '' }}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="structure_{{$index }}">Structure</label>
-                                                        <input type="text" value="{{ $experience['structure'] ?? '' }}" name="experiences[{{ $index }}][structure]" id="structure_{{$index }}">
+                                                        <input type="text" class="form-control"     value="{{ $experience['structure'] ?? '' }}" name="experiences[{{ $index }}][structure]" id="structure_{{$index }}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="debut_{{ $index }}">Début de la fonction</label>
-                                                        <input type="date" name="experiences[{{ $index }}][debut]"
+                                                        <input type="date" class="form-control"   name="experiences[{{ $index }}][debut]"
                                                             id="debut_{{ $index }}" class="form-control"
                                                             value="{{ $experience['debut'] ?? '' }}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="fin_{{ $index }}">Fin de la fonction</label>
-                                                        <input type="date" name="experiences[{{ $index }}][fin]"
+                                                        <input type="date" class="form-control"  name="experiences[{{ $index }}][fin]"
                                                             id="fin_{{ $index }}" class="form-control"
                                                             value="{{ $experience['fin'] ?? '' }}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="ville_{{ $index }}">Ville</label>
-                                                        <input type="text" name="experiences[{{ $index }}][ville]}"
+                                                        <input type="text" class="form-control"        name="experiences[{{ $index }}][ville]}"
                                                             id="ville_{{ $index }}" class="form-control"
                                                             value="{{ $experience['ville'] ?? '' }}">
                                                     </div>
                                                     <button type="button" class=" btn btn-danger remove-btn"
-                                                        onclick="removeField(this)">Supprimer ce champ</button>
+                                                        onclick="removeField(this)">Supprimer</button>
                                                 @endforeach
 
                                                 <!-- Champs dynamiques pour ajouter les expériences seront ajoutés ici -->
@@ -126,19 +126,19 @@
                                             <div id="fields-container">
                                                 @foreach ($responsabilites as $index => $responsabilite)
                                                 <label>Intitulé de la responsabilité:</label>
-                                                <input type="text" name="responsabilites[{{ $index }}][intitule]"
+                                                <input type="text" class="form-control" name="responsabilites[{{ $index }}][intitule]"
                                                 value="{{ $responsabilite['intitule'] ?? '' }}" /><br/>
                                                 <label>Début:</label>
-                                                <input type="date" name="responsabilites[{{ $index }}][debut]"
+                                                <input type="date" class="form-control" name="responsabilites[{{ $index }}][debut]"
                                                 value="{{ $responsabilite['debut'] ?? '' }}" /><br/>
                                                 <label>Fin:</label>
-                                                <input type="date" name="responsabilites[{{ $index }}][fin]"
+                                                <input type="date"  class="form-control" name="responsabilites[{{ $index }}][fin]"
                                                 value="{{ $responsabilite['fin'] ?? '' }}" /><br/>
                                                 <label>Structure:</label>
-                                                <input type="text" name="responsabilites[{{ $index }}][structure]"
+                                                <input type="text" class="form-control" name="responsabilites[{{ $index }}][structure]"
                                                 value="{{ $responsabilite['structure'] ?? '' }}"/><br/>
                                                 <label>Ville:</label>
-                                                <input type="text" name="responsabilites[{{ $index }}][ville]"
+                                                <input type="text" class="form-control" name="responsabilites[{{ $index }}][ville]"
                                                 value="{{ $responsabilite['ville'] ?? '' }}"/><br/>
                                                 <button type="button" class=" btn btn-danger remove-button">Supprimer</button>
                                                 <hr/>

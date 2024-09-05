@@ -53,6 +53,8 @@
                                             <br>
                                             @php
                                                 $diplomes = old('diplomes', session('data3.diplomes', []));
+                                                
+                                                
                                             @endphp
 
                                             @foreach ($diplomes as $index => $diplome)
