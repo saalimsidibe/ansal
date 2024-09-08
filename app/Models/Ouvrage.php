@@ -11,6 +11,6 @@ class Ouvrage extends Model
 
     public function candidat()
     {
-        return $this->belongsTo(Candidat::class);
+        return $this->belongsTo(Candidat::class, 'candidat_id');
     }
 }

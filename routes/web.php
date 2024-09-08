@@ -37,6 +37,8 @@ Route::get('/evaluateur_sciences', [Evaluateur::class, 'EvSciences'])->name('eva
 
 Route::get('/evaluateur_economie', [Evaluateur::class, 'EvEconomie'])->name('evaluateur.economie');
 
+Route::get('/profilmedecin/{id}', [Evaluateur::class, 'showMedecin'])->name('profil.medecin');
+
 
 
 

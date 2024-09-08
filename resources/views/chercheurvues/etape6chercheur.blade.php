@@ -122,12 +122,12 @@
                                                                 <label for="auteurs-{{ $index }}">Auteur(s)</label>
                                                                 <input class="form-control" type="text"
                                                                     id="auteurs-{{ $index }}"
-                                                                    name="ouvrages[{{ $index }}][auteur]"       required>
+                                                                    name="ouvrages[{{ $index }}][auteur]" value="{{ $ouvrage['auteur'] ?? '' }}"     required>
                                                             </div >
 
                                                             <div class="form-group">
                                                                 <label for="coauteurs-{{$index }}">Coauteur</label>
-                                                                <input class="form-control" type="text" id="coauteurs-{{$index }}" name="ouvrages[{{ $index }}][coauteur]">
+                                                                <input class="form-control" type="text" id="coauteurs-{{$index }}" name="ouvrages[{{ $index }}][coauteur]"  value="{{ $ouvrage['coauteur'] ?? '' }}">
                                                             </div>
                                                             
                                                             <div class="form-group">
@@ -135,26 +135,26 @@
                                                                     publication</label>
                                                                 <input type="date" class="form-control"
                                                                     id="annee-{{ $index }}"
-                                                                    name="ouvrages[{{ $index }}][annee]" required>
+                                                                    name="ouvrages[{{ $index }}][annee]" value="{{ $ouvrage['annee'] ?? '' }}" required>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="titre-{{ $index }}">Titre</label>
                                                                 <input type="text" class="form-control"
                                                                     id="titre-{{ $index }}"
-                                                                    name="ouvrages[{{ $index }}][titre]" required>
+                                                                    name="ouvrages[{{ $index }}][titre]" value="{{ $ouvrage['titre'] ?? '' }}" required>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="editeur-{{ $index }}">Éditeur</label>
                                                                 <input type="text" class="form-control"
                                                                     id="editeur-{{ $index }}"
-                                                                    name="ouvrages[{{ $index }}][editeur]" required>
+                                                                    name="ouvrages[{{ $index }}][editeur]" value="{{ $ouvrage['editeur'] ?? '' }}" required>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="nombre_pages-{{ $index }}">Nombre de
                                                                     pages</label>
                                                                 <input type="number" class="form-control"
                                                                     id="nombre_pages-{{ $index }}"
-                                                                    name="ouvrages[{{ $index }}][nombre_pages]" required>
+                                                                    name="ouvrages[{{ $index }}][nombre_pages]" value="{{ $ouvrage['nombre_pages'] ?? '' }}" required>
                                                             </div>
                                                             <button type="button"
                                                                 class="supprimer-ouvrage btn btn-danger"
@@ -420,9 +420,10 @@
 
 <br>
 <script>
+    var fieldIndex = 0;
     //script pour ajouter les articles dans des ouvrages scientifiques
     $(document).ready(function() {
-        var fieldIndex = 0;
+        
 
         $("#add-field").click(function() {
             fieldIndex++;
@@ -436,7 +437,7 @@
                 '<input  class="form-control" type="text" name="articles[' + fieldIndex +
                 '][coauteur]">' + '<br>' +
                 '<label>Année de publication:</label>' +
-                '<input class="form-control" type="date" name="articles[' + fieldIndex +
+                '<input class="form-control" type="number" name="articles[' + fieldIndex +
                 '][annee_publication]" required>' + '<br>' +
                 '<label>Titre:</label>' +
                 '<input  class="form-control" type="text" name="articles[' + fieldIndex +

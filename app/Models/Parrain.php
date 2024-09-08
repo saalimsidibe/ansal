@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Parrain extends Model
 {
     use HasFactory;
+
+
+    public function candidat()
+    {
+        return $this->belongsTo(Candidat::class, 'candidat_id');
+    }
 }

@@ -11,31 +11,51 @@ class Candidat extends Model
 
     public function diplomes()
     {
-        return $this->hasMany(Diplome::class);
+        return $this->hasMany(Diplome::class, 'candidat_id');
     }
 
     public function ouvrages()
     {
-        return $this->hasMany(Ouvrage::class);
+        return $this->hasMany(Ouvrage::class, 'candidat_id');
     }
 
     public function articles()
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Article::class, 'candidat_id');
     }
 
     public function distinctions()
     {
-        return $this->hasMany('Distinction::class');
+        return $this->hasMany(Distinction::class, 'candidat_id');
     }
 
     public function responsabilites()
     {
-        return $this->hasMany(Responsabilite::class);
+        return $this->hasMany(Responsabilite::class, 'candidat_id');
     }
 
     public function fonctions()
     {
         return $this->hasMany(Fonction::class);
+    }
+
+    public function parrains()
+    {
+        return $this->hasMany(Parrain::class, 'candidat_id');
+    }
+
+    public function experiences()
+    {
+        return $this->hasMany(Experience::class, 'candidat_id');
+    }
+
+    public function brevets()
+    {
+        return $this->hasMany(Brevet::class, 'candidat_id');
+    }
+
+    public function commissions()
+    {
+        return $this->hasMany(Commission::class, 'candidat_id');
     }
 }

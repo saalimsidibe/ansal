@@ -192,7 +192,7 @@ class MultiStepFormController extends Controller
                     'ouvrages.*.nombre_pages' => 'required|integer|min:1', // Doit être un nombre entier positif
                     'articles.*.auteur' => 'required|string|max:255',
                     'articles.*.coauteur' => 'nullable|string|max:255', // Coauteur peut être nullable si non obligatoire
-                    'articles.*.annee_publication' => 'required|date', // Validation pour une année de publication valide
+                    'articles.*.annee_publication' => ['required', 'digits:4'], // Validation pour une année de publication valide
                     'articles.*.titre' => 'required|string|max:255',
                     'articles.*.editeur' => 'required|string|max:255',
                     'articles.*.pages' => 'required|integer|min:1', // Doit être un nombre entier positif
@@ -346,7 +346,7 @@ class MultiStepFormController extends Controller
         }
 
         return response()->json(['success' => 'File uploaded successfully.']); */
-
+/*
         foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
                 $path = $file->store('uploads');
@@ -685,7 +685,7 @@ class MultiStepFormController extends Controller
 
         //  DB::commit(); // Commit de la transaction
 
-
+        /*
         foreach ($files as $file) {
             $preuve = new PreuveChercheur();
             $preuve->type = $file['key'];
@@ -696,10 +696,12 @@ class MultiStepFormController extends Controller
             $preuve->save();
         }
 
+*/
+
         return view('chercheurvues.summary')->with('success', 'Données enregistrées avec succès!');
-        /*} catch (\Exception $e) {
+        } catch (\Exception $e) {
          //   DB::rollBack(); // Rollback en cas d'erreur
             return redirect()->back()->withErrors(['error' => 'Une erreur s\'est produite lors de l\'enregistrement.']);
-        }*/
+        }
     }
 }

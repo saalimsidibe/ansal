@@ -11,34 +11,38 @@ class Evaluateur extends Controller
     public function EvMedecine()
 
     {
-        $medecins = Candidat::where('college', '5');
+        $medecins = Candidat::where('college', '3')->get();
 
         return view('evaluateurs.evaluateurmedecine')->with('medecins', $medecins);
     }
 
     public function showMedecin($id)
     {
-        $medecin=Candidat::where('college','5');
-        
+        $medecin = Candidat::findOrFail($id);
+        return view('informations.profilmedec')->with('medecin', $medecin);
     }
 
     public function EvLettre()
     {
-        $litteraires = Candidat::where('college', '2');
+        $litteraires = Candidat::where('college', '5')->get();
         return view('evaluateurs.evaluateurlettre')->with('litteraires', $litteraires);
     }
 
     public function EvAgricole()
     {
-        return view('evaluateurs.evaluateuragricole');
+        $agronomes = Candidat::where('college', '4')->get();
+        return view('evaluateurs.evaluateuragricole')->with('agronomes', $agronomes);
     }
     public function EvSciences()
+
     {
-        return view('evaluateurs.evaluateursciences');
+        $techniciens = Candidat::where('college', '1')->get();
+        return view('evaluateurs.evaluateursciences')->with('techniciens', $techniciens);
     }
 
     public function EvEconomie()
     {
-        return view('evaluateurs.evaluateureconomie');
+        $economistes = Candidat::where('college', '2')->get();
+        return view('evaluateurs.evaluateureconomie')->with('economistes', $economistes);
     }
 }
