@@ -28,10 +28,22 @@ class Evaluateur extends Controller
         return view('evaluateurs.evaluateurlettre')->with('litteraires', $litteraires);
     }
 
+    public function showLettre($id)
+    {
+        $litteraire = Candidat::findOrFail($id);
+        return view('informations.profillitteraire')->with('litteraire', $litteraire);
+    }
+
     public function EvAgricole()
     {
         $agronomes = Candidat::where('college', '4')->get();
         return view('evaluateurs.evaluateuragricole')->with('agronomes', $agronomes);
+    }
+
+    public function showAgronome($id)
+    {
+        $agronome = Candidat::findOrFail($id);
+        return view('informations.profilagronome')->with('agronome', $agronome);
     }
     public function EvSciences()
 
@@ -40,9 +52,21 @@ class Evaluateur extends Controller
         return view('evaluateurs.evaluateursciences')->with('techniciens', $techniciens);
     }
 
+    public function showSciences($id)
+    {
+        $technicien = Candidat::findOrFail($id);
+        return view('informations.profilst')->with('technicien', $technicien);
+    }
+
     public function EvEconomie()
     {
         $economistes = Candidat::where('college', '2')->get();
         return view('evaluateurs.evaluateureconomie')->with('economistes', $economistes);
+    }
+
+    public function showEconomie($id)
+    {
+        $economiste = Candidat::findOrFail($id);
+        return view('informations.profilecono.blade')->with('economiste', $economiste);
     }
 }

@@ -186,15 +186,11 @@
     <hr>
 
     <h2>Apport Particulier à l'academie</h2>
-    <p><strong></strong><{{$medecin->apport ??'' }}/p>
+    <p><strong></strong><{{$medecin->apport ?? 'Non renseigné' }}/p>
 </body>
     <!-- Étape 7: Fichiers joints -->
     
 
-    <!-- Formulaire de soumission finale -->
-    <form method="POST" action="{{ route('multi-step-form.finish') }}">
-        @csrf
-        <button type="submit" class="btn btn-success mt-4">Terminer et Enregistrer</button>
-    </form>
+  
 </div>
 @endsection

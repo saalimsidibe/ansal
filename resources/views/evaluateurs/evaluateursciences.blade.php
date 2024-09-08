@@ -44,7 +44,7 @@ echo 'medecine';
     <td>{{$technicien['telephone']}}</td>
      <td>{{$technicien['email']}}</td>
      <td>{{$technicien['created_at']}}</td>
-    <td> <button type="button" class="btn btn-danger ">Voir</button></td>
+<td> <button type="button" class="btn btn-danger "> <a href="{{route('profil.sciences',$technicien->id)}}">Voir </a></button></td>
     @endforeach
 </tbody>
 </table>

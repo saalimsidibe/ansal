@@ -39,7 +39,13 @@ Route::get('/evaluateur_economie', [Evaluateur::class, 'EvEconomie'])->name('eva
 
 Route::get('/profilmedecin/{id}', [Evaluateur::class, 'showMedecin'])->name('profil.medecin');
 
+Route::get('/profillitteraire/{id}', [Evaluateur::class, 'showLettre'])->name('profil.litteraire');
 
+Route::get('/profilagronome/{id}', [Evaluateur::class, 'showAgronome'])->name('profil.agronome');
+
+Route::get('/profilsciences/{id}', [Evaluateur::class, 'showSciences'])->name('profil.sciences');
+
+Route::get('/profileconomie/{id}', [Evaluateur::class, 'showEconomie'])->name('profil.economie');
 
 
 
