@@ -51,11 +51,10 @@
           </div>
           <div class="col-lg-4 order-lg-1">
             <span class="section-subtitle" data-aos="fade-up"></span>
-            <h1 class="mb-4" data-aos="fade-up">
-            Troisième appel à candidatures pour l’admission
-              de nouveaux membres de l’ANSAL-BF
-            </h1>
-            <p data-aos="fade-up">
+            <h3 class="mb-4" data-aos="fade-up" style="text-align: justify">
+            Troisième appel à candidatures pour l’admission de nouveaux membres de l’ANSAL-BF
+            </h3>
+            <p data-aos="fade-up" style="text-align: justify">
              Dans le cadre de sa mission de mobilisation de tous les savoirs pour contribuer au
               développement socio-économique du Burkina Faso , l’Académie Nationale des Sciences, des
               Arts et des Lettres du Burkina Faso (ANSAL-BF) lance un troisième appel à candidatures
@@ -75,35 +74,35 @@
       </div>
     </section><!-- /About Section -->
 
-    
-            
-     
 
-             
 
-  
 
-       
 
-               
 
-         
 
-        
-               
 
-        
-   
-        
 
-     
-               
 
-        
 
-         
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </main>
 
 @endsection

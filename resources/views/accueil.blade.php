@@ -9,7 +9,7 @@
         <nav class="breadcrumbs">
           <Center>
           <p>
-         <H3>Critères</H3> 
+         <H3>Critères</H3>
          </p>
          </Center>
         </nav>
@@ -36,26 +36,27 @@
                 <h2 class="content-title text-start">
                   Critères Généraux
                 </h2>
-                <p class="fst-italic"><span class="fw-bold">NB:Tout candidat doit avoir moins de 70 ans au 31 octobre 2024, date de clôture du dépôt des dossiers et devra être parrainé par deux (2) Académiciens du Collège concerné.</span></p>
+                <p class="fst-italic"><span class="fw-bold" style="text-align: justify">NB:Tout candidat doit avoir moins de 70 ans au 31 octobre 2024, date de clôture du dépôt des dossiers et devra être parrainé par deux (2) Académiciens du Collège concerné.</span></p>
                 <p class="">
+
                     1.	Candidat(e) provenant de l’enseignement supérieur ou de la recherche scientifique :
                 </p>
-                
-                <p class="lead">
+
+                <p class="lead" style="text-align: justify">
                     <ul class="">
-                        <li class="">
+                        <li class="" style="text-align: justify">
                             être spécialiste d’une discipline parmi celles relevant du Collège considéré ou  avoir conduit des travaux scientifiques avérés de portée internationale dans le domaine ;
                         </li><br>
-                        <li class="">
-                            disposer d’une thèse de spécialité de doctorat datant d’au moins dix (10) ans à la date de clôture des dépôts des dossiers de candidature 
+                        <li class="" style="text-align: justify">
+                            disposer d’une thèse de spécialité de doctorat datant d’au moins dix (10) ans à la date de clôture des dépôts des dossiers de candidature
                         </li><br>
-                        <li class="">
+                        <li class="" style="text-align: justify">
                             être de rang A dans l’enseignement supérieur ou dans la recherche scientifique
                         </li><br>
-                        <li class="">
-                            avoir un rayonnement scientifique international 
+                        <li class="" style="text-align: justify">
+                            avoir un rayonnement scientifique international
                         </li><br>
-                        <li class="">
+                        <li class="" style="text-align: justify">
                             prendre l’engagement de respecter ses devoirs vis-à-vis de l’Académie en s’acquittant de sa cotisation annuelle et en participant pleinement aux activités de l’institution pour son rayonnement national et international.
                         </li>
                     </ul>
@@ -67,16 +68,16 @@
 
                 <p class="lead">
                     <ul>
-                        <li class="">
+                        <li class="" style="text-align: justify">
                             être spécialiste d’une discipline parmi celles relevant du Collège considéré ou avoir conduit des travaux avérés de portée internationale dans le domaine ;
                         </li><br>
-                        <li>
-                            avoir une notoriété nationale et internationale à travers ses œuvres ou disposer de titres de propriétés intellectuelles  dans le domaine 
+                        <li style="text-align: justify">
+                            avoir une notoriété nationale et internationale à travers ses œuvres ou disposer de titres de propriétés intellectuelles  dans le domaine
                         </li><br>
                         <li>
                             être suffisamment impliqué dans la vie de la communauté
                         </li><br>
-                        <li>
+                        <li style="text-align: justify">
                             prendre l’engagement de respecter ses devoirs vis-à-vis de l’Académie en s’acquittant de sa cotisation annuelle et en participant pleinement aux activités de l’institution pour son rayonnement national et international
                         </li>
               </div>
@@ -84,9 +85,9 @@
           </div>
         </div>
       </div>
-     
+
     </section><!-- /About 2 Section -->
- 
+
 <section id="" class="">
 
       <div class="container">
@@ -95,7 +96,7 @@
             <div class="col-sm-12 col-md-5 col-lg-4 col-xl-4 order-lg-2 offset-xl-1 mb-4">
               <div class="img-wrap text-center text-md-left" data-aos="fade-up" data-aos-delay="100">
                 <div class="img">
-                
+
                 </div>
               </div>
             </div>
@@ -107,7 +108,7 @@
                   Consulter les critères spécifiques du collège souhaité avant de passer à la phase de  dépot des candidatures
                 </h2>
                 <p class="fst-italic"><span class="fw-bold">NB:Tout candidat doit avoir moins de 70 ans au 31 octobre 2024, date de clôture du dépôt des dossiers et devra être parrainé par deux (2) Académiciens du Collège concerné.</span></p>
-                
+
               </div>
             </div>
           </div>
@@ -115,7 +116,7 @@
       </div>
     </section>
 
- 
+
 
 
 
@@ -159,7 +160,7 @@
 
 
               <!-- Start Stats Item -->
-             
+
 
             </div>
           </div>
@@ -224,7 +225,7 @@
                     <a href=""><span class=""> Collège Sciences humaines, arts, lettres et culture </span> </a>
                   </h3>
                   <span class="d-block position"></span>
-                
+
                   <p class="mb-0">
                     <a href="{{route('litterature')}}" class="more dark"> Consulter et Passer au dépôt <span class="bi bi-arrow-right-short"></span></a>
                   </p>
@@ -239,7 +240,7 @@
                     <a href="#"><span class="">Collège Sciences juridiques, politiques, économiques et de gestion   </span> </a>
                   </h3>
                   <span class="d-block position"></span>
-               
+
                   <p class="mb-0">
                     <a href="{{route('economie')}}" class="more dark">Consulter et Passer au dépôt  <span class="bi bi-arrow-right-short"></span></a>
                   </p>
@@ -254,7 +255,7 @@
                     <a href="#"><span class="">Collège Sciences de la Santé Humaine et Animale</span></a>
                   </h3>
                   <span class="d-block position"></span>
-                
+
                   <p class="mb-0">
                     <a href="{{route('sante')}}" class="more dark">Consulter et Passer au dépôt  <span class="bi bi-arrow-right-short"></span></a>
                   </p>
@@ -283,7 +284,7 @@
                   <h3 clas="">
                     <a href=""><span class=""> Collège Sciences et <br> Techniques </span> </a>
                   </h3>
-                
+
                   <p class="mb-0">
                     <a href="{{route('sciencestech')}}" class="more dark"> Consulter et Passer au dépôt <span class="bi bi-arrow-right-short"></span></a>
                   </p>
@@ -298,11 +299,11 @@
     </section><!-- /Team Section -->
 
     <!-- Testimonials Section -->
-    
-           
-            
-               
-              
+
+
+
+
+
   </main>
 
 @endsection
