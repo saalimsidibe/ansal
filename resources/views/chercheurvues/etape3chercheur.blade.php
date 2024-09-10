@@ -26,7 +26,7 @@
                         <div class="col-2"> </div>
                         <div class="col-8">
                             <div class="card ">
-                                <div class="card-head info bg-light">  <h3>Informations sur les diplômes</h3> </div>
+                                <div class="card-head info bg-light">  <h3> <legend class="scheduler-border float-none w-auto">Informations sur les diplômes</h3> </legend> </div>
                                 <div class="card-body">
 
                                     <form method="POST" action="{{ route('multi-step-form.next') }}">
@@ -56,10 +56,13 @@
                                                 
                                                 
                                             @endphp
-
+                                             
+                                             <fieldset class="border p-2">
+                                                 <legend class="scheduler-border float-none w-auto"> <h4> Diplôme universitaire </h4> </legend>
                                             @foreach ($diplomes as $index => $diplome)
                                                 <div class="diplome">
-                                                    <h4>Diplôme universitaire</h4>
+                                                  
+                                                  
                                                     <div class="form-group">
                                                         <label for="intitule_{{ $index }}">Intitulé du
                                                             diplôme</label>
@@ -105,7 +108,9 @@
                                                     </div>
                                                     <button type="button"
                                                         class="btn btn-danger supprimerDiplome">Supprimer</button>
-                                                </div>
+                                                
+                                                    </fieldset>
+                                                    </div>
                                             @endforeach
                                         </div>
                                         <br>
@@ -127,7 +132,9 @@
                                             var newDiplome = document.createElement('div');
                                             newDiplome.classList.add('diplome');
                                             newDiplome.innerHTML = `
-                                                <h4>Diplôme universitaire</h4>
+                                            <fieldset class="border p-2">
+                                                 
+                                                <legend class="scheduler-border float-none w-auto"><h4>Diplôme universitaire</h4></legend>
                                                 <div class="form-group">
                                                     <label for="intitule_${diplomeCount}">Intitulé du diplôme</label>
                                                     <input type="text" class="form-control" id="intitule_${diplomeCount}"
@@ -154,7 +161,9 @@
                                                            name="diplomes[${diplomeCount}][ville]" required placeholder="Entrez la ville">
                                                 </div>
                                                 <button type="button" class="btn btn-danger supprimerDiplome">Supprimer</button>
+                                              </fieldset>   
                                             `;
+                                        
                                             diplomesContainer.appendChild(newDiplome);
 
                                             // Attacher l'événement de suppression

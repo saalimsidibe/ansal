@@ -174,6 +174,8 @@
                                             const experienceIndex = experienceContainer.children.length;
 
                                             const experienceField = `
+                                             <fieldset class="border p-2">
+                                                <legend class="scheduler-border float-none w-auto"> <h6>Nouvelle Experience</h6>  </legend>
                                                 <div class="form-group">
                                                     <label for="exp_intitule_${experienceIndex}">Intitulé</label>
                                                     <input type="text" name="experiences[${experienceIndex}][intitule]"
@@ -203,6 +205,7 @@
                                                     
                                                            
                                                 </div>
+                                                 </fieldset>
                                             `;
 
                                             experienceContainer.insertAdjacentHTML('beforeend', experienceField);
@@ -224,6 +227,8 @@
                                             const responsibilityIndex = responsibilityContainer.children.length;
 
                                             const responsibilityField = `
+                                              <fieldset class="border p-2">
+                                                     <legend class="scheduler-border float-none w-auto"> <h6>Nouvelle Responsabilite</h6>  </legend>
                                                 <div class="form-group">
                                                     <label for="resp_intitule_${responsibilityIndex}">Intitulé</label>
                                                     <input type="text" name="responsabilites[${responsibilityIndex}][intitule]"
@@ -249,7 +254,7 @@
                                                            class="form-control" id="resp_pays_${responsibilityIndex}" required>
 
                                                 
-
+                                                     </fieldset>
                                                 </div>
                                             `;
 

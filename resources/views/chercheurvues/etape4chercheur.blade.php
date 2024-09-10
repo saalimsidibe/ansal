@@ -206,6 +206,8 @@
                 const newField = document.createElement('div');
                 newField.classList.add('mb-3');
                 newField.innerHTML = `
+                 <fieldset class="border p-2">
+                      <legend class="scheduler-border float-none w-auto"><h4>Experience</h4></legend>
                 <div class="form-group">
                     <label for="intitule_${fieldIndex}">Intitulé de la fonction</label>
                     <input type="text" name="experiences[${fieldIndex}][intitule]" id="intitule_${fieldIndex}" class="form-control">
@@ -229,6 +231,8 @@
                     <input type="text" name="experiences[${fieldIndex}][ville]" id="ville_${fieldIndex}" class="form-control">
                 </div>
                 <button type="button" class=" btn btn-danger remove-btn" onclick="removeField(this)">Supprimer</button>
+                </fieldset>
+                
             `;
                 experienceContainer.appendChild(newField);
             });
@@ -263,6 +267,7 @@
             addButton.addEventListener('click', function() {
                 const index = fieldsContainer.children.length; // Compter les ensembles de champs existants
                 const newFieldSet = document.createElement('fieldset');
+                newFieldSet.classList.add('border', 'p-2');
                 newFieldSet.innerHTML = `
                     <legend>Responsabilité ${index + 1}</legend>
                     <label>Intitulé de la responsabilité:</label>

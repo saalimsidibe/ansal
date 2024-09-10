@@ -39,6 +39,8 @@ class LoginController extends Controller
                 return redirect()->route('evaluateur.agricole');
             } else if ($user->categorie === 'economie') {
                 return redirect()->route('evaluateur.economie');
+            } else if ($user->categorie === 'admin') {
+                return redirect()->route('evaluateur.admin');
             } else {
                 echo 'erreur';
             }

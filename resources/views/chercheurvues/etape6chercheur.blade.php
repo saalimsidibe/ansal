@@ -288,7 +288,7 @@
                         </div>
                         <div class="col-2"> </div>
                     </div>
-            </section>
+            </section>  
         </div>
     </main>
 @endsection
@@ -339,8 +339,9 @@
             index++;
 
             const fieldset = document.createElement('fieldset');
+            fieldset.classList.add('border','p-2');
             fieldset.innerHTML = `
-                <legend>Brevet-${index}</legend>
+                <legend class ="scheduler-border float-none w-auto"><h6>Nouveau Brevet</h6></legend>
                 <div class="form-group">
                     <label for="auteurs-${index}">Auteur(s)</label>
                     <input class="form-control" type="text" id="auteurs-${index}" name="brevets[${index}][auteur]" required>
@@ -375,8 +376,8 @@
             index++;
 
             const nouvelOuvrage = `
-                <fieldset id="ouvrage-${index}">
-                    <legend>Ouvrage-${index }</legend>
+                <fieldset id="ouvrage-${index}" class="border p-2">
+                    <legend class ="scheduler-border float-none w-auto"><h6>Ouvrage</h6></legend>
                     <div class="form-group">
                         <label for="auteurs-${index}">Auteur(s)</label>
                         <input  class="form-control" type="text" id="auteurs-${index}" name="ouvrages[${index}][auteur]" required>
@@ -418,6 +419,7 @@
 </script>
 
 
+
 <br>
 <script>
     var fieldIndex = 0;
@@ -429,7 +431,8 @@
             fieldIndex++;
 
             var newField = '<div class="">' +
-
+                '<fieldset class="border p-2">'+
+                 '<legend class ="scheduler-border float-none w-auto"> <h6> '+'</legend>'+
                 '<label>Auteur(s):</label>' +
                 '<input class="form-control" type="text" name="articles[' + fieldIndex +
                 '][auteur]" required>' + '<br>' +
@@ -449,8 +452,9 @@
                 '<input class="form-control" type="number" name="articles[' + fieldIndex +
                 '][pages]" required>' + '<br>' +
                 '<button class="remove-field btn btn-danger">Supprimer</button>' +
+                '</legend>'+
                 '</div>  <hr/>';
-
+                
 
             $("#articles-container").append(newField);
             $("#save-button").show(); // Afficher le bouton Enregistrer une fois qu'un champ est ajouté
@@ -480,6 +484,8 @@
 
             newFormGroup.innerHTML = `
              <br/>
+             <fieldset  class="border p-2">
+                   <legend class="scheduler-border float-none w-auto"> <h6>Distinction</h6>  </legend>
                 <select name="distinctions[${index}][type]" class="form-control" required>
                      <option value="">Selectionner</option>
                     <option value="1">Scientifique</option>
@@ -487,12 +493,14 @@
                 </select>
 
                 <input type="text" name="distinctions[${index}][nom]" placeholder="Saisir la distinction" class="form-control"><br>
-                <input type="hidden" name="distinctions[${index}][id]" value="" class="form-control" placeholder="nom de la distinction"><br>
+                <input type="hidden" name="distinctions[${index}][id]" value="" class="form-control" placeholder="nom de la distinction">
                  <input type="date" name="distinctions[${index}][date]" placeholder="Saisir la date de la distinction" class="form-control">
                 <button type="button" class="removeDistinctionButton btn btn-danger">Supprimer</button>
-                  <hr/>  <br/>
-            `;
+                  <hr/>  
+                    <fieldset>
 
+            `;
+                
             distinctionsContainer.appendChild(newFormGroup);
             index++;
         });

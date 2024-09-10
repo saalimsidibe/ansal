@@ -67,6 +67,18 @@ class Evaluateur extends Controller
     public function showEconomie($id)
     {
         $economiste = Candidat::findOrFail($id);
-        return view('informations.profilecono.blade')->with('economiste', $economiste);
+        return view('informations.profilecono')->with('economiste', $economiste);
+    }
+
+    public function EvAdmin()
+    {
+        $candidats = Candidat::all();
+        return view('evaluateurs.evaluateuradmin')->with('candidats', $candidats);
+    }
+
+    public function showProfil($id)
+    {
+        $candidat = Candidat::findOrFail($id);
+        return view('informations.profiladmin')->with('candidat', $candidat);
     }
 }

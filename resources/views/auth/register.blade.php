@@ -19,6 +19,9 @@
         <option value="sciences">Sciences et Techniques</option>
         <option value="agricole">Sciences naturelles et Agricole</option>
         <option value="economie">Sciences économiques</option>
+         <option value="admin">Administrateur</option>
+        
+        
         <!-- Ajoute d'autres catégories si nécessaire -->
     </select>
 
