@@ -346,7 +346,7 @@ class MultiStepFormController extends Controller
         }
 
         return response()->json(['success' => 'File uploaded successfully.']); */
-/*
+
         foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
                 $path = $file->store('uploads');
@@ -367,7 +367,7 @@ class MultiStepFormController extends Controller
     {
         //  DB::beginTransaction();
 
-        // try {
+         try {
         // Récupération des données de la session
         $data1 = session('data1'); //step1
         $data2 = session('data2'); //step2
