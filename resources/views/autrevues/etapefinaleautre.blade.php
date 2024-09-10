@@ -42,28 +42,28 @@
                                             </div>
                                         @endif
                                         <div class="form-group">
-                                            <label for="cv">Joindre une copie de votre cv</label><br>
-                                            <input type="file" class="form-control" name="cv" id="cv">
-                                            <button type="button" onclick="uploadFile('cv')">Telecharger</button>
-                                            <span id="cvStatus"></span>
+                                            <label for="cvchercheurDoc">Joindre une copie de votre cv</label><br>
+                                            <input type="file" class="form-control" name="cvchercheurDoc" id="cvchercheurDoc">
+                                            <button type="button" onclick="uploadFile('cvchercheurDoc')">Telecharger</button>
+                                            <span id="cvchercheurDocStatus"></span>
 
                                         </div>
                                         <div class="form-group">
-                                            <label for="dip">Joindre un fichier unique composé de l'ensemble des
+                                            <label for="dipChercheurDoc">Joindre un fichier unique composé de l'ensemble des
                                                 diplomes et attestations</label> <br>
-                                            <input type="file" class="form-control" name="diplomes" id="diplomes">
-                                            <button type="button" onclick="uploadFile('diplomes')">Telecharger</button>
-                                            <span id="diplomesStatus"></span>
+                                            <input type="file" class="form-control" name="dipChercheurDoc" id="dipChercheurDoc">
+                                            <button type="button" onclick="uploadFile('dipChercheurDoc')">Telecharger</button>
+                                            <span id="dipChercheurDocStatus"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="fonction">Joindre un fichier unique composé de l'ensemble des
                                                 arrêtés justifiants les fonctions et responsabiltés
                                                 professionnelles</label><br>
                                             <input type="file" class="form-control"
-                                                name="justifications_professionnelles" id="justifications_professionnelles">
+                                                name="fonctionDoc" id="fonctionDoc">
                                             <button type="button"
-                                                onclick="uploadFile('justifications_professionnelles')">Telecharger</button>
-                                            <span id="justifications_professionnellesStatus"></span>
+                                                onclick="uploadFile('fonctionDoc')">Telecharger</button>
+                                            <span id="fonctionDocStatus"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="commite">Joindre un fichier unique justifiant l'appartenance à un
@@ -75,31 +75,31 @@
 
 
                                         <div class="form-group">
-                                            <label for="ouvrage">Joindre un fichier unique contenant l'ensemble de vos
+                                            <label for="ouvrageDoc">Joindre un fichier unique contenant l'ensemble de vos
                                                 ouvrages .Pour chaque ouvrage il est demandé une à deux pages sur
                                                 la/lesquelles on peut distinguer le titre, les auteurs et l'éditeur</label>
-                                            <input type="file" name="ouvrages" class="form-control" id="ouvrages">
-                                            <button type="button" onclick="uploadFile('ouvrages')">Telecharger</button>
-                                            <span id="ouvragesStatus"></span>
+                                            <input type="file" name="ouvrageDoc" class="form-control" id="ouvrageDoc">
+                                            <button type="button" onclick="uploadFile('ouvrageDoc')">Telecharger</button>
+                                            <span id="ouvrageDocStatus"></span>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="distinctions_honorifiques">Joindre un fichier unique contenant
+                                            <label for="distinctionsHonorifiquesDoc">Joindre un fichier unique contenant
                                                 l'ensemble de vos distinctions honorifiques</label>
-                                            <input type="file" name="distinctions_honorifiques" class="form-control"
-                                                id="distinctions_honorifiques">
+                                            <input type="file" name="distinctionsHonorifiquesDoc" class="form-control"
+                                                id="distinctionsHonorifiquesDoc">
                                             <button type="button"
-                                                onclick="uploadFile('distinctions_honorifiques')">Telecharger</button>
-                                            <span id="distinctions_honorifiquesStatus"></span>
+                                                onclick="uploadFile('distinctionsHonorifiquesDoc')">Telecharger</button>
+                                            <span id="distinctionsHonorifiquesDocStatus"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="distinctions_scientifiques">Joindre un fichier unique contenant
+                                            <label for="distinctionsScientifiquesDoc">Joindre un fichier unique contenant
                                                 l'ensemble des distinctions scientifiques </label><br>
-                                            <input type="file" name= "distinctions_scientifiques" class="form-control"
-                                                id="distinctions_scientifiques">
+                                            <input type="file" name= "distinctionsScientifiquesDoc" class="form-control"
+                                                id="distinctionsScientifiquesDoc">
                                             <button type="button"
-                                                onclick="uploadFile('distinctions_scientifiques')">Telecharger</button>
-                                            <span id="distinctions_scientifiquesStatus"></span>
+                                                onclick="uploadFile('distinctionsScientifiquesDoc')">Telecharger</button>
+                                            <span id="distinctionsScientifiquesDocStatus"></span>
                                         </div>
 
                                     <form method="POST" id="fileUploadForm" action="{{ route('AutreControllerNouveau.finir') }}" enctype="multipart/form-data">

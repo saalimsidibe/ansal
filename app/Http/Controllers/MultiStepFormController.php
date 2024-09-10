@@ -336,6 +336,7 @@ class MultiStepFormController extends Controller
             'ouvrageDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'distinctionsHonorifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'distinctionsScientifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'commites' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
         /*  foreach ($validatedData as $key => $file) {
@@ -352,6 +353,7 @@ class MultiStepFormController extends Controller
                 $path = $file->store('uploads');
                 $type = $key;
                 $nom_originale = $file->getClientOriginalName();
+              //  dd($key);
                 session()->push('preuves_chercheurs', ['key' => $key, 'path' => $path, 'type' => $type, 'nom_originale' => $nom_originale]);
             }
         }
