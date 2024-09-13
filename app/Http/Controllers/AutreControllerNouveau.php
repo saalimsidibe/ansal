@@ -85,6 +85,7 @@ class AutreControllerNouveau extends Controller
         ]);
         $request->session()->put('etapeX', $donneesX);
 
+
         return redirect()->route('etape4.autre');
     }
 
@@ -197,8 +198,6 @@ class AutreControllerNouveau extends Controller
         }
 
         return response()->json(['success' => 'File uploaded successfully.']);
-
-
     }
 
 
@@ -217,7 +216,6 @@ class AutreControllerNouveau extends Controller
         $d6 = session()->get('etape6');
         $dx = session()->get('etapeX');
         $documents = session('preuves_chercheurs');
-        dd($documents);
         $edites = $d6['edites'];
         $Nedites = $d6['Nedites'];
         $distinctions = $d6['distinctionsAu'];

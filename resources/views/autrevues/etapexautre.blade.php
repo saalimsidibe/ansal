@@ -40,9 +40,16 @@
                                                 </ul>
                                             </div>
                                         @endif
+
+            @php
+              // $travaux=old('travaux',session('etapeX.travaux',[]));
+
+              // $implication=old('implication',session('etapeX.implication',[]));
+              
+            @endphp
        
-     <textarea name="travaux" id="" cols="30" rows="10" class="form-control" placeholder="Décrire vos contributions et travaux les plus significatives"></textarea><br>
-     <textarea name="implication" id="" cols="30" rows="10" class="form-control" placeholder="Décrire votre implication dans  la vie de la communauté"></textarea>
+     <textarea name="travaux" id="" cols="30" rows="10" value="cheval" class="form-control" placeholder="contribution"> {{old('travaux',session('etapeX.travaux',''))}}</textarea><br>
+     <textarea name="implication" id="" cols="30" rows="10" class="form-control"   placeholder="implication communautaire">{{old('implication',session('etapeX.implication',''))}}</textarea>
        
      <div class="btn-group mt-4">
          <a href="{{route('etape3.autre')}}" class="btn btn-warning">Précédent</a>

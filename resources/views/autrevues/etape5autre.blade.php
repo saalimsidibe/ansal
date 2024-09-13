@@ -51,8 +51,48 @@
              
                       <div id="experience-fields-container" class="d-none">
                             <!-- Container for dynamic fields -->
+
+                            @php
+                            $experiences=old('experiences',session('etape5.experiences',[]));
+                            @endphp
                             <div id="dynamic-fields-container">
                                 <!-- Dynamic fields will be appended here -->
+                            @foreach ($experiences as $index =>$exp)
+                                <div class="form-group">
+                                     <label for="experience_{{$index}}">Nom de la fonction</label>
+                                    <input type="text" class="form-control" name="experiences[{{$index}}][intitule]" value="{{$exp['functionTitle'] ?? ''}}" id="experience_{{$index}}" class="form-control" required>   
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="debut_{{$index}}">Debut</label>
+                                    <input type="text" name="experiences[{{$index}}][startDate]"  class="form-control"   id="debut_{{$index}}" value="{{$exp['startDate'] ?? ''}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fin_{{$index}}">fin</label>
+                                    <input type="text" name="experiences[{{$index}}][endDate]" class="form-control"     id="fin_{{$index}}" value="{{$exp['endDate'] ?? ''}}">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ville_{{$index}}">Ville</label>
+                                      <input type="text" name="experiences[{{$index}}][city]"   class="form-control" id="ville_{{$index}}" value="{{$exp['city'] ?? ''}}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="structure_{{$index}}">Structure</label>
+                                    <input type="text" name="experiences[{{$index}}][structure]"  class="form-control"               id="structure_{{$index}}" value="{{$exp['structure'] ?? ''}}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pays_{{$index}}">Pays</label>
+                                    <input type="text" name="experiences[{{$index}}][country]"    class="form-control"      id="pays_{{$index}}" value="{{$exp['country'] ?? ''}}">
+                                </div>
+
+                            @endforeach
+
+
+
+
                             </div>
 
                             <!-- Button to add fields -->
@@ -74,8 +114,51 @@
                     
                      <div id="responsibility-fields-container" class="d-none">
                                         <!-- Container for dynamic responsibility fields -->
+                        @php
+                            $responsibilities=old('responsibilities', session('etape5.responsibilities',[]));
+                        @endphp
                                         <div id="dynamic-responsibility-fields-container">
                                             <!-- Dynamic fields will be appended here -->
+
+                                            @foreach ($responsibilities as $index => $resp)
+                        <div class="form-group">
+                        <label for="Intitule_{{$index}}">Intitulé de la responsabilité</label>
+                        <input type="text" name="responsibilities[{{$index}}][responsibilityTitle]"  value="{{$resp['responsibilityTitle'] ?? ""}}"   id="Intitule_{{$index}}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Debut_{{$index}}">Début de la responsabilité</label>
+                        <input type="date" name="responsibilities[{{$index}}][startDate]"  value="{{$resp['startDate'] ?? ""}}"         id="Debut_{{$index}}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Fin_{{$index}}">Fin de la responsabilité</label>
+                        <input type="date" name="responsibilities[{{$index}}][endDate]" id="Fin_{{$index}}"  value="{{$resp['endDate'] ?? ""}}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="structure_{{$index}}">Structure</label>
+                        <input type="text" name="responsibilities[{{$index}}][structure]"  value="{{$resp['structure'] ?? ""}}"      id="structure_{{$index}}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ville_{{$index}}">Ville</label>
+                        <input type="text" name="responsibilities[{{$index}}][city]" value="{{$resp['city'] ?? ""}}"  id="ville_{{$index}}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pays_{{$index}}">Pays</label>
+                        <input type="text" name="responsibilities[{{$index}}][country]" value="{{$resp['country'] ?? ""}}"         id="pays_{{$index}}" class="form-control">
+                    </div>
+
+                 @endforeach
+                                              
+                 
+
+
+
+
+
                                         </div>
 
                                         <!-- Button to add responsibility fields -->

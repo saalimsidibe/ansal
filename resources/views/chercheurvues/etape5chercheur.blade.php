@@ -203,7 +203,7 @@
 
 
                                                     
-                                                           
+                                                    <button type="button" class="remove-experience-button btn btn-danger">Supprimer</button>        
                                                 </div>
                                                  </fieldset>
                                             `;
@@ -211,7 +211,14 @@
                                             experienceContainer.insertAdjacentHTML('beforeend', experienceField);
                                         });
 
-                                           
+                                           document.getElementById('experience-fields-container').addEventListener('click', function(event) {
+    if (event.target && event.target.classList.contains('remove-experience-button')) {
+        const fieldset = event.target.closest('fieldset');
+        if (fieldset) {
+            fieldset.remove();
+        }
+    }
+});
 
                                         // Gestion des responsabilités administratives internationales
                                         document.getElementById('respprofint').addEventListener('change', function() {
@@ -253,7 +260,7 @@
                                                     <input type="text" name="responsabilites[${responsibilityIndex}][pays]"
                                                            class="form-control" id="resp_pays_${responsibilityIndex}" required>
 
-                                                
+                                                  <button type="button" class="remove-responsibility-button btn btn-danger">Supprimer</button>
                                                      </fieldset>
                                                 </div>
                                             `;
@@ -363,13 +370,13 @@
                     <input type="text" name="ville_${index}" /> <br/>
                     <label>Pays:</label>
                     <input type="text" name="pays_${index}" /><br/>
-                    <button type="button" class="remove-btn">Supprimer</button>
+                   <button type="button" class="custom-remove-btn">Supprimer</button>
                     <hr/>
                 `;
                 fieldsWrapper.appendChild(newFieldSet);
 
                 // Ajouter un écouteur d'événements au bouton Supprimer
-                newFieldSet.querySelector('.remove-btn').addEventListener('click', function() {
+               newFieldSet.querySelector('.custom-remove-btn').addEventListener('click', function() {
                     fieldsWrapper.removeChild(newFieldSet);
                 });
             });

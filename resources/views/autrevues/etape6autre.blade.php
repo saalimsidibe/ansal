@@ -42,9 +42,9 @@
                                         @endif
     @php
         $commissionsAu = old('commissionAu', session('etape6.commissionAu', []));
-        $ouvragesEdite = old('edites', session('etape6.edites', []));
-        $ouvragesNonEdite = old('ouvrageNonEdite', session('etape6.ouvrageNonEdite', []));
-        $distinctionsAut = old('distinctionsAut', session('etape6.distinctionsAut', []));
+        $edites = old('edites', session('etape6.edites', []));
+        $Nedites = old('Nedites', session('etape6.Nedites', []));
+        $distinctionsAu = old('distinctionsAu', session('etape6.distinctionsAu', []));
         $distinctAu = old('distinctAu', session('etape6.distinctAu', ''));
         $apportAu = old('apportAu', session('etape6.apportAu', ''));
         $honneurAu = old('honneurAu', session('etape6.honneurAu', ''));
@@ -73,31 +73,31 @@
         <button type="button" id="ouvrageEditeAut" class="btn btn-info">Ajouter</button>
     </div>
     <div class="ouvrageEditeAut">
-        @foreach ($ouvragesEdite as $index => $ouvrage)
+        @foreach ($edites as $index => $edite)
             <div class="dynamic-field">
                 <div>
                     <label for="titre{{ $index }}">Titre</label>
-                    <input type="text" class="form-control" name="" id="titre{{ $index }}" value="{{ $ouvrage['titre'] ?? '' }}" required>
+                    <input type="text" class="form-control" name="edites[{{$index}}][titre]" id="titre{{ $index }}" value="{{ $edite['titre'] ?? '' }}" required>
                 </div>
                 <div>
                     <label for="anneePublication{{ $index }}">Année de publication</label>
-                    <input type="number" name="" id="anneePublication{{ $index }}" value="{{ $ouvrage['anneePublication'] ?? '' }}" required>
+                    <input type="number" class="form-control"  name="edites[{{$index}}][anneePublication]" id="anneePublication{{ $index }}" value="{{ $edite['anneePublication'] ?? '' }}" required>
                 </div>
                 <div>
                     <label for="nomAuteur{{ $index }}">Nom de l'auteur</label>
-                    <input type="text" name="" id="nomAuteur{{ $index }}" value="{{ $ouvrage['nomAuteur'] ?? '' }}" required>
+                    <input type="text" class="form-control"       name="edites[{{$index}}][nomAuteur]" class="form-control"         id="nomAuteur{{ $index }}" value="{{ $edite['nomAuteur'] ?? '' }}" required>
                 </div>
                 <div>
                     <label for="nomCoauteur{{ $index }}">Nom du coauteur</label>
-                    <input type="text" name="" id="nomCoauteur{{ $index }}" value="{{ $ouvrage['nomCoauteur'] ?? '' }}" required>
+                    <input type="text" class="form-control"        name="edites[{{$index}}][nomCoauteur]"  class="form-control" id="nomCoauteur{{ $index }}" value="{{ $edite['nomCoauteur'] ?? '' }}" required>
                 </div>
                 <div>
                     <label for="editeur{{ $index }}">Éditeur</label>
-                    <input type="text" name="" id="editeur{{ $index }}" value="{{ $ouvrage['editeur'] ?? '' }}" required>
+                    <input type="text" class="form-control"      name="edites[{{$index}}][editeur]" id="editeur{{ $index }}" value="{{ $edite['editeur'] ?? '' }}" required>
                 </div>
                 <div>
                     <label for="nombrePage{{ $index }}">Nombre de pages</label>
-                    <input type="number" name="" id="nombrePage{{ $index }}" value="{{ $ouvrage['nombrePage'] ?? '' }}" required>
+                    <input type="number" class="form-control"        name="edites[{{$index}}][nombrePage]" id="nombrePage{{ $index }}" value="{{ $edite['nombrePage'] ?? '' }}" required>
                 </div>
                 <button type="button" class="remove-field">Supprimer ces champs</button>
                 <hr>
@@ -111,23 +111,23 @@
         <button type="button" id="ajouterOuvrageNonEditeAut" class="btn btn-info">Ajouter</button>
     </div>
     <div class="ouvrageNonEditeAut">
-        @foreach ($ouvragesNonEdite as $index => $ouvrage)
+        @foreach ($Nedites as $index => $nedite)
             <div class="dynamic-field">
                 <div>
                     <label for="titreNe{{ $index }}">Titre</label>
-                    <input type="text" name="titreNe[]" id="titreNe{{ $index }}" value="{{ $ouvrage['titre'] ?? '' }}" required>
+                    <input type="text" class="form-control"          name="Nedites[{{$index}}][titreNe]" id="titreNe{{ $index }}" value="{{ $nedite['titreNe'] ?? '' }}" required>
                 </div>
                 <div>
                     <label for="nomAuteurNe{{ $index }}">Nom de l'auteur</label>
-                    <input type="text" name="nomAuteurNe[]" id="nomAuteurNe{{ $index }}" value="{{ $ouvrage['nomAuteur'] ?? '' }}" required>
+                    <input type="text" class="form-control"  name="Nedites[{{$index}}][nomAuteurNe]" id="nomAuteurNe{{ $index }}" value="{{ $nedite['nomAuteurNe'] ?? '' }}" required>
                 </div>
                 <div>
                     <label for="nomCoauteurNe{{ $index }}">Nom du coauteur</label>
-                    <input type="text" name="nomCoauteurNe[]" id="nomCoauteurNe{{ $index }}" value="{{ $ouvrage['nomCoauteur'] ?? '' }}">
+                    <input type="text" class="form-control"  name="Nedites[{{$index}}][nomCoauteurNe]" id="nomCoauteurNe{{ $index }}" value="{{ $nedite['nomCoauteurNe'] ?? '' }}">
                 </div>
                 <div>
                     <label for="nbrePage{{ $index}}">Nombre de pages</label>
-                    <input type="text" name="nbrePNe[]" id="nbrePage{{ $index}}"  value="{{ $ouvrage['nbrePage'] ?? '' }}">
+                    <input type="text" class="form-control"  name="Nedites[{{$index}}[nbrePNe]" id="nbrePage{{ $index}}"  value="{{ $nedite['nbrePNe'] ?? '' }}">
                 </div>
                 <button type="button" class="remove-field">Supprimer ces champs</button>
                 <hr>
@@ -143,20 +143,22 @@
     </div>
 
     <div id="select-container">
-        @foreach ($distinctionsAut as $index => $distinction)
+        @foreach ($distinctionsAu as $index => $distinction)
             <div>
-                <select name="distinctionsAu[]" class="form-control">
+                <select name="distinctionsAu[{{$index}}][type]" class="form-control">
                     <option value="honorifique" {{ $distinction == 'honorifique' ? 'selected' : '' }}>Distinction Honorifique</option>
                     <option value="scientifique" {{ $distinction == 'scientifique' ? 'selected' : '' }}>Distinction Scientifique</option>
                 </select>
 
-                <div>
-                    <label for="">Nom de la distinction</label> 
-                    <input type="text" name="distinctions_nom[]" id="">
+                <div class="form-group">
+                    <label for="nom_{{$index}}">Nom de la distinction</label> 
+                    <input type="text" name="distinctionsAu[{{$index}}][distinctions_nom]" id="nom_{{$index}}"  value="{{$distinction['distinctions_nom'] ?? ''}}">
 
                 </div>
-               
-                                <input type="date" name="distinctions_date[]" id="date" class="form-control">
+               <div class="form-group">
+                <input type="date_{{$index}}" name="distinctionsAu[{{$index}}][distinctions_date]" id="date_{{$index}}" class="form-control" value="{{$distinction['distinctions_date'] ?? ''}}">
+               </div>
+                                
                          
                 <button type="button" onclick="removeSelect(this)">Supprimer</button>
             </div>
@@ -164,12 +166,12 @@
     </div><br>
 
     <div class="form-group">
-        <textarea id="description" name="contribution" rows="4" cols="50" placeholder="Indiquer votre contribution majeure dans les domaines du  collège postulé "></textarea>
+        <textarea id="description" name="contribution" rows="4" cols="50" placeholder="Indiquer votre contribution majeure dans les domaines du  collège postulé ">{{old('contribution',session('etape6.contribution',''))}}</textarea>
     </div>
 
      
     <div class="form-group">
-         <textarea name="apportAu" id="" cols="50" rows="4" placeholder="Indiquer quel pourrait etre votre apprt particulier à l'academie"></textarea>
+         <textarea name="apportAu" id="" cols="50" rows="4" placeholder="Indiquer quel pourrait etre votre apprt particulier à l'academie">{{old('apportAu',session('etape6.apportAu',''))}}</textarea>
     </div><br>
      
     <!-- Apport particulier à l’Académie -->

@@ -358,10 +358,17 @@
                     <label for="reference-${index}">Reference</label>
                     <input class="form-control" type="text" id="reference-${index}" name="brevets[${index}][reference]" required>
                 </div>
+
+                  <button type="button" class="btn btn-danger btn-sm remove-button">Supprimer</button>
                   <hr/>
             `;
 
             brevetsDiv.appendChild(fieldset);
+
+             const removeButton = fieldset.querySelector('.remove-button');
+        removeButton.addEventListener('click', function() {
+            brevetsDiv.removeChild(fieldset);
+        });
         });
     });
 </script>
@@ -432,7 +439,7 @@
 
             var newField = '<div class="">' +
                 '<fieldset class="border p-2">'+
-                 '<legend class ="scheduler-border float-none w-auto"> <h6> '+'</legend>'+
+                 '<legend class ="scheduler-border float-none w-auto">' + '<h6>Articles </h6>' +'</legend>'+
                 '<label>Auteur(s):</label>' +
                 '<input class="form-control" type="text" name="articles[' + fieldIndex +
                 '][auteur]" required>' + '<br>' +
@@ -483,8 +490,8 @@
             const newFormGroup = document.createElement('div');
 
             newFormGroup.innerHTML = `
-             <br/>
-             <fieldset  class="border p-2">
+             
+                <fieldset class = "border p-2">
                    <legend class="scheduler-border float-none w-auto"> <h6>Distinction</h6>  </legend>
                 <select name="distinctions[${index}][type]" class="form-control" required>
                      <option value="">Selectionner</option>
@@ -496,9 +503,10 @@
                 <input type="hidden" name="distinctions[${index}][id]" value="" class="form-control" placeholder="nom de la distinction">
                  <input type="date" name="distinctions[${index}][date]" placeholder="Saisir la date de la distinction" class="form-control">
                 <button type="button" class="removeDistinctionButton btn btn-danger">Supprimer</button>
+               
                   <hr/>  
-                    <fieldset>
-
+                    
+                 </fieldset>   
             `;
                 
             distinctionsContainer.appendChild(newFormGroup);
