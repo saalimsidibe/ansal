@@ -45,7 +45,8 @@
                                             $diplomesAu=old('diplomesAu',session('etape3.diplomesAu',[]));
                                         @endphp
                              <div class="diplome" id="diplome-section">
-                                 <h4>Diplôme universitaire</h4>
+                                 <fieldset class="border p-2">
+                             <legend class="scheduler-border float-none w-auto">    <h4>Diplôme universitaire</h4> </legend>
     @foreach ($diplomesAu as $indexAu => $diplomeAu )
         
    
@@ -78,7 +79,7 @@
      </div>
     
 
- 
+   </fieldset>
                      
  </div>
                    
@@ -119,9 +120,10 @@
         var section = document.getElementById('diplome-section');
         comptDip++;
         var newFields = `
-        
+            
             <div class="diplome-item">
-                 <h4>Diplôme universitaire</h4>
+                 <fieldset class="border p-2">
+                 <legend class="scheduler-border float-none w-auto"> <h4>Diplôme universitaire</h4> </legend>
                 <div class="form-group">
                     <label for="nomDipAu">Intitulé du diplôme</label>
                     <input type="text" class="form-control" name="diplomesAu[${comptDip}][nom]" id="intitule_${comptDip}" required>
@@ -144,6 +146,7 @@
                 </div>
                 <button type="button" class="remove-field btn btn-danger">Supprimer</button>
             </div>
+             </fieldset>   
         `;
         section.insertAdjacentHTML('beforeend', newFields);
     });

@@ -48,8 +48,9 @@
               
             @endphp
        
-     <textarea name="travaux" id="" cols="30" rows="10" value="cheval" class="form-control" placeholder="contribution"> {{old('travaux',session('etapeX.travaux',''))}}</textarea><br>
-     <textarea name="implication" id="" cols="30" rows="10" class="form-control"   placeholder="implication communautaire">{{old('implication',session('etapeX.implication',''))}}</textarea>
+
+       <textarea name="travaux" id="" cols="30" rows="10" class="form-control"   placeholder=" contribution et travaux significatifs">{{old('travaux',session('etapeX.travaux',''))}}</textarea>
+     <textarea name="implication" id="" cols="30" rows="10" class="form-control"   placeholder=" implication communautaire">{{old('implication',session('etapeX.implication',''))}}</textarea>
        
      <div class="btn-group mt-4">
          <a href="{{route('etape3.autre')}}" class="btn btn-warning">Précédent</a>

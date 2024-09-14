@@ -176,7 +176,9 @@
         var experiencesList = document.getElementById('experiences-list');
         var index = experiencesList.children.length;
         var newFields = `
+        <fieldset class="border p-2">
             <div class="experience-item">
+                  <legend class="scheduler-border float-none w-auto">
                 <div class="form-group">
                     <label for="fonction${index}">Nom de la fonction</label>
                     <input type="text" class="form-control" name="fonctionsAAu[${index}][intitule]" id="fonction${index}" required>

@@ -62,7 +62,7 @@
                     <label for="nomCommission{{ $index }}" class="form-label">Nom de la commission</label>
                     <input  class='form-control'      type="text" name="commissionAu[{{ $index }}][nom]" id="nomCommission{{ $index }}" value="{{ $commission['nom'] ?? '' }}">
                 </div>
-                <button type="button" class="remove-field btn btn-primary">Supprimer ce champ</button>
+                <button type="button" class="remove-field btn btn-primary btn btn-danger">Supprimer </button>
             </div>
         @endforeach
     </div>
@@ -99,7 +99,7 @@
                     <label for="nombrePage{{ $index }}">Nombre de pages</label>
                     <input type="number" class="form-control"        name="edites[{{$index}}][nombrePage]" id="nombrePage{{ $index }}" value="{{ $edite['nombrePage'] ?? '' }}" required>
                 </div>
-                <button type="button" class="remove-field">Supprimer ces champs</button>
+                <button type="button" class=" btn btn-danger remove-field">Supprimer </button>
                 <hr>
             </div>
         @endforeach
@@ -129,7 +129,7 @@
                     <label for="nbrePage{{ $index}}">Nombre de pages</label>
                     <input type="text" class="form-control"  name="Nedites[{{$index}}[nbrePNe]" id="nbrePage{{ $index}}"  value="{{ $nedite['nbrePNe'] ?? '' }}">
                 </div>
-                <button type="button" class="remove-field">Supprimer ces champs</button>
+                <button type="button" class="remove-field btn btn-danger">Supprimer</button>
                 <hr>
             </div>
         @endforeach
@@ -146,13 +146,13 @@
         @foreach ($distinctionsAu as $index => $distinction)
             <div>
                 <select name="distinctionsAu[{{$index}}][type]" class="form-control">
-                    <option value="honorifique" {{ $distinction == 'honorifique' ? 'selected' : '' }}>Distinction Honorifique</option>
-                    <option value="scientifique" {{ $distinction == 'scientifique' ? 'selected' : '' }}>Distinction Scientifique</option>
+                    <option  value="honorifique" {{ $distinction == 'honorifique' ? 'selected' : '' }}>Distinction Honorifique</option>
+                    <option        value="scientifique" {{ $distinction == 'scientifique' ? 'selected' : '' }}>Distinction Scientifique</option>
                 </select>
 
                 <div class="form-group">
                     <label for="nom_{{$index}}">Nom de la distinction</label> 
-                    <input type="text" name="distinctionsAu[{{$index}}][distinctions_nom]" id="nom_{{$index}}"  value="{{$distinction['distinctions_nom'] ?? ''}}">
+                    <input type="text"  class="form-control"         name="distinctionsAu[{{$index}}][distinctions_nom]" id="nom_{{$index}}"  value="{{$distinction['distinctions_nom'] ?? ''}}">
 
                 </div>
                <div class="form-group">
@@ -160,7 +160,7 @@
                </div>
                                 
                          
-                <button type="button" onclick="removeSelect(this)">Supprimer</button>
+                <button type="button"  class="btn btn-danger"      onclick="removeSelect(this)">Supprimer</button>
             </div>
         @endforeach
     </div><br>
