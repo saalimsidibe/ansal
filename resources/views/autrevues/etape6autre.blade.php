@@ -127,7 +127,7 @@
                 </div>
                 <div>
                     <label for="nbrePage{{ $index}}">Nombre de pages</label>
-                    <input type="text" class="form-control"  name="Nedites[{{$index}}[nbrePNe]" id="nbrePage{{ $index}}"  value="{{ $nedite['nbrePNe'] ?? '' }}">
+                    <input type="text" class="form-control"  name="Nedites[{{$index}}][nbrePNe]" id="nbrePage{{ $index}}"  value="{{ $nedite['nbrePNe'] ?? '' }}">
                 </div>
                 <button type="button" class="remove-field btn btn-danger">Supprimer</button>
                 <hr>

@@ -56,7 +56,10 @@
        @foreach ($fonctionsAAu as $indexAAu =>$fonctionAAu )
        
        <div class="experience-item">
+         <fieldset class="border p-2">
+            <legend class="scheduler-border float-none w-auto"><h4>Experience</h4></legend>
             <div class="form-group">
+                
                  <label for="fonction_{{$indexAAu}}">Nom de la fonction</label>
                  <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][intitule]" value="{{$fonctionAAu['intitule'] ?? ''}}" id="fonction_{{$indexAAu}}" required>   
             </div>
@@ -84,7 +87,9 @@
         @endforeach 
 
         <button type="button" id="add-experience" class="btn btn-primary">Ajouter une expérience</button>
-        <div id="experiences-list"></div>
+        <div id="experiences-list">
+        </fieldset>    
+        </div>
     </div>
 
     <div class="form-group">
@@ -103,6 +108,8 @@
          <div id="respadminDynamic" class="respadmin-dynamic">
             @foreach ($resAdau as $j => $reAdau )
                   <div class="field">
+  <fieldset class="border p-2">
+        <legend class="scheduler-border float-none w-auto"> <h4>Responsabilite</h4></legend>
              <div class="form-group">
                     <label for="responsibilite_{{$j}}">Intitulé de la responsabilité</label>
                     <input type="text" name="resAdau[{{$j}}][intitule]"  value="{{$reAdau['intitule'] ??'' }}"       placeholder="Titre" class="form-control" id="responsibilite_{{$j}}" required>
@@ -130,7 +137,8 @@
                 </div>
       
             @endforeach
-              </div>        
+              </div>  
+            </fieldset>      
         </div> 
        <div class="btn-group mt-4">
              <a href="{{route('etapexautre')}}" class="btn btn-warning">Précédent</a>
@@ -178,7 +186,7 @@
         var newFields = `
         <fieldset class="border p-2">
             <div class="experience-item">
-                  <legend class="scheduler-border float-none w-auto">
+                  <legend class="scheduler-border float-none w-auto"> <h4>Experience</h4> </legend>
                 <div class="form-group">
                     <label for="fonction${index}">Nom de la fonction</label>
                     <input type="text" class="form-control" name="fonctionsAAu[${index}][intitule]" id="fonction${index}" required>
@@ -205,6 +213,7 @@
                     <input type="text" class="form-control" name="fonctionsAAu[${index}][pays]" id="pays${index}" required>
                 </div>
                 <button type="button" class="remove-experience btn btn-danger">Supprimer</button>
+                 </fieldset>
             </div>
         `;
         experiencesList.insertAdjacentHTML('beforeend', newFields);
@@ -251,6 +260,8 @@
             container.className = 'field';
             
             container.innerHTML = `
+                <fieldset class="border p-2">
+                     <legend class="scheduler-border float-none w-auto"> <h6>Nouvelle Responsabilite</h6></legend>
                 <div class="form-group">
                     <label for="responsibilityTitle">Intitulé de la responsabilité</label>
                     <input type="text" name="resAdau[${i}][intitule]" placeholder="Titre" class="form-control">
@@ -277,6 +288,7 @@
                     <input type="text" name="resAdau[${i}][pays]" placeholder="Pays" class="form-control">
                 </div>
                 <button type="button" class="remove-btn btn btn-danger" onclick="removeField(this)">Supprimer</button>
+                 </fieldset>
             `;
 
             document.getElementById('respadminDynamic').appendChild(container);

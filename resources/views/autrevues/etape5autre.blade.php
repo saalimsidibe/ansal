@@ -58,9 +58,11 @@
                             <div id="dynamic-fields-container">
                                 <!-- Dynamic fields will be appended here -->
                             @foreach ($experiences as $index =>$exp)
+                                <fieldset class="border p-2">
+                                       <legend class="scheduler-border float-none w-auto"> <h4>Experience</h4></legend>
                                 <div class="form-group">
                                      <label for="experience_{{$index}}">Nom de la fonction</label>
-                                    <input type="text" class="form-control" name="experiences[{{$index}}][intitule]" value="{{$exp['functionTitle'] ?? ''}}" id="experience_{{$index}}" class="form-control" required>   
+                                    <input type="text" class="form-control" name="experiences[{{$index}}][functionTitle]" value="{{$exp['functionTitle'] ?? ''}}" id="experience_{{$index}}" class="form-control" required>   
                                 </div>
 
                                 <div class="form-group">
@@ -90,8 +92,7 @@
 
                             @endforeach
 
-
-
+                            </fieldset>
 
                             </div>
 
@@ -121,7 +122,10 @@
                                             <!-- Dynamic fields will be appended here -->
 
                                             @foreach ($responsibilities as $index => $resp)
+                              <fieldset class="border p-2">   
+                                  <legend class="scheduler-border float-none w-auto"><h4>Responsabilite</h4> </legend>             
                         <div class="form-group">
+
                         <label for="Intitule_{{$index}}">Intitulé de la responsabilité</label>
                         <input type="text" name="responsibilities[{{$index}}][responsibilityTitle]"  value="{{$resp['responsibilityTitle'] ?? ""}}"   id="Intitule_{{$index}}" class="form-control">
                     </div>
@@ -156,8 +160,7 @@
                  
 
 
-
-
+  <fieldset class="border p-2">
 
                                         </div>
 
@@ -219,6 +222,8 @@
         const newField = document.createElement('div');
         newField.classList.add('mb-3');
         newField.innerHTML = `
+          <fieldset class="border p-2">
+          <legend class="scheduler-border float-none w-auto"><h4>Experience</h4></legend>
             <div class="form-group">
                 <label for="functionTitle_${fieldIndex}">Intitulé de la fonction</label>
                 <input type="text" name="experiences[${fieldIndex}][functionTitle]" id="functionTitle_${fieldIndex}" class="form-control">
@@ -250,6 +255,7 @@
             </div>
 
             <button type="button" class="btn btn-danger remove-field" onclick="removeField(this)">Supprimer </button>
+            </fieldset>
         `;
         dynamicFieldsContainer.appendChild(newField);
     });
@@ -283,9 +289,9 @@
             addResponsibilityFieldButton.addEventListener('click', function() {
                 Index++;
                 const newFieldset = document.createElement('fieldset');
-                newFieldset.classList.add('mb-3');
+                newFieldset.classList.add('mb-3','border','p-2' );
                 newFieldset.innerHTML = `
-                    <legend>Responsabilité ${Index}</legend>
+                    <legend class="scheduler-border float-none w-auto"><h4>Responsabilité</h4> </legend>
                     <div class="form-group">
                         <label for="responsibilityTitle_${Index}">Intitulé de la responsabilité</label>
                         <input type="text" name="responsibilities[${Index}][responsibilityTitle]" id="responsibilityTitle_${Index}" class="form-control">
