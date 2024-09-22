@@ -90,6 +90,7 @@
 
                                                         <label for="exp_pays_{{$index}}" class="mt-2">Pays</label>
                                                         <input type="text" name="experiences[{{ $index }}][pays]" id="exp_pays_{{$index}}"  value="{{ old("experiences.$index.pays", $experience['pays'] ?? '') }}" class="form-control">
+                                                         <button type="button" class=" btn btn-danger "  onclick="removeField(this)">Supprimer </button>
                                                     </div>
                                                 @endforeach
                                             </div>
@@ -145,7 +146,7 @@
                                                         <input type="text" class="form-control"  name="responsabilites[{{ $index }}][ville]" id="resp_ville_{{$index}}" value="{{ old("responsabilites.$index.ville", $responsibility['ville'] ?? '') }}"><br>
                                                         <label for="res_pays_{{$index}}" class="mt-2">Pays</label>
                                                         <input type="text" class="form-control" name="responsabilites[{{ $index }}][pays]" id="res_pays_{{$index}}"    value=" {{ old("responsabilites.$index.pays", $responsibility['pays'] ?? '') }}">
-                                                    </div>
+                                                    </div> <button type="button" class=" btn btn-danger "  onclick="removeField(this)">Supprimer </button>
                                                 @endforeach
                                             </div>
 
@@ -381,5 +382,11 @@
                 });
             });
         });
+    </script>
+
+    <script>
+          window.removeField = function(button) {
+        button.parentElement.remove();
+    };
     </script>
 @endsection

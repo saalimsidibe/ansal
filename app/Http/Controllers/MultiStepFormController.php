@@ -1,5 +1,5 @@
 <?php
-// app/Http/Controllers/MultiStepFormController.php
+
 
 namespace App\Http\Controllers;
 
@@ -129,11 +129,13 @@ class MultiStepFormController extends Controller
                     'experiences.*.debut' => 'required|string|max:255',
                     'experiences.*.fin' => 'required|string|max:255',
                     'experiences.*.ville' => 'required|string|max:255',
+                    'experiences.*.pays' => 'required|string|max:255',
                     'experiences.*.structure' => 'required|string|max:255',
                     'responsabilites.*.intitule' => 'required|string|max:255',
                     'responsabilites.*.debut' => 'required|string|max:255',
                     'responsabilites.*.fin' => 'required|string|max:255',
                     'responsabilites.*.ville' => 'required|string|max:255',
+                    'responsabilites.*.pays' => 'required|string|max:255',
                     'responsabilites.*.structure' => 'required|string|max:255'
                 ]);
                 //  dd($validatedData);
@@ -340,15 +342,16 @@ class MultiStepFormController extends Controller
             'commites' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
-        /*  foreach ($validatedData as $key => $file) {
+        foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
                 $path = $file->store('uploads');
                 session()->push('uploaded_files', ['key' => $key, 'path' => $path]);
             }
         }
 
-        return response()->json(['success' => 'File uploaded successfully.']); */
-
+        return response()->json(['success' => 'File uploaded successfully.']);
+    }
+    /*
         foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
                 $path = $file->store('uploads');
@@ -362,7 +365,7 @@ class MultiStepFormController extends Controller
         return response()->json(['success' => 'File uploaded successfully.']);
     }
 
-
+*/
 
     // app/Http/Controllers/MultiStepFormController.php
 
@@ -378,7 +381,7 @@ class MultiStepFormController extends Controller
             $data4 = session('data4'); //step4
             $data5 = session('data5'); //step5
             $data6 = session('data6'); //step6
-            $docs = session('preuves_chercheurs'); // Pour les fichiers uploadés
+            $docs = session('uploaded_files'); // Pour les fichiers uploadés
 
 
 
@@ -449,7 +452,7 @@ class MultiStepFormController extends Controller
                 $exp->debut = $ex['debut'];
                 $exp->fin = $ex['fin'];
                 $exp->ville = $ex['ville'];
-                $exp->pays = 'Burkina Faso';
+                $exp->pays = $ex['pays'];
                 $exp->candidat_id = $candidat->id;
                 $exp->save();
             }
@@ -464,7 +467,7 @@ class MultiStepFormController extends Controller
                 $responsabilite->fin = $resp['fin'];
                 $responsabilite->structure = $resp['structure'];
                 $responsabilite->ville = $resp['ville'];
-                $responsabilite->pays = 'Burkina Faso';
+                $responsabilite->pays = $resp['pays'];
                 $responsabilite->candidat_id = $candidat->id;
                 $responsabilite->save();
             }
@@ -533,7 +536,7 @@ class MultiStepFormController extends Controller
                 $article->titre = $art['titre'];
                 $article->editeur = $art['editeur'];
                 $article->refPage = $art['pages'];
-                # $article->coauteur = $art['coauteur'];
+                $article->coauteur = $art['coauteur'];
                 $article->candidat_id = $candidat->id;
 
                 $article->save();
@@ -702,22 +705,21 @@ class MultiStepFormController extends Controller
 */
 
 
-
+            /*
             foreach ($docs as $preuveCher) {
                 $preuve = new PreuveChercheur();
                 $preuve->type = $preuveCher['key'];
                 $preuve->chemin = $preuveCher['path'];
-                $preuve->nom_originale = $preuveCher['nom_originale'];
+
                 $preuve->candidat_id = $candidat->id;
 
                 $preuve->save();
             }
-
-
-            return view('chercheurvues.summary')->with('success', 'Données enregistrées avec succès!');
+*/
+            return redirect()->route('multi-step-form.summary')->with('successC', 'Candidature enregistrée avec succès!');
         } catch (\Exception $e) {
             //   DB::rollBack(); // Rollback en cas d'erreur
-            return redirect()->back()->withErrors(['error' => 'Une erreur s\'est produite lors de l\'enregistrement.']);
+            return redirect()->route('multi-step-form.summary')->with('errorC', 'Une erreur s\'est produite lors de l\'enregistrement.' . $e->getMessage());
         }
     }
 }

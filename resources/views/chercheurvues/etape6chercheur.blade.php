@@ -54,6 +54,7 @@
                                                             class="form-control"
                                                             value="{{ old("commissions.$index.name", $commission['name'] ?? '') }}"
                                                             required>
+                                                          <button type="button" class="btn btn-danger remove-field" onclick="removeField(this)">Supprimer</button>
                                                     </div>
                                                 @endforeach
                                             </div>
@@ -98,7 +99,9 @@
                                                                 id="reference-{{ $index }}"
                                                                 value="{{ old("brevets.$index.reference", $brevet['reference'] ?? '') }}"
                                                                 name="brevets[{{ $index }}][reference]" required>
+                                                                  
                                                         </div>
+                                                          <button type="button" class="btn btn-danger" onclick="removeField(this)">Supprimer</button>
                                                     </div>
                                                 @endforeach
                                                 <button type="button" id="ajouter-champ"
@@ -218,14 +221,7 @@
                                         <fieldset class="border p-2">
                                             <legend class="scheduler-border float-none w-auto">Distinctions</legend>
                                             <div id="distinctions-container">
-                                                <div class="form-group">
-                                                    <label for="contribution">Indiquer votre contribution scientifique
-                                                        majeure dans les domaines du collège postulé</label>
-                                                    <input type="text" class="form-control"
-                                                        name="contributionChecheur"
-                                                        value="{{ old('contributionChecheur', session('data6.contributionChecheur')) }}"
-                                                        required>
-                                                </div>
+                                              
 
                                                 <div id="distinctionsContainer">
                                                     @php
@@ -261,6 +257,7 @@
                                                                 name="distinctions[{{ $index }}][date]"
                                                                 class="form-control"
                                                                 value="{{ $distinction['date'] ?? '' }}" required>
+                                                                  <button type="button" class="btn btn-danger" onclick="removeField(this)">Supprimer</button>
                                                         </div>
                                                     @endforeach
                                                 </div>
@@ -270,6 +267,14 @@
                                             </div>
                                         </fieldset><br>
 
+                                          <div class="form-group">
+                                                    <label for="contribution">Indiquer votre contribution scientifique
+                                                        majeure dans les domaines du collège postulé</label>
+                                                    <input type="text" class="form-control"
+                                                        name="contributionChecheur"
+                                                        value="{{ old('contributionChecheur', session('data6.contributionChecheur')) }}"
+                                                        required>
+                                                </div>
                                         <div class="form-group">
                                             <label for="honneurChercheur">Déclaration sur l'honneur</label>
                                             <input type="checkbox" name="honneurChercheur" class="form-group"
@@ -383,7 +388,7 @@
             index++;
 
             const nouvelOuvrage = `
-                <fieldset id="ouvrage-${index}" class="border p-2">
+                <fieldset id="ouvrage" class="border p-2">
                     <legend class ="scheduler-border float-none w-auto"><h6>Ouvrage</h6></legend>
                     <div class="form-group">
                         <label for="auteurs-${index}">Auteur(s)</label>
@@ -488,7 +493,7 @@
 
         ajouterDistinctionButton.addEventListener('click', function() {
             const newFormGroup = document.createElement('div');
-
+            newFormGroup.classList.add('form-group');
             newFormGroup.innerHTML = `
              
                 <fieldset class = "border p-2">
@@ -499,10 +504,10 @@
                     <option value="2">Sociale</option>
                 </select>
 
-                <input type="text" name="distinctions[${index}][nom]" placeholder="Saisir la distinction" class="form-control"><br>
+                <input type="text" name="distinctions[${index}][nom]" placeholder="Saisir la distinction" class="form-control">
                 <input type="hidden" name="distinctions[${index}][id]" value="" class="form-control" placeholder="nom de la distinction">
                  <input type="date" name="distinctions[${index}][date]" placeholder="Saisir la date de la distinction" class="form-control">
-                <button type="button" class="removeDistinctionButton btn btn-danger">Supprimer</button>
+                <button type="button" class=" btn btn-danger"onclick="removeField(this)" >Supprimer</button>
                
                   <hr/>  
                     
@@ -523,4 +528,8 @@
     });
 </script>
 
-<script></script>
+<script>
+     window.removeField = function(button) {
+                button.parentElement.remove();
+            };
+</script>

@@ -221,176 +221,164 @@ class AutreControllerNouveau extends Controller
         $distinctions = $d6['distinctionsAu'];
 
 
-        $candidat = new Candidat();
-        $candidat->categorie = 'autre';
-        $candidat->nom = $d1['nomAutre'];
-        $candidat->prenom = $d1['prenomAutre'];
-        $candidat->sexe = $d1['sexeAu'];
-        $candidat->datenaissance = $d1['datenaissanceAutre'];
-        $candidat->titre = $d1['titreAutre'];
-        $candidat->telephone = $d1['numerotelAutre'];
-        $candidat->email = $d1['emailAutre'];
-        $candidat->college = $d2['collegeAutre'];
-        $candidat->specialite = $d2['specialiteAutre'];
-        $candidat->travauxSign = $dx['travaux'];
-        $candidat->communautaire = $dx['implication'];
-        $candidat->apport = $d6['apportAu'];
-        $candidat->honneur = $d6['honneurAu'];
-        $candidat->contribution = $d6['contribution'];
+        try {
+            // Création du candidat
+            $candidat = new Candidat();
+            $candidat->categorie = 'autre';
+            $candidat->nom = $d1['nomAutre'];
+            $candidat->prenom = $d1['prenomAutre'];
+            $candidat->sexe = $d1['sexeAu'];
+            $candidat->datenaissance = $d1['datenaissanceAutre'];
+            $candidat->titre = $d1['titreAutre'];
+            $candidat->telephone = $d1['numerotelAutre'];
+            $candidat->email = $d1['emailAutre'];
+            $candidat->college = $d2['collegeAutre'];
+            $candidat->specialite = $d2['specialiteAutre'];
+            $candidat->travauxSign = $dx['travaux'];
+            $candidat->communautaire = $dx['implication'];
+            $candidat->apport = $d6['apportAu'];
+            $candidat->honneur = $d6['honneurAu'];
+            $candidat->contribution = $d6['contribution'];
+            $candidat->save();
 
-        $candidat->save();
+            // Création du parrain
+            $parrain = new Parrain();
+            $parrain->nomPreParrain = $d2['nomPremierPautre'];
+            $parrain->PrenomPreParrain = $d2['prenomPremierPautre'];
+            $parrain->nomDeuxParrain = $d2['nomDeuxiemePautre'];
+            $parrain->PrenomDeuxParrain = $d2['prenomDeuxiemePautre'];
+            $parrain->candidat_id = $candidat->id;
+            $parrain->save();
 
+            // Création des diplômes
+            foreach ($d3['diplomesAu'] as $dip) {
+                $diplome = new Diplome();
+                $diplome->nom_diplome = $dip['nom'];
+                $diplome->date_acquisition = $dip['periode'];
+                $diplome->nom_college = $dip['institut'];
+                $diplome->ville = $dip['ville'];
+                $diplome->pays = $dip['pays'];
+                $diplome->candidat_id = $candidat->id;
+                $diplome->save();
+            }
 
-        $parrain = new Parrain();
-        $parrain->nomPreParrain = $d2['nomPremierPautre'];
-        $parrain->PrenomPreParrain = $d2['prenomPremierPautre'];
-        $parrain->nomDeuxParrain = $d2['nomDeuxiemePautre'];
-        $parrain->PrenomDeuxParrain = $d2['prenomDeuxiemePautre'];
-        $parrain->candidat_id = $candidat->id;
+            // Création des expériences nationales
+            foreach ($d4['fonctionsAAu'] as $ex) {
+                $exp = new Experience();
+                $exp->intitule = $ex['intitule'];
+                $exp->type = 'nationale';
+                $exp->structure = $ex['structure'];
+                $exp->debut = $ex['debut'];
+                $exp->fin = $ex['fin'];
+                $exp->ville = $ex['ville'];
+                $exp->pays = $ex['pays'];
+                $exp->candidat_id = $candidat->id;
+                $exp->save();
+            }
 
-        $parrain->save();
+            // Création des responsabilités nationales
+            foreach ($d4['resAdau'] as $resp) {
+                $responsabilite = new Responsabilite();
+                $responsabilite->intitule = $resp['intitule'];
+                $responsabilite->type = "nationale";
+                $responsabilite->debut = $resp['debut'];
+                $responsabilite->fin = $resp['fin'];
+                $responsabilite->structure = $resp['structure'];
+                $responsabilite->ville = $resp['ville'];
+                $responsabilite->pays = $resp['pays'];
+                $responsabilite->candidat_id = $candidat->id;
+                $responsabilite->save();
+            }
 
+            // Création des expériences internationales
+            foreach ($d5['experiences'] as $ex) {
+                $exp = new Experience();
+                $exp->intitule = $ex['functionTitle'];
+                $exp->type = 'internationale';
+                $exp->structure = $ex['structure'];
+                $exp->debut = $ex['startDate'];
+                $exp->fin = $ex['endDate'];
+                $exp->ville = $ex['city'];
+                $exp->pays = $ex['country'];
+                $exp->candidat_id = $candidat->id;
+                $exp->save();
+            }
 
-        foreach ($d3['diplomesAu'] as $key => $dip) {
-            $diplome = new Diplome();
-            $diplome->nom_diplome = $dip['nom'];
-            $diplome->date_acquisition = $dip['periode'];
-            $diplome->nom_college = $dip['institut'];
-            $diplome->ville = $dip['ville'];
-            $diplome->pays = $dip['pays'];
-            $diplome->candidat_id = $candidat->id;
+            // Création des responsabilités internationales
+            foreach ($d5['responsibilities'] as $resp) {
+                $responsabilite = new Responsabilite();
+                $responsabilite->intitule = $resp['responsibilityTitle'];
+                $responsabilite->type = "internationale";
+                $responsabilite->debut = $resp['startDate'];
+                $responsabilite->fin = $resp['endDate'];
+                $responsabilite->structure = $resp['structure'];
+                $responsabilite->ville = $resp['city'];
+                $responsabilite->pays = $resp['country'];
+                $responsabilite->candidat_id = $candidat->id;
+                $responsabilite->save();
+            }
 
-            $diplome->save();
-        }
+            // Création des commissions
+            foreach ($d6['commissionAu'] as $comm) {
+                $commission = new Commission();
+                $commission->nom = $comm['nom'];
+                $commission->candidat_id = $candidat->id;
+                $commission->save();
+            }
 
-        foreach ($d4['fonctionsAAu'] as $key => $ex) {
-            $exp = new Experience();
-            $exp->intitule = $ex['intitule'];
-            $exp->type = 'nationale';
-            $exp->structure = $ex['structure'];;
-            $exp->debut = $ex['debut'];
-            $exp->fin = $ex['fin'];
-            $exp->ville = $ex['ville'];
-            $exp->pays = 'Burkina Faso';
-            $exp->candidat_id = $candidat->id;
-            $exp->save();
-        }
+            // Enregistrement des ouvrages non édités
+            foreach ($Nedites as $Nedite) {
+                $ouvrage = new Ouvrage();
+                $ouvrage->nom = $Nedite['titreNe'];
+                $ouvrage->nom_auteur = $Nedite['nomAuteurNe'];
+                $ouvrage->nom_coauteur = $Nedite['nomCoauteurNe'];
+                $ouvrage->nombrePage = $Nedite['nbrePNe'];
+                $ouvrage->type = 'non edite';
+                $ouvrage->candidat_id = $candidat->id;
+                $ouvrage->save();
+            }
 
-        foreach ($d4['resAdau'] as $key => $resp) {
-            $responsabilite = new Responsabilite();
-            $responsabilite->intitule = $resp['intitule'];
-            $responsabilite->type = "nationale";
-            $responsabilite->debut = $resp['debut'];
-            $responsabilite->fin = $resp['fin'];
-            $responsabilite->structure = $resp['structure'];
-            $responsabilite->ville = $resp['ville'];
-            $responsabilite->pays = 'Burkina Faso';
-            $responsabilite->candidat_id = $candidat->id;
-            $responsabilite->save();
-        }
+            // Enregistrement des ouvrages édités
+            foreach ($edites as $edite) {
+                $ouvrage = new Ouvrage();
+                $ouvrage->nom = $edite['titre'];
+                $ouvrage->nom_auteur = $edite['nomAuteur'];
+                $ouvrage->nom_coauteur = $edite['nomCoauteur'];
+                $ouvrage->annee_publication = $edite['anneePublication'];
+                $ouvrage->nom_editeur = $edite['editeur'];
+                $ouvrage->nombrePage = $edite['nombrePage'];
+                $ouvrage->type = 'edite';
+                $ouvrage->candidat_id = $candidat->id;
+                $ouvrage->save();
+            }
 
+            // Enregistrement des distinctions
+            foreach ($distinctions as $distinction) {
+                $distinctionModel = new Distinction();
+                $distinctionModel->type = $distinction['type'];
+                $distinctionModel->nom = $distinction['distinctions_nom'];
+                $distinctionModel->date = $distinction['distinctions_date'];
+                $distinctionModel->candidat_id = $candidat->id;
+                $distinctionModel->save();
+            }
 
-
-        foreach ($d5['experiences'] as $key => $ex) {
-            $exp = new Experience();
-            $exp->intitule = $ex['functionTitle'];
-            $exp->type = 'internationale';
-            $exp->structure = $ex['structure'];;
-            $exp->debut = $ex['startDate'];
-            $exp->fin = $ex['endDate'];
-            $exp->ville = $ex['city'];
-            $exp->pays = $ex['country'];
-            $exp->candidat_id = $candidat->id;
-            $exp->save();
-        }
-
-
-
-
-
-        foreach ($d5['responsibilities'] as $key => $resp) {
-            $responsabilite = new Responsabilite();
-            $responsabilite->intitule = $resp['responsibilityTitle'];
-            $responsabilite->type = "internationale";
-            $responsabilite->debut = $resp['startDate'];
-            $responsabilite->fin = $resp['endDate'];
-            $responsabilite->structure = $resp['structure'];
-            $responsabilite->ville = $resp['city'];
-            $responsabilite->pays =  $resp['country'];
-            $responsabilite->candidat_id = $candidat->id;
-            $responsabilite->save();
-        }
-
-        foreach ($d6['commissionAu'] as  $key => $comm) {
-            $commission = new Commission();
-            $commission->nom = $comm['nom'];
-            $commission->candidat_id = $candidat->id;
-            $commission->save();
-        }
-
-        //enregistrer les ouvrages non edites
-        foreach ($Nedites as $Nedite) {
-            $nomAuteurNe = $Nedite['nomAuteurNe'];
-            $nomCoauteurNe = $Nedite['nomCoauteurNe'];
-            $titreNe = $Nedite['titreNe'];
-            $NbrePage = $Nedite['nbrePNe'];
-
-            $ouvrage = new Ouvrage();
-            $ouvrage->nom = $titreNe;
-            $ouvrage->nom_auteur =  $nomAuteurNe;
-            $ouvrage->nom_coauteur = $nomCoauteurNe;
-            $ouvrage->nombrePage = $NbrePage;
-            $ouvrage->type = 'non edite';
-            $ouvrage->candidat_id = $candidat->id;
-
-            $ouvrage->save();
-        }
-
-        //Pour les ouvrages edités
-        foreach ($edites as $edite) {
-            $nomAuteur = $edite['nomAuteur'];
-            $nomCoAuteur = $edite['nomCoauteur'];
-            $anneePublication = $edite['anneePublication'];
-            $titre = $edite['titre'];
-            $editeur = $edite['editeur'];
-            $nombrePage = $edite['nombrePage'];
-
-            $ouvrage = new Ouvrage();
-            $ouvrage->nom = $titre;
-            $ouvrage->nom_auteur = $nomAuteur;
-            $ouvrage->nom_coauteur = $nomCoAuteur;
-            $ouvrage->annee_publication = $anneePublication;
-            $ouvrage->nom_editeur = $editeur;
-            $ouvrage->nombrePage = $nombrePage;
-            $ouvrage->type = 'edite';
-            $ouvrage->candidat_id = $candidat->id;
-
-            $ouvrage->save();
-        }
-
-        foreach ($distinctions as $distinction) {
-            $type = $distinction['type'];
-            $nom = $distinction['distinctions_nom'];
-            $date = $distinction['distinctions_date'];
-
-            $distinction = new Distinction();
-            $distinction->type = $type;
-            $distinction->nom = $nom;
-            $distinction->date = $date;
-
-            $distinction->candidat_id = $candidat->id;
-
-            $distinction->save();
-        }
-
+            // (Décommenter si vous souhaitez enregistrer les preuves)
+            /*
         foreach ($documents as $document) {
             $preuve = new PreuveAutre();
             $preuve->type = $document['key'];
             $preuve->chemin = $document['path'];
             $preuve->nom_originale = $document['nom_originale'];
             $preuve->candidat_id = $candidat->id;
-
             $preuve->save();
+        }
+        */
+
+            // Redirection avec un message de succès
+            return redirect()->route('resume')->with('message', ' Votre candidature a été enregistrée avec succès.');
+        } catch (\Exception $e) {
+            // En cas d'erreur, redirection avec un message d'erreur
+            return redirect()->back()->with(['error' => 'Une erreur est survenue lors de l\'enregistrement de votre candidature.']);
         }
     }
 }

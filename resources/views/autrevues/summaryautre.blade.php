@@ -3,7 +3,20 @@
 @section('content')
 <div class="container">
     <h2>Résumé de vos informations</h2>
-    @if ($errors->any())
+ 
+         <!-- Affichage des messages de succès -->
+     <!-- Affichage des messages de succès -->
+
+
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
+
+    <!-- Affichage des messages d'erreur -->
+   
+           @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -12,6 +25,8 @@
         </ul>
     </div>
 @endif
+
+    
 
     <!-- Étape 1: Informations personnelles -->
     
@@ -23,6 +38,7 @@
     <p><strong>Date de naissance:</strong> {{ session('etape1.datenaissanceAutre') ?? 'Non renseigné' }}</p>
     <p><strong>Sexe:</strong> {{ session('etape1.sexeAu') ?? 'Non renseigné' }}</p>
     <p><strong>Numero de Téléphone:</strong> {{ session('etape1.numerotelAutre')?? 'Non renseigné' }}</p>
+     <p><strong>Categorie: Autre</strong></p>
     <p><strong>Titre:</strong> {{ session('etape1.titreAutre') ?? 'Non renseigné' }}</p>
     <p> <strong>Email:</strong>{{ session('etape1.emailAutre') ?? 'Non renseigné' }}</p>
     <p> <strong>Nom du Premier Parrain: </strong>{{session('etape2.nomPremierPautre') ?? 'Non renseigné'}}</p>
@@ -97,6 +113,7 @@
         <p><strong>Année d'obtention:</strong> {{$diplome['periode'] ?? 'Non renseigné' }}</p>
         <p> <strong>Ville:</strong>{{$diplome['ville'] ?? 'Non renseigné' }}</p>
         <p> <strong>Pays:</strong>{{$diplome['pays'] ?? 'Non renseigné' }}</p>
+        <hr>
     @endforeach
 
 
@@ -120,7 +137,7 @@
         <p><strong>Fin:</strong> {{ $experienceNat['fin'] ?? 'Non renseigné' }}</p>
         <p><strong>Ville:</strong> {{ $experienceNat['ville'] ?? 'Non renseigné' }}</p> 
         <p><strong>Pays:</strong> {{ $experienceNat['pays'] ?? 'Non renseigné' }}</p>
-      
+      <hr>
         @php
             $compExpNat++;
         @endphp
@@ -136,7 +153,7 @@
         <p><strong>Fin:</strong> {{ $respNat['fin'] ?? 'Non renseigné' }}</p>
         <p><strong>Ville:</strong> {{ $respNat['ville'] ?? 'Non renseigné' }}</p> 
         <p><strong>Pays:</strong> {{ $respNat['pays'] ?? 'Non renseigné' }}</p>
-        
+        <hr>
         @php
             $compteurRespNat++;
         @endphp
@@ -153,7 +170,7 @@
         <p><strong>Fin:</strong> {{ $experienceInt['endDate'] ?? 'Non renseigné' }}</p>
         <p><strong>Ville:</strong> {{ $experienceInt['city'] ?? 'Non renseigné' }}</p> 
         <p><strong>Pays:</strong> {{ $experienceInt['country'] ?? 'Non renseigné' }}</p>
-      
+      <hr>
         @php
             $comptExpInt++
         @endphp
@@ -170,7 +187,7 @@
         <p><strong>Fin:</strong> {{ $respInt['endDate'] ?? 'Non renseigné' }}</p>
         <p><strong>Ville:</strong> {{ $respInt['city'] ?? 'Non renseigné' }}</p> 
         <p><strong>Pays:</strong> {{ $respInt['country'] ?? 'Non renseigné' }}</p>
-        
+        <hr>
         @php
            $compteurRespInt++;
         @endphp
@@ -181,6 +198,7 @@
     <h3>Étape : Associations, commissions, réseaux, comités d’experts internationaux d’appartenance </h3>
     @foreach ($commissionsAu as $com)
         <p><strong>Association/Commission  {{  $compteurCommAu }}:</strong>{{ $com['nom'] ?? 'Non renseigné' }}</p>
+        <hr>
         @php
              $compteurCommAu++;
         @endphp
@@ -195,7 +213,7 @@
          <p><strong>Année de Publication: </strong>{{ $edite['anneePublication'] ?? 'Non renseigné' }}</p>
          <p><strong>Editeur: </strong>{{ $edite['editeur'] ?? 'Non renseigné' }}</p>
          <p><strong>Nombre de Pages</strong>{{ $edite['nombrePage'] ?? 'Non renseigné' }}</p>
-         
+         <hr>
          @php
             $cmpEdites++; 
          @endphp
@@ -210,7 +228,7 @@
          <p><strong>Co auteur(s): </strong>{{  $ne['nomCoauteurNe'] ?? 'Non renseigné' }}</p>  
          <p><strong>Nombre de Pages</strong>{{ $ne['nbrePNe'] ?? 'Non renseigné' }}</p>
 
-
+        <hr>
         @php
             $comptNedites++; 
          @endphp
@@ -231,6 +249,7 @@
         <p> <strong>Type:</strong>{{ $distinction['type'] ?? 'Non renseigné' }}</p>
         <p> <strong>Nom:</strong>{{ $distinction['distinctions_nom'] ?? 'Non renseigné' }}</p>
         <p> <strong>Date:</strong>{{ $distinction['distinctions_date'] ?? 'Non renseigné' }}</p>
+        <hr>
         @php
         $cmptdisctions++;    
         @endphp
@@ -238,14 +257,12 @@
 
      <H3>Contribution Majeure dans les domaines du collège postulé</H3>:
    <p>{{session('etape6')['contribution']?? 'Non renseigné'}}</p> 
-
+<hr>
 
    <h3>Apport Particulier à l'academie</h3>
    <p>{{session('etape6')['apportAu']?? 'Non renseigné'}}</p>
-
-   <h3>Declaration sur l'honneur</h3>
-   <p>{{session('etape6')['honneurAu']?? 'Non renseigné'}}</p>
-
+<hr>
+   
 
     <!-- Étape 7: Fichiers joints -->
     <h3> Fichiers joints</h3>

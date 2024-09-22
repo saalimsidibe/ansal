@@ -91,6 +91,12 @@
                                                             id="ville_{{ $index }}" class="form-control"
                                                             value="{{ $experience['ville'] ?? '' }}">
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label for="pays_{{ $index }}">Pays</label>
+                                                        <input type="text" class="form-control"        name="experiences[{{ $index }}][pays]}"
+                                                            id="pays_{{ $index }}" class="form-control"
+                                                            value="{{ $experience['pays'] ?? '' }}">
+                                                    </div>
                                                     <button type="button" class=" btn btn-danger remove-btn"
                                                         onclick="removeField(this)">Supprimer</button>
                                                 @endforeach
@@ -140,7 +146,11 @@
                                                 <label>Ville:</label>
                                                 <input type="text" class="form-control" name="responsabilites[{{ $index }}][ville]"
                                                 value="{{ $responsabilite['ville'] ?? '' }}"/><br/>
-                                                <button type="button" class=" btn btn-danger remove-button">Supprimer</button>
+                                                <label>Pays:</label>
+                                                <input type="text" class="form-control" name="responsabilites[{{ $index }}][pays]"
+                                                value="{{ $responsabilite['pays'] ?? '' }}"/><br/>
+
+                                                <button type="button" class=" btn btn-danger "  onclick="removeField(this)">Supprimer</button>
                                                 <hr/>
                                                 @endforeach
 
@@ -230,6 +240,10 @@
                     <label for="ville_${fieldIndex}">Ville</label>
                     <input type="text" name="experiences[${fieldIndex}][ville]" id="ville_${fieldIndex}" class="form-control">
                 </div>
+                  <div class="form-group">
+                    <label for="pays_${fieldIndex}">pays</label>
+                    <input type="text" name="experiences[${fieldIndex}][pays]" id="pays_${fieldIndex}" class="form-control">
+                </div>
                 <button type="button" class=" btn btn-danger remove-btn" onclick="removeField(this)">Supprimer</button>
                 </fieldset>
                 
@@ -269,7 +283,7 @@
                 const newFieldSet = document.createElement('fieldset');
                 newFieldSet.classList.add('border', 'p-2');
                 newFieldSet.innerHTML = `
-                    <legend>Responsabilité ${index + 1}</legend>
+                    <legend>Responsabilité</legend>
                     <label>Intitulé de la responsabilité:</label>
                     <input type="text" class="form-control" name="responsabilites[${index}][intitule]"" /><br/>
                     <label>Début:</label>
@@ -280,6 +294,8 @@
                     <input type="text"  class="form-control" name="responsabilites[${index}][structure]" /><br/>
                     <label>Ville:</label>
                     <input type="text" class="form-control" name="responsabilites[${index}][ville]" /><br/>
+                      <label>pays:</label>
+                    <input type="text" class="form-control" name="responsabilites[${index}][pays]" /><br/>
                     <button type="button" class="remove-button btn btn-danger">Supprimer</button>
                     <hr/>
                 `;

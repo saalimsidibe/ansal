@@ -83,6 +83,7 @@
                 <label for="pays_{{$indexAAu}}">Pays</label>
                 <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][pays]" id="pays_{{$indexAAu}}" value="{{$fonctionAAu['pays'] ?? ''}}"  required> 
             </div>
+               <button type="button" class=" btn btn-danger "  onclick="removeField(this)">Supprimer </button>
        </div>
         @endforeach 
 
@@ -135,9 +136,10 @@
                     <label for="Pays_{{$j}}">Pays</label>
                     <input type="text" name="resAdau[{{$j}}][pays]" value="{{$reAdau['pays'] ?? ''}}" placeholder="Pays" id="Pays_{{$j}}" class="form-control">
                 </div>
-      
+                   <button type="button" class=" btn btn-danger "  onclick="removeField(this)">Supprimer </button> 
             @endforeach
-              </div>  
+              </div> 
+             
             </fieldset>      
         </div> 
        <div class="btn-group mt-4">
@@ -165,7 +167,11 @@
 @section('scripts')
  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
-    <script>
+   
+   
+   
+   
+   <script>
         //ajouter et supprimer champs experience professionnelle
 
          // Écoutez les changements sur le select

@@ -58,41 +58,43 @@
                             <div id="dynamic-fields-container">
                                 <!-- Dynamic fields will be appended here -->
                             @foreach ($experiences as $index =>$exp)
+                                <div class="exp">
                                 <fieldset class="border p-2">
                                        <legend class="scheduler-border float-none w-auto"> <h4>Experience</h4></legend>
                                 <div class="form-group">
                                      <label for="experience_{{$index}}">Nom de la fonction</label>
                                     <input type="text" class="form-control" name="experiences[{{$index}}][functionTitle]" value="{{$exp['functionTitle'] ?? ''}}" id="experience_{{$index}}" class="form-control" required>   
-                                </div>
+                                
 
-                                <div class="form-group">
+                            
                                     <label for="debut_{{$index}}">Debut</label>
                                     <input type="text" name="experiences[{{$index}}][startDate]"  class="form-control"   id="debut_{{$index}}" value="{{$exp['startDate'] ?? ''}}">
-                                </div>
-                                <div class="form-group">
+                                
+                                
                                     <label for="fin_{{$index}}">fin</label>
                                     <input type="text" name="experiences[{{$index}}][endDate]" class="form-control"     id="fin_{{$index}}" value="{{$exp['endDate'] ?? ''}}">
 
-                                </div>
+                                
 
-                                <div class="form-group">
+                                
                                     <label for="ville_{{$index}}">Ville</label>
                                       <input type="text" name="experiences[{{$index}}][city]"   class="form-control" id="ville_{{$index}}" value="{{$exp['city'] ?? ''}}">
-                                </div>
+                            
 
-                                <div class="form-group">
+                                
                                     <label for="structure_{{$index}}">Structure</label>
                                     <input type="text" name="experiences[{{$index}}][structure]"  class="form-control"               id="structure_{{$index}}" value="{{$exp['structure'] ?? ''}}">
-                                </div>
-
-                                <div class="form-group">
+                                
+                                
                                     <label for="pays_{{$index}}">Pays</label>
                                     <input type="text" name="experiences[{{$index}}][country]"    class="form-control"      id="pays_{{$index}}" value="{{$exp['country'] ?? ''}}">
                                 </div>
-
-                            @endforeach
-
-                            </fieldset>
+                                <button type="button" class=" btn btn-danger "  onclick="suppExp(this)">Supprimer </button>
+                          </fieldset>
+                          </div>
+                                @endforeach
+                                 
+                            
 
                             </div>
 
@@ -104,7 +106,7 @@
         
                 
 
-                    <div class="form-group">
+                      <div class="form-group">
                         <label for="respintAu">Responsabilités professionnelles exercées au plan international</label>
                         <select name="respintAu" id="respintAu" class="form-control" required>
                             <option value="non" {{ old('respintAu', session('form.respintAu')) == 'non' ? 'selected' : '' }}>Non</option>
@@ -120,8 +122,9 @@
                         @endphp
                                         <div id="dynamic-responsibility-fields-container">
                                             <!-- Dynamic fields will be appended here -->
-
+                                            
                                             @foreach ($responsibilities as $index => $resp)
+                                            <div class="res">
                               <fieldset class="border p-2">   
                                   <legend class="scheduler-border float-none w-auto"><h4>Responsabilite</h4> </legend>             
                         <div class="form-group">
@@ -154,7 +157,9 @@
                         <label for="pays_{{$index}}">Pays</label>
                         <input type="text" name="responsibilities[{{$index}}][country]" value="{{$resp['country'] ?? ""}}"         id="pays_{{$index}}" class="form-control">
                     </div>
+                      <button type="button" class=" btn btn-danger "  onclick="suppRes(this)">Supprimer </button>
 
+                </div>
                  @endforeach
                                               
                  
@@ -171,6 +176,8 @@
                                    
                                    
                          </div>
+                                   
+                         
                
 
                   
@@ -195,11 +202,19 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
     
-
-    //Ajouter une fonction
+<script>
+    function removeField(button) {
+        // Trouve le div le plus proche avec la classe `dynamic-responsibility-fields-container`
+        const container = button.closest('.dynamic-responsibility-fields-container');
+        if (container) {
+            container.remove(); // Supprime le conteneur du DOM
+        }
+    }
+</script>
+    
     
    <script>
-  document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('DOMContentLoaded', function() {
     const expprofintSelect = document.getElementById('expprofintAu');
     const experienceFieldsContainer = document.getElementById('experience-fields-container');
     const dynamicFieldsContainer = document.getElementById('dynamic-fields-container');
@@ -265,7 +280,7 @@
         button.parentElement.remove();
     };
 });
-   </script>
+</script>
 
    <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -333,4 +348,25 @@
             }
         }); 
     </script>
+    <script>
+        function suppExp(button){
+          const fieldGroup = button.closest('.exp'); 
+          if(fieldGroup)
+          {
+            fieldGroup.remove();
+          }
+        }
+    </script>
+
+    <script>
+        function suppRes(button){
+            const fieldGroup=button.closest('.res');
+            if(fieldGroup)
+        {
+            fieldGroup.remove();
+        }
+        }
+
+    </script>
+
 @endsection
