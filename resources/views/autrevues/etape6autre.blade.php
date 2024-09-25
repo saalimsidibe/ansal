@@ -8,12 +8,12 @@
                 <nav class="breadcrumbs">
                     <ol>
 
-                        <li>Etape1</li>
-                        <li>Etape2</li>
-                        <li>Etape3</li>
-                        <li>Etape4</li>
-                        <li>Etape5</li>
-                        <li >Etape6</li>
+                        <li>Etape 1</li>
+                        <li>Etape 2</li>
+                        <li>Etape 3</li>
+                        <li>Etape 4</li>
+                        <li>Etape 5</li>
+                        <li >Etape 6</li>
                         <li class="current"><a href="#">Etape 7</a></li>
                          <li >Etape Finale</li>
                     </ol>
@@ -138,7 +138,7 @@
     <!-- Distinctions honorifiques et scientifiques -->
     <div class="form-group">
         <h5>Distinctions honorifiques et scientifiques</h5>
-      
+
         <button type="button" id="add-select" class="btn btn-info">Ajouter</button>
     </div>
 
@@ -152,17 +152,17 @@
                 </select>
              </div>
                 <div class="form-group">
-                    <label for="nom_{{$index}}">Nom de la distinction</label> 
+                    <label for="nom_{{$index}}">Nom de la distinction</label>
                     <input type="text"  class="form-control"         name="distinctionsAu[{{$index}}][distinctions_nom]" id="nom_{{$index}}"  value="{{$distinction['distinctions_nom'] ?? ''}}">
 
                 </div>
                <div class="form-group">
                 <input type="date" name="distinctionsAu[{{$index}}][distinctions_date]" id="date_{{$index}}" class="form-control" value="{{$distinction['distinctions_date'] ?? ''}}">
                </div>
-                                
-                         
+
+
                 <button type="button"  class="btn btn-danger"      onclick="removeSelect(this)">Supprimer</button>
-            
+
         </div>
         @endforeach
     </div>
@@ -172,27 +172,27 @@
         <textarea id="description" name="contribution" rows="4" cols="50" placeholder="Indiquer votre contribution majeure dans les domaines du  collège postulé ">{{old('contribution',session('etape6.contribution',''))}}</textarea>
     </div>
 
-     
+
     <div class="form-group">
          <textarea name="apportAu" id="" cols="50" rows="4" placeholder="Indiquer quel pourrait etre votre apprt particulier à l'academie">{{old('apportAu',session('etape6.apportAu',''))}}</textarea>
     </div><br>
-     
+
     <!-- Apport particulier à l’Académie -->
-           
-        
+
+
 
     <!-- Déclaration sur l’honneur -->
-  
+
           <label for="declaration"> <h5>Declaration sur l'honneur</h5></label>
          <input name="honneurAu" id="declaration" type="checkbox" placeholder="" value="1"  {{ $honneurAu ? 'checked' : '' }} required> <br>
 
-            
-   
+
+
      <div class="btn-group mt-4">
          <a href="{{route('etape5.autre')}}" class="btn btn-warning">Précédent</a>
          <button type="submit" class="btn btn-info">Suivant</button>
         </div>
-         
+
     </form>
      </div>
 
@@ -215,11 +215,11 @@
     </div>
 
     @endsection
-  
+
    <div class="form-control">
     <input type="date">
-    </div> 
-        
+    </div>
+
 @section('scripts')
     <script>
         //ajouter des associations
@@ -249,13 +249,13 @@
             newField.querySelector('.remove-field').addEventListener('click', function() {
                 container.removeChild(newField);
             });
-        }       
+        }
     </script>
     <script>
-        //Ajouter ouvrage edité 
+        //Ajouter ouvrage edité
          let u=0;
           document.getElementById('ouvrageEditeAut').addEventListener('click', function() {
-         
+
             addDynamicFieldOuvrageEdite();
         });
 
@@ -287,7 +287,7 @@
                     <input type="text" class="form-control" name="edites[${u}][nomCoauteur]" id="nomCoauteur${u}" required>
                 </div>
 
-             
+
                 <div>
                     <label for="nombrePage${u}">Nombre de pages</label>
                     <input type="number" class="form-control" name="edites[${u}][nombrePage]" id="nombrePage${u}" required>
@@ -345,15 +345,15 @@
                     <input type="text" class="form-control" name="Nedites[${y}][nbrePNe]" id="nbrePage${y}">
                 </div>
 
-                
+
                 <button type="button" class=" btn btn-danger remove-field">Supprimer </button>
                 <hr>
             `;
 
             container.appendChild(newFields);
-            
 
-            
+
+
 
             // Add event listener to the remove button
             newFields.querySelector('.remove-field').addEventListener('click', function() {
@@ -367,7 +367,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             const selectContainer = document.getElementById('select-container');
             const addSelectButton = document.getElementById('add-select');
-            
+
           //Nedites[${y}][nbrePNe]
 
 
@@ -385,7 +385,7 @@
                         <label for="nom_distinction_${v}">Nom de la distinction</label>
                         <input type="text" name="distinctionsAu[${v}][distinctions_nom]" id="nom_distinction_${v}" class="form-control">
                     </div>
-                    
+
                         <div class="form-group">
                                 <label for="date_${v}">Date</label>
                                 <input type="date" name="distinctionsAu[${v}][distinctions_date]" id="date_${v}" class="form-control">

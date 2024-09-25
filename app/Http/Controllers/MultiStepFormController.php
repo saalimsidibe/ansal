@@ -323,6 +323,10 @@ class MultiStepFormController extends Controller
                 $request->session()->put('step', "6");
                 return redirect()->route('etape6chercheur');
                 break;
+            default:
+                 $request->session()->put('step', "1");
+                return view('chercheurvues.etape1chercheur');
+                break;
         }
     }
 
@@ -498,7 +502,7 @@ class MultiStepFormController extends Controller
                 $responsabilite->save();
             }
 
-            foreach ($data6['commissions'] as $key => $comm) {
+             foreach ($data6['commissions'] as $key => $comm) {
                 $commission = new Commission();
                 $commission->nom = $comm['name'];
                 $commission->candidat_id = $candidat->id;
