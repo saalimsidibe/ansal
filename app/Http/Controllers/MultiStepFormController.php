@@ -344,8 +344,10 @@ class MultiStepFormController extends Controller
 
         foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
+                $nom = 'nom';
                 $path = $file->store('uploads');
-                session()->push('uploaded_files', ['key' => $key, 'path' => $path]);
+
+                session()->push('uploaded_files', ['key' => $key, 'path' => $path, 'nom_originale' => $nom]);
             }
         }
 
@@ -705,17 +707,21 @@ class MultiStepFormController extends Controller
 */
 
 
-            /*
+
             foreach ($docs as $preuveCher) {
                 $preuve = new PreuveChercheur();
-                $preuve->type = $preuveCher['key'];
+
                 $preuve->chemin = $preuveCher['path'];
+
+                $preuve->nom_originale = $preuveCher['nom_originale'];
+
 
                 $preuve->candidat_id = $candidat->id;
 
                 $preuve->save();
             }
-*/
+
+
             return redirect()->route('multi-step-form.summary')->with('successC', 'Candidature enregistrée avec succès!');
         } catch (\Exception $e) {
             //   DB::rollBack(); // Rollback en cas d'erreur
