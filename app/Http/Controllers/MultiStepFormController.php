@@ -349,7 +349,7 @@ class MultiStepFormController extends Controller
         foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
                 $nom = $file->getClientOriginalName();
-                $path = $file->store('uploads');
+                $path = $file->store('public');
 
                 session()->push('uploaded_files', ['key' => $key, 'path' => $path, 'nom_originale' => $nom]);
             }
