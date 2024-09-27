@@ -47,6 +47,7 @@
                                             <div id="commission-fields">
                                                 @php
                                                     $commissions = old('commissions', session('data6.commissions', []));
+                                                  
                                                 @endphp
                                                 @foreach ($commissions as $index => $commission)
                                                     <div class="form-group">

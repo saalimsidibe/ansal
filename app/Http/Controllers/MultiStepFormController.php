@@ -344,12 +344,13 @@ class MultiStepFormController extends Controller
 
         foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
-                $nom = 'nom';
+                $nom = $file->getClientOriginalName();
                 $path = $file->store('uploads');
 
                 session()->push('uploaded_files', ['key' => $key, 'path' => $path, 'nom_originale' => $nom]);
             }
         }
+
 
         return response()->json(['success' => 'File uploaded successfully.']);
     }
@@ -500,12 +501,12 @@ class MultiStepFormController extends Controller
                 $responsabilite->save();
             }
 
-            foreach ($data6['commissions'] as $key => $comm) {
+            /*   foreach ($data6['commissions'] as $key => $comm) {
                 $commission = new Commission();
                 $commission->nom = $comm['name'];
                 $commission->candidat_id = $candidat->id;
                 $commission->save();
-            }
+            }*/
 
             foreach ($data6['brevets'] as $key =>  $brev) {
                 $brevet = new Brevet();
@@ -709,6 +710,7 @@ class MultiStepFormController extends Controller
 
 
             foreach ($docs as $preuveCher) {
+
                 $preuve = new PreuveChercheur();
 
                 $preuve->chemin = $preuveCher['path'];

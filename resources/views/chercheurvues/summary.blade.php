@@ -26,6 +26,10 @@
 <h1>Résumé des Informations</h1>
 
     <!-- Affichage des données personnelles -->
+
+    @php
+          
+    @endphp
     <h2>Informations Personnelles</h2>
     <p><strong>Nom:</strong> {{ session('data1.nom') ?? 'Non renseigné' }}</p>
     <p><strong>Prénom:</strong> {{ session('data1.prenom') ?? 'Non renseigné' }}</p>
