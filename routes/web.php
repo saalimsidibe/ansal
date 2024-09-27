@@ -95,6 +95,9 @@ Route::view('/sante', 'criterevues.sante')->name('sante');
 Route::view('/sciencesnat', 'criterevues.sciencesnat')->name('agro');
 Route::view('/st', 'criterevues.sciencestechniques')->name('sciencestech');
 Route::view('/implicationAutre', 'autrevues.etapexautre')->name('etapexautre');
+
+Route::post('/send-file', [AutreControllerNouveau::class, 'sendFile'])->name('file.send');
+
 Route::post('/finir', [AutreControllerNouveau::class, 'finir'])->name('AutreControllerNouveau.finir');
 
 Route::get('/etape1au', [AutreControllerNouveau::class, 'etape1']);

@@ -355,6 +355,7 @@
 
             // Ajouter de nouveaux champs lorsque le bouton Ajouter est cliqué
             addButton.addEventListener('click', function() {
+                console.log("Nouveau champ créé");
                 const index = fieldsWrapper.children.length; // Compter les ensembles de champs existants
                 const newFieldSet = document.createElement('fieldset');
                 newFieldSet.innerHTML = `
@@ -378,7 +379,8 @@
 
                 // Ajouter un écouteur d'événements au bouton Supprimer
                newFieldSet.querySelector('.custom-remove-btn').addEventListener('click', function() {
-                    fieldsWrapper.removeChild(newFieldSet);
+                    newFieldSet.remove();
+                    
                 });
             });
         });

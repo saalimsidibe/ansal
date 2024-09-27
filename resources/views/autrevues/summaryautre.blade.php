@@ -16,15 +16,11 @@
 
     <!-- Affichage des messages d'erreur -->
    
-           @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+         @if(session('error'))
+         <div class="alert alert-danger">
+            {{session('error')}}
+         </div>
+         @endif
 
     
 
@@ -102,7 +98,9 @@
       $contribution=session('etape6')['contribution']
   @endphp
 
-
+@php
+    $documents=session('documents', []);
+@endphp
 
 
  <!-- Étape 2 : Informations Academiques -->
@@ -276,6 +274,22 @@
     <p><strong>Distinctions honorifiques:</strong> {{ session('distinctionsHonorifiquesDoc') ? session('distinctionsHonorifiquesDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
     <p><strong>Distinctions scientifiques:</strong> {{ session('distinctionsScientifiquesDoc') ? session('distinctionsScientifiquesDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
 
+
+     @if (count($documents) > 0)
+    @foreach ($documents as $document)
+        @if (is_array($document)) <!-- Vérifiez que c'est un tableau -->
+            <div class="document-item">
+                <h4>{{ $document['nom_originale'] }}</h4>
+                
+                <a href="{{ asset('storage/' . $document['path']) }}" target="_blank">Voir le document</a>
+            </div>
+        @else
+            <p>Document non valide.</p>
+        @endif
+    @endforeach
+@else
+    <p>Aucun document trouvé.</p>
+@endif
     <!-- Formulaire de soumission finale -->
     <form method="POST" action="{{ route('AutreControllerNouveau.finir') }}">
         @csrf

@@ -62,6 +62,7 @@
 
                                             <div id="experience-container">
                                                 @foreach ($experiences as $index => $experience)
+                                                <div class="ex">  
                                                     <div class="form-group">
                                                         <label for="intitule_{{ $index }}">Intitulé de la
                                                             fonction</label>
@@ -97,8 +98,10 @@
                                                             id="pays_{{ $index }}" class="form-control"
                                                             value="{{ $experience['pays'] ?? '' }}">
                                                     </div>
-                                                    <button type="button" class=" btn btn-danger remove-btn"
-                                                        onclick="removeField(this)">Supprimer</button>
+                                                    
+                                                    <button type="button" class=" btn btn-danger"
+                                                        onclick=" supEx(this)">Supprimer</button>
+                                                      </div>   
                                                 @endforeach
 
                                                 <!-- Champs dynamiques pour ajouter les expériences seront ajoutés ici -->
@@ -131,11 +134,12 @@
                                         @endphp
                                             <div id="fields-container">
                                                 @foreach ($responsabilites as $index => $responsabilite)
-                                                <label>Intitulé de la responsabilité:</label>
-                                                <input type="text" class="form-control" name="responsabilites[{{ $index }}][intitule]"
-                                                value="{{ $responsabilite['intitule'] ?? '' }}" /><br/>
-                                                <label>Début:</label>
-                                                <input type="date" class="form-control" name="responsabilites[{{ $index }}][debut]"
+                                                <div class="rs">
+                                                    <label>Intitulé de la responsabilité:</label>
+                                                    <input type="text" class="form-control" name="responsabilites[{{ $index }}][intitule]"
+                                                    value="{{ $responsabilite['intitule'] ?? '' }}" /><br/>
+                                                    <label>Début:</label>
+                                                    <input type="date" class="form-control" name="responsabilites[{{ $index }}][debut]"
                                                 value="{{ $responsabilite['debut'] ?? '' }}" /><br/>
                                                 <label>Fin:</label>
                                                 <input type="date"  class="form-control" name="responsabilites[{{ $index }}][fin]"
@@ -150,7 +154,8 @@
                                                 <input type="text" class="form-control" name="responsabilites[{{ $index }}][pays]"
                                                 value="{{ $responsabilite['pays'] ?? '' }}"/><br/>
 
-                                                <button type="button" class=" btn btn-danger "  onclick="removeField(this)">Supprimer</button>
+                                                <button type="button" class=" btn btn-danger "  onclick="supRes(this)">Supprimer</button>
+                                                </div>
                                                 <hr/>
                                                 @endforeach
 
@@ -307,5 +312,27 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        function supEx(button)
+        {
+            const fieldGroup=button.closest('.ex');
+            if(fieldGroup)
+        {
+            fieldGroup.remove();
+        }
+        }
+    </script>
+
+    <script>
+        function  supRes(button)
+        {
+        const fieldGroup=button.closest('.rs');
+             if(fieldGroup)
+        {
+            fieldGroup.remove();
+        }
+    }
     </script>
 @endsection

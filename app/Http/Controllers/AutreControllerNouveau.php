@@ -174,9 +174,9 @@ class AutreControllerNouveau extends Controller
     }
 
 
-    public function uploadFile(Request $request)
+    public function sendFile(Request $request)
     {
-        $fichiers = $request->validate([
+        $validatedData = $request->validate([
 
             'cv' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'diplomes' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
@@ -188,16 +188,17 @@ class AutreControllerNouveau extends Controller
 
         ]);
 
-        foreach ($fichiers as $key => $file) {
+        foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
-                $path = $file->store('uploads');
+                $path = $file->store('public/uploads');
                 $type = $key;
                 $nom_originale = $file->getClientOriginalName();
-                session()->put('documents', ['key' => $key, 'path' => $path, 'type' => $type, 'nom_originale' => $nom_originale]);
+                session()->push('documents', ['key' => $key, 'path' => $path, 'type' => $type, 'nom_originale' => $nom_originale]);
             }
         }
+        //return response()->json(['success' => 'Fichiers téléchargés avec succès.']);
 
-        return response()->json(['success' => 'File uploaded successfully.']);
+        return redirect()->route('resume');
     }
 
 
@@ -215,7 +216,7 @@ class AutreControllerNouveau extends Controller
         $d5 = session()->get('etape5');
         $d6 = session()->get('etape6');
         $dx = session()->get('etapeX');
-        $documents = session('preuves_chercheurs');
+        $documents = session('documents', []);
         $edites = $d6['edites'];
         $Nedites = $d6['Nedites'];
         $distinctions = $d6['distinctionsAu'];
@@ -362,6 +363,17 @@ class AutreControllerNouveau extends Controller
                 $distinctionModel->save();
             }
 
+            foreach ($documents as $preuveAutre) {
+
+                if (is_array($preuveAutre)) {
+                    $preuve = new PreuveAutre();
+                    $preuve->chemin = $preuveAutre['path'];
+                    $preuve->nom_originale = $preuveAutre['nom_originale'];
+                    $preuve->candidat_id = $candidat->id;
+                    $preuve->save();
+                }
+            }
+
             // (Décommenter si vous souhaitez enregistrer les preuves)
             /*
         foreach ($documents as $document) {
@@ -378,7 +390,7 @@ class AutreControllerNouveau extends Controller
             return redirect()->route('resume')->with('message', ' Votre candidature a été enregistrée avec succès.');
         } catch (\Exception $e) {
             // En cas d'erreur, redirection avec un message d'erreur
-            return redirect()->back()->with(['error' => 'Une erreur est survenue lors de l\'enregistrement de votre candidature.']);
+            return redirect()->back()->with('error', 'Une erreur est survenue lors de l\'enregistrement de votre candidature: ' . $e->getMessage());
         }
     }
 }
