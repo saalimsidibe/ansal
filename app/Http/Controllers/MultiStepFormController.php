@@ -506,12 +506,12 @@ class MultiStepFormController extends Controller
             }
 
 
-            /*   foreach ($data6['commissions'] as $key => $comm) {
+            foreach ($data6['commissions'] as $key => $comm) {
                 $commission = new Commission();
                 $commission->nom = $comm['name'];
                 $commission->candidat_id = $candidat->id;
                 $commission->save();
-            }*/
+            }
 
             foreach ($data6['brevets'] as $key =>  $brev) {
                 $brevet = new Brevet();
