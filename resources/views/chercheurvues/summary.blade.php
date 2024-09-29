@@ -18,7 +18,7 @@
 
 
 @php
-    
+      $docs = session('uploaded_files'); 
 @endphp
     
  <!--p><strong>Nom:</strong> {{ session('data1')['nom'] ?? 'Non renseigné' }}</p> -->
@@ -199,14 +199,25 @@
 
     <!-- Affichage des fichiers téléchargés -->
     <h2>Fichiers Téléchargés</h2>
-    @foreach (session('preuves_chercheurs', []) as $file)
-        <div>
-            
-            <p><strong>Type:</strong> {{ $file['type'] }}</p>
-            <p><strong>Nom Original:</strong> {{ $file['nom_originale'] }}</p>
-            <p><strong>Chemin:</strong> <a href="{{ Storage::url($file['path']) }}">Voir le fichier</a></p>
+    @foreach ( $docs as $doc)
+       
+    <div>
+         <p><strong>Nom :</strong> {{ $doc['nom_originale'] }}</p>
+            <a href="{{ asset('storage/' . $doc['path']) }}">Voir le fichier</a></p>
+   
         </div>
+            
+           
+          
+    
+      
+
+        
+        <p>Document non valide.</p>
+  
     @endforeach
+
+    
 
     <!-- Affichage de la contribution et des honneurs -->
     <h2>Contribution</h2>

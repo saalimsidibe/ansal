@@ -190,7 +190,7 @@ class AutreControllerNouveau extends Controller
 
         foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
-                $path = $file->store('public/uploads');
+                $path = $file->store('autres', 'public');
                 $type = $key;
                 $nom_originale = $file->getClientOriginalName();
                 session()->push('documents', ['key' => $key, 'path' => $path, 'type' => $type, 'nom_originale' => $nom_originale]);

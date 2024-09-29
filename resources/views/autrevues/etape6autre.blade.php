@@ -89,7 +89,7 @@
                 </div>
                 <div>
                     <label for="nomCoauteur{{ $index }}">Nom du coauteur</label>
-                    <input type="text" class="form-control"        name="edites[{{$index}}][nomCoauteur]"  class="form-control" id="nomCoauteur{{ $index }}" value="{{ $edite['nomCoauteur'] ?? '' }}" required>
+                    <input type="text" class="form-control"        name="edites[{{$index}}][nomCoauteur]"  class="form-control" id="nomCoauteur{{ $index }}" value="{{ $edite['nomCoauteur'] ?? '' }}" >
                 </div>
                 <div>
                     <label for="editeur{{ $index }}">Éditeur</label>
@@ -284,7 +284,7 @@
 
                  <div>
                     <label for="nomCoauteur${u}">Nom du coauteur</label>
-                    <input type="text" class="form-control" name="edites[${u}][nomCoauteur]" id="nomCoauteur${u}" required>
+                    <input type="text" class="form-control" name="edites[${u}][nomCoauteur]" id="nomCoauteur${u}" >
                 </div>
 
              

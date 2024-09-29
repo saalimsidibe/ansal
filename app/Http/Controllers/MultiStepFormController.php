@@ -342,18 +342,20 @@ class MultiStepFormController extends Controller
             'commites' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
+        //dd('kjsdkljlmsqjdfsqf');
         foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
-                $nom = $file->getClientOriginalName();
-                $path = $file->store('uploads');
+                $path = $file->store('chercheurs', 'public');
+                //dd('kjsdkljlmsqjdfsqf');
 
-                session()->push('uploaded_files', ['key' => $key, 'path' => $path, 'nom_originale' => $nom]);
+                $nom_originale = $file->getClientOriginalName();
+                session()->push('uploaded_files', ['key' => $key, 'path' => $path, 'nom_originale' => $nom_originale]);
             }
         }
 
-
         return response()->json(['success' => 'File uploaded successfully.']);
     }
+
     /*
         foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
@@ -501,12 +503,12 @@ class MultiStepFormController extends Controller
                 $responsabilite->save();
             }
 
-            /*   foreach ($data6['commissions'] as $key => $comm) {
+            foreach ($data6['commissions'] as $key => $comm) {
                 $commission = new Commission();
                 $commission->nom = $comm['name'];
                 $commission->candidat_id = $candidat->id;
                 $commission->save();
-            }*/
+            }
 
             foreach ($data6['brevets'] as $key =>  $brev) {
                 $brevet = new Brevet();
@@ -710,24 +712,19 @@ class MultiStepFormController extends Controller
 
 
             foreach ($docs as $preuveCher) {
-
                 $preuve = new PreuveChercheur();
-
+                $preuve->type = $preuveCher['key'];
                 $preuve->chemin = $preuveCher['path'];
-
                 $preuve->nom_originale = $preuveCher['nom_originale'];
-
-
                 $preuve->candidat_id = $candidat->id;
 
                 $preuve->save();
             }
 
-
-            return redirect()->route('multi-step-form.summary')->with('successC', 'Candidature enregistrée avec succès!');
+            return view('chercheurvues.summary')->with('successC', 'Candidature enregistrée avec succès!');
         } catch (\Exception $e) {
             //   DB::rollBack(); // Rollback en cas d'erreur
-            return redirect()->route('multi-step-form.summary')->with('errorC', 'Une erreur s\'est produite lors de l\'enregistrement.' . $e->getMessage());
+            return redirect()->back()->withErrors('errorC', 'Une erreur s\'est produite lors de l\'enregistrement.' . $e->getMessage());
         }
     }
 }

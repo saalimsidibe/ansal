@@ -69,7 +69,7 @@
   @endphp
 
   @php
-      $respsInt=session('etape5')['responsibilities'];
+      $respsInt=session('etape5')['responsibilities'] ;
       $compteurRespInt=1;
   @endphp
 
@@ -80,12 +80,12 @@
 
   @php
    
-    $edites=session('etape6')['edites'];
+    $edites=session('etape6')['edites'] ?? '';
     $cmpEdites=1;
   @endphp
 
   @php
-      $nedites=session('etape6')['Nedites'];
+      $nedites=session('etape6')['Nedites'] ?? '';
       $comptNedites=1;
   @endphp
 
@@ -262,34 +262,20 @@
 <hr>
    
 
-    <!-- Étape 7: Fichiers joints -->
-    <h3> Fichiers joints</h3>
-    <p><strong>CV:</strong> {{ session('cvchercheurDoc') ? session('cvchercheurDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Diplômes et attestations:</strong> {{ session('dipChercheurDoc') ? session('dipChercheurDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Fonctions et responsabilités:</strong> {{ session('fonctionDoc') ? session('fonctionDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Sociétés savantes:</strong> {{ session('societeExpertDoc') ? session('societeExpertDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Brevets:</strong> {{ session('brevetDoc') ? session('brevetDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Articles:</strong> {{ session('articleDoc') ? session('articleDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Ouvrages scientifiques:</strong> {{ session('ouvrageDoc') ? session('ouvrageDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Distinctions honorifiques:</strong> {{ session('distinctionsHonorifiquesDoc') ? session('distinctionsHonorifiquesDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-    <p><strong>Distinctions scientifiques:</strong> {{ session('distinctionsScientifiquesDoc') ? session('distinctionsScientifiquesDoc')->getClientOriginalName() : 'Non renseigné' }}</p>
-
-
-     @if (count($documents) > 0)
+    <p>Elements de Preuve</p>
+    
     @foreach ($documents as $document)
         @if (is_array($document)) <!-- Vérifiez que c'est un tableau -->
             <div class="document-item">
                 <h4>{{ $document['nom_originale'] }}</h4>
                 
                 <a href="{{ asset('storage/' . $document['path']) }}" target="_blank">Voir le document</a>
-            </div>
+            </div> 
         @else
             <p>Document non valide.</p>
         @endif
     @endforeach
-@else
-    <p>Aucun document trouvé.</p>
-@endif
+
     <!-- Formulaire de soumission finale -->
     <form method="POST" action="{{ route('AutreControllerNouveau.finir') }}">
         @csrf
