@@ -100,7 +100,7 @@
                                                                 id="reference-{{ $index }}"
                                                                 value="{{ old("brevets.$index.reference", $brevet['reference'] ?? '') }}"
                                                                 name="brevets[{{ $index }}][reference]" required>
-                                                                  
+
                                                         </div>
                                                           <button type="button" class="btn btn-danger" onclick="removeField(this)">Supprimer</button>
                                                     </div>
@@ -133,7 +133,7 @@
                                                                 <label for="coauteurs-{{$index }}">Coauteur</label>
                                                                 <input class="form-control" type="text" id="coauteurs-{{$index }}" name="ouvrages[{{ $index }}][coauteur]"  value="{{ $ouvrage['coauteur'] ?? '' }}">
                                                             </div>
-                                                            
+
                                                             <div class="form-group">
                                                                 <label for="annee-{{ $index }}">Année de
                                                                     publication</label>
@@ -222,7 +222,7 @@
                                         <fieldset class="border p-2">
                                             <legend class="scheduler-border float-none w-auto">Distinctions</legend>
                                             <div id="distinctions-container">
-                                              
+
 
                                                 <div id="distinctionsContainer">
                                                     @php
@@ -264,7 +264,7 @@
                                                 </div>
                                                 <button type="button" id="AjouterDistinction"
                                                     class="btn btn-primary mt-3">Ajouter</button>
-                                                
+
                                             </div>
                                         </fieldset><br>
 
@@ -294,7 +294,7 @@
                         </div>
                         <div class="col-2"> </div>
                     </div>
-            </section>  
+            </section>
         </div>
     </main>
 @endsection
@@ -321,7 +321,7 @@
             // Ajoute un champ pour saisir le nom de la commission
             $('#commission-fields').append(`
                 <div class="mt-3" id="commission-${commissionCounter}">
-                    <input type="text" name="commissions[${commissionCounter}][name]" class="form-control" placeholder="Nom de la commission">
+                    <input type="text" name="commissions[${commissionCounter}][name]" class="form-control" placeholder="Nom de la commission" required>
                     <button type="button" class="btn btn-danger mt-2" onclick="removeCommission(${commissionCounter})">Supprimer</button>
                 </div>
             `);
@@ -399,7 +399,7 @@
                         <label for="coauteurs-${index}">Coauteurs</label>
                         <input  class="form-control" type="text" id="coauteurs-${index}" name="ouvrages[${index}][coauteur]">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="annee-${index}">Année de publication</label>
                         <input type="date" class="form-control" id="annee-${index}" name="ouvrages[${index}][annee]" required>
@@ -438,7 +438,7 @@
     var fieldIndex = 0;
     //script pour ajouter les articles dans des ouvrages scientifiques
     $(document).ready(function() {
-        
+
 
         $("#add-field").click(function() {
             fieldIndex++;
@@ -467,7 +467,7 @@
                 '<button class="remove-field btn btn-danger">Supprimer</button>' +
                 '</legend>'+
                 '</div>  <hr/>';
-                
+
 
             $("#articles-container").append(newField);
             $("#save-button").show(); // Afficher le bouton Enregistrer une fois qu'un champ est ajouté
@@ -496,7 +496,7 @@
             const newFormGroup = document.createElement('div');
             newFormGroup.classList.add('form-group');
             newFormGroup.innerHTML = `
-             
+
                 <fieldset class = "border p-2">
                    <legend class="scheduler-border float-none w-auto"> <h6>Distinction</h6>  </legend>
                 <select name="distinctions[${index}][type]" class="form-control" required>
@@ -509,12 +509,12 @@
                 <input type="hidden" name="distinctions[${index}][id]" value="" class="form-control" placeholder="nom de la distinction">
                  <input type="date" name="distinctions[${index}][date]" placeholder="Saisir la date de la distinction" class="form-control">
                 <button type="button" class=" btn btn-danger"onclick="removeField(this)" >Supprimer</button>
-               
-                  <hr/>  
-                    
-                 </fieldset>   
+
+                  <hr/>
+
+                 </fieldset>
             `;
-                
+
             distinctionsContainer.appendChild(newFormGroup);
             index++;
         });
@@ -525,7 +525,7 @@
                 distinctionsContainer.removeChild(formGroup);
             }
         });
-        
+
     });
 </script>
 

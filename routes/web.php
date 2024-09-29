@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Evaluateur;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\FileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,6 +51,8 @@ Route::get('/profilagronome/{id}', [Evaluateur::class, 'showAgronome'])->name('p
 Route::get('/profilsciences/{id}', [Evaluateur::class, 'showSciences'])->name('profil.sciences');
 
 Route::get('/profileconomie/{id}', [Evaluateur::class, 'showEconomie'])->name('profil.economie');
+
+
 
 
 

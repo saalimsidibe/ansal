@@ -323,6 +323,10 @@ class MultiStepFormController extends Controller
                 $request->session()->put('step', "6");
                 return redirect()->route('etape6chercheur');
                 break;
+            default:
+                 $request->session()->put('step', "1");
+                return view('chercheurvues.etape1chercheur');
+                break;
         }
     }
 
@@ -345,8 +349,13 @@ class MultiStepFormController extends Controller
         //dd('kjsdkljlmsqjdfsqf');
         foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
+<<<<<<< HEAD
                 $path = $file->store('chercheurs', 'public');
                 //dd('kjsdkljlmsqjdfsqf');
+=======
+                $nom = $file->getClientOriginalName();
+                $path = $file->store('public');
+>>>>>>> abe0ba2ec5a75adda014a7b19ee7ba5388e2863a
 
                 $nom_originale = $file->getClientOriginalName();
                 session()->push('uploaded_files', ['key' => $key, 'path' => $path, 'nom_originale' => $nom_originale]);
@@ -503,6 +512,10 @@ class MultiStepFormController extends Controller
                 $responsabilite->save();
             }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> abe0ba2ec5a75adda014a7b19ee7ba5388e2863a
             foreach ($data6['commissions'] as $key => $comm) {
                 $commission = new Commission();
                 $commission->nom = $comm['name'];
