@@ -1,20 +1,23 @@
+@extends('layout.app')
+
+@section('content')
+<div class="container">
+    <h2></h2>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ansal BF| Plateforme de depots des candidatures </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
+    <div class="container">
+        <h1 class="page-title light-background">Les inscrits au Collège  : {{$college_libelle ??'non renseigné'}} </h1>
 
-<body>
-
-    <div class="container-fluid">
 
 
         <table class="table table-striped table-dark">
@@ -35,20 +38,20 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($agronomes as $agronome)
+                @foreach ($candidats as $candidat)
                     <tr>
-                        <td>{{ $agronome['nom'] }}</td>
-                        <td>{{ $agronome['prenom'] }}</td>
-                        <td>{{ $agronome['datenaissance'] }}</td>
-                        <td>{{ $agronome['sexe'] }}</td>
-                        <td>{{ $agronome['categorie'] }}</td>
-                        <td>{{ $agronome['titre'] }}</td>
-                        <td>{{ $agronome['datenomin'] }}</td>
-                        <td>{{ $agronome['telephone'] }}</td>
-                        <td>{{ $agronome['email'] }}</td>
-                        <td>{{ $agronome['created_at'] }}</td>
+                        <td>{{ $candidat['nom'] }}</td>
+                        <td>{{ $candidat['prenom'] }}</td>
+                        <td>{{ $candidat['datenaissance'] }}</td>
+                        <td>{{ $candidat['sexe'] }}</td>
+                        <td>{{ $candidat['categorie'] }}</td>
+                        <td>{{ $candidat['titre'] }}</td>
+                        <td>{{ $candidat['datenomin'] }}</td>
+                        <td>{{ $candidat['telephone'] }}</td>
+                        <td>{{ $candidat['email'] }}</td>
+                        <td>{{ $candidat['created_at'] }}</td>
                         <td> <button type="button" class="btn btn-danger "> <a
-                                    href="{{ route('profil.candidat', $agronome->id) }}">Voir</a></button></td>
+                                    href="{{ route('profil.candidat', $candidat->id) }}">Voir</a></button></td>
                 @endforeach
             </tbody>
         </table>
@@ -65,6 +68,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-</body>
-
-</html>
+@endsection

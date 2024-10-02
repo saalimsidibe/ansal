@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2>Résumé de vos informations</h2>
- 
+
          <!-- Affichage des messages de succès -->
      <!-- Affichage des messages de succès -->
 
@@ -15,19 +15,19 @@
     @endif
 
     <!-- Affichage des messages d'erreur -->
-   
+
          @if(session('error'))
          <div class="alert alert-danger">
             {{session('error')}}
          </div>
          @endif
 
-    
+
 
     <!-- Étape 1: Informations personnelles -->
-    
 
-    
+
+
     <h3>Informations personnelles</h3>
     <p><strong>Nom:</strong> {{ session('etape1.nomAutre') ?? 'Non renseigné' }}</p>
     <p><strong>Prénom:</strong> {{ session('etape1.prenomAutre') ?? 'Non renseigné' }}</p>
@@ -43,11 +43,11 @@
     <p> <strong>Prenom du Deuxième Parrain: </strong>{{session('etape2.prenomDeuxiemePautre') ?? 'Non renseigné'}} </p>
     <p> <strong>Collège dans lequel vous souhaitez postuler</strong>{{ session('etape2.collegeAutre') ?? 'Non renseigné'}}</p>
     <p> <strong>Spécialité  dans le  postulé </strong>{{ session('etape2.specialiteAutre') ?? 'Non renseigné'}}</p>
-    
-     
-    
-    
- 
+
+
+
+
+
 
     @php
     $diplomes=session('etape3')['diplomesAu'] ?? [];
@@ -62,7 +62,7 @@
         $respsNat=session('etape4')['fonctionsAAu'];
         $compteurRespNat=1;
     @endphp
-    
+
   @php
       $experiencesInt=session('etape5')['experiences'];
       $comptExpInt=1;
@@ -79,7 +79,7 @@
   @endphp
 
   @php
-   
+
     $edites=session('etape6')['edites'] ?? '';
     $cmpEdites=1;
   @endphp
@@ -119,7 +119,7 @@
     <h3> Contributions et Travaux les plus significatifs</h3>
     <p> <Strong>{{session('etapeX.travaux')?? 'Non renseigné'}}</Strong></p>
 
-     <!-- Étape 3: Contributions et Travaux les plus significatifs -->    
+     <!-- Étape 3: Contributions et Travaux les plus significatifs -->
     <h3>Implication dans la vie communautaire</h3>
     <p> <strong>{{session('etapeX.implication')}}</strong></p>
 
@@ -133,7 +133,7 @@
         <p><strong>Structure:</strong> {{ $experienceNat['structure'] ?? 'Non renseigné' }}</p>
         <p><strong>Debut:</strong> {{ $experienceNat['debut'] ?? 'Non renseigné' }}</p>
         <p><strong>Fin:</strong> {{ $experienceNat['fin'] ?? 'Non renseigné' }}</p>
-        <p><strong>Ville:</strong> {{ $experienceNat['ville'] ?? 'Non renseigné' }}</p> 
+        <p><strong>Ville:</strong> {{ $experienceNat['ville'] ?? 'Non renseigné' }}</p>
         <p><strong>Pays:</strong> {{ $experienceNat['pays'] ?? 'Non renseigné' }}</p>
       <hr>
         @php
@@ -149,7 +149,7 @@
         <p><strong>Structure:</strong> {{$respNat['structure'] ?? 'Non renseigné' }}</p>
         <p><strong>Debut:</strong> {{ $respNat['debut'] ?? 'Non renseigné' }}</p>
         <p><strong>Fin:</strong> {{ $respNat['fin'] ?? 'Non renseigné' }}</p>
-        <p><strong>Ville:</strong> {{ $respNat['ville'] ?? 'Non renseigné' }}</p> 
+        <p><strong>Ville:</strong> {{ $respNat['ville'] ?? 'Non renseigné' }}</p>
         <p><strong>Pays:</strong> {{ $respNat['pays'] ?? 'Non renseigné' }}</p>
         <hr>
         @php
@@ -166,7 +166,7 @@
         <p><strong>Structure:</strong> {{ $experienceInt['structure']  ?? 'Non renseigné' }}</p>
         <p><strong>Debut:</strong> {{ $experienceInt['startDate'] ?? 'Non renseigné' }}</p>
         <p><strong>Fin:</strong> {{ $experienceInt['endDate'] ?? 'Non renseigné' }}</p>
-        <p><strong>Ville:</strong> {{ $experienceInt['city'] ?? 'Non renseigné' }}</p> 
+        <p><strong>Ville:</strong> {{ $experienceInt['city'] ?? 'Non renseigné' }}</p>
         <p><strong>Pays:</strong> {{ $experienceInt['country'] ?? 'Non renseigné' }}</p>
       <hr>
         @php
@@ -183,7 +183,7 @@
         <p><strong>Structure:</strong> {{$respInt['structure'] ?? 'Non renseigné' }}</p>
         <p><strong>Debut:</strong> {{ $respInt['startDate'] ?? 'Non renseigné' }}</p>
         <p><strong>Fin:</strong> {{ $respInt['endDate'] ?? 'Non renseigné' }}</p>
-        <p><strong>Ville:</strong> {{ $respInt['city'] ?? 'Non renseigné' }}</p> 
+        <p><strong>Ville:</strong> {{ $respInt['city'] ?? 'Non renseigné' }}</p>
         <p><strong>Pays:</strong> {{ $respInt['country'] ?? 'Non renseigné' }}</p>
         <hr>
         @php
@@ -213,7 +213,7 @@
          <p><strong>Nombre de Pages</strong>{{ $edite['nombrePage'] ?? 'Non renseigné' }}</p>
          <hr>
          @php
-            $cmpEdites++; 
+            $cmpEdites++;
          @endphp
 
     @endforeach
@@ -223,23 +223,23 @@
     @foreach ($nedites as $ne)
          <p><strong>Ouvrage  {{  $comptNedites }}:</strong>{{ $ne['titreNe'] ?? 'Non renseigné' }}</p>
          <p><strong>Auteur(s):</strong>{{  $ne['nomAuteurNe'] ?? 'Non renseigné' }}</p>
-         <p><strong>Co auteur(s): </strong>{{  $ne['nomCoauteurNe'] ?? 'Non renseigné' }}</p>  
+         <p><strong>Co auteur(s): </strong>{{  $ne['nomCoauteurNe'] ?? 'Non renseigné' }}</p>
          <p><strong>Nombre de Pages</strong>{{ $ne['nbrePNe'] ?? 'Non renseigné' }}</p>
 
         <hr>
         @php
-            $comptNedites++; 
+            $comptNedites++;
          @endphp
 
     @endforeach
 
 
 
-  
 
-    
 
-   
+
+
+
 
     <H3>Distinctions</H3>
     @foreach ( $distinctions  as $distinction )
@@ -249,28 +249,28 @@
         <p> <strong>Date:</strong>{{ $distinction['distinctions_date'] ?? 'Non renseigné' }}</p>
         <hr>
         @php
-        $cmptdisctions++;    
+        $cmptdisctions++;
         @endphp
     @endforeach
 
      <H3>Contribution Majeure dans les domaines du collège postulé</H3>:
-   <p>{{session('etape6')['contribution']?? 'Non renseigné'}}</p> 
+   <p>{{session('etape6')['contribution']?? 'Non renseigné'}}</p>
 <hr>
 
    <h3>Apport Particulier à l'academie</h3>
    <p>{{session('etape6')['apportAu']?? 'Non renseigné'}}</p>
 <hr>
-   
+
 
     <p>Elements de Preuve</p>
-    
+
     @foreach ($documents as $document)
         @if (is_array($document)) <!-- Vérifiez que c'est un tableau -->
             <div class="document-item">
                 <h4>{{ $document['nom_originale'] }}</h4>
-                
-                <a href="{{ asset('storage/' . $document['path']) }}" target="_blank">Voir le document</a>
-            </div> 
+
+                <a href="{{ url($document['path']) }}" target="_blank">Voir le document</a>
+            </div>
         @else
             <p>Document non valide.</p>
         @endif
@@ -279,7 +279,7 @@
     <!-- Formulaire de soumission finale -->
     <form method="POST" action="{{ route('AutreControllerNouveau.finir') }}">
         @csrf
-      <center><button type="submit" class="btn btn-success mt-4">Terminer et Enregistrer</button></center>   
+      <center><button type="submit" class="btn btn-success mt-4">Terminer et Enregistrer</button></center>
     </form>
 </div>
 @endsection

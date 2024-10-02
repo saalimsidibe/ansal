@@ -8,6 +8,64 @@ use Illuminate\Http\Request;
 
 class Evaluateur extends Controller
 {
+
+    public function showCandidat($id)
+    {
+        $candidat = Candidat::findOrFail($id);
+        switch ($candidat->college) {
+            case 1:
+                $candidat->college_libelle="Sciences et Techniques";
+                break;
+            case 2:
+                $candidat->college_libelle="Sciences juridiques, politiques, économiques et de gestion ";
+                break;
+            case 3:
+                 $candidat->college_libelle="Sciences de la Santé Humaine et Animale";
+                break;
+            case 4:
+                $candidat->college_libelle="Sciences Naturelles et Agricoles";
+                break;
+            case 5:
+                $candidat->college_libelle="Sciences humaines, arts, lettres et culture ";
+                break;
+
+            default:
+                $candidat->college_libelle="Non Défini";
+                break;
+        }
+        return view('informations.profilcandidat')->with('candidat', $candidat);
+    }
+
+    public function EvCandidat($col)
+
+    {
+        $candidats = Candidat::where('college', $col)->get();
+
+        switch ($col) {
+            case 1:
+                $college_libelle="Sciences et Techniques";
+                break;
+            case 2:
+                $college_libelle="Sciences juridiques, politiques, économiques et de gestion ";
+                break;
+            case 3:
+                 $college_libelle="Sciences de la Santé Humaine et Animale";
+                break;
+            case 4:
+                $college_libelle="Sciences Naturelles et Agricoles";
+                break;
+            case 5:
+                $college_libelle="Sciences humaines, arts, lettres et culture ";
+                break;
+
+            default:
+                $college_libelle="Non Défini";
+                break;
+        }
+
+        return view('evaluateurs.evaluateurcandidat')->with('candidats', $candidats)->with('college_libelle',$college_libelle);
+    }
+
     public function EvMedecine()
 
     {

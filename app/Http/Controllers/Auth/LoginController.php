@@ -29,16 +29,16 @@ class LoginController extends Controller
 
 
             if ($user->categorie === 'medecine')
-                return redirect()->route('evaluateur.medecine');
+                return redirect()->route('evaluateur.candidat',3);
 
             elseif ($user->categorie === 'litterature') {
-                return redirect()->route('evaluateur.litterature');
+                return redirect()->route('evaluateur.candidat',5);
             } elseif ($user->categorie === 'sciences') {
-                return redirect()->route('evaluateur.sciences');
+                return redirect()->route('evaluateur.candidat',1);
             } else if ($user->categorie === 'agricole') {
-                return redirect()->route('evaluateur.agricole');
+                return redirect()->route('evaluateur.candidat',4);
             } else if ($user->categorie === 'economie') {
-                return redirect()->route('evaluateur.economie');
+                return redirect()->route('evaluateur.candidat',2);
             } else if ($user->categorie === 'admin') {
                 return redirect()->route('evaluateur.admin');
             } else {

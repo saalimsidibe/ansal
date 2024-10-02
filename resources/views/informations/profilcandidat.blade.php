@@ -14,17 +14,15 @@
 @endif
 
 
-@php
-
-@endphp
 
 
 
-<h1>Résumé des Informations</h1>
+<h1 class="page-title light-background">Résumé des Informations : {{$candidat->college_libelle ??'non renseigné'}} </h1>
+
 
     <!-- Affichage des données personnelles -->
     <h2>Informations du Profil</h2>
-    <p><strong>Nom: </strong> {{  $candidat->nom ?? 'Non renseigné' }}</p>
+    <p><strong>Nom: </strong> {{ $candidat->nom ?? 'Non renseigné' }}</p>
     <p><strong>Prénom: </strong> {{ $candidat->prenom ?? 'Non renseigné' }}</p>
     <p><strong>Sexe: </strong> {{$candidat->sexe  ?? 'Non renseigné' }}</p>
     <p><strong>Date de Naissance: </strong> {{$candidat->datenaissance ?? 'Non renseigné'}}</p>
@@ -33,7 +31,6 @@
     <p><strong>Numéro de Téléphone: </strong> {{$candidat->telephone  ?? 'Non renseigné' }}</p>
     <p><strong>Email: </strong> {{$candidat->email ?? 'Non renseigné' }}</p>
     <p><strong>Expertise: </strong> {{ $candidat->expertise ?? 'Non renseigné' }}</p>
-    <p><strong>Categorie: </strong>{{$candidat->categorie ?? 'Non renseigné'}}</p>
     <p><strong>Collège: </strong> {{ $candidat->college ?? 'Non renseigné' }}</p>
     <p><strong>Spécialité: </strong> {{ $candidat->specialite ?? 'Non renseigné' }}</p>
     <p><strong>Travaux Significatifs: </strong>{{ $candidat->travauxSign ?? 'Non renseigné'}}</p>
@@ -75,7 +72,7 @@
             <p><strong>Intitulé: </strong> {{ $experience->intitule ?? 'Non renseigné' }}</p>
             <p><strong>Début: </strong> {{ $experience->debut  ?? 'Non renseigné'}}</p>
             <p><strong>Fin: </strong> {{ $experience->fin ?? 'Non renseigné'}}</p>
-            <p><strong>Structure: </strong> {{ $experie->structure ?? 'Non renseigné' }}</p>
+            <p><strong>Structure: </strong> {{ $expNa->structure ?? 'Non renseigné' }}</p>
             <p><strong>Ville: </strong> {{ $experience->ville ?? 'Non renseigné' }}</p>
             <p><strong>Pays: </strong>{{$experience->pays ?? 'Non renseigné'}}</p>
             <hr>
@@ -172,13 +169,13 @@
 
     <!-- Affichage des fichiers téléchargés -->
     <h2>Fichiers Téléchargés</h2>
-    @foreach ($litteraire->preuveChercheurs as $file)
-            <?php /*<p><strong>Type:</strong> * {{ $file['type']}} </p>*/?>
+    @foreach ($candidat->preuveChercheurs as $file)
+            <p><strong>Type:</strong>  {{ $file['type']}} </p>
 
 
             <p><strong>Nom Original:</strong> {{ $file['nom_originale'] }}</p>
 
-            <p><strong>Chemin:</strong> <a target="_blank" href="{{ Storage::url($file['path']) }}">Voir le fichier</a>
+            <p><strong>Chemin:</strong> <a target="_blank" href="{{  Storage::url($file['chemin'])  }}">Voir le fichier</a>
             </p>
         @endforeach
 
@@ -189,9 +186,8 @@
     <hr>
 
     <h2>Apport Particulier à l'academie</h2>
-    <p><strong></strong><{{$candidat->apport ?? 'Non renseigné' }}/p>
-</body>
-    <!-- Étape 7: Fichiers joints -->
+    <p><strong>{{$candidat->apport ?? 'Non renseigné' }}</strong></p>
+
 
 
 

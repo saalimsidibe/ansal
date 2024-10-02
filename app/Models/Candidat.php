@@ -58,4 +58,9 @@ class Candidat extends Model
     {
         return $this->hasMany(Commission::class, 'candidat_id');
     }
+
+    public function preuveChercheurs()
+    {
+        return $this->hasMany(PreuveChercheur::class, 'candidat_id');
+    }
 }

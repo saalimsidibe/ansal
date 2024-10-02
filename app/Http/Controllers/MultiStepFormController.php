@@ -202,32 +202,10 @@ class MultiStepFormController extends Controller
                     'honneurChercheur' => 'required',
                 ]);
 
-                /*  $validatedData = $request->validate([
-                    'commissions.*' => 'required|string|max:255', // Le champ "name" n'est pas nécessaire ici puisque la valeur est directement dans l'array
-                    'brevets.*' => 'required|string|max:255', // Assurez-vous que le champ brevets est bien une chaîne de caractères et que chaque élément est bien en string
-                    'brevets.*.date' => 'required|date', // La date doit être validée comme un format de date
-                    'brevets.*.intitule' => 'required|string|max:255',
-                    'brevets.*.reference' => 'required|string|max:255',
-                    'ouvrages.*.auteur' => 'required|string|max:255',
-                    'ouvrages.*.annee' => 'required|integer|min:1900|max:' . date('Y'), // Validation pour une année de publication valide
-                    'ouvrages.*.titre' => 'required|string|max:255',
-                    'ouvrages.*.editeur' => 'required|string|max:255',
-                    'ouvrages.*.nombre_page' => 'required|integer|min:1', // Doit être un nombre entier positif
-                    'articles.*.auteur' => 'required|string|max:255',
-                    'articles.*.coauteur' => 'nullable|string|max:255', // Coauteur peut être nullable si non obligatoire
-                    'articles.*.annee_publication' => 'required|integer|min:1900|max:' . date('Y'), // Validation pour une année de publication valide
-                    'articles.*.titre' => 'required|string|max:255',
-                    'articles.*.editeur' => 'required|string|max:255',
-                    'articles.*.pages' => 'required|integer|min:1', // Doit être un nombre entier positif
-                    'distinctions.*.type' => 'required|string|in:1,2', // Correction pour s'assurer que le type est parmi les valeurs acceptées
-                    'distinctions.*.nom' => 'required|string|max:255',
-                    'distinctions.*.date' => 'required|date', // Doit être une date valide
-                    'honneurChercheur' => 'required|boolean', // Validation en tant que booléen
-                    'contributionChecheur' => 'required|string|max:255'
-                ]); */
 
 
-                //  dd($request);
+
+             //    dd($validatedData);
 
                 $request->session()->put('step', "7");
                 $request->session()->put('data6', array_merge($request->session()->get('data6', []), $validatedData));
@@ -349,13 +327,8 @@ class MultiStepFormController extends Controller
         //dd('kjsdkljlmsqjdfsqf');
         foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
-<<<<<<< HEAD
                 $path = $file->store('chercheurs', 'public');
                 //dd('kjsdkljlmsqjdfsqf');
-=======
-                $nom = $file->getClientOriginalName();
-                $path = $file->store('public');
->>>>>>> abe0ba2ec5a75adda014a7b19ee7ba5388e2863a
 
                 $nom_originale = $file->getClientOriginalName();
                 session()->push('uploaded_files', ['key' => $key, 'path' => $path, 'nom_originale' => $nom_originale]);
@@ -387,7 +360,7 @@ class MultiStepFormController extends Controller
     {
         //  DB::beginTransaction();
 
-        try {
+       // try {
             // Récupération des données de la session
             $data1 = session('data1'); //step1
             $data2 = session('data2'); //step2
@@ -512,16 +485,14 @@ class MultiStepFormController extends Controller
                 $responsabilite->save();
             }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> abe0ba2ec5a75adda014a7b19ee7ba5388e2863a
             foreach ($data6['commissions'] as $key => $comm) {
                 $commission = new Commission();
                 $commission->nom = $comm['name'];
                 $commission->candidat_id = $candidat->id;
                 $commission->save();
             }
+          //  dd('ok');
 
             foreach ($data6['brevets'] as $key =>  $brev) {
                 $brevet = new Brevet();
@@ -734,10 +705,11 @@ class MultiStepFormController extends Controller
                 $preuve->save();
             }
 
-            return view('chercheurvues.summary')->with('successC', 'Candidature enregistrée avec succès!');
-        } catch (\Exception $e) {
-            //   DB::rollBack(); // Rollback en cas d'erreur
-            return redirect()->back()->withErrors('errorC', 'Une erreur s\'est produite lors de l\'enregistrement.' . $e->getMessage());
-        }
+
+            return view('chercheurvues.summary')->with('success', 'Candidature enregistrée avec succès!');
+       // } catch (\Exception $e) {
+        //       DB::rollBack(); // Rollback en cas d'erreur
+       //     return redirect()->back()->withErrors('errorC', 'Une erreur s\'est produite lors de l\'enregistrement.' . $e->getMessage());
+       // }
     }
 }

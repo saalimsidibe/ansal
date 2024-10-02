@@ -28,7 +28,14 @@ Route::get('/contact', function () {
 });
 
 
-Route::get('/evaluateur_medecine', [Evaluateur::class, 'EvMedecine'])->name('evaluateur.medecine');
+
+Route::get('/evaluateur_candidat/{col}', [Evaluateur::class, 'EvCandidat'])->name('evaluateur.candidat');
+Route::get('/evaluateur_admin', [Evaluateur::class, 'EvAdmin'])->name('evaluateur.admin');
+
+Route::get('/profil/{id}', [Evaluateur::class, 'showProfil'])->name('profil.admin');
+Route::get('/profilcandidat/{id}', [Evaluateur::class, 'showCandidat'])->name('profil.candidat');
+
+/*Route::get('/evaluateur_medecine', [Evaluateur::class, 'EvMedecine'])->name('evaluateur.medecine');
 
 Route::get('/evaluateur_lettre', [Evaluateur::class, 'EvLettre'])->name('evaluateur.litterature');
 
@@ -38,10 +45,9 @@ Route::get('/evaluateur_sciences', [Evaluateur::class, 'EvSciences'])->name('eva
 
 Route::get('/evaluateur_economie', [Evaluateur::class, 'EvEconomie'])->name('evaluateur.economie');
 
-Route::get('/evaluateur_admin', [Evaluateur::class, 'EvAdmin'])->name('evaluateur.admin');
 
-Route::get('/profil/{id}', [Evaluateur::class, 'showProfil'])->name('profil.admin');
-
+*/
+/*
 Route::get('/profilmedecin/{id}', [Evaluateur::class, 'showMedecin'])->name('profil.medecin');
 
 Route::get('/profillitteraire/{id}', [Evaluateur::class, 'showLettre'])->name('profil.litteraire');
@@ -52,7 +58,7 @@ Route::get('/profilsciences/{id}', [Evaluateur::class, 'showSciences'])->name('p
 
 Route::get('/profileconomie/{id}', [Evaluateur::class, 'showEconomie'])->name('profil.economie');
 
-
+*/
 
 
 

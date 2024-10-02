@@ -15,9 +15,9 @@
 
 
 @php
-    
+
 @endphp
-    
+
 
 
 <h1>Résumé des Informations</h1>
@@ -97,10 +97,10 @@
     @endforeach
 
     <!-- Affichage des informations professionnelles -->
-  
-       
 
-       
+
+
+
     <!-- Affichage des publications, brevets, distinctions -->
     <h2>Ouvrages</h2>
     @foreach ($agronome->ouvrages as $ouvrage)
@@ -149,7 +149,7 @@
         @foreach ($agronome->commissions as $comm)
         <h6>Commission{{$loop->iteration}}</h6>
             <div>
-               <p><strong>Nom: </strong> {{$comm->nom ?? 'Non renseigné' }}</p>  
+               <p><strong>Nom: </strong> {{$comm->nom ?? 'Non renseigné' }}</p>
             </div>
             <hr>
         @endforeach
@@ -167,17 +167,19 @@
         <hr>
     @endforeach
 
-    
+
 
     <!-- Affichage des fichiers téléchargés -->
     <h2>Fichiers Téléchargés</h2>
-    @foreach (session('preuves_chercheurs', []) as $file)
-        <div>
-            <p><strong>Type:</strong> {{ $file['type'] }}</p>
+    @foreach ($agronome->preuveChercheurs as $file)
+            <p><strong>Type:</strong>  {{ $file['type']}} </p>
+
+
             <p><strong>Nom Original:</strong> {{ $file['nom_originale'] }}</p>
-            <p><strong>Chemin:</strong> <a href="{{ Storage::url($file['path']) }}">Voir le fichier</a></p>
-        </div>
-    @endforeach
+
+            <p><strong>Chemin:</strong> <a target="_blank" href="{{  Storage::url($file['chemin'])  }}">Voir le fichier</a>
+            </p>
+        @endforeach
 
     <!-- Affichage de la contribution et des honneurs -->
     <h2>Contribution</h2>
@@ -186,11 +188,10 @@
     <hr>
 
     <h2>Apport Particulier à l'academie</h2>
-    <p><strong></strong><{{$agronome->apport ?? 'Non renseigné' }}/p>
-</body>
-    <!-- Étape 7: Fichiers joints -->
-    
+    <p><strong>{{$agronome->apport ?? 'Non renseigné' }}</strong></p>
 
-  
+
+
+
 </div>
 @endsection

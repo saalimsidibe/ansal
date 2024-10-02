@@ -17,16 +17,13 @@
         @endif
 
 
-<<<<<<< HEAD
-@php
-      $docs = session('uploaded_files'); 
-@endphp
-    
- <!--p><strong>Nom:</strong> {{ session('data1')['nom'] ?? 'Non renseigné' }}</p> -->
-=======
         @php
->>>>>>> abe0ba2ec5a75adda014a7b19ee7ba5388e2863a
+            $docs = session('uploaded_files');
+        @endphp
 
+        @php
+            /* <!--p><strong>Nom:</strong> {{ session('data1')['nom'] ?? 'Non renseigné' }}</p> -->
+             */
         @endphp
 
         <!--p><strong>Nom:</strong> {{ session('data1')['nom'] ?? 'Non renseigné' }}</p> -->
@@ -235,46 +232,10 @@
             <button type="submit" class="btn btn-success mt-4">Terminer et Enregistrer</button>
         </form>
     </div>
-<<<<<<< HEAD
-        
-    @endforeach
 
-    <!-- Affichage des fichiers téléchargés -->
-    <h2>Fichiers Téléchargés</h2>
-    @foreach ( $docs as $doc)
-       
-    <div>
-         <p><strong>Nom :</strong> {{ $doc['nom_originale'] }}</p>
-            <a href="{{ asset('storage/' . $doc['path']) }}">Voir le fichier</a></p>
-   
-        </div>
-            
-           
-          
-    
-      
 
-        
-        <p>Document non valide.</p>
-  
-    @endforeach
+
 
     
 
-    <!-- Affichage de la contribution et des honneurs -->
-    <h2>Contribution</h2>
-    <p><strong>Contribution majeure dans les domaines du  collège postulé  :</strong> {{ session('data6.contributionChecheur') }}</p>
-    
-</body>
-    <!-- Étape 7: Fichiers joints -->
-    
-
-    <!-- Formulaire de soumission finale -->
-    <form method="POST" action="{{ route('multi-step-form.finish') }}">
-        @csrf
-        <button type="submit" class="btn btn-success mt-4">Terminer et Enregistrer</button>
-    </form>
-</div>
-=======
->>>>>>> abe0ba2ec5a75adda014a7b19ee7ba5388e2863a
 @endsection
