@@ -28,13 +28,17 @@ Route::get('/contact', function () {
 });
 
 
+Route::middleware('auth')->group(function () {
+    Route::view('/admin', 'admin');
+    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register']);
 
-Route::get('/evaluateur_candidat/{col}', [Evaluateur::class, 'EvCandidat'])->name('evaluateur.candidat');
-Route::get('/evaluateur_admin', [Evaluateur::class, 'EvAdmin'])->name('evaluateur.admin');
+    Route::get('/evaluateur_candidat/{col}', [Evaluateur::class, 'EvCandidat'])->name('evaluateur.candidat');
+    Route::get('/evaluateur_admin', [Evaluateur::class, 'EvAdmin'])->name('evaluateur.admin');
 
-Route::get('/profil/{id}', [Evaluateur::class, 'showProfil'])->name('profil.admin');
-Route::get('/profilcandidat/{id}', [Evaluateur::class, 'showCandidat'])->name('profil.candidat');
-
+    Route::get('/profil/{id}', [Evaluateur::class, 'showProfil'])->name('profil.admin');
+    Route::get('/profilcandidat/{id}', [Evaluateur::class, 'showCandidat'])->name('profil.candidat');
+});
 /*Route::get('/evaluateur_medecine', [Evaluateur::class, 'EvMedecine'])->name('evaluateur.medecine');
 
 Route::get('/evaluateur_lettre', [Evaluateur::class, 'EvLettre'])->name('evaluateur.litterature');
@@ -73,7 +77,7 @@ Route::post('/multi-step-form/next', [MultiStepFormController::class, 'next'])->
 Route::get('/multi-step-form/previous', [MultiStepFormController::class, 'previous'])->name('multi-step-form.previous');
 //Route::post('/autre/next', [AutreController::class, 'nextAu'])->name('autre.next');
 
-Route::view('/admin', 'admin');
+
 
 Route::view('/chercheur', 'chercheur')->name('chercheur');
 
@@ -124,8 +128,6 @@ Route::post('/etape6au', [AutreControllerNouveau::class, 'validerEtape6'])->name
 
 // Routes pour l'authentificationRoute::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
