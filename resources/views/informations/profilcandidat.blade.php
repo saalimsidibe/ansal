@@ -169,7 +169,15 @@
 
     <!-- Affichage des fichiers téléchargés -->
     <h2>Fichiers Téléchargés</h2>
-    @foreach ($candidat->preuveChercheurs as $file)
+    @php
+    $preuves=[];
+     if($candidat ->categorie ==="autre" ) {
+        $preuves=$candidat->preuveAutres;
+     } elseif ($candidat ->categorie ==="chercheur") {
+        $preuves=$candidat->preuveChercheurs;
+     }
+    @endphp
+    @foreach ($preuves as $file)
             <p><strong>Type:</strong>  {{ $file['type']}} </p>
 
 

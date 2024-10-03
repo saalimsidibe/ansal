@@ -368,6 +368,7 @@ class AutreControllerNouveau extends Controller
                 if (is_array($preuveAutre)) {
                     $preuve = new PreuveAutre();
                     $preuve->chemin = $preuveAutre['path'];
+                    $preuve->type = $preuveAutre['key'];
                     $preuve->nom_originale = $preuveAutre['nom_originale'];
                     $preuve->candidat_id = $candidat->id;
                     $preuve->save();

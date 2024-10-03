@@ -269,7 +269,7 @@
             <div class="document-item">
                 <h4>{{ $document['nom_originale'] }}</h4>
 
-                <a href="{{ url($document['path']) }}" target="_blank">Voir le document</a>
+                <a href="{{ Storage::url($document['path']) }}" target="_blank">Voir le document</a>
             </div>
         @else
             <p>Document non valide.</p>

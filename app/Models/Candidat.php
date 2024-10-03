@@ -63,4 +63,8 @@ class Candidat extends Model
     {
         return $this->hasMany(PreuveChercheur::class, 'candidat_id');
     }
+    public function preuveAutres()
+    {
+        return $this->hasMany(PreuveAutre::class, 'candidat_id');
+    }
 }
