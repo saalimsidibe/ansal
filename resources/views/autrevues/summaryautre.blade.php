@@ -47,7 +47,7 @@
 
 
 
-
+ 
 
     @php
     $diplomes=session('etape3')['diplomesAu'] ?? [];
@@ -59,49 +59,48 @@
     @endphp
 
     @php
-        $respsNat=session('etape4')['fonctionsAAu'];
+        $respsNat=session('etape4')['fonctionsAAu'] ?? [];
         $compteurRespNat=1;
     @endphp
 
   @php
-      $experiencesInt=session('etape5')['experiences'];
+      $experiencesInt=session('etape5')['experiences']?? [];
       $comptExpInt=1;
   @endphp
 
   @php
-      $respsInt=session('etape5')['responsibilities'] ;
+      $respsInt=session('etape5')['responsibilities']?? [] ;
       $compteurRespInt=1;
   @endphp
 
   @php
-      $commissionsAu=session('etape6')['commissionAu'];
+      $commissionsAu=session('etape6')['commissionAu'] ?? [];
       $compteurCommAu=1;
   @endphp
 
   @php
 
-    $edites=session('etape6')['edites'] ?? '';
+    $edites=session('etape6')['edites'] ?? [];
     $cmpEdites=1;
   @endphp
 
   @php
-      $nedites=session('etape6')['Nedites'] ?? '';
+      $nedites=session('etape6')['Nedites'] ?? [];
       $comptNedites=1;
   @endphp
 
   @php
-      $distinctions=session('etape6')['distinctionsAu'];
+      $distinctions=session('etape6')['distinctionsAu'] ?? [];
       $cmptdisctions=1;
   @endphp
 
   @php
-      $contribution=session('etape6')['contribution']
+      $contribution=session('etape6')['contribution']?? [];
   @endphp
 
 @php
-    $documents=session('documents', []);
+    $documents=session('documents', []) ;
 @endphp
-
 
  <!-- Étape 2 : Informations Academiques -->
     <h3> Informations académiques</h3>
@@ -161,7 +160,9 @@
 
   <!-- Étape : Expériences professionnelles au plan internationale -->
  <h3>Étape  : Expériences professionnelles au plan international</h3>
+
     @foreach (  $experiencesInt as $experienceInt)
+   
         <p><strong> Expérience  {{$comptExpInt}} </strong>: {{$experienceInt['functionTitle'] ?? ''}} </p>
         <p><strong>Structure:</strong> {{ $experienceInt['structure']  ?? 'Non renseigné' }}</p>
         <p><strong>Debut:</strong> {{ $experienceInt['startDate'] ?? 'Non renseigné' }}</p>
@@ -174,7 +175,9 @@
         @endphp
     @endforeach
 
+ 
 
+ 
 
      <!-- Étape : Responsabilites professionnelles au plan internationale -->
     <h3> Etape: Responsabilités professionnelles au plan international </h3>

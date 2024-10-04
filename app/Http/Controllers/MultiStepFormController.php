@@ -205,7 +205,7 @@ class MultiStepFormController extends Controller
 
 
 
-             //    dd($validatedData);
+                //    dd($validatedData);
 
                 $request->session()->put('step', "7");
                 $request->session()->put('data6', array_merge($request->session()->get('data6', []), $validatedData));
@@ -302,7 +302,7 @@ class MultiStepFormController extends Controller
                 return redirect()->route('etape6chercheur');
                 break;
             default:
-                 $request->session()->put('step', "1");
+                $request->session()->put('step', "1");
                 return view('chercheurvues.etape1chercheur');
                 break;
         }
@@ -360,77 +360,80 @@ class MultiStepFormController extends Controller
     {
         //  DB::beginTransaction();
 
-       // try {
-            // Récupération des données de la session
-            $data1 = session('data1'); //step1
-            $data2 = session('data2'); //step2
-            $data3 = session('data3'); //step3
-            $data4 = session('data4'); //step4
-            $data5 = session('data5'); //step5
-            $data6 = session('data6'); //step6
-            $docs = session('uploaded_files'); // Pour les fichiers uploadés
+        // try {
+        // Récupération des données de la session
+        $data1 = session('data1'); //step1
+        $data2 = session('data2'); //step2
+        $data3 = session('data3'); //step3
+        $data4 = session('data4'); //step4
+        $data5 = session('data5'); //step5
+        $data6 = session('data6'); //step6
+        $docs = session('uploaded_files'); // Pour les fichiers uploadés
 
 
 
-            // Exemple d'enregistrement dans la base de données
-            //  $candidat = new Candidat();
+        // Exemple d'enregistrement dans la base de données
+        //  $candidat = new Candidat();
 
-            // $candidat->nom = $data1['nom'];
-            // $candidat->prenom = $data1['prenom'];
-            // $candidat->sexe = $data1['sexe'];
-            //$candidat->datenaissance = $data1['datenaiss'];
-            //$candidat->titre = $data1['titre'];
-            //$candidat->telephone = $data1['numerotel'];
-            //$candidat->datenomin = $data1['datenomin'];
-            //$candidat->email = $data1['email'];
-            //$candidat->college = $data2['college'];
-            //$candidat->specialite = $data2['specialite'];
-            //  $candidat->expertise = $data1['expertise'];
-            //  $candidat->honneur = $data1['honneur'];
+        // $candidat->nom = $data1['nom'];
+        // $candidat->prenom = $data1['prenom'];
+        // $candidat->sexe = $data1['sexe'];
+        //$candidat->datenaissance = $data1['datenaiss'];
+        //$candidat->titre = $data1['titre'];
+        //$candidat->telephone = $data1['numerotel'];
+        //$candidat->datenomin = $data1['datenomin'];
+        //$candidat->email = $data1['email'];
+        //$candidat->college = $data2['college'];
+        //$candidat->specialite = $data2['specialite'];
+        //  $candidat->expertise = $data1['expertise'];
+        //  $candidat->honneur = $data1['honneur'];
 
-            //  $candidat->save();
+        //  $candidat->save();
 
-            $candidat = new Candidat();
-            $candidat->categorie = 'chercheur';
-            $candidat->nom = $data1['nom'];
-            $candidat->prenom = $data1['prenom'];
-            $candidat->sexe = $data1['sexe'];
-            $candidat->datenaissance = $data1['datenaiss'];
-            $candidat->titre = $data1['titre'];
-            $candidat->telephone = $data1['numerotel'];
-            $candidat->datenomin = $data1['datenomin'];
-            $candidat->email = $data1['email'];
-            $candidat->college = $data2['college'];
-            $candidat->specialite = $data2['specialite'];
-            $candidat->expertise = $data1['expertise'];
-            $candidat->honneur = 'valide';
-            $candidat->contribution = $data6['contributionChecheur'];
+        $candidat = new Candidat();
+        $candidat->categorie = 'chercheur';
+        $candidat->nom = $data1['nom'];
+        $candidat->prenom = $data1['prenom'];
+        $candidat->sexe = $data1['sexe'];
+        $candidat->datenaissance = $data1['datenaiss'];
+        $candidat->titre = $data1['titre'];
+        $candidat->telephone = $data1['numerotel'];
+        $candidat->datenomin = $data1['datenomin'];
+        $candidat->email = $data1['email'];
+        $candidat->college = $data2['college'];
+        $candidat->specialite = $data2['specialite'];
+        $candidat->expertise = $data1['expertise'];
+        $candidat->honneur = 'valide';
+        $candidat->contribution = $data6['contributionChecheur'];
 
-            $candidat->save();
-
-
-
-            $parrain = new Parrain();
-            $parrain->nomPreParrain = $data2['nomPremierP'];
-            $parrain->PrenomPreParrain = $data2['prenomPremierP'];
-            $parrain->nomDeuxParrain = $data2['nomDeuxiemeP'];
-            $parrain->PrenomDeuxParrain = $data2['prenomDeuxiemeP'];
-            $parrain->candidat_id = $candidat->id;
-
-            $parrain->save();
+        $candidat->save();
 
 
-            foreach ($data3['diplomes'] as $key => $dip) {
-                $diplome = new Diplome();
-                $diplome->nom_diplome = $dip['intitule'];
-                $diplome->date_acquisition = $dip['periode'];
-                $diplome->nom_college = $dip['institution'];
-                $diplome->ville = $dip['ville'];
-                $diplome->pays = $dip['pays'];
-                $diplome->candidat_id = $candidat->id;
-                $diplome->save();
-            }
 
+        $parrain = new Parrain();
+        $parrain->nomPreParrain = $data2['nomPremierP'];
+        $parrain->PrenomPreParrain = $data2['prenomPremierP'];
+        $parrain->nomDeuxParrain = $data2['nomDeuxiemeP'];
+        $parrain->PrenomDeuxParrain = $data2['prenomDeuxiemeP'];
+        $parrain->candidat_id = $candidat->id;
+
+        $parrain->save();
+
+
+        foreach ($data3['diplomes'] as $key => $dip) {
+            $diplome = new Diplome();
+            $diplome->nom_diplome = $dip['intitule'];
+            $diplome->date_acquisition = $dip['periode'];
+            $diplome->nom_college = $dip['institution'];
+            $diplome->ville = $dip['ville'];
+            $diplome->pays = $dip['pays'];
+            $diplome->candidat_id = $candidat->id;
+            $diplome->save();
+        }
+
+
+
+        if (isset($data4['experiences'])) {
             foreach ($data4['experiences'] as $key => $ex) {
                 $exp = new Experience();
                 $exp->intitule = $ex['intitule'];
@@ -443,9 +446,11 @@ class MultiStepFormController extends Controller
                 $exp->candidat_id = $candidat->id;
                 $exp->save();
             }
+        }
 
 
 
+        if (isset($data4['responsabilites'])) {
             foreach ($data4['responsabilites'] as $key => $resp) {
                 $responsabilite = new Responsabilite();
                 $responsabilite->intitule = $resp['intitule'];
@@ -458,7 +463,9 @@ class MultiStepFormController extends Controller
                 $responsabilite->candidat_id = $candidat->id;
                 $responsabilite->save();
             }
+        }
 
+        if (isset($data5['experiences'])) {
             foreach ($data5['experiences'] as $key => $ex) {
                 $exp = new Experience();
                 $exp->intitule = $ex['intitule'];
@@ -471,7 +478,11 @@ class MultiStepFormController extends Controller
                 $exp->candidat_id = $candidat->id;
                 $exp->save();
             }
+        }
 
+
+
+        if (isset($data5['responsabilites'])) {
             foreach ($data5['responsabilites'] as $key => $resp) {
                 $responsabilite = new Responsabilite();
                 $responsabilite->intitule = $resp['intitule'];
@@ -484,74 +495,75 @@ class MultiStepFormController extends Controller
                 $responsabilite->candidat_id = $candidat->id;
                 $responsabilite->save();
             }
+        }
 
 
-            foreach ($data6['commissions'] as $key => $comm) {
-                $commission = new Commission();
-                $commission->nom = $comm['name'];
-                $commission->candidat_id = $candidat->id;
-                $commission->save();
-            }
-          //  dd('ok');
+        foreach ($data6['commissions'] as $key => $comm) {
+            $commission = new Commission();
+            $commission->nom = $comm['name'];
+            $commission->candidat_id = $candidat->id;
+            $commission->save();
+        }
+        //  dd('ok');
 
-            foreach ($data6['brevets'] as $key =>  $brev) {
-                $brevet = new Brevet();
-                $brevet->auteurs = $brev['auteur'];
-                $brevet->date = $brev['date'];
-                $brevet->intitule = $brev['intitule'];
-                $brevet->ref = $brev['reference'];
-                $brevet->candidat_id = $candidat->id;
-                $brevet->save();
-            }
+        foreach ($data6['brevets'] as $key =>  $brev) {
+            $brevet = new Brevet();
+            $brevet->auteurs = $brev['auteur'];
+            $brevet->date = $brev['date'];
+            $brevet->intitule = $brev['intitule'];
+            $brevet->ref = $brev['reference'];
+            $brevet->candidat_id = $candidat->id;
+            $brevet->save();
+        }
 
-            foreach ($data6['ouvrages'] as $key => $ouvr) {
-                $ouvrage = new Ouvrage();
-                $ouvrage->nom = $ouvr['titre'];
-                $ouvrage->nom_auteur = $ouvr['auteur'];
-                $ouvrage->nom_coauteur = $ouvr['coauteur'];
-                $ouvrage->annee_publication = $ouvr['annee'];
-                $ouvrage->nom_editeur = $ouvr['editeur'];
-                $ouvrage->nombrePage = $ouvr['nombre_pages'];
-                $ouvrage->type = "édité";
-                $ouvrage->candidat_id = $candidat->id;
+        foreach ($data6['ouvrages'] as $key => $ouvr) {
+            $ouvrage = new Ouvrage();
+            $ouvrage->nom = $ouvr['titre'];
+            $ouvrage->nom_auteur = $ouvr['auteur'];
+            $ouvrage->nom_coauteur = $ouvr['coauteur'];
+            $ouvrage->annee_publication = $ouvr['annee'];
+            $ouvrage->nom_editeur = $ouvr['editeur'];
+            $ouvrage->nombrePage = $ouvr['nombre_pages'];
+            $ouvrage->type = "édité";
+            $ouvrage->candidat_id = $candidat->id;
 
-                $ouvrage->save();
-            }
+            $ouvrage->save();
+        }
 
-            foreach ($data6['articles'] as $key => $art) {
-                $article = new Article();
-                $article->auteur = $art['auteur'];
-                $article->datePub = $art['annee_publication'];
-                $article->titre = $art['titre'];
-                $article->editeur = $art['editeur'];
-                $article->refPage = $art['pages'];
-                $article->coauteur = $art['coauteur'];
-                $article->candidat_id = $candidat->id;
+        foreach ($data6['articles'] as $key => $art) {
+            $article = new Article();
+            $article->auteur = $art['auteur'];
+            $article->datePub = $art['annee_publication'];
+            $article->titre = $art['titre'];
+            $article->editeur = $art['editeur'];
+            $article->refPage = $art['pages'];
+            $article->coauteur = $art['coauteur'];
+            $article->candidat_id = $candidat->id;
 
-                $article->save();
-            }
-
-
+            $article->save();
+        }
 
 
 
-            /*'distinctions.*.type' => 'nullable|integer|in:1,2',
+
+
+        /*'distinctions.*.type' => 'nullable|integer|in:1,2',
                     'distinctions.*.nom' => 'nullable|string|max:255',
                     'distinctions.*.date' => 'nullable|date',
     */
-            foreach ($data6['distinctions'] as $key => $dist) {
-                $distinction = new Distinction();
-                $distinction->nom = $dist['nom'];
-                $distinction->type = $dist['type'];
-                $distinction->date = $dist['date'];
-                $distinction->candidat_id = $candidat->id;
+        foreach ($data6['distinctions'] as $key => $dist) {
+            $distinction = new Distinction();
+            $distinction->nom = $dist['nom'];
+            $distinction->type = $dist['type'];
+            $distinction->date = $dist['date'];
+            $distinction->candidat_id = $candidat->id;
 
-                $distinction->save();
-            }
+            $distinction->save();
+        }
 
 
-            // les données du step2
-            /*
+        // les données du step2
+        /*
         $parrainChercheur = new ParrainChercheur();
         $parrainChercheur->prenomPremierP = $data2['prenomPremierP'];
         $parrainChercheur->nomPremierP = $data2['nomPremierP'];
@@ -563,8 +575,8 @@ class MultiStepFormController extends Controller
         $parrainChercheur->save();
 */
 
-            // les données du step3
-            /*
+        // les données du step3
+        /*
         foreach ($data3['diplomes'] as $key => $dip) {
             $diplome = new Diplome();
             $diplome->nom_diplome = $dip['intitule'];
@@ -576,8 +588,8 @@ class MultiStepFormController extends Controller
             $diplome->save();
         }*/
 
-            // les données du step4
-            /*
+        // les données du step4
+        /*
 
         foreach ($data4['experiences'] as $key => $ex) {
             $exp = new ExpProfChercheur();
@@ -589,8 +601,8 @@ class MultiStepFormController extends Controller
             $exp->save();
         }
 */
-            // les données du step5
-            /*
+        // les données du step5
+        /*
         foreach ($data4['responsabilites'] as $key => $resp) {
             $responsabilite = new Responsabilite();
             $responsabilite->intitule = $resp['intitule'];
@@ -603,7 +615,7 @@ class MultiStepFormController extends Controller
             $responsabilite->candidat_id = $candidat->id;
             $responsabilite->save();
         }*/
-            /*
+        /*
 
         foreach ($data5['experiences'] as $key => $expint) {
             $experience = new  ExpProfChercheur();
@@ -617,7 +629,7 @@ class MultiStepFormController extends Controller
             $experience->save();
         }
            */
-            /*     foreach ($data5['responsabilites'] as $key => $respint) {
+        /*     foreach ($data5['responsabilites'] as $key => $respint) {
             $responsabilite = new Responsabilite();
             $responsabilite->type = 'internationale';
             $responsabilite->debut = $respint['debut'];
@@ -631,7 +643,7 @@ class MultiStepFormController extends Controller
             }
            */
 
-            /*        foreach ($data6['commissions'] as $key => $comm) {
+        /*        foreach ($data6['commissions'] as $key => $comm) {
             $CommissionChercheur = new CommissionChercheur();
             $CommissionChercheur->Comm = $comm['name'];
             $CommissionChercheur->candidat_id = $candidat->id;
@@ -647,7 +659,7 @@ class MultiStepFormController extends Controller
 
 
 
-            /*
+        /*
 
         foreach ($data6['ouvrages'] as $key => $ouvrage) {
             $ouvragesChercheur = new Ouvrage();
@@ -661,8 +673,8 @@ class MultiStepFormController extends Controller
         }
 
         */
-            // Sauvegarde des fichiers si nécessaire
-            /*  if (isset($files['cvchercheurDoc'])) {
+        // Sauvegarde des fichiers si nécessaire
+        /*  if (isset($files['cvchercheurDoc'])) {
                 $cvPath = $files['cvchercheurDoc']->store('cv_docs');
                 $candidat->cv_path = $cvPath;
             }
@@ -670,17 +682,17 @@ class MultiStepFormController extends Controller
                 $diplomaPath = $files['dipChercheurDoc']->store('diploma_docs');
                 $candidat->diploma_path = $diplomaPath;
             }*/
-            // Continuez pour les autres fichiers...
+        // Continuez pour les autres fichiers...
 
-            // Enregistrement de l'objet dans la base de données
+        // Enregistrement de l'objet dans la base de données
 
 
-            // Suppression des données de session après enregistrement
-            // session()->forget(['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'files']);
+        // Suppression des données de session après enregistrement
+        // session()->forget(['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'files']);
 
-            //  DB::commit(); // Commit de la transaction
+        //  DB::commit(); // Commit de la transaction
 
-            /*
+        /*
         foreach ($files as $file) {
             $preuve = new PreuveChercheur();
             $preuve->type = $file['key'];
@@ -695,21 +707,21 @@ class MultiStepFormController extends Controller
 
 
 
-            foreach ($docs as $preuveCher) {
-                $preuve = new PreuveChercheur();
-                $preuve->type = $preuveCher['key'];
-                $preuve->chemin = $preuveCher['path'];
-                $preuve->nom_originale = $preuveCher['nom_originale'];
-                $preuve->candidat_id = $candidat->id;
+        foreach ($docs as $preuveCher) {
+            $preuve = new PreuveChercheur();
+            $preuve->type = $preuveCher['key'];
+            $preuve->chemin = $preuveCher['path'];
+            $preuve->nom_originale = $preuveCher['nom_originale'];
+            $preuve->candidat_id = $candidat->id;
 
-                $preuve->save();
-            }
+            $preuve->save();
+        }
 
 
-            return view('chercheurvues.summary')->with('success', 'Candidature enregistrée avec succès!');
-       // } catch (\Exception $e) {
+        return view('chercheurvues.summary')->with('success', 'Candidature enregistrée avec succès!');
+        // } catch (\Exception $e) {
         //       DB::rollBack(); // Rollback en cas d'erreur
-       //     return redirect()->back()->withErrors('errorC', 'Une erreur s\'est produite lors de l\'enregistrement.' . $e->getMessage());
-       // }
+        //     return redirect()->back()->withErrors('errorC', 'Une erreur s\'est produite lors de l\'enregistrement.' . $e->getMessage());
+        // }
     }
 }

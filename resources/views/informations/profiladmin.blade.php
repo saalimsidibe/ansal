@@ -171,8 +171,10 @@
 
 
     <!-- Affichage des fichiers téléchargés -->
+   
     <h2>Fichiers Téléchargés</h2>
-    @foreach ($litteraire->preuveChercheurs as $file)
+   @if($candidat->categorie==='chercheur')
+    @foreach ($candidat->preuveChercheurs as $file)
             <?php /*<p><strong>Type:</strong> * {{ $file['type']}} </p>*/?>
 
 
@@ -181,6 +183,15 @@
             <p><strong>Chemin:</strong> <a target="_blank" href="{{ Storage::url($file['path']) }}">Voir le fichier</a>
             </p>
         @endforeach
+    @endif
+
+    @if ($candidat->categorie==='autre')
+    @foreach ($candidat->preuveAutres as $fichier)
+          <p><strong>Nom Original:</strong> {{ $fichier['nom_originale'] }}</p>
+          <p><strong></strong> <a target="_blank" href="{{ Storage::url($fichier['path']) }}">Voir le fichier</a></p>
+    @endforeach
+        
+    @endif
 
     <!-- Affichage de la contribution et des honneurs -->
     <h2>Contribution</h2>

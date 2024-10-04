@@ -171,15 +171,27 @@
 
     <!-- Affichage des fichiers téléchargés -->
     <h2>Fichiers Téléchargés</h2>
+
+    @if($agronome->categorie==='chercheur')
     @foreach ($agronome->preuveChercheurs as $file)
             <p><strong>Type:</strong>  {{ $file['type']}} </p>
 
 
             <p><strong>Nom Original:</strong> {{ $file['nom_originale'] }}</p>
 
-            <p><strong>Chemin:</strong> <a target="_blank" href="{{  Storage::url($file['chemin'])  }}">Voir le fichier</a>
+            <p><strong></strong> <a target="_blank" href="{{  Storage::url($file['chemin'])  }}">Voir le fichier</a>
             </p>
         @endforeach
+    @endif
+
+    @if($agronome->categorie==='autre')
+    {
+        @foreach ($agronome->preuveAutres as $file)
+            <p><strong>Nom Original</strong>{{$file['nom_originale']}}</p>
+            <p><strong><a target="_blank" href="{{ Storage::url($file['path']) }}">Voir le fichier</a></strong></p>
+        @endforeach
+    }
+    @endif
 
     <!-- Affichage de la contribution et des honneurs -->
     <h2>Contribution</h2>

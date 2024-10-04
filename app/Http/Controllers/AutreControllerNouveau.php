@@ -191,9 +191,9 @@ class AutreControllerNouveau extends Controller
         foreach ($validatedData as $key => $file) {
             if ($request->hasFile($key)) {
                 $path = $file->store('autres', 'public');
-                $type = $key;
+
                 $nom_originale = $file->getClientOriginalName();
-                session()->push('documents', ['key' => $key, 'path' => $path, 'type' => $type, 'nom_originale' => $nom_originale]);
+                session()->push('documents', ['key' => $key, 'path' => $path, 'nom_originale' => $nom_originale]);
             }
         }
         //return response()->json(['success' => 'Fichiers téléchargés avec succès.']);
@@ -217,9 +217,9 @@ class AutreControllerNouveau extends Controller
         $d6 = session()->get('etape6');
         $dx = session()->get('etapeX');
         $documents = session('documents', []);
-        $edites = $d6['edites'];
-        $Nedites = $d6['Nedites'];
-        $distinctions = $d6['distinctionsAu'];
+        $edites = $d6['edites'] ?? [];
+        $Nedites = $d6['Nedites'] ?? [];
+        $distinctions = $d6['distinctionsAu'] ?? [];
 
 
         try {
@@ -264,59 +264,70 @@ class AutreControllerNouveau extends Controller
             }
 
             // Création des expériences nationales
-            foreach ($d4['fonctionsAAu'] as $ex) {
-                $exp = new Experience();
-                $exp->intitule = $ex['intitule'];
-                $exp->type = 'nationale';
-                $exp->structure = $ex['structure'];
-                $exp->debut = $ex['debut'];
-                $exp->fin = $ex['fin'];
-                $exp->ville = $ex['ville'];
-                $exp->pays = $ex['pays'];
-                $exp->candidat_id = $candidat->id;
-                $exp->save();
+            if (isset($d4['fonctionsAAu'])) {
+                foreach ($d4['fonctionsAAu'] as $ex) {
+                    $exp = new Experience();
+                    $exp->intitule = $ex['intitule'];
+                    $exp->type = 'nationale';
+                    $exp->structure = $ex['structure'];
+                    $exp->debut = $ex['debut'];
+                    $exp->fin = $ex['fin'];
+                    $exp->ville = $ex['ville'];
+                    $exp->pays = $ex['pays'];
+                    $exp->candidat_id = $candidat->id;
+                    $exp->save();
+                }
             }
+
 
             // Création des responsabilités nationales
-            foreach ($d4['resAdau'] as $resp) {
-                $responsabilite = new Responsabilite();
-                $responsabilite->intitule = $resp['intitule'];
-                $responsabilite->type = "nationale";
-                $responsabilite->debut = $resp['debut'];
-                $responsabilite->fin = $resp['fin'];
-                $responsabilite->structure = $resp['structure'];
-                $responsabilite->ville = $resp['ville'];
-                $responsabilite->pays = $resp['pays'];
-                $responsabilite->candidat_id = $candidat->id;
-                $responsabilite->save();
+            if (isset($d4['resAdau'])) {
+                foreach ($d4['resAdau'] as $resp) {
+                    $responsabilite = new Responsabilite();
+                    $responsabilite->intitule = $resp['intitule'];
+                    $responsabilite->type = "nationale";
+                    $responsabilite->debut = $resp['debut'];
+                    $responsabilite->fin = $resp['fin'];
+                    $responsabilite->structure = $resp['structure'];
+                    $responsabilite->ville = $resp['ville'];
+                    $responsabilite->pays = $resp['pays'];
+                    $responsabilite->candidat_id = $candidat->id;
+                    $responsabilite->save();
+                }
             }
+
 
             // Création des expériences internationales
-            foreach ($d5['experiences'] as $ex) {
-                $exp = new Experience();
-                $exp->intitule = $ex['functionTitle'];
-                $exp->type = 'internationale';
-                $exp->structure = $ex['structure'];
-                $exp->debut = $ex['startDate'];
-                $exp->fin = $ex['endDate'];
-                $exp->ville = $ex['city'];
-                $exp->pays = $ex['country'];
-                $exp->candidat_id = $candidat->id;
-                $exp->save();
+            if (isset($d5['experiences'])) {
+                foreach ($d5['experiences'] as $ex) {
+                    $exp = new Experience();
+                    $exp->intitule = $ex['functionTitle'];
+                    $exp->type = 'internationale';
+                    $exp->structure = $ex['structure'];
+                    $exp->debut = $ex['startDate'];
+                    $exp->fin = $ex['endDate'];
+                    $exp->ville = $ex['city'];
+                    $exp->pays = $ex['country'];
+                    $exp->candidat_id = $candidat->id;
+                    $exp->save();
+                }
             }
 
+
             // Création des responsabilités internationales
-            foreach ($d5['responsibilities'] as $resp) {
-                $responsabilite = new Responsabilite();
-                $responsabilite->intitule = $resp['responsibilityTitle'];
-                $responsabilite->type = "internationale";
-                $responsabilite->debut = $resp['startDate'];
-                $responsabilite->fin = $resp['endDate'];
-                $responsabilite->structure = $resp['structure'];
-                $responsabilite->ville = $resp['city'];
-                $responsabilite->pays = $resp['country'];
-                $responsabilite->candidat_id = $candidat->id;
-                $responsabilite->save();
+            if (isset($d5['responsibilities'])) {
+                foreach ($d5['responsibilities'] as $resp) {
+                    $responsabilite = new Responsabilite();
+                    $responsabilite->intitule = $resp['responsibilityTitle'];
+                    $responsabilite->type = "internationale";
+                    $responsabilite->debut = $resp['startDate'];
+                    $responsabilite->fin = $resp['endDate'];
+                    $responsabilite->structure = $resp['structure'];
+                    $responsabilite->ville = $resp['city'];
+                    $responsabilite->pays = $resp['country'];
+                    $responsabilite->candidat_id = $candidat->id;
+                    $responsabilite->save();
+                }
             }
 
             // Création des commissions
@@ -368,7 +379,6 @@ class AutreControllerNouveau extends Controller
                 if (is_array($preuveAutre)) {
                     $preuve = new PreuveAutre();
                     $preuve->chemin = $preuveAutre['path'];
-                    $preuve->type = $preuveAutre['key'];
                     $preuve->nom_originale = $preuveAutre['nom_originale'];
                     $preuve->candidat_id = $candidat->id;
                     $preuve->save();
