@@ -205,12 +205,12 @@
             <div>
 
 
-                <p><strong>Type:</strong> <?php /* {{ $file['type']}} */?></p>
+        
 
 
                 <p><strong>Nom Original:</strong> {{ $file['nom_originale'] }}</p>
 
-                <p><strong>Chemin:</strong> <a target="_blank" href="{{ Storage::url($file['path']) }}">Voir le fichier</a>
+                <p><strong></strong> <a target="_blank" href="{{ asset('storage/' .$file['path']) }}">Voir le fichier</a>
                 </p>
 
 

@@ -252,16 +252,19 @@ class AutreControllerNouveau extends Controller
             $parrain->save();
 
             // Création des diplômes
-            foreach ($d3['diplomesAu'] as $dip) {
-                $diplome = new Diplome();
-                $diplome->nom_diplome = $dip['nom'];
-                $diplome->date_acquisition = $dip['periode'];
-                $diplome->nom_college = $dip['institut'];
-                $diplome->ville = $dip['ville'];
-                $diplome->pays = $dip['pays'];
-                $diplome->candidat_id = $candidat->id;
-                $diplome->save();
+            if (isset($d3['diplomesAu'])) {
+                foreach ($d3['diplomesAu'] as $dip) {
+                    $diplome = new Diplome();
+                    $diplome->nom_diplome = $dip['nom'];
+                    $diplome->date_acquisition = $dip['periode'];
+                    $diplome->nom_college = $dip['institut'];
+                    $diplome->ville = $dip['ville'];
+                    $diplome->pays = $dip['pays'];
+                    $diplome->candidat_id = $candidat->id;
+                    $diplome->save();
+                }
             }
+
 
             // Création des expériences nationales
             if (isset($d4['fonctionsAAu'])) {
@@ -330,49 +333,62 @@ class AutreControllerNouveau extends Controller
                 }
             }
 
+
             // Création des commissions
-            foreach ($d6['commissionAu'] as $comm) {
-                $commission = new Commission();
-                $commission->nom = $comm['nom'];
-                $commission->candidat_id = $candidat->id;
-                $commission->save();
+            if (isset($d6['commissionAu'])) {
+                foreach ($d6['commissionAu'] as $comm) {
+                    $commission = new Commission();
+                    $commission->nom = $comm['nom'];
+                    $commission->candidat_id = $candidat->id;
+                    $commission->save();
+                }
             }
+
 
             // Enregistrement des ouvrages non édités
-            foreach ($Nedites as $Nedite) {
-                $ouvrage = new Ouvrage();
-                $ouvrage->nom = $Nedite['titreNe'];
-                $ouvrage->nom_auteur = $Nedite['nomAuteurNe'];
-                $ouvrage->nom_coauteur = $Nedite['nomCoauteurNe'];
-                $ouvrage->nombrePage = $Nedite['nbrePNe'];
-                $ouvrage->type = 'non edite';
-                $ouvrage->candidat_id = $candidat->id;
-                $ouvrage->save();
+            if (isset($Nedites)) {
+                foreach ($Nedites as $Nedite) {
+                    $ouvrage = new Ouvrage();
+                    $ouvrage->nom = $Nedite['titreNe'];
+                    $ouvrage->nom_auteur = $Nedite['nomAuteurNe'];
+                    $ouvrage->nom_coauteur = $Nedite['nomCoauteurNe'];
+                    $ouvrage->nombrePage = $Nedite['nbrePNe'];
+                    $ouvrage->type = 'non edite';
+                    $ouvrage->candidat_id = $candidat->id;
+                    $ouvrage->save();
+                }
             }
+
 
             // Enregistrement des ouvrages édités
-            foreach ($edites as $edite) {
-                $ouvrage = new Ouvrage();
-                $ouvrage->nom = $edite['titre'];
-                $ouvrage->nom_auteur = $edite['nomAuteur'];
-                $ouvrage->nom_coauteur = $edite['nomCoauteur'];
-                $ouvrage->annee_publication = $edite['anneePublication'];
-                $ouvrage->nom_editeur = $edite['editeur'];
-                $ouvrage->nombrePage = $edite['nombrePage'];
-                $ouvrage->type = 'edite';
-                $ouvrage->candidat_id = $candidat->id;
-                $ouvrage->save();
+            if (isset($edites)) {
+                foreach ($edites as $edite) {
+                    $ouvrage = new Ouvrage();
+                    $ouvrage->nom = $edite['titre'];
+                    $ouvrage->nom_auteur = $edite['nomAuteur'];
+                    $ouvrage->nom_coauteur = $edite['nomCoauteur'];
+                    $ouvrage->annee_publication = $edite['anneePublication'];
+                    $ouvrage->nom_editeur = $edite['editeur'];
+                    $ouvrage->nombrePage = $edite['nombrePage'];
+                    $ouvrage->type = 'edite';
+                    $ouvrage->candidat_id = $candidat->id;
+                    $ouvrage->save();
+                }
             }
 
+
             // Enregistrement des distinctions
-            foreach ($distinctions as $distinction) {
-                $distinctionModel = new Distinction();
-                $distinctionModel->type = $distinction['type'];
-                $distinctionModel->nom = $distinction['distinctions_nom'];
-                $distinctionModel->date = $distinction['distinctions_date'];
-                $distinctionModel->candidat_id = $candidat->id;
-                $distinctionModel->save();
+            if (isset($distinctions)) {
+                foreach ($distinctions as $distinction) {
+                    $distinctionModel = new Distinction();
+                    $distinctionModel->type = $distinction['type'];
+                    $distinctionModel->nom = $distinction['distinctions_nom'];
+                    $distinctionModel->date = $distinction['distinctions_date'];
+                    $distinctionModel->candidat_id = $candidat->id;
+                    $distinctionModel->save();
+                }
             }
+
 
             foreach ($documents as $preuveAutre) {
 

@@ -265,14 +265,14 @@
 <hr>
 
 
-    <p>Elements de Preuve</p>
+   <h2>Fichiers Téléchargés</h2>
 
     @foreach ($documents as $document)
         @if (is_array($document)) <!-- Vérifiez que c'est un tableau -->
             <div class="document-item">
                 <h4>{{ $document['nom_originale'] }}</h4>
 
-                <a href="{{ Storage::url($document['path']) }}" target="_blank">Voir le document</a>
+                <a href="{{asset('storage/'.$document['path'] )  }}" target="_blank">Voir le document</a>
             </div>
         @else
             <p>Document non valide.</p>
