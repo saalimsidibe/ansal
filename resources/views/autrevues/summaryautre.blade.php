@@ -59,7 +59,7 @@
     @endphp
 
     @php
-        $respsNat=session('etape4')['fonctionsAAu'] ?? [];
+        $respsNat=session('etape4')['resAdau'] ?? [];
         $compteurRespNat=1;
     @endphp
 

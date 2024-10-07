@@ -180,7 +180,7 @@
 
             <p><strong>Nom Original:</strong> {{ $file['nom_originale'] }}</p>
 
-            <p><strong>Chemin:</strong> <a target="_blank" href="{{ Storage::url($file['path']) }}">Voir le fichier</a>
+            <p><strong>Chemin:</strong> <a target="_blank" href="{{ asset('storage/'. $file['chemin']) }}">Voir le fichier</a>
             </p>
         @endforeach
     @endif
@@ -188,7 +188,7 @@
     @if ($candidat->categorie==='autre')
     @foreach ($candidat->preuveAutres as $fichier)
           <p><strong>Nom Original:</strong> {{ $fichier['nom_originale'] }}</p>
-          <p><strong></strong> <a target="_blank" href="{{ Storage::url($fichier['path']) }}">Voir le fichier</a></p>
+          <p><strong></strong> <a target="_blank" href="{{ asset('storage/' .$fichier['chemin']) }}">Voir le fichier</a></p>
     @endforeach
         
     @endif

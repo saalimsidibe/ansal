@@ -178,12 +178,12 @@
      }
     @endphp
     @foreach ($preuves as $file)
-            <p><strong>Type:</strong>  {{ $file['type']}} </p>
+       
 
 
             <p><strong>Nom Original:</strong> {{ $file['nom_originale'] }}</p>
 
-            <p><strong>Chemin:</strong> <a target="_blank" href="{{  Storage::url($file['chemin'])  }}">Voir le fichier</a>
+            <p><strong></strong> <a target="_blank" href="{{  asset('storage/' .$file['chemin'])}}">Voir le fichier</a>
             </p>
         @endforeach
 

@@ -216,9 +216,7 @@
 
     @endsection
 
-   <div class="form-control">
-    <input type="date">
-    </div>
+   
 
 @section('scripts')
     <script>
