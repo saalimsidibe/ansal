@@ -34,7 +34,28 @@
     <p><strong>Email: </strong> {{$candidat->email ?? 'Non renseigné' }}</p>
     <p><strong>Expertise: </strong> {{ $candidat->expertise ?? 'Non renseigné' }}</p>
     <p><strong>Categorie: </strong>{{$candidat->categorie ?? 'Non renseigné'}}</p>
-    <p><strong>Collège: </strong> {{ $candidat->college ?? 'Non renseigné' }}</p>
+    
+    @if ($candidat->college === '1' )
+        <p><strong>Collège: </strong> Sciences et Techniques</p> 
+    @endif
+
+    @if($candidat->college === '2')
+    <p><strong>Collège: </strong> Sciences Juridiques, politiques, économiques et de gestion </p>
+    @endif
+
+    @if ($candidat->college === '3')
+    <p><strong>Collège: </strong>   Sciences de la santé humaine et animale</p> 
+    @endif
+
+    @if ($candidat->college === '4')
+    <p><strong>Collège: </strong> Sciences naturelles et agronomiques</p>    
+    @endif
+
+    @if ($candidat->college === '5')
+       <p> <strong>Collège</strong>  Sciences humaines, des arts, des lettres et de la communication</p>     
+    @endif
+
+ 
     <p><strong>Spécialité: </strong> {{ $candidat->specialite ?? 'Non renseigné' }}</p>
     <p><strong>Travaux Significatifs: </strong>{{ $candidat->travauxSign ?? 'Non renseigné'}}</p>
     <p><strong>Implication Communautaire: </strong>{{ $candidat->communautaire ?? 'Non renseigné'}}</p>
@@ -43,13 +64,13 @@
 
 
 
-    <!-- Affichage des informations sur les parents -->
+    <!-- Affichage des informations sur les parrains -->
     @foreach($candidat->parrains as $parrain)
     <h2>Informations sur les Parrains</h2>
-    <p><strong>Nom du Premier Parent:</strong> {{$parrain->nomPreParrain  ?? 'Non renseigné' }}</p>
-    <p><strong>Prénom du Premier Parent:</strong> {{ $parrain->PrenomPreParrain ?? 'Non renseigné' }}</p>
-    <p><strong>Nom du Deuxième Parent:</strong> {{ $parrain->nomDeuxParrain ?? 'Non renseigné'}}</p>
-    <p><strong>Prénom du Deuxième Parent:</strong> {{  $parrain->PrenomDeuxParrain ?? 'Non renseigné' }}</p>
+    <p><strong>Nom du Premier parrain:</strong> {{$parrain->nomPreParrain  ?? 'Non renseigné' }}</p>
+    <p><strong>Prénom du Premier parrain:</strong> {{ $parrain->PrenomPreParrain ?? 'Non renseigné' }}</p>
+    <p><strong>Nom du Deuxième parrain:</strong> {{ $parrain->nomDeuxParrain ?? 'Non renseigné'}}</p>
+    <p><strong>Prénom du Deuxième parrain:</strong> {{  $parrain->PrenomDeuxParrain ?? 'Non renseigné' }}</p>
     @endforeach
 
     <!-- Affichage des diplômes -->
@@ -75,7 +96,7 @@
             <p><strong>Intitulé: </strong> {{ $experience->intitule ?? 'Non renseigné' }}</p>
             <p><strong>Début: </strong> {{ $experience->debut  ?? 'Non renseigné'}}</p>
             <p><strong>Fin: </strong> {{ $experience->fin ?? 'Non renseigné'}}</p>
-            <p><strong>Structure: </strong> {{ $experie->structure ?? 'Non renseigné' }}</p>
+            <p><strong>Structure: </strong> {{ $experience->structure ?? 'Non renseigné' }}</p>
             <p><strong>Ville: </strong> {{ $experience->ville ?? 'Non renseigné' }}</p>
             <p><strong>Pays: </strong>{{$experience->pays ?? 'Non renseigné'}}</p>
             <hr>
@@ -200,7 +221,8 @@
     <hr>
 
     <h2>Apport Particulier à l'academie</h2>
-    <p><strong></strong><{{$candidat->apport ?? 'Non renseigné' }}/p>
+    
+    <p><strong>{{$candidat->apport ?? 'Non renseigné' }}</strong></p>
 </body>
     <!-- Étape 7: Fichiers joints -->
 

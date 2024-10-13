@@ -390,14 +390,19 @@ class AutreControllerNouveau extends Controller
             }
 
 
-            foreach ($documents as $preuveAutre) {
 
-                if (is_array($preuveAutre)) {
-                    $preuve = new PreuveAutre();
-                    $preuve->chemin = $preuveAutre['path'];
-                    $preuve->nom_originale = $preuveAutre['nom_originale'];
-                    $preuve->candidat_id = $candidat->id;
-                    $preuve->save();
+            if (isset($documents)) {
+
+
+                foreach ($documents as $preuveAutre) {
+
+                    if (is_array($preuveAutre)) {
+                        $preuve = new PreuveAutre();
+                        $preuve->chemin = $preuveAutre['path'];
+                        $preuve->nom_originale = $preuveAutre['nom_originale'];
+                        $preuve->candidat_id = $candidat->id;
+                        $preuve->save();
+                    }
                 }
             }
 

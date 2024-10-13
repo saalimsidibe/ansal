@@ -86,10 +86,10 @@
                                             <label for="titre" class="form-label">Titre *:</label>
                                             <select name="titre" id="titre" class="form-control" required>
                                                 <option value="">-Choisir-</option>
-                                                <option value="1" {{ old('titre', session('data1.titre')) == '1' ? 'selected' : '' }}>Maître de Recherche</option>
-                                                <option value="2" {{ old('titre', session('data1.titre')) == '2' ? 'selected' : '' }}>Directeur de Recherche</option>
-                                                <option value="3" {{ old('titre', session('data1.titre')) == '3' ? 'selected' : '' }}>Maître de conférence</option>
-                                                <option value="4" {{ old('titre', session('data1.titre')) == '4' ? 'selected' : '' }}>Professeur Titulaire</option>
+                                                <option value="Maître de Recherche" {{ old('titre', session('data1.titre')) == 'Maître de Recherche' ? 'selected' : '' }}>Maître de Recherche</option>
+                                                <option value="Directeur de Recherche" {{ old('titre', session('data1.titre')) == 'Directeur de Recherche' ? 'selected' : '' }}>Directeur de Recherche</option>
+                                                <option value="Maître de conférence" {{ old('titre', session('data1.titre')) == 'Maître de conférence' ? 'selected' : '' }}>Maître de conférence</option>
+                                                <option value="Professeur Titulaire" {{ old('titre', session('data1.titre')) == 'Professeur Titulaire' ? 'selected' : '' }}>Professeur Titulaire</option>
                                             </select>
                                             @error('titre')
                                                 <div class="invalid-feedback">{{ $message }}</div>

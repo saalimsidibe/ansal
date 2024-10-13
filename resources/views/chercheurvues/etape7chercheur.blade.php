@@ -27,6 +27,7 @@
                         <div class="col-8">
                             <div class="card ">
                                 <div class="card-head info"> Vos documents</div>
+                               <center><p>NB: La taille maximale de chaque fichier ne devra pas exceder 2048Mo</p></center> 
 
                                 <div class="card-body">
                                 

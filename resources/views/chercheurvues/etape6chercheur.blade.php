@@ -206,7 +206,7 @@
                                                             value="{{ old("articles.$index.editeur", $article['editeur'] ?? '') }}"
                                                             required><br>
                                                         <label>Numéro de pages:</label>
-                                                        <input class="form-control" type="number"
+                                                        <input class="form-control" type="text"
                                                             name="articles[{{ $index }}][pages]"
                                                             value="{{ old("articles.$index.pages", $article['pages'] ?? '') }}"
                                                             required><br>
@@ -239,11 +239,11 @@
                                                                 Scientifiques</label>
                                                             <select name="distinctions[{{ $index }}][type]"
                                                                 class="form-control">
-                                                                <option value="1"
-                                                                    {{ $distinction['type'] == '1' ? 'selected' : '' }}>
+                                                                <option value=" Scientifique"
+                                                                    {{ $distinction['type'] == 'scientifique' ? 'selected' : '' }}>
                                                                     Scientifique</option>
-                                                                <option value="2"
-                                                                    {{ $distinction['type'] == '2' ? 'selected' : '' }}>
+                                                                <option value=" Sociale"
+                                                                    {{ $distinction['type'] == 'sociale' ? 'selected' : '' }}>
                                                                     Sociale</option>
                                                             </select>
                                                             <label for="distinctions[{{ $index }}][nom]">Nom de la
@@ -275,7 +275,11 @@
                                                         name="contributionChecheur"
                                                         value="{{ old('contributionChecheur', session('data6.contributionChecheur')) }}"
                                                         required>
-                                                </div>
+                                                </div> <br>
+
+                                            <textarea name="travsign" id="" cols="30" rows="10" class="form-control" placeholder="contribution et travaux significatifs majeures">{{old('travsign',session('data6.travsign',''))}}</textarea> <br>
+                                            <textarea name="imp" id="" cols="30" rows="10" class="form-control" placeholder="implication communautaire">{{old('imp',session('data6.imp',''))}}</textarea><br>
+                                            <textarea name="apport" id="" cols="30" rows="10" placeholder="apport particulier à l'academie" class="form-control">{{old('apport',session('data6.apport',''))}}</textarea><br>
                                         <div class="form-group">
                                             <label for="honneurChercheur">Déclaration sur l'honneur</label>
                                             <input type="checkbox" name="honneurChercheur" class="form-group"
@@ -462,7 +466,7 @@
                 '<input class="form-control" type="text" name="articles[' + fieldIndex +
                 '][editeur]" required>' + '<br>' +
                 '<label>Numéro de pages:</label>' +
-                '<input class="form-control" type="number" name="articles[' + fieldIndex +
+                '<input class="form-control" type="text" name="articles[' + fieldIndex +
                 '][pages]" required>' + '<br>' +
                 '<button class="remove-field btn btn-danger">Supprimer</button>' +
                 '</legend>'+
@@ -501,8 +505,8 @@
                    <legend class="scheduler-border float-none w-auto"> <h6>Distinction</h6>  </legend>
                 <select name="distinctions[${index}][type]" class="form-control" required>
                      <option value="">Selectionner</option>
-                    <option value="1">Scientifique</option>
-                    <option value="2">Sociale</option>
+                    <option value="Scientifique">Scientifique</option>
+                    <option value="Sociale">Sociale</option>
                 </select>
 
                 <input type="text" name="distinctions[${index}][nom]" placeholder="Saisir la distinction" class="form-control">

@@ -46,15 +46,38 @@
         <p><strong>Numéro de Téléphone:</strong> {{ session('data1.numerotel') ?? 'Non renseigné' }}</p>
         <p><strong>Email:</strong> {{ session('data1.email') ?? 'Non renseigné' }}</p>
         <p><strong>Expertise:</strong> {{ session('data1.expertise') ?? 'Non renseigné' }}</p>
-        <p><strong>Collège:</strong> {{ session('data2.college') ?? 'Non renseigné' }}</p>
+      
+        @if (session('data2.college') ==='1')
+          <p><strong>College:</strong>Sciences et Techniques</p>
+      @endif
+
+      
+        @if (session('data2.college') ==='2')
+          <p><strong>College:</strong>Sciences juridiques, plitiques, économiques et de gestion</p>
+      @endif
+
+
+              @if (session('data2.college') ==='3')
+          <p><strong>College:</strong>Sciences de la santé humaine et animale</p>
+      @endif
+
+        @if (session('data2.college') ==='4')
+          <p><strong>College:</strong> Sciences naturelles et agronomiques</p>
+      @endif
+
+       @if (session('data2.college') ==='5')
+          <p><strong>College:</strong> Sciences humaines, des arts, des lettres et de la communication </p>
+      @endif
+    
+
         <p><strong>Spécialité:</strong> {{ session('data2.specialite') ?? 'Non renseigné' }}</p>
 
-        <!-- Affichage des informations sur les parents -->
+        <!-- Affichage des informations sur les parrains -->
         <h2>Informations sur les Parrains</h2>
-        <p><strong>Nom du Premier Parent:</strong> {{ session('data2.nomPremierP') ?? 'Non renseigné' }}</p>
-        <p><strong>Prénom du Premier Parent:</strong> {{ session('data2.prenomPremierP') ?? 'Non renseigné' }}</p>
-        <p><strong>Nom du Deuxième Parent:</strong> {{ session('data2.nomDeuxiemeP') ?? 'Non renseigné' }}</p>
-        <p><strong>Prénom du Deuxième Parent:</strong> {{ session('data2.prenomDeuxiemeP') ?? 'Non renseigné' }}</p>
+        <p><strong>Nom du Premier parrain:</strong> {{ session('data2.nomPremierP') ?? 'Non renseigné' }}</p>
+        <p><strong>Prénom du Premier parrain:</strong> {{ session('data2.prenomPremierP') ?? 'Non renseigné' }}</p>
+        <p><strong>Nom du Deuxième parrain:</strong> {{ session('data2.nomDeuxiemeP') ?? 'Non renseigné' }}</p>
+        <p><strong>Prénom du Deuxième parrain:</strong> {{ session('data2.prenomDeuxiemeP') ?? 'Non renseigné' }}</p>
 
 
         <!-- Affichage des diplômes -->
@@ -152,7 +175,9 @@
 
 
         <h2>Articles</h2>
+       
         @foreach (session('data6.articles', []) as $article)
+
             <div>
                 <p><strong>Article{{ $loop->iteration }}</strong></p>
                 <p><strong>Auteur:</strong> {{ $article['auteur'] ?? 'Non renseigné' }}</p>
@@ -221,6 +246,23 @@
         <h2>Contribution</h2>
         <p><strong>Contribution majeure dans les domaines du collège postulé :</strong>
             {{ session('data6.contributionChecheur') }}</p>
+        <p><strong> Contribution et travaux significatifs majeures: </strong>
+            {{session('data6.travsign')}}
+        </p>
+
+        <p>
+            <strong>Apport particulier à l'académie: </strong>
+            {{session('data6.apport')}}
+        </p>
+
+        <p>
+            <strong>Implication communautaire</strong>
+            {{session('data6.imp')}}
+        </p>
+
+        <p>
+            <strong></strong>
+        </p>
 
         </body>
         <!-- Étape 7: Fichiers joints -->

@@ -55,7 +55,7 @@ class MultiStepFormController extends Controller
                     'prenom' => 'required|string|max:255',
                     'sexe' => 'required|string|max:15|in:feminin,masculin',
                     'datenaiss' => 'required|date',
-                    'titre' => 'required|integer|in:1,2,3,4,5',
+                    'titre' => 'required|string|max:255',
                     // 'datenomin' => 'required|date', // Décommentez cette ligne si ce champ est nécessaire
                     'numerotel' => 'required|string|max:15', // Limite de longueur typique pour un numéro de téléphone
                     'email' => 'required|string|email|max:255',
@@ -184,7 +184,7 @@ class MultiStepFormController extends Controller
                     'brevets.*.reference' => 'nullable|string|max:255',
                     'brevets.*.intitule' => 'nullable|string|max:255',
                     'contributionChecheur' => 'nullable|string|max:1000',
-                    'distinctions.*.type' => 'nullable|integer|in:1,2',
+                    'distinctions.*.type' => 'nullable|string|max:255',
                     'distinctions.*.nom' => 'nullable|string|max:255',
                     'distinctions.*.date' => 'nullable|date',
                     'ouvrages.*.auteur' => 'required|string|max:255',
@@ -198,7 +198,10 @@ class MultiStepFormController extends Controller
                     'articles.*.annee_publication' => ['required', 'digits:4'], // Validation pour une année de publication valide
                     'articles.*.titre' => 'required|string|max:255',
                     'articles.*.editeur' => 'required|string|max:255',
-                    'articles.*.pages' => 'required|integer|min:1', // Doit être un nombre entier positif
+                    'articles.*.pages' => 'required|string|max:255', // Doit être un nombre entier positif
+                    'travsign' => 'required|string|max:255',
+                    'imp' => 'nullable|string|max:255',
+                    'apport' => 'required|string|max:255',
                     'honneurChercheur' => 'required',
                 ]);
 
@@ -403,6 +406,9 @@ class MultiStepFormController extends Controller
             $candidat->college = $data2['college'];
             $candidat->specialite = $data2['specialite'];
             $candidat->expertise = $data1['expertise'];
+            $candidat->communautaire = $data6['imp'];
+            $candidat->apport = $data6['apport'];
+            $candidat->travauxSign = $data6['travsign'];
             $candidat->honneur = 'valide';
             $candidat->contribution = $data6['contributionChecheur'];
 
@@ -419,20 +425,18 @@ class MultiStepFormController extends Controller
 
             $parrain->save();
 
-
-            foreach ($data3['diplomes'] as $key => $dip) {
-                $diplome = new Diplome();
-                $diplome->nom_diplome = $dip['intitule'];
-                $diplome->date_acquisition = $dip['periode'];
-                $diplome->nom_college = $dip['institution'];
-                $diplome->ville = $dip['ville'];
-                $diplome->pays = $dip['pays'];
-                $diplome->candidat_id = $candidat->id;
-                $diplome->save();
+            if (isset($data3['diplomes'])) {
+                foreach ($data3['diplomes'] as $key => $dip) {
+                    $diplome = new Diplome();
+                    $diplome->nom_diplome = $dip['intitule'];
+                    $diplome->date_acquisition = $dip['periode'];
+                    $diplome->nom_college = $dip['institution'];
+                    $diplome->ville = $dip['ville'];
+                    $diplome->pays = $dip['pays'];
+                    $diplome->candidat_id = $candidat->id;
+                    $diplome->save();
+                }
             }
-
-
-
             if (isset($data4['experiences'])) {
                 foreach ($data4['experiences'] as $key => $ex) {
                     $exp = new Experience();
@@ -721,16 +725,16 @@ class MultiStepFormController extends Controller
 */
 
 
+            if (isset($docs)) {
+                foreach ($docs as $preuveCher) {
+                    $preuve = new PreuveChercheur();
+                    $preuve->chemin = $preuveCher['path'];
+                    $preuve->nom_originale = $preuveCher['nom_originale'];
+                    $preuve->candidat_id = $candidat->id;
 
-            foreach ($docs as $preuveCher) {
-                $preuve = new PreuveChercheur();
-                $preuve->chemin = $preuveCher['path'];
-                $preuve->nom_originale = $preuveCher['nom_originale'];
-                $preuve->candidat_id = $candidat->id;
-
-                $preuve->save();
+                    $preuve->save();
+                }
             }
-
 
             return redirect()->route('multi-step-form.summary')->with('successC', 'Candidature enregistrée avec succès!');
         } catch (\Exception $e) {
