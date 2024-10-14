@@ -41,13 +41,36 @@
     <p> <strong>Prénom du Premier  Parrain: </strong>{{session('etape2.prenomPremierPautre') ?? 'Non renseigné'}}</p>
     <p> <strong>Nom du Deuxième Parrain: </strong>{{session('etape2.nomDeuxiemePautre') ?? 'Non renseigné'}} </p>
     <p> <strong>Prenom du Deuxième Parrain: </strong>{{session('etape2.prenomDeuxiemePautre') ?? 'Non renseigné'}} </p>
-    <p> <strong>Collège dans lequel vous souhaitez postuler</strong>{{ session('etape2.collegeAutre') ?? 'Non renseigné'}}</p>
     <p> <strong>Spécialité  dans le  postulé </strong>{{ session('etape2.specialiteAutre') ?? 'Non renseigné'}}</p>
 
 
+@if( session('etape2.collegeAutre') ==='1')
+
+  <p><strong>College:</strong>Sciences et Techniques</p>
+@endif
+
+@if(session('etape2.collegeAutre') ==='2')
+
+<p><strong>College:</strong>Sciences juridiques, politiques, économiques et de gestion</p>
+@endif
+
+@if(session('etape2.collegeAutre') ==='3')
+
+<p><strong>College:</strong>Sciences de la santé humaine et animale</p>
+@endif
+
+@if(session('etape2.collegeAutre') ==='4')
+
+<p><strong>College:</strong>Sciences naturelles et agronomiques/p>
+@endif
+
+@if(session('etape2.collegeAutre') ==='5')
+
+<p><strong>College:</strong>Sciences humaines, des arts, des lettres et de la communication </p>
+@endif
 
 
- 
+
 
     @php
     $diplomes=session('etape3')['diplomesAu'] ?? [];
