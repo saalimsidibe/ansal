@@ -277,12 +277,12 @@ class MultiStepFormController extends Controller
         switch ($step) {
             case 1:
                 $request->session()->put('step', "1");
-                return redirect()->route('multi-step-form');
+                return redirect()->route('etape1chercheur');
 
                 break;
             case 2:
                 $request->session()->put('step', "1");
-                return redirect()->route('multi-step-form');;
+                return redirect()->route('etape1chercheur');;
                 break;
             case 3:
                 $request->session()->put('step', "2");
