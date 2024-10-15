@@ -271,7 +271,9 @@
         <!-- Formulaire de soumission finale -->
         <form method="POST" action="{{ route('multi-step-form.finish') }}">
             @csrf
-            <button type="submit" class="btn btn-success mt-4">Terminer et Enregistrer</button>
+           <a href="{{ route('multi-step-form.previous') }}"
+                                                class="btn btn-warning">Précédent</a>
+           <center> <button type="submit" class="btn btn-success mt-4">Terminer et Enregistrer</button></center> 
         </form>
     </div>
 

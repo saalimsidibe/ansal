@@ -305,6 +305,7 @@
     <!-- Formulaire de soumission finale -->
     <form method="POST" action="{{ route('AutreControllerNouveau.finir') }}">
         @csrf
+       <a href="{{route('etapefinale.autre')}}" class="btn btn-warning">Précédent</a> 
       <center><button type="submit" class="btn btn-success mt-4">Terminer et Enregistrer</button></center>
     </form>
 </div>

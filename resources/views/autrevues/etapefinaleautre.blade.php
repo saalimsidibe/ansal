@@ -69,9 +69,10 @@
                     <input type="file" name="distinctions_scientifiques" class="form-control" id="distinctions_scientifiques">
                     <button type="button" onclick="sendFile('distinctions_scientifiques')">Télécharger</button>
                     <span id="distinctions_scientifiquesStatus"></span>
-                    <span id="distinctions_scientifiques-name"></span>
-                </div>
-                <input type="submit">
+                    <span id="distinctions_scientifiques-name">{{session('filePaths.distinctions_scientifiques') ? basename(session('filePaths.distinctions_scientifiques')): ''}}</span>
+                </div><br>
+                <input type="submit" class="btn btn-primary" value="Suivant">
+                 <a href="{{route('etape6.autre')}}" class="btn btn-warning">Précédent</a>
             </form>
         </div>
 

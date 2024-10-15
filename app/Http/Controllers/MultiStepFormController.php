@@ -21,6 +21,8 @@ use App\Models\PreuveAutre;
 use App\Models\PreuveChercheur;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\returnSelf;
+
 class MultiStepFormController extends Controller
 {
     public function index(Request $request)
@@ -304,6 +306,9 @@ class MultiStepFormController extends Controller
                 $request->session()->put('step', "6");
                 return redirect()->route('etape6chercheur');
                 break;
+            case 8:
+                $request->session()->put('step','7');
+                return redirect()->route('etape7chercheur');
             default:
                 $request->session()->put('step', "1");
                 return view('chercheurvues.etape1chercheur');
