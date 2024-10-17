@@ -259,7 +259,7 @@
             <strong>Implication communautaire</strong>
             {{session('data6.imp')}}
         </p>
-
+       
         <p>
             <strong></strong>
         </p>

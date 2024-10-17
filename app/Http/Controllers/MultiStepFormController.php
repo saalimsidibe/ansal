@@ -20,6 +20,8 @@ use App\Models\Distinction;
 use App\Models\PreuveAutre;
 use App\Models\PreuveChercheur;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ChercheurMail;
 
 use function PHPUnit\Framework\returnSelf;
 
@@ -307,7 +309,7 @@ class MultiStepFormController extends Controller
                 return redirect()->route('etape6chercheur');
                 break;
             case 8:
-                $request->session()->put('step','7');
+                $request->session()->put('step', '7');
                 return redirect()->route('etape7chercheur');
             default:
                 $request->session()->put('step', "1");
@@ -741,7 +743,11 @@ class MultiStepFormController extends Controller
                 }
             }
 
-            return redirect()->route('multi-step-form.summary')->with('successC', 'Candidature enregistrée avec succès!');
+
+            Mail::to(session('data1')['email'])->send(new ChercheurMail);
+
+
+            return redirect()->route('multi-step-form.summary')->with('successC', 'Candidature enregistrée avec succès! Un mail de confirmation vous a été envoyé à l\'adresse' . ' ' . session('data1')['email']);
         } catch (\Exception $e) {
             //       DB::rollBack(); // Rollback en cas d'erreur
             return redirect()->back()->withErrors('errorC', 'Une erreur s\'est produite lors de l\'enregistrement.' . $e->getMessage());
