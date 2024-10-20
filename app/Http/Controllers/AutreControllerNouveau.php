@@ -180,13 +180,13 @@ class AutreControllerNouveau extends Controller
     {
         $validatedData = $request->validate([
 
-            'cv' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'diplomes' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'justifications_professionnelles' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'commites' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'ouvrages' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'distinctions_honorifiques' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'distinctions_scientifiques' => 'nullable|file|mimes:pdf,doc,docx|max:2048'
+            'cv' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'diplomes' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'justifications_professionnelles' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'commites' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'ouvrages' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'distinctions_honorifiques' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'distinctions_scientifiques' => 'nullable|file|mimes:pdf,doc,docx|max:20048'
 
         ]);
 

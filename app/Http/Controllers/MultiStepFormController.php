@@ -322,16 +322,16 @@ class MultiStepFormController extends Controller
     public function uploadFile(Request $request)
     {
         $validatedData = $request->validate([
-            'cvchercheurDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'dipChercheurDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'fonctionDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'societeExpertDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'brevetDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'articleDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'ouvrageDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'distinctionsHonorifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'distinctionsScientifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'commites' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'cvchercheurDoc' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'dipChercheurDoc' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'fonctionDoc' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'societeExpertDoc' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'brevetDoc' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'articleDoc' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'ouvrageDoc' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'distinctionsHonorifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'distinctionsScientifiquesDoc' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
+            'commites' => 'nullable|file|mimes:pdf,doc,docx|max:20048',
         ]);
 
         //dd('kjsdkljlmsqjdfsqf');
