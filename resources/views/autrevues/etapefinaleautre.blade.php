@@ -4,7 +4,7 @@
     <main class="main">
         <div class="container">
             <h1>Télécharger des documents</h1>
-              <p>NB: La taille maximale de chaque fichier  sera de 2048Mo</p>
+              <p>NB: La taille maximale de chaque fichier  ne devra pas exceder 20 Mo</p>
             <form method="POST" action="{{ route('file.send') }}" id="sendFileForm" action="#" enctype="multipart/form-data">
                 @csrf
 
