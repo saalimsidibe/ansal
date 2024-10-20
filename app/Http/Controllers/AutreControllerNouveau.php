@@ -421,14 +421,13 @@ class AutreControllerNouveau extends Controller
         }
         */
             Mail::to(session('etape1')['emailAutre'])->send(new AutreMail);
-
-
+            $mail = session('etape1.emailAutre');
+            Session::flush();
             // Redirection avec un message de succès
-            return redirect()->route('resume')->with('message', ' Votre candidature a été enregistrée avec succès. Un mail de confirmation vous a été envoyé à l\'adresse ' . ' ' . session('etape1')['emailAutre']);
+            return redirect()->route('resume')->with('message', ' Votre candidature a été enregistrée avec succès. Un mail de confirmation vous a été envoyé à l\'adresse ' . ' ' . $mail);
         } catch (\Exception $e) {
             // En cas d'erreur, redirection avec un message d'erreur
             return redirect()->back()->with('error', 'Une erreur est survenue lors de l\'enregistrement de votre candidature: ' . $e->getMessage());
         }
-        Session::flush();
     }
 }

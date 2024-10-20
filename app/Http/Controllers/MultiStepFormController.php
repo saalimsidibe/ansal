@@ -747,14 +747,13 @@ class MultiStepFormController extends Controller
 
             Mail::to(session('data1')['email'])->send(new ChercheurMail);
 
-
-            return redirect()->route('multi-step-form.summary')->with('successC', 'Candidature enregistrée avec succès! Un mail de confirmation vous a été envoyé à l\'adresse' . ' ' . session('data1')['email']);
+            $mailchercheur = session('data1.email');
+            Session::flush();
+            return redirect()->route('multi-step-form.summary')->with('successC', 'Candidature enregistrée avec succès! Un mail de confirmation vous a été envoyé à l\'adresse' . ' ' . $mailchercheur);
         } catch (\Exception $e) {
             //       DB::rollBack(); // Rollback en cas d'erreur
             return redirect()->back()->withErrors('errorC', 'Une erreur s\'est produite lors de l\'enregistrement.' . $e->getMessage());
             // }
         }
-
-        Session::flush();
     }
 }
