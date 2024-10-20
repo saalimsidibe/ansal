@@ -39,6 +39,8 @@
         Route::get('/profil/{id}', [Evaluateur::class, 'showProfil'])->name('profil.admin');
         Route::get('/profilcandidat/{id}', [Evaluateur::class, 'showCandidat'])->name('profil.candidat');
     });
+
+
     /*Route::get('/evaluateur_medecine', [Evaluateur::class, 'EvMedecine'])->name('evaluateur.medecine');
 
 Route::get('/evaluateur_lettre', [Evaluateur::class, 'EvLettre'])->name('evaluateur.litterature');

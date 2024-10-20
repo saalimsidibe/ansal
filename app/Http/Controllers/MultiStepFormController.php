@@ -22,6 +22,7 @@ use App\Models\PreuveChercheur;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ChercheurMail;
+use Illuminate\Support\Facades\Session;
 
 use function PHPUnit\Framework\returnSelf;
 
@@ -753,5 +754,7 @@ class MultiStepFormController extends Controller
             return redirect()->back()->withErrors('errorC', 'Une erreur s\'est produite lors de l\'enregistrement.' . $e->getMessage());
             // }
         }
+
+        Session::flush();
     }
 }
