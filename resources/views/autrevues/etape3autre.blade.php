@@ -55,9 +55,9 @@
     
         <label for="intitule_{{ $indexAu }}">Intitulé du diplôme</label>
         <input type="text" class="form-control" id="intitule_{{ $indexAu }}" name="diplomesAu[{{$indexAu}}][nom]" value="{{$diplomeAu['nom'] ?? ''}}" required>
-         @error('diplomesAu.' . $indexAu . '.nom')
+        {{-- @error('diplomesAu.' . $indexAu . '.nom')
                             <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
     </div>
     <div class="form-group">
         <label for="periode_{{ $indexAu }}">Période d'obtention</label>
@@ -74,18 +74,18 @@
     <div class="form-group">
         <label for="ville_{{ $indexAu }}">Ville</label>
         <input type="text"  id="ville_{{ $indexAu }}" name="diplomesAu[{{$indexAu}}][ville]" value="{{$diplomeAu['ville']??''}}"     class="form-control" required>
-        @error('diplomesAu.' . $indexAu . '.ville')
+       {{-- @error('diplomesAu.' . $indexAu . '.ville')
                             <div class="text-danger">{{ $message }}</div>
-     @enderror
+     @enderror --}}
    
     </div>
     <div class="form-group">
         <label for="pays_{{ $indexAu }}">Pays</label>
         <input type="text" name="diplomesAu[{{$indexAu}}][pays]" id="paysAu_{{ $indexAu }}" value="{{$diplomeAu['pays']??''}}"    class="form-control" required>
          
-        @error('diplomesAu.' . $indexAu . '.pays')
+      {{--  @error('diplomesAu.' . $indexAu . '.pays')
                             <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
    
 
     </div>

@@ -31,17 +31,16 @@
 </head>
 
 <body class="index-page">
-
+ <center><marquee behavior="scroll" direction="left" style="color: red">URGENT: La date de clôture des candidatures initialement prévue le jeudi 31 octobre 2024 à minuit est prolongée au samedi 30 novembre 2024 à minuit. </marquee></center> 
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-      
+
      
         <!-- Uncomment the line below if you also wish to use an image logo -->
          <img src="{{ asset('images/ansal.png') }}" alt=""> 
       
 
       <nav id="navmenu" class="navmenu">
-        
         <ul>
           <li><a href="{{url('/')}}" class="active">Accueil</a></li>
        
@@ -51,22 +50,24 @@
           <li><a href="{{url('/contact')}}">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+       
+
       </nav>
 
     </div>
+   
   </header>
-   <center><marquee behavior="scroll" direction="left" style="color: red">La date de clôture des candidatures initialement prévue le jeudi 31 octobre 2024 à minuit est prolongée au samedi 30 novembre 2024 à minuit. </marquee></center> 
+ 
   @yield('content')
 
-
-
+ 
   <footer id="footer" class="footer light-background">
     <div class="container">
+      <center><marquee behavior="scroll" direction="left" style="color: red">URGENT: La date de clôture des candidatures initialement prévue le jeudi 31 octobre 2024 à minuit est prolongée au samedi 30 novembre 2024 à minuit. </marquee></center> 
       <div class="row g-4">
         
       
-       
-
+      
       <div class="copyright d-flex flex-column flex-md-row align-items-center justify-content-md-between">
         <p>© <span>ANSAL BURKINA FASO 2024 - </span> <span>Tous droits réservés</span></p>
         <div class="credits">

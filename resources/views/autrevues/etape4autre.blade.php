@@ -62,17 +62,17 @@
                 
                  <label for="fonction_{{$indexAAu}}">Nom de la fonction</label>
                  <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][intitule]" value="{{$fonctionAAu['intitule'] ?? ''}}" id="fonction_{{$indexAAu}}" required>   
-                 @error('fonctionsAAu.' . $indexAAu + 1 . 'intitule')
+                {{-- @error('fonctionsAAu.' . $indexAAu  . 'intitule')
                      <div class="text-danger">{{$message}}</div>
-                 @enderror
+                 @enderror --}}
             </div>
             <div class="form-group">
                 <label for="Debut_{{$indexAAu}}"> Début</label>
                 <input type="date" class="form-control" name="fonctionsAAu[{{$indexAAu}}][debut]" id="Debut_{{$indexAAu}}" value="{{$fonctionAAu['debut']}}" required>
            
-              @error('fonctionsAAu.' . $indexAAu + 1 . 'debut')
+             {{-- @error('fonctionsAAu.' . $indexAAu  . 'debut')
                      <div class="text-danger">{{$message}}</div>
-                 @enderror
+                 @enderror --}}
            
            
             </div>
@@ -80,35 +80,35 @@
                 <label for="Fin_{{$indexAAu}}"> Fin</label>
                 <input type="date" class="form-control" name="fonctionsAAu[{{$indexAAu}}][fin]" id="Fin_{{$indexAAu}}" value="{{$fonctionAAu['fin'] ?? ''}}"      required>
           
-             @error('fonctionsAAu.' . $indexAAu + 1 . 'fin')
+           {{--  @error('fonctionsAAu.' . $indexAAu . 'fin')
                      <div class="text-danger">{{$message}}</div>
-                 @enderror
+                 @enderror --}}
           
             </div>
             <div class="form-group">
                 <label for="structure_{{$indexAAu}}">Nom de la structure</label>
                 <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][structure]" value="{{$fonctionAAu['structure'] ?? ''}}" id="structure_{{$indexAAu}}" required>   
-              @error('fonctionsAAu.' . $indexAAu + 1 . 'structure')
+              {{--@error('fonctionsAAu.' . $indexAAu  . 'structure')
                      <div class="text-danger">{{$message}}</div>
-                 @enderror
+                 @enderror--}}
            
             </div>
             <div class="form-group">
                   <label for="ville_{{$indexAAu}}">Ville</label>
                   <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][ville]" id="ville_{{$indexAAu}}" value="{{$fonctionAAu['ville'] ?? ''}}" required>
           
-             @error('fonctionsAAu.' . $indexAAu + 1 . 'ville')
+           {{--  @error('fonctionsAAu.' . $indexAAu  . 'ville')
                      <div class="text-danger">{{$message}}</div>
-                 @enderror
+                 @enderror --}}
           
                 </div>
             <div class="form-group">
                 <label for="pays_{{$indexAAu}}">Pays</label>
                 <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][pays]" id="pays_{{$indexAAu}}" value="{{$fonctionAAu['pays'] ?? ''}}"  required> 
           
-             @error('fonctionsAAu.' . $indexAAu+1 . 'pays')
+            {{-- @error('fonctionsAAu.' . $indexAAu . 'pays')
                      <div class="text-danger">{{$message}}</div>
-                 @enderror
+                 @enderror --}}
             </div>
                <button type="button" class=" btn btn-danger "  onclick="removeField(this)">Supprimer </button>
        </div>
