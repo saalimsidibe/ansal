@@ -107,7 +107,7 @@
                 <h2 class="content-title text-start">
                   Consulter les critères spécifiques du collège souhaité avant de passer à la phase de  dépot des candidatures
                 </h2>
-                <p class="fst-italic"><span class="fw-bold">NB:Tout candidat doit avoir moins de 70 ans au 31 octobre 2024, date de clôture du dépôt des dossiers et devra être parrainé par deux (2) Académiciens du Collège concerné.</span></p>
+                <p class="fst-italic"><span class="fw-bold">NB:Tout candidat doit avoir moins de 70 ans au 31 octobre 2024 et devra être parrainé par deux (2) Académiciens du Collège concerné.</span></p>
 
               </div>
             </div>

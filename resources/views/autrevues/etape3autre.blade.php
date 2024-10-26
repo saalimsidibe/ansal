@@ -48,13 +48,16 @@
                                  <fieldset class="border p-2">
                              <legend class="scheduler-border float-none w-auto">    <h4>Diplôme universitaire</h4> </legend>
     @foreach ($diplomesAu as $indexAu => $diplomeAu )
-        
+          <legend class="scheduler-border float-none w-auto"> <h4>Diplôme universitaire{{$indexAu}} </h4> </legend>
    
     
     <div class="form-group">
     
         <label for="intitule_{{ $indexAu }}">Intitulé du diplôme</label>
         <input type="text" class="form-control" id="intitule_{{ $indexAu }}" name="diplomesAu[{{$indexAu}}][nom]" value="{{$diplomeAu['nom'] ?? ''}}" required>
+         @error('diplomesAu.' . $indexAu . '.nom')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
     </div>
     <div class="form-group">
         <label for="periode_{{ $indexAu }}">Période d'obtention</label>
@@ -62,15 +65,29 @@
     </div>
     <div class="form-group">
         <label for="institut_{{ $indexAu }}">Institution d'obtention</label>
-        <input type="text" class="form-control" id="institut_{{ $indexAu }}" name="diplomesAu[{{$indexAu}}][institut]" value="{{$diplomeAu['institut']??''}}"        required>
+        <input type="text" class="form-control" id="institut_{{ $indexAu }}" name="diplomesAu[{{$indexAu}}][institut]" value="{{$diplomeAu['institut']??''}}"   
+             required>
+        @error('diplomesAu.' .$indexAu. '.institut')
+            <div class="text-danger">{{$message}}</div> 
+        @enderror
     </div>
     <div class="form-group">
         <label for="ville_{{ $indexAu }}">Ville</label>
         <input type="text"  id="ville_{{ $indexAu }}" name="diplomesAu[{{$indexAu}}][ville]" value="{{$diplomeAu['ville']??''}}"     class="form-control" required>
+        @error('diplomesAu.' . $indexAu . '.ville')
+                            <div class="text-danger">{{ $message }}</div>
+     @enderror
+   
     </div>
     <div class="form-group">
         <label for="pays_{{ $indexAu }}">Pays</label>
         <input type="text" name="diplomesAu[{{$indexAu}}][pays]" id="paysAu_{{ $indexAu }}" value="{{$diplomeAu['pays']??''}}"    class="form-control" required>
+         
+        @error('diplomesAu.' . $indexAu . '.pays')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+   
+
     </div>
      @endforeach
 
@@ -114,7 +131,7 @@
     
     <script>
         //ajouter diplomes
-        let comptDip=0;
+        let comptDip={{ count($diplomesAu) }};
         
     document.getElementById('add-field').addEventListener('click', function() {
         var section = document.getElementById('diplome-section');
@@ -123,10 +140,14 @@
             
             <div class="diplome-item">
                  <fieldset class="border p-2">
-                 <legend class="scheduler-border float-none w-auto"> <h4>Diplôme universitaire</h4> </legend>
+                 <legend class="scheduler-border float-none w-auto"> <h4>Diplôme universitaire${comptDip}</h4> </legend>
                 <div class="form-group">
                     <label for="nomDipAu">Intitulé du diplôme</label>
                     <input type="text" class="form-control" name="diplomesAu[${comptDip}][nom]" id="intitule_${comptDip}" required>
+                
+
+
+
                 </div>
                 <div class="form-group">
                     <label for="periodDipAu">Période d'obtention</label>

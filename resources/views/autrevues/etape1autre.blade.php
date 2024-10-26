@@ -48,6 +48,7 @@
  <div class="form-group">
     <label for="nomAutre" class="form-label" >Nom</label>
     <input type="text" class="form-control" id="nomAutre" name="nomAutre" value="{{old('nomAutre',session('etape1.nomAutre',''))}}" required>
+   
 </div>
 <div class="form-group">
     <label for="prenomAutre" class="form-label">Prenom</label>

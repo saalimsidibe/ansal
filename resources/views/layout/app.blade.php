@@ -34,13 +34,14 @@
 
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-
+      
      
         <!-- Uncomment the line below if you also wish to use an image logo -->
          <img src="{{ asset('images/ansal.png') }}" alt=""> 
       
 
       <nav id="navmenu" class="navmenu">
+        
         <ul>
           <li><a href="{{url('/')}}" class="active">Accueil</a></li>
        
@@ -54,6 +55,7 @@
 
     </div>
   </header>
+   <center><marquee behavior="scroll" direction="left" style="color: red">La date de clôture des candidatures initialement prévue le jeudi 31 octobre 2024 à minuit est prolongée au samedi 30 novembre 2024 à minuit. </marquee></center> 
   @yield('content')
 
 

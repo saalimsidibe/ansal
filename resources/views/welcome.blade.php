@@ -51,20 +51,19 @@
           </div>
           <div class="col-lg-4 order-lg-1">
             <span class="section-subtitle" data-aos="fade-up"></span>
+          
             <h3 class="mb-4" data-aos="fade-up" style="text-align: justify">
             Troisième appel à candidatures pour l’admission de nouveaux membres de l’ANSAL-BF
             </h3>
             <p data-aos="fade-up" style="text-align: justify">
-             Dans le cadre de sa mission de mobilisation de tous les savoirs pour contribuer au
-              développement socio-économique du Burkina Faso , l’Académie Nationale des Sciences, des
-              Arts et des Lettres du Burkina Faso (ANSAL-BF) lance un troisième appel à candidatures
-              pour l’admission de nouveaux membres.
-              Cet appel s’adresse aux hommes et femmes des sciences, des lettres, des arts, de la culture,
-              des détenteurs de savoirs endogènes ainsi qu’aux spécialistes des disciplines relevant des
-              champs d’expertise de l’Académie, reconnues par leurs pairs et désireux de mettre leurs
-              compétences et leurs connaissances au service de la communauté nationale.
-              <strong>Tout candidat doit avoir moins de 70 ans au 31 octobre 2024, date de clôture du dépôt des
-                  dossiers et devra être parrainé par deux (2) Académiciens du Collège concerné.</strong>
+          <p style="text-align: justify"> Dans le cadre de sa mission de mobiliser tous les savoirs pour contribuer au développement socio-économique du Burkina Faso ,l’Académie Nationale des Sciences, des Arts et des Lettres du Burkina Faso (ANSAL-BF) lance un nouvel appel à candidature pour l’admission de nouveaux membres. La date de clôture des candidatures initialement prévue le jeudi 31 octobre 2024 à minuit est prolongée au samedi 30 novembre  2024 à minuit.
+
+Alternativment les candidats peuvent déposer une version numérique de leur dossier complet sous clé USB au secrétariat du Secrétaire Perpétuel de l’Académie à son siège à Ouaga 2000 les heures ouvrables au plus tard le Vendredi 29 novembre 2024 à 14 h délai de rigueur. </p>
+
+              <strong>Tout candidat doit avoir moins de 70 ans à la date du 31 octobre 2024 à minuit  et devra être parrainé par deux (2) Académiciens du Collège auquel il postule. </strong>
+              <p>Pour ce présent appel, l’admission portera sur treize (13) membres titulaires et dix (10) membres associés, répartis dans les cinq (5) Collèges de l’Académie. </p>
+              <p> Le dossier de candiature  comprend également un curriculum vitae (CV) complet du candidat  et des documents en format pdf à télécharger.</p>
+              <strong>Il est conseillé au candidat de se familiariser avec la plateforme en simulant une candidature jusqu’au niveau de demande de téléchargement des éléments de preuves sans procéder à la validation du dossier.</strong>
             </p>
             <p class="mt-5" data-aos="fade-up">
               <a href="{{route('accueil')}}" class="btn btn-get-started">Voir</a>
