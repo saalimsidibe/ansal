@@ -56,7 +56,7 @@
             Troisième appel à candidatures pour l’admission de nouveaux membres de l’ANSAL-BF
             </h3>
             <p data-aos="fade-up" style="text-align: justify">
-          <p style="text-align: justify"> Dans le cadre de sa mission de mobiliser tous les savoirs pour contribuer au développement socio-économique du Burkina Faso ,l’Académie Nationale des Sciences, des Arts et des Lettres du Burkina Faso (ANSAL-BF) lance un nouvel appel à candidature pour l’admission de nouveaux membres. La date de clôture des candidatures initialement prévue le jeudi 31 octobre 2024 à minuit est prolongée au samedi 30 novembre  2024 à minuit.
+          <p style="text-align: justify"> Dans le cadre de sa mission de mobiliser tous les savoirs pour contribuer au développement socio-économique du Burkina Faso ,l’Académie Nationale des Sciences, des Arts et des Lettres du Burkina Faso (ANSAL-BF) lance un nouvel appel à candidature pour l’admission de nouveaux membres. <strong>La date de clôture des candidatures initialement prévue le jeudi 31 octobre 2024 à minuit est prolongée au samedi 30 novembre  2024 à minuit.</strong>
 
 Alternativment les candidats peuvent déposer une version numérique de leur dossier complet sous clé USB au secrétariat du Secrétaire Perpétuel de l’Académie à son siège à Ouaga 2000 les heures ouvrables au plus tard le Vendredi 29 novembre 2024 à 14 h délai de rigueur. </p>
 
