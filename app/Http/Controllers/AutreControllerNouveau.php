@@ -97,14 +97,14 @@ class AutreControllerNouveau extends Controller
             'diplomesAu.*.pays' => 'required|string|max:255',
 
 
-        ],/* [
+        ], [
             'diplomesAu.*.nom.required' => 'l\'intitulé du diplôme (numero:index) est requis',
             'diplomesAu.*.nom.max' => 'l\'intitulé du diplôme (numero:index) ne doit pas depasser 255 caractères',
             'diplomesAu.*.institut.max' => 'l\'institution (numero:index) ne doit pas depasser 255 caractères',
             'diplomesAu.*.ville.max' => 'la ville (numero:index) ne doit pas depaser 255 caractères',
             'diplomesAu.*.pays.max' => 'le pays (numero:index) ne doit pas depaser 255 caractères',
 
-        ] */);
+        ]);
         $request->session()->put('etape3', $donnees3);
 
         return redirect()->route('etapexautre');
@@ -120,14 +120,14 @@ class AutreControllerNouveau extends Controller
                 'implication' => 'required|string|max:255'
             ],
 
- /*
+
             [
                 'travaux.required' => 'Votre contribution et vos travaux significatifs sont exigés',
                 'implication.required' => 'Votre implication communautaire est exigée',
                 'travaux.max' => 'Votre contribution et vos travaux significatifs ne doivent pas dépasser 255 caractères',
                 'implication.max' => 'Votre implication communautaire ne doit pas dépasser 255 caractères'
-            ]  */
-            
+            ]
+
         );
         $request->session()->put('etapeX', $donneesX);
 
@@ -154,7 +154,7 @@ class AutreControllerNouveau extends Controller
                 'resAdau.*.pays' => 'required|string|max:255',
 
 
-            ], /*
+            ],
             [
                 'fonctionsAAu.*.intitule.required' => 'l \'intitulé de la fonction(numero:index) est exigé',
                 'fonctionsAAu.*.structure.required' => 'la structure de la fonction(numero:index) est exigé',
@@ -173,11 +173,15 @@ class AutreControllerNouveau extends Controller
                 'fonctionsAAu.*.intitule.max' => 'l\'intitulé de la fonction(numero:index) ne doit pas dépasser 255 caractères',
 
 
+                'resAdau.*.intitule.max' => 'l\'intitulé de la responsabilité (numero:index) ne doit pas dépasser 255 caractères',
+                'resAdau.*.structure.max' => 'le nom de la structure de la responsabilité(numero:index) ne doit pas dépasser 255 caractères',
+                'resAdau.*.ville.max' => 'le nom de la ville de la responsabilité (numero:index) ne doit pas dépasser 255 caractères',
+                'resAdau.*.pays.max' => 'le nom du pays de la responsabilité (numero:index) ne doit pas dépasser 255 caracères',
 
 
 
 
-            ] */
+            ]
         );
 
         $request->session()->put('etape4', $donnees4);
@@ -188,26 +192,48 @@ class AutreControllerNouveau extends Controller
 
     public function validerEtape5(Request $request)
     {
-        $donnees5 = $request->validate([
-            'expprofintAu' => 'required|in:oui,non',
-            'respintAu' => 'required|in:oui,non',
-            'experiences.*.functionTitle' => 'required|string|max:255',
-            'experiences.*.startDate' => 'required|date',
-            'experiences.*.endDate' => 'required|date',
-            'experiences.*.structure' => 'required|string|max:255',
-            'experiences.*.city' => 'required|string|max:255',
-            'experiences.*.country' => 'required|string|max:255',
+        $donnees5 = $request->validate(
+            [
+                'expprofintAu' => 'required|in:oui,non',
+                'respintAu' => 'required|in:oui,non',
+                'experiences.*.functionTitle' => 'required|string|max:255',
+                'experiences.*.startDate' => 'required|date',
+                'experiences.*.endDate' => 'required|date',
+                'experiences.*.structure' => 'required|string|max:255',
+                'experiences.*.city' => 'required|string|max:255',
+                'experiences.*.country' => 'required|string|max:255',
 
-            'responsibilities.*.responsibilityTitle' => 'required|string|max:255',
-            'responsibilities.*.startDate' => 'required|date',
-            'responsibilities.*.endDate' => 'required|date',
-            'responsibilities.*.country' => 'required|string|max:255',
-            'responsibilities.*.city' => 'required|string|max:255',
-            'responsibilities.*.structure' => 'required|string|max:255',
+                'responsibilities.*.responsibilityTitle' => 'required|string|max:255',
+                'responsibilities.*.startDate' => 'required|date',
+                'responsibilities.*.endDate' => 'required|date',
+                'responsibilities.*.country' => 'required|string|max:255',
+                'responsibilities.*.city' => 'required|string|max:255',
+                'responsibilities.*.structure' => 'required|string|max:255',
 
 
 
-        ]);
+            ],
+            [
+                'experiences.*.functionTitle.max' => 'le nom de  de l\'expérience (numero:index) ne doit pas dépasser 255 caractères',
+                'experiences.*.structure.max ' => 'le nom de la structure de l\'expérience (numero:index) ne doit pas dépasser 255 caractères',
+                'experiences.*.city.max' => 'le nom de la ville de l\'expérience(numero:index) ne doit pas dépasser 255 caractères',
+                'experiences.*.country.max' => 'le nom de l\'expérience(numero:index) ne doit pas dépasser 255 caractères',
+
+
+
+                'responsibilities.*.responsibilityTitle.required' => 'le nom de la responsabilite (numero:index) est exigée',
+                'responsibilities.*.startDate.required' => 'la début de la responsabilité(numero:index) est exigée',
+                'responsibilities.*.endDate.required' => 'la fin de la responsabilité(numero:index) est exigée',
+                'responsibilities.*.country.required' => 'le pays de la responsabilité(numero:index) est exigée',
+                'responsibilities.*.city' => 'la ville de la responsabilité(numero:index) est exigée',
+
+
+                'responsibilities.*.responsibilityTitle.max' => 'le nom de la responsabilité(numero:index) ne doit pas dépasser 255 caractères',
+                'responsibilities.*.city.max' => 'la ville de la responsabilité(numero:index) ne doit pas dépasser 255 caractères',
+                'responsibilities.*.country.max' => 'le pays de la responsabilité(numero:index) ne doit pas dépasser 255 caractères',
+
+            ]
+        );
         $request->session()->put('etape5', $donnees5);
 
 

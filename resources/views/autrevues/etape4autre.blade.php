@@ -57,22 +57,22 @@
        
        <div class="experience-item">
          <fieldset class="border p-2">
-            <legend class="scheduler-border float-none w-auto"><h4>Experience</h4></legend>
+            <legend class="scheduler-border float-none w-auto"><h4>Experience{{$indexAAu}}</h4></legend>
             <div class="form-group">
                 
                  <label for="fonction_{{$indexAAu}}">Nom de la fonction</label>
                  <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][intitule]" value="{{$fonctionAAu['intitule'] ?? ''}}" id="fonction_{{$indexAAu}}" required>   
-              {{--   @error('fonctionsAAu.' . $indexAAu  . 'intitule')
+              @error('fonctionsAAu.' . $indexAAu  . 'intitule')
                      <div class="text-danger">{{$message}}</div>
-                 @enderror  --}}
+                 @enderror 
             </div> 
             <div class="form-group">
                 <label for="Debut_{{$indexAAu}}"> Début</label>
                 <input type="date" class="form-control" name="fonctionsAAu[{{$indexAAu}}][debut]" id="Debut_{{$indexAAu}}" value="{{$fonctionAAu['debut']}}" required>
            
-             {{--  @error('fonctionsAAu.' . $indexAAu  . 'debut')
+              @error('fonctionsAAu.' . $indexAAu  . 'debut')
                      <div class="text-danger">{{$message}}</div>
-                 @enderror  --}}
+                 @enderror 
            
            
             </div>
@@ -80,35 +80,35 @@
                 <label for="Fin_{{$indexAAu}}"> Fin</label>
                 <input type="date" class="form-control" name="fonctionsAAu[{{$indexAAu}}][fin]" id="Fin_{{$indexAAu}}" value="{{$fonctionAAu['fin'] ?? ''}}"      required>
           
-           {{-- @error('fonctionsAAu.' . $indexAAu . 'fin')
+           @error('fonctionsAAu.' . $indexAAu . 'fin')
                      <div class="text-danger">{{$message}}</div>
-                 @enderror  --}} 
+                 @enderror  
           
             </div>
             <div class="form-group">
                 <label for="structure_{{$indexAAu}}">Nom de la structure</label>
                 <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][structure]" value="{{$fonctionAAu['structure'] ?? ''}}" id="structure_{{$indexAAu}}" required>   
-              {{-- @error('fonctionsAAu.' . $indexAAu  . 'structure')
+               @error('fonctionsAAu.' . $indexAAu  . 'structure')
                      <div class="text-danger">{{$message}}</div>
-                 @enderror  --}}
+                 @enderror 
            
             </div>
             <div class="form-group">
                   <label for="ville_{{$indexAAu}}">Ville</label>
                   <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][ville]" id="ville_{{$indexAAu}}" value="{{$fonctionAAu['ville'] ?? ''}}" required>
           
-            {{--  @error('fonctionsAAu.' . $indexAAu  . 'ville')
+          @error('fonctionsAAu.' . $indexAAu  . 'ville')
                      <div class="text-danger">{{$message}}</div>
-                 @enderror  --}}
+                 @enderror  
           
                 </div>
             <div class="form-group">
                 <label for="pays_{{$indexAAu}}">Pays</label>
                 <input type="text" class="form-control" name="fonctionsAAu[{{$indexAAu}}][pays]" id="pays_{{$indexAAu}}" value="{{$fonctionAAu['pays'] ?? ''}}"  required> 
           
-            {{-- @error('fonctionsAAu.' . $indexAAu . 'pays')
+             @error('fonctionsAAu.' . $indexAAu . 'pays')
                      <div class="text-danger">{{$message}}</div>
-                 @enderror  --}}
+                 @enderror 
             </div>
                <button type="button" class=" btn btn-danger "  onclick="removeField(this)">Supprimer </button>
        </div>
@@ -137,15 +137,21 @@
             @foreach ($resAdau as $j => $reAdau )
                   <div class="field">
   <fieldset class="border p-2">
-        <legend class="scheduler-border float-none w-auto"> <h4>Responsabilite</h4></legend>
+        <legend class="scheduler-border float-none w-auto"> <h4>Responsabilite{{$j}} </h4></legend>
              <div class="form-group">
                     <label for="responsibilite_{{$j}}">Intitulé de la responsabilité</label>
                     <input type="text" name="resAdau[{{$j}}][intitule]"  value="{{$reAdau['intitule'] ??'' }}"       placeholder="Titre" class="form-control" id="responsibilite_{{$j}}" required>
+                    @error('resAdau.' .$j. 'intitulé')
+                        <div class="text-danger">{{$message}}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="debut_{{$j}}">Debut</label>
                     <input type="date" name="resAdau[{{$j}}][debut]" value="{{$reAdau['debut'] ?? ''}}" class="form-control" id="debut_{{$j}}">
+                
+                
+                
                 </div>
                 <div class="form-group">
                     <label for="fin_{{$j}}"> Fin</label>
@@ -154,14 +160,27 @@
                 <div class="form-group">
                     <label for="structure_{{$j}}">Structure</label>
                     <input type="text" name="resAdau[{{$j}}][structure]"value="{{$reAdau['structure'] ?? ''}} " id="structure_{{$j}}"       placeholder="Structure" class="form-control">
+                @error('resAdau.' .$j. 'structure')
+                        <div class="text-danger">{{$message}}</div>
+                    @enderror
+               
                 </div>
                 <div class="form-group">
                     <label for="ville_{{$j}}">Ville</label>
                     <input type="text" name="resAdau[{{$j}}][ville]" value="{{$reAdau['ville'] ?? ''}}"   id="ville_{{$j}}"     placeholder="Ville" class="form-control">
+                 @error('resAdau.' .$j. 'ville')
+                        <div class="text-danger">{{$message}}</div>
+                    @enderror
+               
+                
+                
                 </div>
                 <div class="form-group">
                     <label for="Pays_{{$j}}">Pays</label>
                     <input type="text" name="resAdau[{{$j}}][pays]" value="{{$reAdau['pays'] ?? ''}}" placeholder="Pays" id="Pays_{{$j}}" class="form-control">
+                 @error('resAdau.' .$j. 'pays')
+                        <div class="text-danger">{{$message}}</div>
+                    @enderror
                 </div>
                    <button type="button" class=" btn btn-danger "  onclick="removeField(this)">Supprimer </button> 
             @endforeach
@@ -220,7 +239,7 @@
         var newFields = `
         <fieldset class="border p-2">
             <div class="experience-item">
-                  <legend class="scheduler-border float-none w-auto"> <h4>Experience</h4> </legend>
+                  <legend class="scheduler-border float-none w-auto"> <h4>Experience ${index}</h4> </legend>
                 <div class="form-group">
                     <label for="fonction${index}">Nom de la fonction</label>
                     <input type="text" class="form-control" name="fonctionsAAu[${index}][intitule]" id="fonction${index}" required>
@@ -257,20 +276,28 @@
     document.addEventListener('click', function(e) {
         if (e.target && e.target.classList.contains('remove-experience')) {
             e.target.parentElement.remove();
+
+
         }
     });        
     </script>
 
     <script>
         //script pour ajouter dynamiquement les responsabilités administrative nationales
-        var i=0;
+    
      
         document.getElementById('respadminAu').addEventListener('change', function() {
             const dynamicFields = document.getElementById('respadminDynamic');
-            dynamicFields.innerHTML = ''; // Clear previous fields
+            // Clear previous fields
+              dynamicFields.innerHTML = '';
 
-            if (this.value === 'oui') {
+            if (this.value !== 'oui') {
                 // Create and append the button to add fields
+            
+                 return;
+            }
+
+             dynamicFields.innerHTML = '';
                 const addBtn = document.createElement('button');
                 addBtn.textContent = 'Ajouter une responsabilité';
                 addBtn.className = 'add-btn  btn btn-primary';
@@ -284,18 +311,19 @@
                 dynamicFields.appendChild(addBtn);
 
                 // Add the first responsibility field
-                addResponsibilityField();
-            }
+              
+            
         });
 
         function addResponsibilityField() {
-            i++;
+           
             const container = document.createElement('div');
             container.className = 'field';
+              const i = document.querySelectorAll('#respadminDynamic .field').length;
             
             container.innerHTML = `
                 <fieldset class="border p-2">
-                     <legend class="scheduler-border float-none w-auto"> <h6>Nouvelle Responsabilite</h6></legend>
+                     <legend class="scheduler-border float-none w-auto"> <h6>Nouvelle Responsabilite ${i+1}</h6></legend>
                 <div class="form-group">
                     <label for="responsibilityTitle">Intitulé de la responsabilité</label>
                     <input type="text" name="resAdau[${i}][intitule]" placeholder="Titre" class="form-control">
@@ -321,18 +349,42 @@
                     <label for="country">Pays</label>
                     <input type="text" name="resAdau[${i}][pays]" placeholder="Pays" class="form-control">
                 </div>
-                <button type="button" class="remove-btn btn btn-danger" onclick="removeField(this)">Supprimer</button>
+                <button type="button" class="remove-btn btn btn-danger" onclick="removeResponsibilityField(this)">Supprimer</button>
                  </fieldset>
             `;
 
             document.getElementById('respadminDynamic').appendChild(container);
+    
         }
 
         function removeField(button) {
             const field = button.parentElement;
             field.remove();
+    
+       
         }
-        
+        function removeResponsibilityField(button) {
+    const field = button.closest('fieldset');
+    field.remove();
+    updateResponsibilityFields();
+    
+}
+
+function updateResponsibilityFields() {
+    const fields = document.querySelectorAll('#respadminDynamic .field');
+    fields.forEach((field, index) => {
+        const legend = field.querySelector('legend h6');
+        if (legend) {
+            legend.textContent = `Nouvelle Responsabilite ${index + 1}`; // Met à jour le texte de la légende
+        }
+
+        const inputs = field.querySelectorAll('input');
+        inputs.forEach(input => {
+            const name = input.name.replace(/\[\d+\]/, `[${index}]`); // Met à jour l'indice dans le nom
+            input.name = name;
+        });
+    });
+}
     </script>
     @php
     

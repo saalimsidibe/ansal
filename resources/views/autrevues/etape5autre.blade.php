@@ -302,11 +302,11 @@
 
             // Add new field group
             addResponsibilityFieldButton.addEventListener('click', function() {
-                Index++;
+               const Index=dynamicResponsibilityFieldsContainer.querySelectorAll('fieldset').length;
                 const newFieldset = document.createElement('fieldset');
                 newFieldset.classList.add('mb-3','border','p-2' );
                 newFieldset.innerHTML = `
-                    <legend class="scheduler-border float-none w-auto"><h4>Responsabilité</h4> </legend>
+                    <legend class="scheduler-border float-none w-auto"><h4>Responsabilité </h4> </legend>
                     <div class="form-group">
                         <label for="responsibilityTitle_${Index}">Intitulé de la responsabilité</label>
                         <input type="text" name="responsibilities[${Index}][responsibilityTitle]" id="responsibilityTitle_${Index}" class="form-control">
@@ -337,7 +337,7 @@
                         <input type="text" name="responsibilities[${Index}][country]" id="responsibilityCountry_${Index}" class="form-control">
                     </div>
 
-                    <button type="button" class="btn btn-danger remove-field" onclick="removeField(this)">Supprimer </button>
+                    <button type="button" class="btn btn-danger remove-field" onclick="removeResponsibilityField(this)">Supprimer </button>
                 `;
                 dynamicResponsibilityFieldsContainer.appendChild(newFieldset);
             });
@@ -347,6 +347,31 @@
                 button.parentElement.remove();
             }
         }); 
+
+        function removeResponsibilityField(button) {
+    const fieldset = button.closest('fieldset');
+    if (fieldset) {
+        fieldset.remove();
+        updateIndices(); // Mettre à jour les indices après la suppression
+    }
+}
+
+
+function updateIndices() {
+    const fields = dynamicResponsibilityFieldsContainer.querySelectorAll('fieldset');
+    fields.forEach((fieldset, index) => {
+        const inputs = fieldset.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.name = input.name.replace(/\[(\d+)\]/, `[${index}]`); // Mise à jour des noms
+            input.id = input.id.replace(/\d+/, index); // Mise à jour des IDs
+        });
+
+        const legend = fieldset.querySelector('legend h4');
+        if (legend) {
+            legend.textContent = `Responsabilité ${index + 1}`; // Mise à jour du texte
+        }
+    });
+}
     </script>
     <script>
         function suppExp(button){
