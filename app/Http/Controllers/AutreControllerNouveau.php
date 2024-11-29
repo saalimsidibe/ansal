@@ -41,14 +41,6 @@ class AutreControllerNouveau extends Controller
             'numerotelAutre' => 'required|string|regex:/^\d+$/|max:15',
             'emailAutre' => 'required|string|email|max:255',
 
-        ], [
-            'nomAutre.required' => 'Votre nom est exigé',
-            'nomAutre.max' => 'Votre nom ne doit pas dépasser 255 caractères',
-            'prenomAutre.max' => 'Votre prénom ne doit pas depasser 255 caractères',
-            'titreAutre.max' => 'Votre titre ne doit pas dépasser 255 caractères',
-            'numerotelAutre.regex' => 'Le numéro de télephone n\'est constitué que de chiffre',
-            'numerotelAutre.max' => 'Votre numéro de télephone ne doit pas dépasser 15 caractères',
-
         ]);
 
         $request->session()->put('etape1', $donnees1);
@@ -66,22 +58,7 @@ class AutreControllerNouveau extends Controller
             'collegeAutre' => 'required|integer|in:1,2,3,4,5',
             'specialiteAutre' => 'required|string|max:255',
 
-        ], [
-            'nomPremierPautre.required' => 'le nom du premier parrain est exigé',
-            'prenomPremierPautre.required' => 'le prénom du premier parrain est exigé',
-            'nomDeuxiemePautre.required' => 'le nom du deuxième parrain est exigé',
-            'prenomDeuxiemePautre.required' => 'le prénom du deuxième parrain est exigé',
-            'specialiteAutre.required' => 'votre spécialité est exigée',
-
-
-
-
-
-            'nomPremierPautre.max' => 'le nom du premier parrain ne peut pas dépasser 255 caractères',
-            'prenomPremierPautre.max' => 'le prénom du premier parrain ne peut pas dépasser 255 caractères',
-            'nomDeuxiemePautre.max' => 'le nom du deuxième parrain ne peut pas dépasser 255 caractères',
-            'prenomDeuxiemePautre.max' => 'le prénom du deuxième parrain ne peut pas dépasser 255 caractères',
-            'specialiteAutre.max' => 'le champ spécialité ne doit pas dépasser 255 caractères',
+        
         ]);
         $request->session()->put('etape2', $donnees2);
         return redirect()->route('etape3.autre');
@@ -97,13 +74,6 @@ class AutreControllerNouveau extends Controller
             'diplomesAu.*.pays' => 'required|string|max:255',
 
 
-        ], [
-            'diplomesAu.*.nom.required' => 'l\'intitulé du diplôme (numero:index) est requis',
-            'diplomesAu.*.nom.max' => 'l\'intitulé du diplôme (numero:index) ne doit pas depasser 255 caractères',
-            'diplomesAu.*.institut.max' => 'l\'institution (numero:index) ne doit pas depasser 255 caractères',
-            'diplomesAu.*.ville.max' => 'la ville (numero:index) ne doit pas depaser 255 caractères',
-            'diplomesAu.*.pays.max' => 'le pays (numero:index) ne doit pas depaser 255 caractères',
-
         ]);
         $request->session()->put('etape3', $donnees3);
 
@@ -118,14 +88,6 @@ class AutreControllerNouveau extends Controller
             [
                 'travaux' => 'required|string|max:255',
                 'implication' => 'required|string|max:255'
-            ],
-
-
-            [
-                'travaux.required' => 'Votre contribution et vos travaux significatifs sont exigés',
-                'implication.required' => 'Votre implication communautaire est exigée',
-                'travaux.max' => 'Votre contribution et vos travaux significatifs ne doivent pas dépasser 255 caractères',
-                'implication.max' => 'Votre implication communautaire ne doit pas dépasser 255 caractères'
             ]
 
         );
@@ -155,33 +117,7 @@ class AutreControllerNouveau extends Controller
 
 
             ],
-            [
-                'fonctionsAAu.*.intitule.required' => 'l \'intitulé de la fonction(numero:index) est exigé',
-                'fonctionsAAu.*.structure.required' => 'la structure de la fonction(numero:index) est exigé',
-                'fonctionsAAu.*.debut.required ' => 'le début de la fonction(numero:index) est exigé',
-                'fonctionsAAu.*.fin.required ' => 'la fin  de la fonction(numero:index) est exigée',
-                'fonctionsAAu.*.ville.required' => 'la ville de la fonction(numero:index) est exigée',
-                'fonctionsAAu.*.pays.required' => 'le pays de la fonction(numero:index) est exigée',
-
-
-
-
-                'fonctionsAAu.*.intitule.max' => 'l\'intitulé de la fonction(numero:index) est ne doit pas dépasser 255 caractères',
-                'fonctionsAAu.*.structure.max' => 'la structure de la fonction(numero:index) ne doit pas dépasser 255 caractères',
-                'fonctionsAAu.*.ville.max' => 'la ville de la fonction(numero:index) ne doit pas dépasser 255 caractères',
-                'fonctionsAAu.*.pays.max' => 'le pays de la fonction(numero:index) ne doit pas dépasser 255 caractères',
-                'fonctionsAAu.*.intitule.max' => 'l\'intitulé de la fonction(numero:index) ne doit pas dépasser 255 caractères',
-
-
-                'resAdau.*.intitule.max' => 'l\'intitulé de la responsabilité (numero:index) ne doit pas dépasser 255 caractères',
-                'resAdau.*.structure.max' => 'le nom de la structure de la responsabilité(numero:index) ne doit pas dépasser 255 caractères',
-                'resAdau.*.ville.max' => 'le nom de la ville de la responsabilité (numero:index) ne doit pas dépasser 255 caractères',
-                'resAdau.*.pays.max' => 'le nom du pays de la responsabilité (numero:index) ne doit pas dépasser 255 caracères',
-
-
-
-
-            ]
+           
         );
 
         $request->session()->put('etape4', $donnees4);

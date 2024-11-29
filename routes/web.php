@@ -1,5 +1,6 @@
    <?php
 
+    use App\Http\Controllers\AdminController;
     use App\Http\Controllers\AutreController;
     use App\Http\Controllers\AutreControllerNouveau;
     use Illuminate\Support\Facades\Route;
@@ -29,7 +30,7 @@
 
 
     Route::middleware('auth')->group(function () {
-        Route::view('/admin', 'admin');
+        Route::get('/admin_index', [AdminController::class, 'index']);
         Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
         Route::post('/register', [RegisterController::class, 'register']);
 
@@ -38,6 +39,13 @@
 
         Route::get('/profil/{id}', [Evaluateur::class, 'showProfil'])->name('profil.admin');
         Route::get('/profilcandidat/{id}', [Evaluateur::class, 'showCandidat'])->name('profil.candidat');
+        Route::get('/statistique', [AdminController::class, 'indexstats'])->name('statistiques');
+        Route::get('/candidature', [AdminController::class, 'candidature'])->name('candidature');
+        Route::get('/medecine_statistiques', [AdminController::class, 'medecine_stats'])->name('statistiques.medecine');
+        Route::get('/st_statistiques', [AdminController::class, 'st_stats'])->name('statistiques.st');
+        Route::get('/economie_juridique_statistiques', [AdminController::class, 'economie_pol_stats'])->name('statistiques.economie');
+        Route::get('/agronomie_statistiques', [AdminController::class, 'agronomie_stats'])->name('statistiques.agronomie');
+        Route::get('/lettre_statistiques', [AdminController::class, 'lettre_stats'])->name('statistiques.lettre');
     });
 
 
@@ -71,7 +79,7 @@ Route::get('/profileconomie/{id}', [Evaluateur::class, 'showEconomie'])->name('p
 
 
     Route::post('/multi-step-form/upload', [MultiStepFormController::class, 'uploadFile'])->name('multi-step-form.upload');
-    Route::view('/formulaire', 'formulaires')->name('formulaire');
+    // Route::view('/formulaire', 'formulaires')->name('formulaire');
     Route::get('/etape1chercheur', [MultiStepFormController::class, 'index'])->name('multi-step-form');
 
     Route::post('/multi-step-form/store', [MultiStepFormController::class, 'store'])->name('multi-step-form.store');
