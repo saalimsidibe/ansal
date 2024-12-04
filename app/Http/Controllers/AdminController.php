@@ -66,42 +66,20 @@ class AdminController extends Controller
 
     public function filtrerAgronomes(Request $request)
     {
-        $categorie = $request->input('categorie');
-        $sexe = $request->input('sexe');
+        $query = Candidat::query();
 
-
-
-        /*   $query = DB::table('candidats')->where('college', '4');
-
-        if ($categorie) {
-            $query->where('categorie', $categorie);
+        // Filtrage par catégorie
+        if ($request->has('categorie') && $request->categorie != '') {
+            $query->where('categorie', $request->categorie);
         }
 
-        if ($sexe) {
-            $query->where('sexe', $sexe);
+        // Filtrage par sexe
+        if ($request->has('sexe') && $request->sexe != '') {
+            $query->where('sexe', $request->sexe);
         }
 
-        $agro = $query->get();
-        return response()->json($agro);
-        */
-
-
-
-        $candidats = Candidat::query();
-
-        if ($categorie) {
-            $candidats->where('categorie', $categorie);
-        }
-
-        if ($sexe) {
-            $candidats->where('sexe', $sexe);
-        }
-
-        $candidats = $candidats->get();
-
-        if ($candidats->isEmpty()) {
-            return response()->json(['message' => 'Aucun candidat trouvé pour ce filtre.'], 404);
-        }
+        // Exécuter la requête et récupérer les résultats
+        $candidats = $query->get();
 
         return response()->json($candidats);
     }

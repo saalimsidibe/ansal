@@ -139,6 +139,14 @@ class Evaluateur extends Controller
         $candidat = Candidat::findOrFail($id);
         return view('informations.profiladmin')->with('candidat', $candidat);
     }
-
+    public function export($id)
+    {
+        $print = Candidat::findOrFail($id);
+        return view('print')->with('print',$print);
+    }
  
+    public function printing($id){
+        
+    }
+    
 }

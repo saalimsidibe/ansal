@@ -46,6 +46,8 @@
         Route::get('/economie_juridique_statistiques', [AdminController::class, 'economie_pol_stats'])->name('statistiques.economie');
         Route::get('/agronomie_statistiques', [AdminController::class, 'agronomie_stats'])->name('statistiques.agronomie');
         Route::get('/lettre_statistiques', [AdminController::class, 'lettre_stats'])->name('statistiques.lettre');
+        // Route::get('/export',[Evaluateur])
+        Route::get('/filteragronome', [AdminController::class, 'filtrerAgronomes'])->name('filter.agronome');
     });
 
 
