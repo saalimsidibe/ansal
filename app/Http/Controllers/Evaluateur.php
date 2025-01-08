@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidat;
-
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Http\Request;
+
+use Barryvdh\DomPDF\PDF;
+
 
 class Evaluateur extends Controller
 {
@@ -14,23 +17,23 @@ class Evaluateur extends Controller
         $candidat = Candidat::findOrFail($id);
         switch ($candidat->college) {
             case 1:
-                $candidat->college_libelle="Sciences et Techniques";
+                $candidat->college_libelle = "Sciences et Techniques";
                 break;
             case 2:
-                $candidat->college_libelle="Sciences juridiques, politiques, économiques et de gestion ";
+                $candidat->college_libelle = "Sciences juridiques, politiques, économiques et de gestion ";
                 break;
             case 3:
-                 $candidat->college_libelle="Sciences de la Santé Humaine et Animale";
+                $candidat->college_libelle = "Sciences de la Santé Humaine et Animale";
                 break;
             case 4:
-                $candidat->college_libelle="Sciences Naturelles et Agricoles";
+                $candidat->college_libelle = "Sciences Naturelles et Agricoles";
                 break;
             case 5:
-                $candidat->college_libelle="Sciences humaines, arts, lettres et culture ";
+                $candidat->college_libelle = "Sciences humaines, arts, lettres et culture ";
                 break;
 
             default:
-                $candidat->college_libelle="Non Défini";
+                $candidat->college_libelle = "Non Défini";
                 break;
         }
         return view('informations.profilcandidat')->with('candidat', $candidat);
@@ -43,27 +46,27 @@ class Evaluateur extends Controller
 
         switch ($col) {
             case 1:
-                $college_libelle="Sciences et Techniques";
+                $college_libelle = "Sciences et Techniques";
                 break;
             case 2:
-                $college_libelle="Sciences juridiques, politiques, économiques et de gestion ";
+                $college_libelle = "Sciences juridiques, politiques, économiques et de gestion ";
                 break;
             case 3:
-                 $college_libelle="Sciences de la Santé Humaine et Animale";
+                $college_libelle = "Sciences de la Santé Humaine et Animale";
                 break;
             case 4:
-                $college_libelle="Sciences Naturelles et Agricoles";
+                $college_libelle = "Sciences Naturelles et Agricoles";
                 break;
             case 5:
-                $college_libelle="Sciences humaines, arts, lettres et culture ";
+                $college_libelle = "Sciences humaines, arts, lettres et culture ";
                 break;
 
             default:
-                $college_libelle="Non Défini";
+                $college_libelle = "Non Défini";
                 break;
         }
 
-        return view('evaluateurs.evaluateurcandidat')->with('candidats', $candidats)->with('college_libelle',$college_libelle);
+        return view('evaluateurs.evaluateurcandidat')->with('candidats', $candidats)->with('college_libelle', $college_libelle);
     }
 
     public function EvMedecine()
@@ -139,14 +142,10 @@ class Evaluateur extends Controller
         $candidat = Candidat::findOrFail($id);
         return view('informations.profiladmin')->with('candidat', $candidat);
     }
-    public function export($id)
+
+    public function test($id)
     {
-        $print = Candidat::findOrFail($id);
-        return view('print')->with('print',$print);
+        $candidat = Candidat::findOrFail($id);
+        return view('test')->with('candidat', $candidat);
     }
- 
-    public function printing($id){
-        
-    }
-    
 }

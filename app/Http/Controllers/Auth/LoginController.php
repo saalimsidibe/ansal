@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Model\User;
+use App\Models\User as ModelsUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 
 
@@ -24,21 +26,25 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+
+
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
 
+            Session::put('nomPr', $user->name);
+
 
             if ($user->categorie === 'medecine')
-                return redirect()->route('evaluateur.candidat',3);
+                return redirect()->route('evaluateur.candidat', 3);
 
             elseif ($user->categorie === 'litterature') {
-                return redirect()->route('evaluateur.candidat',5);
+                return redirect()->route('evaluateur.candidat', 5);
             } elseif ($user->categorie === 'sciences') {
-                return redirect()->route('evaluateur.candidat',1);
+                return redirect()->route('evaluateur.candidat', 1);
             } else if ($user->categorie === 'agricole') {
-                return redirect()->route('evaluateur.candidat',4);
+                return redirect()->route('evaluateur.candidat', 4);
             } else if ($user->categorie === 'economie') {
-                return redirect()->route('evaluateur.candidat',2);
+                return redirect()->route('evaluateur.candidat', 2);
             } else if ($user->categorie === 'admin') {
                 return redirect()->route('evaluateur.admin');
             } else {

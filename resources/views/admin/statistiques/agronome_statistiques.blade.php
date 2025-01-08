@@ -21,19 +21,19 @@
   <div class="card-body">
     <h5 class="card-title"></h5>
    <form id="filterForm">
-        <select name="categorie" id="categorie">
+        <select name="categorie" id="categorie" class="form-control">
             <option value="">Toutes les catégories</option>
             <option value="chercheur">Chercheur</option>
             <option value="autre">Autre</option>
-        </select>
+        </select><br>
 
-        <select name="sexe" id="sexe">
+        <select name="sexe" id="sexe" class="form-control">
             <option value="">Tous les sexes</option>
             <option value="masculin">Masculin</option>
             <option value="feminin">Féminin</option>
-        </select>
+        </select><br>
 
-        <button type="submit">Filtrer</button>
+        <button type="submit" class="btn- btn-primary">Filtrer</button>
     </form>
 
     <div id="resultats"></div>
@@ -57,7 +57,7 @@
                 success: function (response) {
                     var html = '<ul>';
                     response.forEach(function(candidat) {
-                        html += '<li>' + candidat.nom + ' (' + candidat.categorie + ', ' + candidat.sexe + ')</li>';
+                        html += '<li>' + candidat.nom +' '+ candidat.prenom + ' (' + candidat.categorie + ', ' + candidat.sexe + ')</li>';
                     });
                     html += '</ul>';
                     $('#resultats').html(html);

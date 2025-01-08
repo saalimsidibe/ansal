@@ -23,6 +23,7 @@
   <link href="{{url('active/assets/vendor/aos/aos.css')}}" rel="stylesheet">
   <link href="{{url('active/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
   <link href="{{url('active/assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
   <!-- Main CSS File -->
   <link href="{{url('active/assets/css/main.css')}}" rel="stylesheet">

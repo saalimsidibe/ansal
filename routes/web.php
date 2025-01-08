@@ -13,6 +13,8 @@
     use App\Http\Controllers\Auth\LoginController;
     use App\Http\Controllers\Auth\RegisterController;
     use App\Http\Controllers\FileController;
+    use Barryvdh\DomPDF\PDF;
+    use App\Http\Controllers\Impression;
 
     Route::get('/', function () {
         return view('welcome');
@@ -26,6 +28,10 @@
     })->name('formulaire');
     Route::get('/contact', function () {
         return view('contact');
+    });
+
+    Route::get('/aver', function () {
+        return view('aver');
     });
 
 
@@ -48,18 +54,24 @@
         Route::get('/lettre_statistiques', [AdminController::class, 'lettre_stats'])->name('statistiques.lettre');
         // Route::get('/export',[Evaluateur])
         Route::get('/filteragronome', [AdminController::class, 'filtrerAgronomes'])->name('filter.agronome');
+        Route::get('/filtereco', [AdminController::class, 'filtereco'])->name('filter.eco');
+        Route::get('/filtersante', [AdminController::class, 'filtermed'])->name('filter.med');
+        Route::get('/filterlitt', [AdminController::class, 'filterlitt'])->name('filter.litt');
+        Route::get('/filterscientist', [AdminController::class, 'filterscientist'])->name('filter.scientist');
+        Route::get('/print/{id}', [AdminController::class, 'printing'])->name('candidat.printing');
+        Route::get('/nettoyer', [AdminController::class, 'nettoyer'])->name('candidat.nettoyer');
     });
 
-
+    Route::get('/affiche', [Impression::class, 'affiche']);
     /*Route::get('/evaluateur_medecine', [Evaluateur::class, 'EvMedecine'])->name('evaluateur.medecine');
 
-Route::get('/evaluateur_lettre', [Evaluateur::class, 'EvLettre'])->name('evaluateur.litterature');
+    Route::get('/evaluateur_lettre', [Evaluateur::class, 'EvLettre'])->name('evaluateur.litterature');
 
-Route::get('/evaluateur_agricole', [Evaluateur::class, 'EvAgricole'])->name('evaluateur.agricole');
+    Route::get('/evaluateur_agricole', [Evaluateur::class, 'EvAgricole'])->name('evaluateur.agricole');
 
-Route::get('/evaluateur_sciences', [Evaluateur::class, 'EvSciences'])->name('evaluateur.sciences');
+    Route::get('/evaluateur_sciences', [Evaluateur::class, 'EvSciences'])->name('evaluateur.sciences');
 
-Route::get('/evaluateur_economie', [Evaluateur::class, 'EvEconomie'])->name('evaluateur.economie');
+    Route::get('/evaluateur_economie', [Evaluateur::class, 'EvEconomie'])->name('evaluateur.economie');
 
 
 */
@@ -133,6 +145,7 @@ Route::get('/profileconomie/{id}', [Evaluateur::class, 'showEconomie'])->name('p
     Route::post('/etape4au', [AutreControllerNouveau::class, 'validerEtape4'])->name('valider4.autre');
     Route::post('/etape5au', [AutreControllerNouveau::class, 'validerEtape5'])->name('valider5.autre');
     Route::post('/etape6au', [AutreControllerNouveau::class, 'validerEtape6'])->name('valider6.autre');
+    Route::get("/test/{id}", [Evaluateur::class, 'test'])->name('test');
     //Route::post('/etapefinaleautre',[AutreController::class,]);
 
 

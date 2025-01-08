@@ -66,7 +66,7 @@ class AdminController extends Controller
 
     public function filtrerAgronomes(Request $request)
     {
-        $query = Candidat::query();
+        $query = Candidat::where('college', 4);
 
         // Filtrage par catégorie
         if ($request->has('categorie') && $request->categorie != '') {
@@ -82,5 +82,102 @@ class AdminController extends Controller
         $candidats = $query->get();
 
         return response()->json($candidats);
+    }
+
+
+
+    public function filtereco(Request $request)
+    {
+        $query = Candidat::where('college', 2);
+
+        // Filtrage par catégorie
+        if ($request->has('categorie') && $request->categorie != '') {
+            $query->where('categorie', $request->categorie);
+        }
+
+        // Filtrage par sexe
+        if ($request->has('sexe') && $request->sexe != '') {
+            $query->where('sexe', $request->sexe);
+        }
+
+        // Exécuter la requête et récupérer les résultats
+        $candidats = $query->get();
+
+        return response()->json($candidats);
+    }
+
+    public function filtermed(Request $request)
+    {
+        $query = Candidat::where('college', 3);
+
+        // Filtrage par catégorie
+        if ($request->has('categorie') && $request->categorie != '') {
+            $query->where('categorie', $request->categorie);
+        }
+
+        // Filtrage par sexe
+        if ($request->has('sexe') && $request->sexe != '') {
+            $query->where('sexe', $request->sexe);
+        }
+
+        // Exécuter la requête et récupérer les résultats
+        $candidats = $query->get();
+
+        return response()->json($candidats);
+    }
+
+
+    public function filterlitt(Request $request)
+    {
+        $query = Candidat::where('college', 5);
+
+        // Filtrage par catégorie
+        if ($request->has('categorie') && $request->categorie != '') {
+            $query->where('categorie', $request->categorie);
+        }
+
+        // Filtrage par sexe
+        if ($request->has('sexe') && $request->sexe != '') {
+            $query->where('sexe', $request->sexe);
+        }
+
+        // Exécuter la requête et récupérer les résultats
+        $candidats = $query->get();
+
+        return response()->json($candidats);
+    }
+
+
+
+
+    public function printing($id) {}
+
+    public function aver()
+    {
+        return view('aver');
+    }
+
+    public function filterscientist(Request $request)
+    {
+        $query = Candidat::where('college', 1);
+        if ($request->has('categorie') && $request->categorie != '') {
+            $query->where('categorie', $request->categorie);
+        }
+
+        // Filtrage par sexe
+        if ($request->has('sexe') && $request->sexe != '') {
+            $query->where('sexe', $request->sexe);
+        }
+
+        // Exécuter la requête et récupérer les résultats
+        $candidats = $query->get();
+
+        return response()->json($candidats);
+    }
+
+    public function nettoyer()
+    {
+        session()->forget('nomPr');
+        return view('auth.login');
     }
 }

@@ -11,7 +11,7 @@
             @endforeach
         </ul>
     </div>
-@endif
+@endif 
 
 
 
@@ -219,8 +219,4 @@
     <h2>Apport Particulier à l'academie</h2>
     <p><strong>{{$candidat->apport ?? 'Non renseigné' }}</strong></p>
 
-
-
-
-</div>
-@endsection
+    @endsection

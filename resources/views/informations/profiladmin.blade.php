@@ -19,6 +19,9 @@
 @endphp
 
 
+    
+
+
 
 <h1>Résumé des Informations</h1>
 
@@ -223,10 +226,11 @@
     <h2>Apport Particulier à l'academie</h2>
     
     <p><strong>{{$candidat->apport ?? 'Non renseigné' }}</strong></p>
-</body>
+ {{--</body> --}}
     <!-- Étape 7: Fichiers joints -->
 
 
 
 </div>
-@endsection
+</body>
+ @endsection 

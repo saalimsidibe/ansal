@@ -32,7 +32,7 @@
               <a href="{{route('statistiques.medecine')}}"> <small>Sciences de la santé humaine et animale</small></a>
             </li>
             <li class="{{request()->routeIs('statistiques.lettre')? 'active': ''}}">
-              <a href="{{request()->routeIs('statistiques.lettre')? 'active': ''}}"> <small> Sciences humaines, arts, lettres et culture </small></a>
+              <a href="{{route('statistiques.lettre')}}"> <small> Sciences humaines, arts, lettres et culture </small></a>
 
             </li>
         </ul>

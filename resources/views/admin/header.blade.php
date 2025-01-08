@@ -1,7 +1,9 @@
 <div class="container">
   
 </div>
-<nav class="navbar navbar-expand-lg">
+
+<nav class="navbar navbar-expand-lg container-fluid "  style="width: 100%; margin: 0; padding: 0;">
+
         <div class="search-panel">
           <div class="search-inner d-flex align-items-center justify-content-center">
             <div class="close-btn">Close <i class="fa fa-close"></i></div>
@@ -50,4 +52,8 @@
             <div class=" list-inline-item float logout">                   <a id="logout" href="{{route('login')}}" class="nav-link">Déconnexion <i class="icon-logout"></i></a></div>
           </div>
         </div>
+
+
+       
       </nav>
+   
